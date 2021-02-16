@@ -1,1 +1,8 @@
-![Logo](https://drive.google.com/file/d/1mcaGSRbfhv-D0eYj2JCcOz05zJhlihmp/view?usp=sharing)
+![Alt Text](https://i.imgur.com/WOaF7k3.png)
+## Общее описание проекта
+Проект является учебным в рамках изучения курса ОС в университете.
+
+Задачей проекта является создание Quiz-игры с онлайн составляющей. Поддерживается на Windows и Android.
+
+## Используемые технологии
+Проект написан на C# с использованием Xamarin для GUI и SQLite для хранения БД вопросов
