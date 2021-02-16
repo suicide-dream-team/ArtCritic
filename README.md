@@ -1,4 +1,4 @@
-![Alt Text](https://i.imgur.com/WOaF7k3.png)
+![Alt Text](https://i.imgur.com/sNrSkKI.gif)
 ## Общее описание проекта
 Проект является учебным в рамках изучения курса ОС в университете.
 
