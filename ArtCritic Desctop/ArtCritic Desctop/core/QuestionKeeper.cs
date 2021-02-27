@@ -4,22 +4,23 @@ using System.Text;
 
 namespace ArtCritic_Desctop
 {
-    class Question//пока что не определили общий вид запросов пусть объект вопроса в игре выглядит так
+    class QuestionKeeper//пока что не определили общий вид запросов пусть объект вопроса в игре выглядит так
     {
-        protected enum State { None, Text, Image, Video, Eror };
-        State state = State.None;
+        public enum State { None, Text, Image, Video, Music, Eror };
+        protected State state = State.None;
         protected string Text;
         protected string ImageLink;
         protected string VideoLink;
+        protected string MusicLink;
 
-        public Question() { }
+        public QuestionKeeper() { }
 
-        public Question(string text) {
+        public QuestionKeeper(string text) {
             Text = text;
             state = State.Text;
         }
 
-        public Question(string text, string Link, int newState)
+        public QuestionKeeper(string text, string Link, int newState)
         {
             Text = text;
             switch (newState)
@@ -32,11 +33,17 @@ namespace ArtCritic_Desctop
                     state = State.Video;
                     VideoLink = Link;
                     break;
+                case 4:
+                    state = State.Music;
+                    MusicLink = Link;
+                    break;
                 default:
                     state = State.Eror;
                     break;
             }
         }
+
+        public State GetState() { return state; }
 
         public string getTestText() { return "i run"; }
     }

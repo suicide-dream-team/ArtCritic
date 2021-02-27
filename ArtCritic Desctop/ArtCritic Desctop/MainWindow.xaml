@@ -6,7 +6,36 @@
         xmlns:local="clr-namespace:ArtCritic_Desctop"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
+    <Grid x:Name="G1">
+        <Grid x:Name="G2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Button x:Name="B1" Content="B1" Grid.Column="1" Grid.Row="1" Click="Test_Click"></Button>
+        </Grid>
+        <Grid x:Name="G3" d:Visibility="Hidden">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Button x:Name="B2" Content="B2" Grid.Column="1" Grid.Row="1" Click="B2_Click"></Button>
+    </Grid>
+
 
     </Grid>
+
+   
 </Window>

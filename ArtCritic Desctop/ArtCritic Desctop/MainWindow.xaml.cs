@@ -23,8 +23,21 @@ namespace ArtCritic_Desctop
         public MainWindow()
         {
             InitializeComponent();
-            Question question = new Question();
-            MessageBox.Show(question.getTestText());            
+            QuestionKeeper question = new QuestionKeeper();
+            MessageBox.Show(question.getTestText());
+            
+        }
+
+        private void Test_Click(object sender, RoutedEventArgs e)
+        {
+            G2.Visibility = Visibility.Hidden;
+            G3.Visibility = Visibility.Visible;
+        }
+
+        private void B2_Click(object sender, RoutedEventArgs e)
+        {
+            G2.Visibility = Visibility.Visible;
+            G3.Visibility = Visibility.Hidden;
         }
     }
 }
