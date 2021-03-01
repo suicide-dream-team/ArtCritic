@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ArtCritic_Desctop.core
+namespace ArtCritic_Desctop
 {
     class VideoQuestion
     {

@@ -6,8 +6,8 @@
         xmlns:local="clr-namespace:ArtCritic_Desctop"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid x:Name="G1">
-        <Grid x:Name="G2">
+    <Grid x:Name="G1" >
+        <Grid x:Name="Main_menu">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
@@ -17,22 +17,46 @@
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
-            <Button x:Name="B1" Content="B1" Grid.Column="1" Grid.Row="1" Click="Test_Click"></Button>
+            <Button x:Name="Game" Content="Game" Grid.Column="1" Grid.Row="1" 
+                    Click="Game_Click"></Button>
+            
+            <Button x:Name="Settings" Grid.Column="1" Grid.Row="3"
+                    Click="Settings_Click"></Button>
+            
+            <Button x:Name="Satistyc" Grid.Column="1" Grid.Row="5" 
+                    Click="Satistyc_Click"></Button>
+            
+            <Button x:Name="Exit" Grid.Column="1" Grid.Row="7" 
+                    Click="Exit_Click"></Button>   
+            
         </Grid>
-        <Grid x:Name="G3" d:Visibility="Hidden">
-        <Grid.ColumnDefinitions>
+        
+        <Grid x:Name="Type_of_game" d:Visibility="Hidden">
+        
+            <Grid.ColumnDefinitions>
+                
             <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
+        
+            </Grid.ColumnDefinitions>
+        
+            <Grid.RowDefinitions>
+                
             <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
-        </Grid.RowDefinitions>
-        <Button x:Name="B2" Content="B2" Grid.Column="1" Grid.Row="1" Click="B2_Click"></Button>
-    </Grid>
+        
+            </Grid.RowDefinitions>
+            <Button d:Visibility="Hidden" Click="Exit_Click"/>
+        </Grid>
 
 
     </Grid>

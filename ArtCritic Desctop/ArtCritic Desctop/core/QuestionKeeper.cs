@@ -12,26 +12,36 @@ namespace ArtCritic_Desctop
         protected string ImageLink;
         protected string VideoLink;
         protected string MusicLink;
+        protected string[] Answers;
 
         public QuestionKeeper() { }
 
-        public QuestionKeeper(string text) {
+        public QuestionKeeper(string text, string[] answers) {
             Text = text;
             state = State.Text;
+            Answers = new string[answers.Length];
+            for (int i = 0; i < answers.Length; ++i) {
+                Answers[i] = new string(answers[i]);
+            }
         }
 
-        public QuestionKeeper(string text, string Link, int newState)
+        public QuestionKeeper(string text, string Link, int newState, string[] answers)
         {
             Text = text;
+            Answers = new string[answers.Length];
+            for (int i = 0; i < answers.Length; ++i)
+            {
+                Answers[i] = new string(answers[i]);
+            }
             switch (newState)
             {
                 case 2:
                     state = State.Image;
-                    ImageLink = Link;
+                    ImageLink = Link;                    
                     break;
                 case 3:
                     state = State.Video;
-                    VideoLink = Link;
+                    VideoLink = Link;                    
                     break;
                 case 4:
                     state = State.Music;
@@ -44,6 +54,26 @@ namespace ArtCritic_Desctop
         }
 
         public State GetState() { return state; }
+
+        public ImageQuestion GetIm() {
+            if (state == State.Image)
+                return new ImageQuestion();
+            return null;
+        }
+
+        public VideoQuestion GetVideo()
+        {
+            if (state == State.Video)
+                return new VideoQuestion();
+            return null;
+        }
+
+        public TextQuestion GetText()
+        {
+            if (state == State.Text)
+                return new TextQuestion(Text, Answers);
+            return null;
+        }
 
         public string getTestText() { return "i run"; }
     }
