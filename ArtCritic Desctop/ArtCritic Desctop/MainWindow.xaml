@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid x:Name="G1" >
-        <Grid x:Name="Main_menu">
+        <Grid x:Name="Main_menu" d:IsHidden="True">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
@@ -27,18 +27,18 @@
             <Button x:Name="Game" Content="Game" Grid.Column="1" Grid.Row="1" 
                     Click="Game_Click"></Button>
             
-            <Button x:Name="Settings" Grid.Column="1" Grid.Row="3"
+            <Button x:Name="Settings" Content="Settings" Grid.Column="1" Grid.Row="3"
                     Click="Settings_Click"></Button>
-            
-            <Button x:Name="Satistyc" Grid.Column="1" Grid.Row="5" 
+
+            <Button x:Name="Statistics" Content="Statistics" Grid.Column="1" Grid.Row="5" 
                     Click="Satistyc_Click"></Button>
             
-            <Button x:Name="Exit" Grid.Column="1" Grid.Row="7" 
+            <Button x:Name="Exit" Content="Exit" Grid.Column="1" Grid.Row="7" 
                     Click="Exit_Click"></Button>   
             
         </Grid>
         
-        <Grid x:Name="Type_of_game" d:Visibility="Hidden">
+        <Grid x:Name="Type_of_game" d:IsHidden="True" >
         
             <Grid.ColumnDefinitions>
                 
@@ -50,12 +50,52 @@
         
             <Grid.RowDefinitions>
                 
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-        
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                
+
+
             </Grid.RowDefinitions>
-            <Button d:Visibility="Hidden" Click="Exit_Click"/>
+            <Button x:Name="test" Content="test" Grid.Column="1" Grid.Row="1" Click="test_Click" />
+            <Button x:Name="Video_question" Content="Video question" Grid.Column="1" Grid.Row="3" Click="Video_question_Click" />
+            <Button x:Name="Music_question" Content="Music question" Grid.Column="1" Grid.Row="5" Click="Music_question_Click"/>
+            <Button x:Name="Image_question" Content="Image question" Grid.Column="1" Grid.Row="7" Click="Image_question_Click"/>
+            <Button x:Name="Mixed_questions" Content="Mixed questions" Grid.Column="1" Grid.Row="9" Click="Mixed_questions_Click"/>
+        </Grid>
+
+        <Grid x:Name="Test_game_with_Image">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <TextBlock x:Name="Text" Grid.Column="1" Grid.Row="3"></TextBlock>
+
+            <TextBox x:Name="Answer" Grid.Row="5" Grid.Column="1"></TextBox>
+
+            <Button x:Name="Accept" Content="Ввести" Grid.Column="1" Grid.Row="7" Click="Accept_Click"></Button>
         </Grid>
 
 

@@ -6,8 +6,8 @@ namespace ArtCritic_Desctop
 {
     class TextQuestion
     {
-        protected string Text;
-        protected string[] Answers;
+        public string Text;//публично временно, на время тестов
+        public string[] Answers;//публично временно, на время тестов
         public TextQuestion(string text, string[] answers) {
             Text = text;
             Answers = new string[answers.Length];
@@ -16,5 +16,6 @@ namespace ArtCritic_Desctop
                 Answers[i] = new string(answers[i]);
             }
         }
+
     }
 }
