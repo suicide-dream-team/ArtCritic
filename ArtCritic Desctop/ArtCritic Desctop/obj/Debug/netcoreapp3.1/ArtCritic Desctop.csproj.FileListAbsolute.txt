@@ -16,4 +16,3 @@ C:\Users\danila\source\repos\ArtCritic\ArtCritic Desctop\ArtCritic Desctop\obj\D
 C:\Users\danila\source\repos\ArtCritic\ArtCritic Desctop\ArtCritic Desctop\obj\Debug\netcoreapp3.1\ArtCritic Desctop.dll
 C:\Users\danila\source\repos\ArtCritic\ArtCritic Desctop\ArtCritic Desctop\obj\Debug\netcoreapp3.1\ArtCritic Desctop.pdb
 C:\Users\danila\source\repos\ArtCritic\ArtCritic Desctop\ArtCritic Desctop\obj\Debug\netcoreapp3.1\ArtCritic Desctop.genruntimeconfig.cache
-C:\Users\danila\source\repos\ArtCritic\ArtCritic Desctop\ArtCritic Desctop\obj\Debug\netcoreapp3.1\ArtCritic Desctop.csprojAssemblyReference.cache
