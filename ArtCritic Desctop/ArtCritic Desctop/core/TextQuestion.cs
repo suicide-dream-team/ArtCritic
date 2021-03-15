@@ -6,8 +6,8 @@ namespace ArtCritic_Desctop
 {
     class TextQuestion
     {
-        public string Text;//публично временно, на время тестов
-        public string[] Answers;//публично временно, на время тестов
+        public readonly string Text;//публично временно, на время тестов
+        protected string[] Answers;//публично временно, на время тестов
         public TextQuestion(string text, string[] answers) {
             Text = text;
             Answers = new string[answers.Length];
@@ -16,6 +16,12 @@ namespace ArtCritic_Desctop
                 Answers[i] = new string(answers[i]);
             }
         }
-
+        public bool Check_Answer(string ans) { 
+           foreach(string ch_ans in Answers)
+            {
+                if (string.CompareOrdinal(ch_ans, ans)==0 ){ return true; }
+            }
+            return false;
+        }
     }
 }

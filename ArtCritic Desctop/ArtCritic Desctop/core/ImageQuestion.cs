@@ -5,8 +5,10 @@ using System.Windows.Media.Imaging;
 
 namespace ArtCritic_Desctop
 {
-    class ImageQuestion 
+    class ImageQuestion : TextQuestion
     {
-        BitmapImage BitmapImage { get; set; }
+        public ImageQuestion(string text, string[] answers) : base(text, answers)
+        {
+        }
     }
 }

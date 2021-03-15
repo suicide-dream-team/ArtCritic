@@ -1,5 +1,5 @@
 ﻿using System.Windows;
-/*using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,7 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;*/
+using System.Windows.Shapes;
 
 namespace ArtCritic_Desctop
 {
@@ -22,6 +22,7 @@ namespace ArtCritic_Desctop
     {
         private QuestionKeeper question;
         private TextQuestion textQuestion;
+        MediaPlayer mediaPlayer = new MediaPlayer();
         public MainWindow()
         {
             InitializeComponent();
@@ -61,7 +62,11 @@ namespace ArtCritic_Desctop
 
         private void Music_question_Click(object sender, RoutedEventArgs e)
         {
+           
+            Uri uri = new Uri(@"C:\Users\danila\source\repos\ArtCritic\ArtCritic Desctop\ArtCritic Desctop\Александр Разенбаум - Размышления на прогулке.mp3");
 
+            mediaPlayer.Open(uri);
+            mediaPlayer.Play();
         }
 
         private void Mixed_questions_Click(object sender, RoutedEventArgs e)
@@ -84,12 +89,19 @@ namespace ArtCritic_Desctop
 
         private void Accept_Click(object sender, RoutedEventArgs e)
         {
-            for(int i = 0;i<textQuestion.Answers.Length;++i)
-            if (Answer.Text == textQuestion.Answers[i])//пока не работает, разбираюсь
+           
+            if (textQuestion.Check_Answer(Answer.Text))
             {
-                    Accept.Content = "Верно";
+                MessageBox.Show("Верно");
             }
-                else { Accept.Content = "Неверно," + textQuestion.Answers[0]+textQuestion.Answers[1]; }
+            else { MessageBox.Show( "Неверно"); }
+            Test_game_with_Image.Visibility = Visibility.Hidden;
+            Type_of_game.Visibility = Visibility.Visible;
+        }
+
+        private void Creat_Question_Button_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

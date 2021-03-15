@@ -57,14 +57,14 @@ namespace ArtCritic_Desctop
 
         public ImageQuestion GetIm() {
             if (state == State.Image)
-                return new ImageQuestion();
+                return new ImageQuestion(Text, Answers);
             return null;
         }
 
         public VideoQuestion GetVideo()
         {
             if (state == State.Video)
-                return new VideoQuestion();
+                return new VideoQuestion(Text, Answers);
             return null;
         }
 

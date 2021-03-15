@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid x:Name="G1" >
-        <Grid x:Name="Main_menu" d:IsHidden="True">
+        <Grid x:Name="Main_menu">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
@@ -24,17 +24,19 @@
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
-            <Button x:Name="Game" Content="Game" Grid.Column="1" Grid.Row="1" 
+            <Button x:Name="Game" Content="Игра" Grid.Column="1" Grid.Row="1" 
                     Click="Game_Click"></Button>
             
-            <Button x:Name="Settings" Content="Settings" Grid.Column="1" Grid.Row="3"
+            <Button x:Name="Settings" Content="Настройки" Grid.Column="1" Grid.Row="3"
                     Click="Settings_Click"></Button>
 
-            <Button x:Name="Statistics" Content="Statistics" Grid.Column="1" Grid.Row="5" 
+            <Button x:Name="Statistics" Content="Статистика" Grid.Column="1" Grid.Row="5" 
                     Click="Satistyc_Click"></Button>
             
-            <Button x:Name="Exit" Content="Exit" Grid.Column="1" Grid.Row="7" 
-                    Click="Exit_Click"></Button>   
+            <Button x:Name="Exit" Content="Выход" Grid.Column="1" Grid.Row="7" 
+                    Click="Exit_Click"></Button>
+
+            <Button x:Name="Creat_Question_Button" Content="Создать новый вопрос" Click="Creat_Question_Button_Click"></Button>
             
         </Grid>
         
@@ -72,7 +74,7 @@
             <Button x:Name="Mixed_questions" Content="Mixed questions" Grid.Column="1" Grid.Row="9" Click="Mixed_questions_Click"/>
         </Grid>
 
-        <Grid x:Name="Test_game_with_Image">
+        <Grid x:Name="Test_game_with_Image" d:IsHidden="True">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
