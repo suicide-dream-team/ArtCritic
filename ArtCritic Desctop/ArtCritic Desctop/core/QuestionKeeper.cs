@@ -56,11 +56,11 @@ namespace ArtCritic_Desctop
 
         public State GetState() { return state; }
 
-        public ImageQuestion GetIm() {
+      /*  public ImageQuestion GetIm() {
             if (state == State.Image)
                 return new ImageQuestion(Text, Answers);
             return null;
-        }
+        }*/
 
         public VideoQuestion GetVideo()
         {

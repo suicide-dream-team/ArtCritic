@@ -8,23 +8,26 @@
     ".NETCoreApp,Version=v3.1": []
   },
   "packageFolders": {
-    "C:\\Users\\danila\\.nuget\\packages\\": {},
+    "C:\\Users\\Ярослав\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\danila\\source\\repos\\ArtCritic\\ArtCritic Desctop\\ArtCritic Desctop\\ArtCritic Desctop.csproj",
+      "projectUniqueName": "C:\\Users\\Ярослав\\Source\\Repos\\ArtCritic\\ArtCritic Desctop\\ArtCritic Desctop\\ArtCritic Desctop.csproj",
       "projectName": "ArtCritic Desctop",
-      "projectPath": "C:\\Users\\danila\\source\\repos\\ArtCritic\\ArtCritic Desctop\\ArtCritic Desctop\\ArtCritic Desctop.csproj",
-      "packagesPath": "C:\\Users\\danila\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\danila\\source\\repos\\ArtCritic\\ArtCritic Desctop\\ArtCritic Desctop\\obj\\",
+      "projectPath": "C:\\Users\\Ярослав\\Source\\Repos\\ArtCritic\\ArtCritic Desctop\\ArtCritic Desctop\\ArtCritic Desctop.csproj",
+      "packagesPath": "C:\\Users\\Ярослав\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Ярослав\\Source\\Repos\\ArtCritic\\ArtCritic Desctop\\ArtCritic Desctop\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\danila\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Ярослав\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -36,6 +39,7 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
           "projectReferences": {}
         }
       },
@@ -47,6 +51,7 @@
     },
     "frameworks": {
       "netcoreapp3.1": {
+        "targetAlias": "netcoreapp3.1",
         "imports": [
           "net461",
           "net462",
@@ -65,7 +70,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.403\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.200\\RuntimeIdentifierGraph.json"
       }
     }
   }

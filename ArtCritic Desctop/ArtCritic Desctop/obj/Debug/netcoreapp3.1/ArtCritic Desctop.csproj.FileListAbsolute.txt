@@ -17,3 +17,22 @@ C:\Users\danila\source\repos\ArtCritic\ArtCritic Desctop\ArtCritic Desctop\obj\D
 C:\Users\danila\source\repos\ArtCritic\ArtCritic Desctop\ArtCritic Desctop\obj\Debug\netcoreapp3.1\ArtCritic Desctop.pdb
 C:\Users\danila\source\repos\ArtCritic\ArtCritic Desctop\ArtCritic Desctop\obj\Debug\netcoreapp3.1\ArtCritic Desctop.genruntimeconfig.cache
 C:\Users\danila\source\repos\ArtCritic\ArtCritic Desctop\ArtCritic Desctop\obj\Debug\netcoreapp3.1\ArtCritic Desctop.csprojAssemblyReference.cache
+C:\Users\Ярослав\Source\Repos\ArtCritic\ArtCritic Desctop\ArtCritic Desctop\obj\Debug\netcoreapp3.1\ArtCritic Desctop.csprojAssemblyReference.cache
+C:\Users\Ярослав\Source\Repos\ArtCritic\ArtCritic Desctop\ArtCritic Desctop\obj\Debug\netcoreapp3.1\MainWindow.g.cs
+C:\Users\Ярослав\Source\Repos\ArtCritic\ArtCritic Desctop\ArtCritic Desctop\obj\Debug\netcoreapp3.1\App.g.cs
+C:\Users\Ярослав\Source\Repos\ArtCritic\ArtCritic Desctop\ArtCritic Desctop\obj\Debug\netcoreapp3.1\ArtCritic Desctop_MarkupCompile.cache
+C:\Users\Ярослав\Source\Repos\ArtCritic\ArtCritic Desctop\ArtCritic Desctop\obj\Debug\netcoreapp3.1\ArtCritic Desctop_MarkupCompile.lref
+C:\Users\Ярослав\Source\Repos\ArtCritic\ArtCritic Desctop\ArtCritic Desctop\obj\Debug\netcoreapp3.1\ArtCritic Desctop.dll
+C:\Users\Ярослав\Source\Repos\ArtCritic\ArtCritic Desctop\ArtCritic Desctop\obj\Debug\netcoreapp3.1\ArtCritic Desctop.pdb
+C:\Users\Ярослав\source\repos\ArtCritic\ArtCritic Desctop\ArtCritic Desctop\bin\Debug\netcoreapp3.1\ArtCritic Desctop.exe
+C:\Users\Ярослав\source\repos\ArtCritic\ArtCritic Desctop\ArtCritic Desctop\bin\Debug\netcoreapp3.1\ArtCritic Desctop.deps.json
+C:\Users\Ярослав\source\repos\ArtCritic\ArtCritic Desctop\ArtCritic Desctop\bin\Debug\netcoreapp3.1\ArtCritic Desctop.runtimeconfig.json
+C:\Users\Ярослав\source\repos\ArtCritic\ArtCritic Desctop\ArtCritic Desctop\bin\Debug\netcoreapp3.1\ArtCritic Desctop.runtimeconfig.dev.json
+C:\Users\Ярослав\source\repos\ArtCritic\ArtCritic Desctop\ArtCritic Desctop\bin\Debug\netcoreapp3.1\ArtCritic Desctop.dll
+C:\Users\Ярослав\source\repos\ArtCritic\ArtCritic Desctop\ArtCritic Desctop\bin\Debug\netcoreapp3.1\ArtCritic Desctop.pdb
+C:\Users\Ярослав\source\repos\ArtCritic\ArtCritic Desctop\ArtCritic Desctop\obj\Debug\netcoreapp3.1\MainWindow.baml
+C:\Users\Ярослав\source\repos\ArtCritic\ArtCritic Desctop\ArtCritic Desctop\obj\Debug\netcoreapp3.1\ArtCritic Desctop.g.resources
+C:\Users\Ярослав\source\repos\ArtCritic\ArtCritic Desctop\ArtCritic Desctop\obj\Debug\netcoreapp3.1\ArtCritic Desctop.AssemblyInfoInputs.cache
+C:\Users\Ярослав\source\repos\ArtCritic\ArtCritic Desctop\ArtCritic Desctop\obj\Debug\netcoreapp3.1\ArtCritic Desctop.AssemblyInfo.cs
+C:\Users\Ярослав\source\repos\ArtCritic\ArtCritic Desctop\ArtCritic Desctop\obj\Debug\netcoreapp3.1\ArtCritic Desctop.csproj.CoreCompileInputs.cache
+C:\Users\Ярослав\source\repos\ArtCritic\ArtCritic Desctop\ArtCritic Desctop\obj\Debug\netcoreapp3.1\ArtCritic Desctop.genruntimeconfig.cache

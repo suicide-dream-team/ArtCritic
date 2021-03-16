@@ -30,16 +30,24 @@ namespace ArtCritic_Desctop
         MediaPlayer[] mediaPlayer = new MediaPlayer[4];
         public MainWindow()
         {
+
+
             InitializeComponent();
-            Player.statistic = 0;
+            Player.statistic = 0; 
             string[] test_answers = new string[2];
             test_answers[0] = "Спанч Боб";
             test_answers[1] = "Спанч Боб Скрепенс";
             question = new QuestionKeeper("кто проживает на дне океана?", test_answers);
             this.Type_of_game.Visibility = Visibility.Hidden;
             this.Test_game_with_Image.Visibility = Visibility.Hidden;
+            this.Image_game.Visibility = Visibility.Hidden;
             Music_question_window.Visibility = Visibility.Hidden;
+         
+
+
+
         }
+
 
         void Creat_Music()
         {
@@ -114,10 +122,6 @@ namespace ArtCritic_Desctop
             MessageBox.Show("пока в разработке");
         }
 
-        private void Image_question_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
 
         private void test_Click(object sender, RoutedEventArgs e)
         {
@@ -176,5 +180,33 @@ namespace ArtCritic_Desctop
             mediaPlayer[iter].Stop();
             mediaPlayer[iter].Play();
         }
+
+
+
+
+
+        private void Image_question_Click(object sender, RoutedEventArgs e)
+        {
+
+            Type_of_game.Visibility = Visibility.Hidden;
+            Image_game.Visibility = Visibility.Visible;
+
+
+        }
+
+        private void Accept_Answer_Image_Click(object sender, RoutedEventArgs e) {
+
+   
+    
+   
+        }
+
     }
-}
+
+
+
+
+
+
+
+   }
