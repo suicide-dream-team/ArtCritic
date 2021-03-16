@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid x:Name="G1" >
-        <Grid x:Name="Main_menu">
+        <Grid x:Name="Main_menu" d:IsHidden="True" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
@@ -25,7 +25,7 @@
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
             <Button x:Name="Game" Content="Игра" Grid.Column="1" Grid.Row="1" 
-                    Click="Game_Click"></Button>
+                    Click="Game_Click" ></Button>
             
             <Button x:Name="Settings" Content="Настройки" Grid.Column="1" Grid.Row="3"
                     Click="Settings_Click"></Button>
@@ -100,6 +100,39 @@
             <Button x:Name="Accept" Content="Ввести" Grid.Column="1" Grid.Row="7" Click="Accept_Click"></Button>
         </Grid>
 
+        <Grid x:Name="Music_question_window">
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            
+
+            <TextBlock x:Name="Music_question_xaml" Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="3"></TextBlock>
+
+            <TextBox x:Name="Music_answer" Grid.Row="5" Grid.Column="2" Grid.ColumnSpan="2"></TextBox>
+
+            <Button x:Name="Music_exit" Content="Выход" Grid.Column="5" Click="Music_exit_Click"></Button>
+
+            <Button x:Name="Music_accept" Content="Проверить" Grid.Column="5" Grid.Row="5" Click="Music_accept_Click"></Button>
+            
+            <Button x:Name="Music_replay_music" Content="повторить" Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="1" Grid.RowSpan="2" Click="Music_replay_music_Click"></Button>
+
+
+        </Grid>
 
     </Grid>
 
