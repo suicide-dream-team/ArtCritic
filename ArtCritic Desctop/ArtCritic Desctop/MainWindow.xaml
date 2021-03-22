@@ -153,7 +153,7 @@
 
             <Button Content="Exit" Name="Exit_For_Image" Click="Exit_Click" HorizontalAlignment="Left" Margin="714,15,0,0" VerticalAlignment="Top" Height="45" Width="55"/>
 
-            <Image Margin="0,85,0,0" Grid.RowSpan="2" Source="pic0.jpg"/>
+            <Image Margin="0,85,0,0"  Name="pice" Grid.RowSpan="2"  />
 
 
         </Grid>

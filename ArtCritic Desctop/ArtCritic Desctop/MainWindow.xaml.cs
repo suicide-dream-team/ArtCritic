@@ -42,7 +42,10 @@ namespace ArtCritic_Desctop
             this.Test_game_with_Image.Visibility = Visibility.Hidden;
             this.Image_game.Visibility = Visibility.Hidden;
             Music_question_window.Visibility = Visibility.Hidden;
-         
+
+
+ //это для основной логике тут проблема как раз с картинкой
+            new Image_logic(Answer_Image_Texbox, pice);
 
 
 
@@ -190,15 +193,18 @@ namespace ArtCritic_Desctop
 
             Type_of_game.Visibility = Visibility.Hidden;
             Image_game.Visibility = Visibility.Visible;
+            
+
 
 
         }
 
         private void Accept_Answer_Image_Click(object sender, RoutedEventArgs e) {
+         
 
-   
-    
-   
+
+
+
         }
 
     }
