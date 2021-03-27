@@ -1,10 +1,10 @@
-Images/pic0.jpg|богатыри
-Images/pic1.jpg|боярыня морозова
-Images/pic2.jpg|девятый вал
-Images/pic3.jpg|демон сидящий
-Images/pic4.jpg|иван грозный и сын его
-Images/pic5.jpg|купание красного коня
-Images/pic6.jpg|мона лиза
-Images/pic7.jpg|последний день помпеи
-Images/pic8.jpg|троица
-Images/pic9.jpg|утро в сосновом лесу
+C:/Users/Ярослав/source/repos/ArtCritic/ArtCritic Desctop/ArtCritic Desctop/Images/pic0.jpg|богатыри|Что за картина?
+C:/Users/Ярослав/source/repos/ArtCritic/ArtCritic Desctop/ArtCritic Desctop/Images/pic1.jpg|боярыня морозова|Что за картина?
+C:/Users/Ярослав/source/repos/ArtCritic/ArtCritic Desctop/ArtCritic Desctop/Images/pic2.jpg|девятый вал|Что за картина?
+C:/Users/Ярослав/source/repos/ArtCritic/ArtCritic Desctop/ArtCritic Desctop/Images/pic3.jpg|демон сидящий|Что за картина?
+C:/Users/Ярослав/source/repos/ArtCritic/ArtCritic Desctop/ArtCritic Desctop/Images/pic4.jpg|иван грозный и сын его|Что за картина?
+C:/Users/Ярослав/source/repos/ArtCritic/ArtCritic Desctop/ArtCritic Desctop/Images/pic5.jpg|купание красного коня|Что за картина?
+C:/Users/Ярослав/source/repos/ArtCritic/ArtCritic Desctop/ArtCritic Desctop/Images/pic6.jpg|мона лиза|Что за картина?
+C:/Users/Ярослав/source/repos/ArtCritic/ArtCritic Desctop/ArtCritic Desctop/Images/pic7.jpg|последний день помпеи|Что за картина?
+C:/Users/Ярослав/source/repos/ArtCritic/ArtCritic Desctop/ArtCritic Desctop/Images/pic8.jpg|троица|Что за картина?
+C:/Users/Ярослав/source/repos/ArtCritic/ArtCritic Desctop/ArtCritic Desctop/Images/pic9.jpg|утро в сосновом лесу|Что за картина?
