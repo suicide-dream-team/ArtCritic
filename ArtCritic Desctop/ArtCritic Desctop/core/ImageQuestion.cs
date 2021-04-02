@@ -11,9 +11,6 @@ namespace ArtCritic_Desctop
 
    public class Image_Question
     {
-
-      
-
         //Изображение для View
         public BitmapImage Picture { get; set; }
 
@@ -29,7 +26,12 @@ namespace ArtCritic_Desctop
         {
             this.Picture = new BitmapImage();
             this.Picture.BeginInit();
-            this.Picture.UriSource = new Uri(PathBitmapImageSource, UriKind.Absolute);
+
+            // !FIXME Костыль жуткий, но по другому не работает. 
+            // По хорошему нужно сразу передавать в UriSource относительный путь
+            string AbsolutePathBitmapImageSource = Path.GetFullPath(PathBitmapImageSource);
+
+            this.Picture.UriSource = new Uri(AbsolutePathBitmapImageSource, UriKind.RelativeOrAbsolute);
             this.Picture.EndInit();
             this.Question_for_image = QuestionSource;
             this.Answer = AnswerSource;

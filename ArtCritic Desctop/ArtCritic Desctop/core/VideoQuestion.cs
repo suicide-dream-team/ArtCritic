@@ -18,7 +18,7 @@ namespace ArtCritic_Desctop
 
         public VideoQuestion(string PathBitmapImageSource, string AnswerSource, string QuestionSource)
         {
-            this.Path_To_Video = new Uri(PathBitmapImageSource, UriKind.Absolute);
+            this.Path_To_Video = new Uri(PathBitmapImageSource, UriKind.RelativeOrAbsolute);
             this.Question_for_video = QuestionSource;
             this.Answer_for_video = AnswerSource;
 

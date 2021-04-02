@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Reflection;
 
 namespace ArtCritic_Desctop
 {
@@ -31,7 +32,7 @@ namespace ArtCritic_Desctop
         string currentAnswer_video;
 
         Player Player = new Player();
-        private int iter = 0;//пока я не сделаю нормальную обертку итерируем вопросы этой штукой
+        private int iter = 0; //пока я не сделаю нормальную обертку итерируем вопросы этой штукой
         Music_question[] music_Questions = new Music_question[4];
         Uri[] uris = new Uri[4];
         private QuestionKeeper question;
@@ -73,7 +74,7 @@ namespace ArtCritic_Desctop
 
             db_video = new List<VideoQuestion>();
             video_counter = 0;
-            var dataFile = File.ReadAllLines(@"C:\Users\Ярослав\source\repos\ArtCritic\ArtCritic Desctop\ArtCritic Desctop\Videos\answersV.txt");
+            var dataFile = File.ReadAllLines(@"..\..\..\Videos\answersV.txt");
             foreach (var e in dataFile)
             {
                 var args = e.Split('|');
@@ -147,7 +148,7 @@ namespace ArtCritic_Desctop
 
             db = new List<Image_Question>();
             image_counter = 0;
-            var dataFile = File.ReadAllLines(@"C:\Users\Ярослав\source\repos\ArtCritic\ArtCritic Desctop\ArtCritic Desctop\Images\answers.txt");
+            var dataFile = File.ReadAllLines(@"..\..\..\Images\answers.txt");
             foreach (var e in dataFile)
             {
                 var args = e.Split('|');
