@@ -199,22 +199,17 @@ namespace ArtCritic_Desctop
 
         void Creat_Music()
         {
-            uris[0] = new Uri(@"C:\Users\danila\source\repos\ArtCritic\ArtCritic Desctop\ArtCritic Desctop\source\source\Voennayakafedra1.mp3");
-            uris[1] = new Uri(@"C:\Users\danila\source\repos\ArtCritic\ArtCritic Desctop\ArtCritic Desctop\source\source\Voennayakafedra2.mp3");
-            uris[2] = new Uri(@"C:\Users\danila\source\repos\ArtCritic\ArtCritic Desctop\ArtCritic Desctop\source\source\Voennayakafedra3.mp3");
-            uris[3] = new Uri(@"C:\Users\danila\source\repos\ArtCritic\ArtCritic Desctop\ArtCritic Desctop\source\source\Voennayakafedra4.mp3");
+            uris[0] = new Uri(@"..\..\..\source\source\Voennayakafedra1.mp3", UriKind.Relative);
+            uris[1] = new Uri(@"..\..\..\source\source\Voennayakafedra2.mp3", UriKind.Relative);
+            uris[2] = new Uri(@"..\..\..\source\source\Voennayakafedra3.mp3", UriKind.Relative);
+            uris[3] = new Uri(@"..\..\..\source\source\Voennayakafedra4.mp3", UriKind.Relative);
+            
+            StringReader stringReader = new StringReader(@"..\..\..\Links.txt");
             for (int i = 0; i < 4; ++i)
-            {
-                mediaPlayer[i] = new MediaPlayer();
-                mediaPlayer[i].Open(uris[i]);
-                mediaPlayer[i].Pause();
-            }
-            StringReader stringReader = new StringReader("C:\\Users\\danila\\source\\repos\\ArtCritic\\ArtCritic Desctop\\ArtCritic Desctop\\Links.txt");
-            for (int i = 0; i < 4; ++i)
-            {
+            {                
                 string[] cloud_answers = new string[1];
-                string textFromFile;
-                string path = @"C:\Users\danila\source\repos\ArtCritic\ArtCritic Desctop\ArtCritic Desctop\" + (i + 1) + ".txt";
+                string textFromFile; 
+                string path = @"..\..\..\" + (i+1)+".txt";
                 using (FileStream fstream = File.OpenRead(path))
                 {
                     byte[] array = new byte[fstream.Length];
@@ -224,7 +219,7 @@ namespace ArtCritic_Desctop
                     textFromFile = System.Text.Encoding.Default.GetString(array);
                     cloud_answers[0] = textFromFile;
                 }
-                music_Questions[i] = new Music_question("угадайте название песни", cloud_answers);
+                music_Questions[i] =new Music_question("угадайте название песни" , cloud_answers, uris[i]);
             }
         }
 
@@ -272,7 +267,7 @@ namespace ArtCritic_Desctop
             Type_of_game.Visibility = Visibility.Hidden;
             Music_question_window.Visibility = Visibility.Visible;
             Music_question_xaml.Text = music_Questions[iter].Text;
-            mediaPlayer[iter].Play();
+            music_Questions[iter].Play();
         }
 
         private void Mixed_questions_Click(object sender, RoutedEventArgs e)
@@ -343,12 +338,12 @@ namespace ArtCritic_Desctop
             iter = 0;
             Music_question_window.Visibility = Visibility.Hidden;
             Type_of_game.Visibility = Visibility.Visible;
-            mediaPlayer[iter].Stop();
+            music_Questions[iter].Stop();
         }
 
         private void Music_accept_Click(object sender, RoutedEventArgs e)
         {
-            mediaPlayer[iter].Stop();
+            music_Questions[iter].Stop();
             if (music_Questions[iter].Check_Answer(Music_answer.Text))
                 Player.statistic = Player.statistic + 1;
             Music_answer.Text = "";
@@ -361,14 +356,14 @@ namespace ArtCritic_Desctop
                 iter = 0;
             }
             else
-                mediaPlayer[iter].Play();
-
+                music_Questions[iter].Play();
+            
         }
 
         private void Music_replay_music_Click(object sender, RoutedEventArgs e)
         {
-            mediaPlayer[iter].Stop();
-            mediaPlayer[iter].Play();
+            music_Questions[iter].Stop();
+            music_Questions[iter].Play();
         }
 
         private void exit_pic_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
