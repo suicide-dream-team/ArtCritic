@@ -9,7 +9,7 @@ namespace ArtCritic_Desctop
 {
 
 
-   public class Image_Question
+    public class Image_Question
     {
         //Изображение для View
         public BitmapImage Picture { get; set; }
@@ -17,12 +17,10 @@ namespace ArtCritic_Desctop
         //Ответ на картинку
         public string Answer { get; set; }
 
-        public string Question_for_image { get; set; }
-
-        
 
 
-        public Image_Question(string PathBitmapImageSource, string AnswerSource, string QuestionSource)
+
+        public Image_Question(string PathBitmapImageSource, string AnswerSource)
         {
             this.Picture = new BitmapImage();
             this.Picture.BeginInit();
@@ -33,12 +31,11 @@ namespace ArtCritic_Desctop
 
             this.Picture.UriSource = new Uri(AbsolutePathBitmapImageSource, UriKind.RelativeOrAbsolute);
             this.Picture.EndInit();
-            this.Question_for_image = QuestionSource;
             this.Answer = AnswerSource;
- 
+
         }
 
-      
+
 
 
     }

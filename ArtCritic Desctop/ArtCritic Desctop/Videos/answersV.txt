@@ -1,2 +1,2 @@
-..\..\..\Videos\video.mp4|видео|Что за видео?
-..\..\..\Videos\video1.mp4|видео1|Что за видео1?
+..\..\..\Videos\video.mp4|видео
+..\..\..\Videos\video1.mp4|видео1

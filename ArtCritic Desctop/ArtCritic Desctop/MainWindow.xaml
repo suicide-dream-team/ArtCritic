@@ -138,17 +138,20 @@
         <Grid x:Name="Video_game" ShowGridLines="True">
 
             <Button Content="Ввести" Name="Accept_Answer_Video" HorizontalAlignment="Left" Margin="647,8,0,0" Grid.Row="3" VerticalAlignment="Top" Height="52" Width="81" Click="Accept_Answer_Video_Click" />
-            <TextBlock  HorizontalAlignment="Center" Name="Question_Video_TextBlock" Grid.Row="2"  TextWrapping="Wrap" VerticalAlignment="Center" Width="416" Height="20"/>
-            <TextBox HorizontalAlignment="Center" Name="Answer_Video_Texbox" Grid.Row="3" Text="Введите ответ" TextWrapping="Wrap" VerticalAlignment="Top" Width="416" Height="52" Margin="0,8,0,0"/>
+
+            <TextBox HorizontalAlignment="Center" Name="Answer_Video_Texbox"  Grid.Row="3" Text="helpme" TextWrapping="Wrap" VerticalAlignment="Top" Width="416" Height="26" Margin="0,21,0,0"/>
+
             <Button Content="Exit" Name="Exit_For_Video" Click="Exit_Click" HorizontalAlignment="Left" Margin="714,15,0,0" VerticalAlignment="Top" Height="45" Width="55"/>
 
-            <MediaElement x:Name="video" Margin="120,10,120,10" Grid.Row="1" />
+            <MediaElement x:Name="video" Margin="0,32,0,2" Grid.Row="1" />
 
             <Grid.RowDefinitions>
+
                 <RowDefinition Height="85*"/>
-                <RowDefinition Height="243*"/>
-                <RowDefinition Height="29*"/>
+                <RowDefinition Height="260*"/>
+                <RowDefinition Height="12*"/>
                 <RowDefinition Height="77*"/>
+
             </Grid.RowDefinitions>
 
 
@@ -161,21 +164,31 @@
             <Grid.RowDefinitions>
 
                 <RowDefinition Height="85*"/>
-                <RowDefinition Height="243*"/>
-                <RowDefinition Height="29*"/>
+                <RowDefinition Height="260*"/>
+                <RowDefinition Height="12*"/>
                 <RowDefinition Height="77*"/>
 
             </Grid.RowDefinitions>
 
+            <Image Source="C:\Users\Ярослав\source\repos\ArtCritic\ArtCritic Desctop\ArtCritic Desctop\wallpapers__for_menu_music_pictures\guess_picture.jpg" Stretch="Fill" Grid.RowSpan="4" />
+
+
             <Button Content="Ввести" Name="Accept_Answer_Image" HorizontalAlignment="Left" Margin="647,8,0,0" Grid.Row="3" VerticalAlignment="Top" Height="52" Width="81" Click="Accept_Answer_Image_Click"/>
 
-            <TextBox HorizontalAlignment="Center" Name="Answer_Image_Texbox" Grid.Row="3" Text="helpme" TextWrapping="Wrap" VerticalAlignment="Top" Width="416" Height="52" Margin="0,8,0,0"/>
 
-            <TextBlock HorizontalAlignment="Center" Name="Question_Image_TextBlock" Grid.Row="2"  TextWrapping="Wrap" VerticalAlignment="Center" Width="416" Height="20"/>
 
-            <Button Content="Exit" Name="Exit_For_Image" Click="Exit_Click" HorizontalAlignment="Left" Margin="714,15,0,0" VerticalAlignment="Top" Height="45" Width="55"/>
 
-            <Image Margin="0,85,0,0"  Name="pice"  Grid.RowSpan="2"  />
+
+            <TextBox HorizontalAlignment="Center" Name="Answer_Image_Texbox" Grid.Row="3" Text="helpme" TextWrapping="Wrap" VerticalAlignment="Top" Width="416" Height="26" Margin="0,21,0,0"/>
+
+
+
+
+
+            <Image Margin="0,32,0,2"  Name="pice" Grid.Row="1"  />
+            <Image MouseLeftButtonDown="exit_pic_MouseLeftButtonDown"  Name="exit_pic"  HorizontalAlignment="Left" Height="46" Margin="718,15,0,0" VerticalAlignment="Top" Source="C:\Users\Ярослав\Source\Repos\ArtCritic\ArtCritic Desctop\ArtCritic Desctop\wallpapers__for_menu_music_pictures\exit.png" Width="56"/>
+
+
         </Grid>
 
 

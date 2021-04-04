@@ -27,6 +27,9 @@ namespace ArtCritic_Desctop
         string currentAnswer_image;
 
 
+        int answer_sum_video_correct = 0;
+        int answer_sum_image_correct = 0;
+
         private List<VideoQuestion> db_video;
         int video_counter = 0;
         string currentAnswer_video;
@@ -43,7 +46,7 @@ namespace ArtCritic_Desctop
 
 
             InitializeComponent();
-            Player.statistic = 0; 
+            Player.statistic = 0;
             string[] test_answers = new string[2];
             test_answers[0] = "Спанч Боб";
             test_answers[1] = "Спанч Боб Скрепенс";
@@ -62,7 +65,7 @@ namespace ArtCritic_Desctop
             this.Video_game.Visibility = Visibility.Hidden;
 
             Music_question_window.Visibility = Visibility.Hidden;
-         
+
 
 
         }
@@ -78,7 +81,8 @@ namespace ArtCritic_Desctop
             foreach (var e in dataFile)
             {
                 var args = e.Split('|');
-                db_video.Add(new VideoQuestion(args[0], args[1], args[2]));
+                db_video.Add(new VideoQuestion(args[0], args[1]));
+
             }
 
         }
@@ -88,12 +92,13 @@ namespace ArtCritic_Desctop
         /// </summary>
         private void LoadNewVideoQuestion()
         {
-            video_counter++;
-            var g = db_video[video_counter % db_video.Count];
+
+            // var g = db_video[video_counter % db_video.Count];
+
+            var g = db_video[video_counter];
             video.Source = g.Path_To_Video;
             currentAnswer_video = g.Answer_for_video;
-            Question_Video_TextBlock.Text = g.Question_for_video;
-
+            video_counter++;
         }
 
         /// <summary>
@@ -103,12 +108,29 @@ namespace ArtCritic_Desctop
         {
             string word = String.Empty;
             word = Answer_Video_Texbox.Text;
+
             if (word == currentAnswer_video)
             {
-                MessageBox.Show("Молодец");
-                LoadNewVideoQuestion();
+
+                answer_sum_video_correct++;
+
             }
-            else { MessageBox.Show("Неверно"); }
+
+            if (video_counter != db_video.Count) { LoadNewVideoQuestion(); }
+            else { MessageBox.Show("Молодец! твой результат: " + answer_sum_video_correct + "/" + db_video.Count); Close(); }
+
+
+
+            //    if (word == currentAnswer_video)
+            //  {
+            //  MessageBox.Show("Молодец");
+            //LoadNewVideoQuestion();
+            //}
+            //else { MessageBox.Show("Неверно"); }
+
+
+
+
         }
 
 
@@ -116,27 +138,40 @@ namespace ArtCritic_Desctop
         /// <summary>
         /// загрузка нового вопроса картинки
         /// </summary>
-        private void LoadNewImageQuestion() {
-            image_counter++;
-            var q = db[image_counter % db.Count];
+        private void LoadNewImageQuestion()
+        {
+
+            //var q = db[image_counter % db.Count];
+            var q = db[image_counter];
             pice.Source = q.Picture;
             currentAnswer_image = q.Answer;
-            Question_Image_TextBlock.Text = q.Question_for_image;
-          
+            image_counter++;
+
         }
 
         /// <summary>
         /// проверка вопроса картинок
         /// </summary>
-        public void Check_Answer_Image() {
+        public void Check_Answer_Image()
+        {
             string word = String.Empty;
             word = Answer_Image_Texbox.Text;
+
             if (word == currentAnswer_image)
             {
-                MessageBox.Show("Молодец");
-                LoadNewImageQuestion();
+                answer_sum_image_correct++;
             }
-            else { MessageBox.Show("Неверно"); }
+
+
+
+            //  if (word == currentAnswer_image)
+            //   {
+            //     MessageBox.Show("Молодец");
+
+            if (image_counter != db.Count) { LoadNewImageQuestion(); }
+            else { MessageBox.Show("Молодец! твой результат: " + answer_sum_image_correct + "/" + db.Count); Close(); }
+            //  }
+            // else { MessageBox.Show("Неверно"); }
         }
 
 
@@ -144,7 +179,8 @@ namespace ArtCritic_Desctop
         /// <summary>
         /// создание листа для картиночных вопросов
         /// </summary>
-        void Create_Image_List() {
+        void Create_Image_List()
+        {
 
             db = new List<Image_Question>();
             image_counter = 0;
@@ -152,7 +188,7 @@ namespace ArtCritic_Desctop
             foreach (var e in dataFile)
             {
                 var args = e.Split('|');
-                db.Add(new Image_Question(args[0], args[1],args[2]));
+                db.Add(new Image_Question(args[0], args[1]));
             }
 
         }
@@ -177,8 +213,8 @@ namespace ArtCritic_Desctop
             for (int i = 0; i < 4; ++i)
             {
                 string[] cloud_answers = new string[1];
-                string textFromFile; 
-                string path = @"C:\Users\danila\source\repos\ArtCritic\ArtCritic Desctop\ArtCritic Desctop\"+(i+1)+".txt";
+                string textFromFile;
+                string path = @"C:\Users\danila\source\repos\ArtCritic\ArtCritic Desctop\ArtCritic Desctop\" + (i + 1) + ".txt";
                 using (FileStream fstream = File.OpenRead(path))
                 {
                     byte[] array = new byte[fstream.Length];
@@ -188,7 +224,7 @@ namespace ArtCritic_Desctop
                     textFromFile = System.Text.Encoding.Default.GetString(array);
                     cloud_answers[0] = textFromFile;
                 }
-                music_Questions[i] =new Music_question("угадайте название песни" , cloud_answers);
+                music_Questions[i] = new Music_question("угадайте название песни", cloud_answers);
             }
         }
 
@@ -212,7 +248,7 @@ namespace ArtCritic_Desctop
         {
             Main_menu.Visibility = Visibility.Hidden;
             Type_of_game.Visibility = Visibility.Visible;
-        }        
+        }
 
         private void Video_question_Click(object sender, RoutedEventArgs e)
         {
@@ -262,8 +298,8 @@ namespace ArtCritic_Desctop
             Image_game.Visibility = Visibility.Visible;
             Create_Image_List();
             LoadNewImageQuestion();
-            
-           
+
+
 
 
 
@@ -287,12 +323,12 @@ namespace ArtCritic_Desctop
 
         private void Accept_Click(object sender, RoutedEventArgs e)
         {
-           
+
             if (textQuestion.Check_Answer(Answer.Text))
             {
                 MessageBox.Show("Верно");
             }
-            else { MessageBox.Show( "Неверно"); }
+            else { MessageBox.Show("Неверно"); }
             Test_game_with_Image.Visibility = Visibility.Hidden;
             Type_of_game.Visibility = Visibility.Visible;
         }
@@ -326,7 +362,7 @@ namespace ArtCritic_Desctop
             }
             else
                 mediaPlayer[iter].Play();
-            
+
         }
 
         private void Music_replay_music_Click(object sender, RoutedEventArgs e)
@@ -335,7 +371,10 @@ namespace ArtCritic_Desctop
             mediaPlayer[iter].Play();
         }
 
-      
+        private void exit_pic_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            this.Close();
+        }
     }
 
 
@@ -344,4 +383,4 @@ namespace ArtCritic_Desctop
 
 
 
-   }
+}

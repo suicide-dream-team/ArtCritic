@@ -13,13 +13,10 @@ namespace ArtCritic_Desctop
         //Ответ на картинку
         public string Answer_for_video { get; set; }
 
-        public string Question_for_video { get; set; }
 
-
-        public VideoQuestion(string PathBitmapImageSource, string AnswerSource, string QuestionSource)
+        public VideoQuestion(string PathBitmapImageSource, string AnswerSource)
         {
             this.Path_To_Video = new Uri(PathBitmapImageSource, UriKind.RelativeOrAbsolute);
-            this.Question_for_video = QuestionSource;
             this.Answer_for_video = AnswerSource;
 
         }
