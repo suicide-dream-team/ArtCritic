@@ -1,2 +1,6 @@
-..\..\..\Videos\video.mp4|видео
-..\..\..\Videos\video1.mp4|видео1
+..\..\..\Videos\video0.mp4|1+1
+..\..\..\Videos\video1.mp4|аватар
+..\..\..\Videos\video2.mp4|кавказская пленница
+..\..\..\Videos\video3.mp4|мстители
+..\..\..\Videos\video4.mp4|один дома
+..\..\..\Videos\video5.mp4|пираты карибского моря
