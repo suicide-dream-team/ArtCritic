@@ -36,8 +36,8 @@ namespace ArtCritic_Desctop
 
         Player Player = new Player();
         private int iter = 0; //пока я не сделаю нормальную обертку итерируем вопросы этой штукой
-        Music_question[] music_Questions = new Music_question[4];
-        Uri[] uris = new Uri[4];
+        private List<Music_question> music_Questions = new List<Music_question>();
+        private List<Uri> uris = new List<Uri>();
         private QuestionKeeper question;
         private TextQuestion textQuestion;
         MediaPlayer[] mediaPlayer = new MediaPlayer[4];
@@ -199,13 +199,14 @@ namespace ArtCritic_Desctop
 
         void Creat_Music()
         {
-            uris[0] = new Uri(@"..\..\..\source\source\Voennayakafedra1.mp3", UriKind.Relative);
-            uris[1] = new Uri(@"..\..\..\source\source\Voennayakafedra2.mp3", UriKind.Relative);
-            uris[2] = new Uri(@"..\..\..\source\source\Voennayakafedra3.mp3", UriKind.Relative);
-            uris[3] = new Uri(@"..\..\..\source\source\Voennayakafedra4.mp3", UriKind.Relative);
-            
+            uris.Add(new Uri(@"..\..\..\source\source\Voennayakafedra1.mp3", UriKind.Relative));
+            uris.Add(new Uri(@"..\..\..\source\source\Voennayakafedra2.mp3", UriKind.Relative));
+            uris.Add(new Uri(@"..\..\..\source\source\Voennayakafedra3.mp3", UriKind.Relative));
+            uris.Add(new Uri(@"..\..\..\source\source\Voennayakafedra4.mp3", UriKind.Relative));
+            uris.Add(new Uri(@"..\..\..\source\source\Rayonikvartali.mp3", UriKind.Relative));
+            uris.Add(new Uri(@"..\..\..\source\source\Pesnyaodruge.mp3", UriKind.Relative));
             StringReader stringReader = new StringReader(@"..\..\..\Links.txt");
-            for (int i = 0; i < 4; ++i)
+            for (int i = 0; i < 6; ++i)
             {                
                 string[] cloud_answers = new string[1];
                 string textFromFile; 
@@ -219,7 +220,7 @@ namespace ArtCritic_Desctop
                     textFromFile = System.Text.Encoding.Default.GetString(array);
                     cloud_answers[0] = textFromFile;
                 }
-                music_Questions[i] =new Music_question("угадайте название песни" , cloud_answers, uris[i]);
+                music_Questions.Add(new Music_question("угадайте название песни" , cloud_answers, uris[i]));
             }
         }
 

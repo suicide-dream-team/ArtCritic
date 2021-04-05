@@ -135,7 +135,7 @@
         </Grid>
 
 
-        <Grid x:Name="Video_game" ShowGridLines="True">
+        <Grid x:Name="Video_game" ShowGridLines="True" d:IsHidden="True">
 
             <Button Content="Ввести" Name="Accept_Answer_Video" HorizontalAlignment="Left" Margin="647,8,0,0" Grid.Row="3" VerticalAlignment="Top" Height="52" Width="81" Click="Accept_Answer_Video_Click" />
 
@@ -160,7 +160,7 @@
 
 
 
-        <Grid x:Name="Image_game" ShowGridLines="True" d:IsHidden="True">
+        <Grid x:Name="Image_game" ShowGridLines="True">
             <Grid.RowDefinitions>
 
                 <RowDefinition Height="85*"/>
