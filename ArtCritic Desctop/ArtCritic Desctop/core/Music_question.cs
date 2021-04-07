@@ -10,7 +10,7 @@ namespace ArtCritic_Desctop
     {
         MediaPlayer music;
         public Music_question(string text, string[] answers, Uri uriQestion) : base(text, answers)
-        {
+        {            
             music = new MediaPlayer();
             music.Open(uriQestion);
             music.Stop();

@@ -211,15 +211,9 @@ namespace ArtCritic_Desctop
                 string[] cloud_answers = new string[1];
                 string textFromFile; 
                 string path = @"..\..\..\" + (i+1)+".txt";
-                using (FileStream fstream = File.OpenRead(path))
-                {
-                    byte[] array = new byte[fstream.Length];
-                    // считываем данные
-                    fstream.Read(array, 0, array.Length);
-                    // декодируем байты в строку
-                    textFromFile = System.Text.Encoding.Default.GetString(array);
-                    cloud_answers[0] = textFromFile;
-                }
+                StreamReader streamReader = new StreamReader(path);
+                textFromFile = new string(streamReader.ReadToEnd());                
+                cloud_answers[0] = textFromFile;                
                 music_Questions.Add(new Music_question("угадайте название песни" , cloud_answers, uris[i]));
             }
         }
