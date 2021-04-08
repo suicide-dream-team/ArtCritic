@@ -1,4 +1,6 @@
-﻿Полковнику никто не пишет
-Граница
-Юность в сапогах
-Комбат
+﻿..\..\..\source\source\Voennayakafedra1.mp3|Полковнику никто не пишет
+..\..\..\source\source\Voennayakafedra2.mp3|Граница
+..\..\..\source\source\Voennayakafedra3.mp3|Юность в сапогах
+..\..\..\source\source\Voennayakafedra4.mp3|Комбат
+..\..\..\source\source\Rayonikvartali.mp3|Районы, кварталы
+..\..\..\source\source\Pesnyaodruge.mp3|Песня о друге

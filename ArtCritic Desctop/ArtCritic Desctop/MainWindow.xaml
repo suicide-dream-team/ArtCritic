@@ -61,17 +61,16 @@
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
-                <RowDefinition></RowDefinition>
-                <RowDefinition></RowDefinition>
+                
 
 
 
             </Grid.RowDefinitions>
-            <Button x:Name="test" Content="test" Grid.Column="1" Grid.Row="1" Click="test_Click" d:IsHidden="True" />
-            <Button x:Name="Video_question" Content="Video question" Grid.Column="1" Grid.Row="3" Click="Video_question_Click" d:IsHidden="True" />
-            <Button x:Name="Music_question" Content="Music question" Grid.Column="1" Grid.Row="5" Click="Music_question_Click" d:IsHidden="True"/>
-            <Button x:Name="Image_question" Content="Image question" Grid.Column="1" Grid.Row="7" Click="Image_question_Click" d:IsHidden="True"/>
-            <Button x:Name="Mixed_questions" Content="Mixed questions" Grid.Column="1" Grid.Row="9" Click="Mixed_questions_Click" d:IsHidden="True"/>
+            <Button x:Name="test" Content="test" Grid.Column="0" Grid.Row="0" Click="test_Click" Visibility="Hidden" />
+            <Button x:Name="Video_question" Content="Video question" Grid.Column="1" Grid.Row="1" Click="Video_question_Click" />
+            <Button x:Name="Music_question" Content="Music question" Grid.Column="1" Grid.Row="3" Click="Music_question_Click"/>
+            <Button x:Name="Image_question" Content="Image question" Grid.Column="1" Grid.Row="5" Click="Image_question_Click"/>
+            <Button x:Name="Mixed_questions" Content="Mixed questions" Grid.Column="1" Grid.Row="7" Click="Mixed_questions_Click"/>
         </Grid>
 
         <Grid x:Name="Test_game_with_Image" d:IsHidden="True">
@@ -100,7 +99,7 @@
             <Button x:Name="Accept" Content="Ввести" Grid.Column="1" Grid.Row="7" Click="Accept_Click"></Button>
         </Grid>
 
-        <Grid x:Name="Music_question_window" d:IsHidden="True">
+        <Grid x:Name="Music_question_window">
             <Grid.RowDefinitions>
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
@@ -120,15 +119,17 @@
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
 
-
-            <TextBlock x:Name="Music_question_xaml" Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="3"></TextBlock>
+           
+            <TextBlock x:Name="Music_question_xaml" Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="3" ></TextBlock>
 
             <TextBox x:Name="Music_answer" Grid.Row="5" Grid.Column="2" Grid.ColumnSpan="2"></TextBox>
 
-            <Button x:Name="Music_exit" Content="Выход" Grid.Column="5" Click="Music_exit_Click"></Button>
 
-            <Button x:Name="Music_accept" Content="Проверить" Grid.Column="5" Grid.Row="5" Click="Music_accept_Click"></Button>
+            <Image x:Name="Music_exit_image" Source="C:\Users\danila\source\repos\suicide-dream-team\ArtCritic\ArtCritic Desctop\ArtCritic Desctop\source_2.0\exit.png" Grid.Row="0" Grid.Column="5" MouseLeftButtonDown="Music_exit_image_MouseLeftButtonDown"></Image>
 
+
+            <Image x:Name="Music_accept_image" Grid.Row="5" Grid.Column="5" Source="C:\Users\danila\source\repos\suicide-dream-team\ArtCritic\ArtCritic Desctop\ArtCritic Desctop\source_2.0\check.png"  MouseLeftButtonDown="Music_accept_image_MouseLeftButtonDown"></Image>
+            
             <Button x:Name="Music_replay_music" Content="повторить" Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="1" Grid.RowSpan="2" Click="Music_replay_music_Click"></Button>
 
 
@@ -160,7 +161,7 @@
 
 
 
-        <Grid x:Name="Image_game" ShowGridLines="True">
+        <Grid x:Name="Image_game" ShowGridLines="True" d:IsHidden="True">
             <Grid.RowDefinitions>
 
                 <RowDefinition Height="85*"/>

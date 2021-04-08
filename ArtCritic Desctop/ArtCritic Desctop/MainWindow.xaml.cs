@@ -51,7 +51,13 @@ namespace ArtCritic_Desctop
             test_answers[0] = "Спанч Боб";
             test_answers[1] = "Спанч Боб Скрепенс";
             question = new QuestionKeeper("кто проживает на дне океана?", test_answers);
-
+            /*BitmapImage[] bitmapImages = new BitmapImage[3];
+            bitmapImages[0].BaseUri = new Uri(@"..\..\..\source_2.0\check.png", UriKind.Relative);
+            bitmapImages[0].BeginInit();
+            //bitmapImages[1] = 
+            //bitmapImages[2]
+            Music_accept_image.Source = bitmapImages[0];*/
+            
 
 
 
@@ -198,24 +204,18 @@ namespace ArtCritic_Desctop
 
 
         void Creat_Music()
-        {
-            uris.Add(new Uri(@"..\..\..\source\source\Voennayakafedra1.mp3", UriKind.Relative));
-            uris.Add(new Uri(@"..\..\..\source\source\Voennayakafedra2.mp3", UriKind.Relative));
-            uris.Add(new Uri(@"..\..\..\source\source\Voennayakafedra3.mp3", UriKind.Relative));
-            uris.Add(new Uri(@"..\..\..\source\source\Voennayakafedra4.mp3", UriKind.Relative));
-            uris.Add(new Uri(@"..\..\..\source\source\Rayonikvartali.mp3", UriKind.Relative));
-            uris.Add(new Uri(@"..\..\..\source\source\Pesnyaodruge.mp3", UriKind.Relative));
-            StringReader stringReader = new StringReader(@"..\..\..\Links.txt");
+        {           
             for (int i = 0; i < 6; ++i)
-            {                
-                string[] cloud_answers = new string[1];
-                string textFromFile; 
-                string path = @"..\..\..\" + (i+1)+".txt";
-                StreamReader streamReader = new StreamReader(path);
-                textFromFile = new string(streamReader.ReadToEnd());                
-                cloud_answers[0] = textFromFile;                
-                music_Questions.Add(new Music_question("угадайте название песни" , cloud_answers, uris[i]));
+            {
+                StreamReader streamReader = new StreamReader(@"..\..\..\Links.txt");
+                string textFromFile = streamReader.ReadLine();
+                string[] cloud_answers;
+                cloud_answers = textFromFile.Split('|');
+                string[] ans = new string[1];
+                ans[0] = cloud_answers[1];
+                music_Questions.Add(new Music_question("угадайте название песни", ans, new Uri(cloud_answers[0], UriKind.Relative)));
             }
+            
         }
 
         private void Settings_Click(object sender, RoutedEventArgs e)
@@ -364,6 +364,32 @@ namespace ArtCritic_Desctop
         private void exit_pic_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             this.Close();
+        }
+
+        private void Music_accept_image_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            music_Questions[iter].Stop();
+            if (music_Questions[iter].Check_Answer(Music_answer.Text))
+                Player.statistic = Player.statistic + 1;
+            Music_answer.Text = "";
+            ++iter;
+            if (iter == 4)
+            {
+                Music_question_window.Visibility = Visibility.Hidden;
+                Type_of_game.Visibility = Visibility.Visible;
+                MessageBox.Show("Вы отгадали " + Player.statistic);
+                iter = 0;
+            }
+            else
+                music_Questions[iter].Play();
+        }
+
+        private void Music_exit_image_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            iter = 0;
+            Music_question_window.Visibility = Visibility.Hidden;
+            Type_of_game.Visibility = Visibility.Visible;
+            music_Questions[iter].Stop();
         }
     }
 
