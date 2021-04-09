@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Reflection;
+using ArtCritic_Desctop.core;
 
 namespace ArtCritic_Desctop
 {
@@ -26,13 +27,17 @@ namespace ArtCritic_Desctop
         int image_counter = 0;
         string currentAnswer_image;
 
+        private CreatePack a;
 
         int answer_sum_video_correct = 0;
         int answer_sum_image_correct = 0;
 
+
         private List<VideoQuestion> db_video;
         int video_counter = 0;
         string currentAnswer_video;
+
+
 
         Player Player = new Player();
         private int iter = 0; //пока я не сделаю нормальную обертку итерируем вопросы этой штукой
@@ -63,9 +68,14 @@ namespace ArtCritic_Desctop
             this.Test_game_with_Image.Visibility = Visibility.Hidden;
             this.Image_game.Visibility = Visibility.Hidden;
             this.Video_game.Visibility = Visibility.Hidden;
-
+            this.Pack_create.Visibility = Visibility.Hidden;
+            this.Pack_create_Image.Visibility = Visibility.Hidden;
+            this.Pack_create_Music.Visibility = Visibility.Hidden;
+            this.Pack_create_Video.Visibility = Visibility.Hidden;
+            this.Accept_Create_Answer_Image.Visibility = Visibility.Hidden;
+            this.Accept_Create_Answer_Image.Visibility = Visibility.Hidden;
             Music_question_window.Visibility = Visibility.Hidden;
-
+          
 
 
         }
@@ -330,6 +340,8 @@ namespace ArtCritic_Desctop
 
         private void Creat_Question_Button_Click(object sender, RoutedEventArgs e)
         {
+            Main_menu.Visibility = Visibility.Hidden;
+            Pack_create.Visibility = Visibility.Visible;
 
         }
 
@@ -369,6 +381,44 @@ namespace ArtCritic_Desctop
         private void exit_pic_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             this.Close();
+        }
+
+        private void Accept_Create_Image_Pack_Click(object sender, RoutedEventArgs e)
+        {
+            Pack_create.Visibility = Visibility.Hidden;
+
+            Pack_create_Image.Visibility = Visibility.Visible;
+
+            Create_Question_Image_TBlock.Text = "Как вы назовёте свой пак? ";
+
+          
+        }
+
+
+
+
+
+
+
+
+      //  CreatePack image_pack = new CreatePack(2, Creat_Answer_Image_Texbox.Text, Image_for_create, Creat_Answer_Image_Texbox, Create_Question_Image_TBlock);
+       // a = image_pack;
+         //   Accept_Create_Name_Image_Pack.Visibility = Visibility.Hidden;
+          //  Pack_create_Image.Visibility = Visibility.Visible;
+
+
+        private void Accept_Create_Answer_Image_Click(object sender, RoutedEventArgs e)
+        {
+            a.User_Create_CLick(sender, e);
+            if (a.is_create == true) { this.Close(); }
+        }
+     private void Accept_Create_Name_Image_Pack_Click(object sender, RoutedEventArgs e)
+        {
+             CreatePack image_pack = new CreatePack(2, Creat_Answer_Image_Texbox.Text, Image_for_create, Creat_Answer_Image_Texbox, Create_Question_Image_TBlock);
+             a = image_pack;
+            Accept_Create_Name_Image_Pack.Visibility = Visibility.Hidden;
+            Accept_Create_Answer_Image.Visibility = Visibility.Visible;
+        
         }
     }
 

@@ -25,18 +25,18 @@
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
             <Button x:Name="Game" Content="Игра" Grid.Column="1" Grid.Row="1" 
-                    Click="Game_Click" ></Button>
+                    Click="Game_Click" d:IsHidden="True" ></Button>
 
             <Button x:Name="Settings" Content="Настройки" Grid.Column="1" Grid.Row="3"
-                    Click="Settings_Click"></Button>
+                    Click="Settings_Click" d:IsHidden="True"></Button>
 
             <Button x:Name="Statistics" Content="Статистика" Grid.Column="1" Grid.Row="5" 
-                    Click="Satistyc_Click"></Button>
+                    Click="Satistyc_Click" d:IsHidden="True"></Button>
 
             <Button x:Name="Exit" Content="Выход" Grid.Column="1" Grid.Row="7" 
-                    Click="Exit_Click"></Button>
+                    Click="Exit_Click" d:IsHidden="True"></Button>
 
-            <Button x:Name="Creat_Question_Button" Content="Создать новый вопрос" Click="Creat_Question_Button_Click"></Button>
+            <Button x:Name="Creat_Question_Button" Content="Создать новый пак вопросов" Click="Creat_Question_Button_Click" d:IsHidden="True"></Button>
 
         </Grid>
 
@@ -135,15 +135,15 @@
         </Grid>
 
 
-        <Grid x:Name="Video_game" ShowGridLines="True">
+        <Grid x:Name="Video_game" ShowGridLines="True" d:IsHidden="True">
 
-            <Button Content="Ввести" Name="Accept_Answer_Video" HorizontalAlignment="Left" Margin="647,8,0,0" Grid.Row="3" VerticalAlignment="Top" Height="52" Width="81" Click="Accept_Answer_Video_Click" />
+            <Button Content="Ввести" Name="Accept_Answer_Video" HorizontalAlignment="Left" Margin="647,8,0,0" Grid.Row="3" VerticalAlignment="Top" Height="52" Width="81" Click="Accept_Answer_Video_Click" d:IsHidden="True" />
 
-            <TextBox HorizontalAlignment="Center" Name="Answer_Video_Texbox"  Grid.Row="3" Text="helpme" TextWrapping="Wrap" VerticalAlignment="Top" Width="416" Height="26" Margin="0,21,0,0"/>
+            <TextBox HorizontalAlignment="Center" Name="Answer_Video_Texbox"  Grid.Row="3" Text="helpme" TextWrapping="Wrap" VerticalAlignment="Top" Width="416" Height="26" Margin="0,21,0,0" d:IsHidden="True"/>
 
-            <Button Content="Exit" Name="Exit_For_Video" Click="Exit_Click" HorizontalAlignment="Left" Margin="714,15,0,0" VerticalAlignment="Top" Height="45" Width="55"/>
+            <Button Content="Exit" Name="Exit_For_Video" Click="Exit_Click" HorizontalAlignment="Left" Margin="714,15,0,0" VerticalAlignment="Top" Height="45" Width="55" d:IsHidden="True"/>
 
-            <MediaElement x:Name="video" Margin="0,32,0,2" Grid.Row="1" />
+            <MediaElement x:Name="video" Margin="0,32,0,2" Grid.Row="1" d:IsHidden="True" />
 
             <Grid.RowDefinitions>
 
@@ -170,27 +170,95 @@
 
             </Grid.RowDefinitions>
 
-            <Image Source="C:\Users\Ярослав\source\repos\ArtCritic\ArtCritic Desctop\ArtCritic Desctop\wallpapers__for_menu_music_pictures\guess_picture.jpg" Stretch="Fill" Grid.RowSpan="4" />
+            <Image Source="\wallpapers__for_menu_music_pictures\guess_picture.jpg" Stretch="Fill" Grid.RowSpan="4" d:IsHidden="True" />
 
 
-            <Button Content="Ввести" Name="Accept_Answer_Image" HorizontalAlignment="Left" Margin="647,8,0,0" Grid.Row="3" VerticalAlignment="Top" Height="52" Width="81" Click="Accept_Answer_Image_Click"/>
-
-
-
-
-
-            <TextBox HorizontalAlignment="Center" Name="Answer_Image_Texbox" Grid.Row="3" Text="helpme" TextWrapping="Wrap" VerticalAlignment="Top" Width="416" Height="26" Margin="0,21,0,0"/>
+            <Button Content="Ввести" Name="Accept_Answer_Image" HorizontalAlignment="Left" Margin="647,8,0,0" Grid.Row="3" VerticalAlignment="Top" Height="52" Width="81" Click="Accept_Answer_Image_Click" d:IsHidden="True"/>
 
 
 
 
 
-            <Image Margin="0,32,0,2"  Name="pice" Grid.Row="1"  />
-            <Image MouseLeftButtonDown="exit_pic_MouseLeftButtonDown"  Name="exit_pic"  HorizontalAlignment="Left" Height="46" Margin="718,15,0,0" VerticalAlignment="Top" Source="C:\Users\Ярослав\Source\Repos\ArtCritic\ArtCritic Desctop\ArtCritic Desctop\wallpapers__for_menu_music_pictures\exit.png" Width="56"/>
+            <TextBox HorizontalAlignment="Center" Name="Answer_Image_Texbox" Grid.Row="3" Text="helpme" TextWrapping="Wrap" VerticalAlignment="Top" Width="416" Height="26" Margin="0,21,0,0" d:IsHidden="True"/>
+
+
+
+
+
+            <Image Margin="0,32,0,2"  Name="pice" Grid.Row="1" d:IsHidden="True"  />
+            <Image MouseLeftButtonDown="exit_pic_MouseLeftButtonDown"  Name="exit_pic"  HorizontalAlignment="Left" Height="46" Margin="718,15,0,0" VerticalAlignment="Top" Source="\wallpapers__for_menu_music_pictures\exit.png" Width="56" d:IsHidden="True"/>
 
 
         </Grid>
 
+
+        <Grid x:Name="Pack_create" ShowGridLines="True" d:IsHidden="True">
+            <Grid.RowDefinitions>
+
+                <RowDefinition Height="85*"/>
+                <RowDefinition Height="260*"/>
+                <RowDefinition Height="55*"/>
+                <RowDefinition Height="94*"/>
+
+            </Grid.RowDefinitions>
+
+
+            <TextBlock HorizontalAlignment="Center" Name="Which_pack_create" Text="Какой пак вы хотите создать?" TextWrapping="Wrap" VerticalAlignment="Center" Width="164" Height="55" d:IsHidden="True"/>
+            <Button Content="Картинка" Name="Create_Image_Pack" HorizontalAlignment="Left" Margin="120,90,0,0" Grid.Row="1" VerticalAlignment="Top" Height="52" Width="81" Click="Accept_Create_Image_Pack_Click" d:IsHidden="True" />
+            <Button Content="Музыка" Name="Create_Music_Pack" HorizontalAlignment="Center" Margin="0,90,0,0" Grid.Row="1" VerticalAlignment="Top" Height="52" Width="80" d:IsHidden="True" />
+            <Button Content="Видео" Name="Create_Video_Pack" HorizontalAlignment="Left" Margin="600,90,0,0" Grid.Row="1" VerticalAlignment="Top" Height="52" Width="81" d:IsHidden="True" />
+        </Grid>
+
+
+        <Grid x:Name="Pack_create_Image" ShowGridLines="True">
+            <Grid.RowDefinitions>
+
+                <RowDefinition Height="85*"/>
+                <RowDefinition Height="260*"/>
+                <RowDefinition Height="55*"/>
+                <RowDefinition Height="94*"/>
+
+            </Grid.RowDefinitions>
+
+            <TextBlock HorizontalAlignment="Center" Name="Create_Question_Image_TBlock" Grid.Row="2"  TextWrapping="Wrap" VerticalAlignment="Center" Width="416" Height="26"/>
+            
+            <Button Content="Ввести" Name="Accept_Create_Answer_Image" HorizontalAlignment="Left" Margin="647,8,0,0" Grid.Row="3" VerticalAlignment="Top" Height="52" Width="81" Click="Accept_Create_Answer_Image_Click"/>
+
+            <Button Content="Принять" Name="Accept_Create_Name_Image_Pack" HorizontalAlignment="Left" Margin="647,8,0,0" Grid.Row="3" VerticalAlignment="Top" Height="52" Width="81" Click="Accept_Create_Name_Image_Pack_Click" />
+            
+            <TextBox HorizontalAlignment="Center" Name="Creat_Answer_Image_Texbox" Grid.Row="3" TextWrapping="Wrap" VerticalAlignment="Top" Width="416" Height="50" Margin="0,10,0,0"/>
+
+            <Image Margin="0,17,0,17"  Name="Image_for_create" Grid.Row="1" />
+
+        </Grid>
+
+
+        <Grid x:Name="Pack_create_Music" ShowGridLines="True" d:IsHidden="True">
+            <Grid.RowDefinitions>
+
+                <RowDefinition Height="85*"/>
+                <RowDefinition Height="260*"/>
+                <RowDefinition Height="55*"/>
+                <RowDefinition Height="94*"/>
+
+            </Grid.RowDefinitions>
+
+
+        </Grid>
+
+
+        <Grid x:Name="Pack_create_Video" ShowGridLines="True" d:IsHidden="True">
+            <Grid.RowDefinitions>
+
+                <RowDefinition Height="85*"/>
+                <RowDefinition Height="260*"/>
+                <RowDefinition Height="55*"/>
+                <RowDefinition Height="94*"/>
+
+            </Grid.RowDefinitions>
+
+
+        </Grid>
 
 
 
