@@ -4,7 +4,10 @@ using System.Text;
 
 namespace ArtCritic_Desctop
 {
-    public class Player//вообще временный только для демки
+    ///<summary>
+    ///класс игрока для одиночной игры
+    ///</summary>
+    public class Player
     {
         public int statistic { get; set; }
         public string name { get; set; }
