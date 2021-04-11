@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ArtCritic.MainPage">
+    <StackLayout>
+        <Frame BackgroundColor="#2196F3" Padding="24" CornerRadius="0">
+            <Label Text="ArtCritic" HorizontalTextAlignment="Center" TextColor="White" FontSize="70"/>
+        </Frame>
+        <Button x:Name ="Game" Text="Игра" FontSize="36" Clicked ="Game_Click"></Button>
+        <Button x:Name ="Settings" Text="Настройки" FontSize="36" Clicked="Settings_Click"></Button>
+        <Button x:Name ="Statistics" Text="Статистика" FontSize="36" Clicked="Satistyc_Click"></Button>
+    </StackLayout>
+
+</ContentPage>
+
