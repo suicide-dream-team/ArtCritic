@@ -99,7 +99,7 @@
             <Button x:Name="Accept" Content="Ввести" Grid.Column="1" Grid.Row="7" Click="Accept_Click"></Button>
         </Grid>
 
-        <Grid x:Name="Music_question_window">
+        <Grid x:Name="Music_question_window" d:IsHidden="True">
             <Grid.RowDefinitions>
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
@@ -207,11 +207,11 @@
             <TextBlock HorizontalAlignment="Center" Name="Which_pack_create" Text="Какой пак вы хотите создать?" TextWrapping="Wrap" VerticalAlignment="Center" Width="164" Height="55" d:IsHidden="True"/>
             <Button Content="Картинка" Name="Create_Image_Pack" HorizontalAlignment="Left" Margin="120,90,0,0" Grid.Row="1" VerticalAlignment="Top" Height="52" Width="81" Click="Accept_Create_Image_Pack_Click" d:IsHidden="True" />
             <Button Content="Музыка" Name="Create_Music_Pack" HorizontalAlignment="Center" Margin="0,90,0,0" Grid.Row="1" VerticalAlignment="Top" Height="52" Width="80" d:IsHidden="True" />
-            <Button Content="Видео" Name="Create_Video_Pack" HorizontalAlignment="Left" Margin="600,90,0,0" Grid.Row="1" VerticalAlignment="Top" Height="52" Width="81" d:IsHidden="True" />
+            <Button Content="Видео" Name="Create_Video_Pack" HorizontalAlignment="Left" Margin="600,90,0,0" Grid.Row="1" VerticalAlignment="Top" Height="52" Width="81" Click="Create_Video_Pack_Click" d:IsHidden="True" />
         </Grid>
 
 
-        <Grid x:Name="Pack_create_Image" ShowGridLines="True">
+        <Grid x:Name="Pack_create_Image" ShowGridLines="True" d:IsHidden="True">
             <Grid.RowDefinitions>
 
                 <RowDefinition Height="85*"/>
@@ -248,7 +248,7 @@
         </Grid>
 
 
-        <Grid x:Name="Pack_create_Video" ShowGridLines="True" d:IsHidden="True">
+        <Grid x:Name="Pack_create_Video" ShowGridLines="True">
             <Grid.RowDefinitions>
 
                 <RowDefinition Height="85*"/>
@@ -257,6 +257,18 @@
                 <RowDefinition Height="94*"/>
 
             </Grid.RowDefinitions>
+
+
+            <TextBlock HorizontalAlignment="Center" Name="Create_Question_Video_TBlock" Grid.Row="2"  TextWrapping="Wrap" VerticalAlignment="Center" Width="416" Height="26"/>
+
+            <Button Content="Ввести" Name="Accept_Create_Answer_Video" HorizontalAlignment="Left" Margin="647,8,0,0" Grid.Row="3" VerticalAlignment="Top" Height="52" Width="81" Click="Accept_Create_Answer_Video_Click"/>
+
+            <Button Content="Принять" Name="Accept_Create_Name_Video_Pack" HorizontalAlignment="Left" Margin="647,8,0,0" Grid.Row="3" VerticalAlignment="Top" Height="52" Width="81" Click="Accept_Create_Name_Video_Pack_Click" />
+
+            <TextBox HorizontalAlignment="Center" Name="Creat_Answer_Video_Texbox" Grid.Row="3" TextWrapping="Wrap" VerticalAlignment="Top" Width="416" Height="50" Margin="0,10,0,0"/>
+
+            <MediaElement Margin="0,17,0,17"  Name="Video_for_create" Grid.Row="1" />
+
 
 
         </Grid>

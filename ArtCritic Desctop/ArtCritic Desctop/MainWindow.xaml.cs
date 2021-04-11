@@ -79,7 +79,7 @@ namespace ArtCritic_Desctop
             this.Pack_create_Music.Visibility = Visibility.Hidden;
             this.Pack_create_Video.Visibility = Visibility.Hidden;
             this.Accept_Create_Answer_Image.Visibility = Visibility.Hidden;
-            this.Accept_Create_Answer_Image.Visibility = Visibility.Hidden;
+            this.Accept_Create_Answer_Video.Visibility = Visibility.Hidden;
             Music_question_window.Visibility = Visibility.Hidden;
           
 
@@ -378,6 +378,10 @@ namespace ArtCritic_Desctop
             this.Close();
         }
 
+        
+
+
+
         private void Accept_Create_Image_Pack_Click(object sender, RoutedEventArgs e)
         {
             Pack_create.Visibility = Visibility.Hidden;
@@ -388,18 +392,6 @@ namespace ArtCritic_Desctop
 
           
         }
-
-
-
-
-
-
-
-
-      //  CreatePack image_pack = new CreatePack(2, Creat_Answer_Image_Texbox.Text, Image_for_create, Creat_Answer_Image_Texbox, Create_Question_Image_TBlock);
-       // a = image_pack;
-         //   Accept_Create_Name_Image_Pack.Visibility = Visibility.Hidden;
-          //  Pack_create_Image.Visibility = Visibility.Visible;
 
 
         private void Accept_Create_Answer_Image_Click(object sender, RoutedEventArgs e)
@@ -440,6 +432,29 @@ namespace ArtCritic_Desctop
             Music_question_window.Visibility = Visibility.Hidden;
             Type_of_game.Visibility = Visibility.Visible;
             music_Questions[iter].Stop();
+        }
+
+        private void Create_Video_Pack_Click(object sender, RoutedEventArgs e)
+        {
+            Pack_create.Visibility = Visibility.Hidden;
+
+            Pack_create_Video.Visibility = Visibility.Visible;
+
+            Create_Question_Video_TBlock.Text = "Как вы назовёте свой пак? ";
+        }
+
+        private void Accept_Create_Name_Video_Pack_Click(object sender, RoutedEventArgs e)
+        {
+            CreatePack Video_pack = new CreatePack(3, Creat_Answer_Video_Texbox.Text, Video_for_create, Creat_Answer_Video_Texbox, Create_Question_Video_TBlock);
+            a = Video_pack;
+            Accept_Create_Name_Video_Pack.Visibility = Visibility.Hidden;
+            Accept_Create_Answer_Video.Visibility = Visibility.Visible;
+        }
+
+        private void Accept_Create_Answer_Video_Click(object sender, RoutedEventArgs e)
+        {
+            a.User_Create_CLick(sender, e);
+            if (a.is_create == true) { this.Close(); }
         }
     }
 
