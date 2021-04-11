@@ -124,11 +124,13 @@
 
             <TextBox x:Name="Music_answer" Grid.Row="5" Grid.Column="2" Grid.ColumnSpan="2"></TextBox>
 
+            <Button x:Name="Music_Accept_button" Content="Ввести" Grid.Row="5" Grid.Column="5" Click="Music_accept_Click"></Button>
 
-            <Image x:Name="Music_exit_image" Source="C:\Users\danila\source\repos\suicide-dream-team\ArtCritic\ArtCritic Desctop\ArtCritic Desctop\source_2.0\exit.png" Grid.Row="0" Grid.Column="5" MouseLeftButtonDown="Music_exit_image_MouseLeftButtonDown"></Image>
+            <Image x:Name="Music_exit_image" Source="\source_2.0\exit.png" Grid.Row="0" Grid.Column="5" Visibility="Hidden" MouseLeftButtonDown="Music_exit_image_MouseLeftButtonDown"></Image>
 
+            <Button x:Name="Music_exit_button" Content="Выйти" Grid.Row="0" Grid.Column="5" Click="Music_exit_Click"></Button>
 
-            <Image x:Name="Music_accept_image" Grid.Row="5" Grid.Column="5" Source="C:\Users\danila\source\repos\suicide-dream-team\ArtCritic\ArtCritic Desctop\ArtCritic Desctop\source_2.0\check.png"  MouseLeftButtonDown="Music_accept_image_MouseLeftButtonDown"></Image>
+            <Image x:Name="Music_accept_image" Grid.Row="5" Grid.Column="5" Source="\source_2.0\check.png" Visibility="Hidden" MouseLeftButtonDown="Music_accept_image_MouseLeftButtonDown"></Image>
             
             <Button x:Name="Music_replay_music" Content="повторить" Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="1" Grid.RowSpan="2" Click="Music_replay_music_Click"></Button>
 
