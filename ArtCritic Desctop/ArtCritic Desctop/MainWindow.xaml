@@ -163,7 +163,7 @@
 
 
 
-        <Grid x:Name="Image_game" ShowGridLines="True" d:IsHidden="True">
+        <Grid x:Name="Image_game" ShowGridLines="True">
             <Grid.RowDefinitions>
 
                 <RowDefinition Height="85*"/>
@@ -173,24 +173,18 @@
 
             </Grid.RowDefinitions>
 
-            <Image Source="\wallpapers__for_menu_music_pictures\guess_picture.jpg" Stretch="Fill" Grid.RowSpan="4" d:IsHidden="True" />
+            <Image Name="Image_Background"  Source="\wallpapers__for_menu_music_pictures\guess_picture.jpg" Stretch="Fill" Grid.RowSpan="4" />
 
 
-            <Button Content="Ввести" Name="Accept_Answer_Image" HorizontalAlignment="Left" Margin="647,8,0,0" Grid.Row="3" VerticalAlignment="Top" Height="52" Width="81" Click="Accept_Answer_Image_Click" d:IsHidden="True"/>
+        
 
+            <TextBox HorizontalAlignment="Center" Name="Answer_Image_Texbox" Grid.Row="3" Text="helpme" TextWrapping="Wrap" VerticalAlignment="Top" Width="416" Height="26" Margin="0,21,0,0"/>
+            <Image Margin="0,32,0,2"  Name="pice" Grid.Row="1"  />
+           
+            <Image MouseLeftButtonDown="exit_pic_MouseLeftButtonDown"  Name="exit_pic"  HorizontalAlignment="Left" Height="46" Margin="718,15,0,0" VerticalAlignment="Top" Source="\wallpapers__for_menu_music_pictures\exit.png" Width="56"/>
 
-
-
-
-            <TextBox HorizontalAlignment="Center" Name="Answer_Image_Texbox" Grid.Row="3" Text="helpme" TextWrapping="Wrap" VerticalAlignment="Top" Width="416" Height="26" Margin="0,21,0,0" d:IsHidden="True"/>
-
-
-
-
-
-            <Image Margin="0,32,0,2"  Name="pice" Grid.Row="1" d:IsHidden="True"  />
-            <Image MouseLeftButtonDown="exit_pic_MouseLeftButtonDown"  Name="exit_pic"  HorizontalAlignment="Left" Height="46" Margin="718,15,0,0" VerticalAlignment="Top" Source="\wallpapers__for_menu_music_pictures\exit.png" Width="56" d:IsHidden="True"/>
-
+            <Image Name="Accept_Answer_Image" HorizontalAlignment="Left" Margin="647,8,0,0" Grid.Row="3" VerticalAlignment="Top" Height="52" Width="81" MouseLeftButtonDown="Accept_Answer_Image_Click"/>
+            
 
         </Grid>
 
@@ -223,15 +217,15 @@
 
             </Grid.RowDefinitions>
 
-            <TextBlock HorizontalAlignment="Center" Name="Create_Question_Image_TBlock" Grid.Row="2"  TextWrapping="Wrap" VerticalAlignment="Center" Width="416" Height="26"/>
+            <TextBlock HorizontalAlignment="Center" Name="Create_Question_Image_TBlock" Grid.Row="2"  TextWrapping="Wrap" VerticalAlignment="Center" Width="416" Height="26" d:IsHidden="True"/>
             
-            <Button Content="Ввести" Name="Accept_Create_Answer_Image" HorizontalAlignment="Left" Margin="647,8,0,0" Grid.Row="3" VerticalAlignment="Top" Height="52" Width="81" Click="Accept_Create_Answer_Image_Click"/>
+            <Button Content="Ввести" Name="Accept_Create_Answer_Image" HorizontalAlignment="Left" Margin="647,8,0,0" Grid.Row="3" VerticalAlignment="Top" Height="52" Width="81" Click="Accept_Create_Answer_Image_Click" d:IsHidden="True"/>
 
-            <Button Content="Принять" Name="Accept_Create_Name_Image_Pack" HorizontalAlignment="Left" Margin="647,8,0,0" Grid.Row="3" VerticalAlignment="Top" Height="52" Width="81" Click="Accept_Create_Name_Image_Pack_Click" />
+            <Button Content="Принять" Name="Accept_Create_Name_Image_Pack" HorizontalAlignment="Left" Margin="647,8,0,0" Grid.Row="3" VerticalAlignment="Top" Height="52" Width="81" Click="Accept_Create_Name_Image_Pack_Click" d:IsHidden="True" />
             
-            <TextBox HorizontalAlignment="Center" Name="Creat_Answer_Image_Texbox" Grid.Row="3" TextWrapping="Wrap" VerticalAlignment="Top" Width="416" Height="50" Margin="0,10,0,0"/>
+            <TextBox HorizontalAlignment="Center" Name="Creat_Answer_Image_Texbox" Grid.Row="3" TextWrapping="Wrap" VerticalAlignment="Top" Width="416" Height="50" Margin="0,10,0,0" d:IsHidden="True"/>
 
-            <Image Margin="0,17,0,17"  Name="Image_for_create" Grid.Row="1" />
+            <Image Margin="0,17,0,17"  Name="Image_for_create" Grid.Row="1" d:IsHidden="True" />
 
         </Grid>
 
@@ -250,7 +244,7 @@
         </Grid>
 
 
-        <Grid x:Name="Pack_create_Video" ShowGridLines="True">
+        <Grid x:Name="Pack_create_Video" ShowGridLines="True" d:IsHidden="True">
             <Grid.RowDefinitions>
 
                 <RowDefinition Height="85*"/>

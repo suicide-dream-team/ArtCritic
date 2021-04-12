@@ -32,6 +32,10 @@ namespace ArtCritic_Desctop
         int answer_sum_video_correct = 0;
         int answer_sum_image_correct = 0;
 
+        public BitmapImage Back_Ground { get; set; }
+        public BitmapImage Exit_Button { get; set; }
+        public BitmapImage Enter_Button { get; set; }
+        public BitmapImage Check_Button { get; set; }
 
         private List<VideoQuestion> db_video;
         int video_counter = 0;
@@ -56,20 +60,6 @@ namespace ArtCritic_Desctop
             test_answers[0] = "Спанч Боб";
             test_answers[1] = "Спанч Боб Скрепенс";
             question = new QuestionKeeper("кто проживает на дне океана?", test_answers);
-            /*BitmapImage[] bitmapImages = new BitmapImage[3];
-            bitmapImages[0].BaseUri = new Uri(@"..\..\..\source_2.0\check.png", UriKind.Relative);
-            bitmapImages[0].BeginInit();
-            //bitmapImages[1] = 
-            //bitmapImages[2]
-            Music_accept_image.Source = bitmapImages[0];*/
-            
-
-
-
-
-
-
-
             this.Type_of_game.Visibility = Visibility.Hidden;
             this.Test_game_with_Image.Visibility = Visibility.Hidden;
             this.Image_game.Visibility = Visibility.Hidden;
@@ -296,6 +286,33 @@ namespace ArtCritic_Desctop
 
             Type_of_game.Visibility = Visibility.Hidden;
             Image_game.Visibility = Visibility.Visible;
+
+
+            
+            Back_Ground = new BitmapImage();
+            Back_Ground.BeginInit();
+            string Background_Image_Path = System.IO.Path.GetFullPath(@"..\..\..\source_2.0\guess_picture.jpg");
+            Back_Ground.UriSource = new Uri(Background_Image_Path, UriKind.RelativeOrAbsolute);
+            Back_Ground.EndInit();
+            Image_Background.Source = Back_Ground;
+
+
+
+            Exit_Button = new BitmapImage();
+            Exit_Button.BeginInit();
+            string Exit_Button_Image_Path = System.IO.Path.GetFullPath(@"..\..\..\source_2.0\exit.png");
+            Exit_Button.UriSource = new Uri(Exit_Button_Image_Path, UriKind.RelativeOrAbsolute);
+            Exit_Button.EndInit();
+            exit_pic.Source = Exit_Button;
+
+            Check_Button = new BitmapImage();
+            Check_Button.BeginInit();
+            string Check_Button_Image_Path= System.IO.Path.GetFullPath(@"..\..\..\source_2.0\check.png");
+            Check_Button.UriSource = new Uri(Check_Button_Image_Path, UriKind.RelativeOrAbsolute);
+            Check_Button.EndInit();
+            Accept_Answer_Image.Source = Check_Button;
+
+
             Create_Image_List();
             LoadNewImageQuestion();
 

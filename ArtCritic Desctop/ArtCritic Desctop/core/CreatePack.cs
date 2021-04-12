@@ -24,7 +24,7 @@ namespace ArtCritic_Desctop.core
         public int kol_vo_in_dir = 0;
         public bool is_create=false;
 
-        public FileInfo[] ImageFiles;
+        public FileInfo[] Files;
 
         public TextBox Users_Answer;
         public TextBlock Question_for_user;
@@ -54,7 +54,7 @@ namespace ArtCritic_Desctop.core
                 {
                     File.Create(@"\..\..\..\PacksCreated\" + pack_name + @"\answersV.txt").Close();
                     FileInfo[] GraphicFiles = dirInfo.GetFiles("*.mp4");
-                    ImageFiles = GraphicFiles;
+                    Files = GraphicFiles;
                     kol_vo_in_dir = GraphicFiles.Length;
                 }
             Create_Video_for_user();
@@ -85,7 +85,7 @@ namespace ArtCritic_Desctop.core
                 {
                     File.Create(@"\..\..\..\PacksCreated\" + pack_name + @"\answersI.txt").Close();
                     FileInfo[] GraphicFiles = dirInfo.GetFiles("*.jpg");
-                    ImageFiles = GraphicFiles;
+                    Files = GraphicFiles;
                     kol_vo_in_dir = GraphicFiles.Length;
                 }
                 Create_Image_for_user(); 
@@ -96,7 +96,7 @@ namespace ArtCritic_Desctop.core
 
             if (type_OF_create_game == 3) {
                 
-                string nameFile = ImageFiles[iter].Name;
+                string nameFile = Files[iter].Name;
                 using (StreamWriter w = File.AppendText(@"\..\..\..\PacksCreated\" + Namepack + @"\answersV.txt"))
                 {
                     w.WriteLine(@"\..\..\..\Packs\" + Namepack + @"\" + nameFile + "|" + Users_Answer.Text);
@@ -124,7 +124,7 @@ namespace ArtCritic_Desctop.core
 
                 if (type_OF_create_game == 2)
             { 
-                    string nameFile = ImageFiles[iter].Name;
+                    string nameFile = Files[iter].Name;
                     using (StreamWriter w = File.AppendText(@"\..\..\..\PacksCreated\" + Namepack + @"\answersI.txt"))
                     {
                         
@@ -151,7 +151,7 @@ namespace ArtCritic_Desctop.core
         }
         public void Create_Video_for_user() {
             Question_for_user.Text = "Какой вы хотите ответ для этого видео?";
-            string Path_toImage = Path.GetFullPath(ImageFiles[iter].FullName);
+            string Path_toImage = Path.GetFullPath(Files[iter].FullName);
             this.video_for_user.Source = new Uri(Path_toImage, UriKind.RelativeOrAbsolute);
         }
 
@@ -159,7 +159,7 @@ namespace ArtCritic_Desctop.core
         public void Create_Image_for_user() {
 
           Question_for_user.Text ="Какой вы хотите ответ для этой картинки?";
-            string Path_toImage = Path.GetFullPath(ImageFiles[iter].FullName);
+            string Path_toImage = Path.GetFullPath(Files[iter].FullName);
             setImageSource(Path_toImage);
         }
         void setImageSource(string file)
