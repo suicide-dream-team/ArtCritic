@@ -11,12 +11,49 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="core\Packs\**" />
+    <EmbeddedResource Remove="core\Packs\**" />
+    <None Remove="core\Packs\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Images\answers.txt" />
+    <None Remove="Images\pic0.jpg" />
+    <None Remove="Images\pic1.jpg" />
+    <None Remove="Images\pic2.jpg" />
+    <None Remove="Images\pic3.jpg" />
+    <None Remove="Images\pic4.jpg" />
+    <None Remove="Images\pic5.jpg" />
+    <None Remove="Images\pic6.jpg" />
+    <None Remove="Images\pic7.jpg" />
+    <None Remove="Images\pic8.jpg" />
+    <None Remove="Images\pic9.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Images\answers.txt" />
+    <EmbeddedResource Include="Images\pic0.jpg" />
+    <EmbeddedResource Include="Images\pic1.jpg" />
+    <EmbeddedResource Include="Images\pic2.jpg" />
+    <EmbeddedResource Include="Images\pic3.jpg" />
+    <EmbeddedResource Include="Images\pic4.jpg" />
+    <EmbeddedResource Include="Images\pic5.jpg" />
+    <EmbeddedResource Include="Images\pic6.jpg" />
+    <EmbeddedResource Include="Images\pic7.jpg" />
+    <EmbeddedResource Include="Images\pic8.jpg" />
+    <EmbeddedResource Include="Images\pic9.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Xamarin.Forms" Version="4.8.0.1451" />
     <PackageReference Include="Xamarin.Essentials" Version="1.5.3.2" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Update="ChooseGameModePage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="ImageQuestionPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>
