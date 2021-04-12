@@ -13,7 +13,7 @@ namespace ArtCritic
         public Image_Question(string PathImageSource, string AnswerSource)
         {
             this.Picture = new Image();
-            this.Picture.Source = PathImageSource;
+            this.Picture.Source = ImageSource.FromResource(PathImageSource);
             this.Answer = AnswerSource;
         }
     }

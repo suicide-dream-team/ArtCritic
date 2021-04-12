@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-
+using System.Reflection;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -21,7 +21,7 @@ namespace ArtCritic
         {
             InitializeComponent();
             Create_Image_List();
-            //LoadNewImageQuestion();
+            LoadNewImageQuestion();
         }
 
         /// <summary>
@@ -43,18 +43,26 @@ namespace ArtCritic
             
             pice.Source = ImageSource.FromResource("ArtCritic.Images.pic0.jpg");
 
-            //var dataFile = File.ReadAllLines(@"Images/answers.txt");
-            //foreach (var e in dataFile)
-            //{
-            //    var args = e.Split('|');
-            //    db.Add(new Image_Question(args[0], args[1]));
-            //}
+            var assembly = Assembly.GetExecutingAssembly();
+            var resourceName = "ArtCritic.Images.answers.txt";
+
+            using (Stream stream = assembly.GetManifestResourceStream(resourceName))
+            using (StreamReader reader = new StreamReader(stream))
+            {
+                while (!reader.EndOfStream)
+                {
+                    var e = reader.ReadLine();
+                    var args = e.Split('|');
+                    db.Add(new Image_Question(args[0], args[1]));
+                }
+            }
         }
 
 
         private void Accept_Answer_Image_Click(object sender, EventArgs e)
         {
             Check_Answer_Image();
+            Answer_Image_Texbox.Text = "";
         }
 
         async public void Check_Answer_Image()
@@ -65,6 +73,7 @@ namespace ArtCritic
             if (word == currentAnswer_image)
             {
                 answer_sum_image_correct++;
+                score.Text = answer_sum_image_correct.ToString();
             }
 
             if (image_counter != db.Count) { LoadNewImageQuestion(); }

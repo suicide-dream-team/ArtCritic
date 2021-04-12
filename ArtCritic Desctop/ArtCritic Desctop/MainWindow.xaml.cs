@@ -325,6 +325,7 @@ namespace ArtCritic_Desctop
         private void Accept_Answer_Image_Click(object sender, RoutedEventArgs e)
         {
             Check_Answer_Image();
+            Answer_Image_Texbox.Text = "";
         }
 
 

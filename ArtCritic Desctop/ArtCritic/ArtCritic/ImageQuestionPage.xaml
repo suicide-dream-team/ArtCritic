@@ -4,8 +4,8 @@
              x:Class="ArtCritic.ImageQuestionPage">
     <StackLayout x:Name="Image_game">
         <Image x:Name="pice"/>
-        <Label x:Name="test" Text="Пока ничего"></Label>
-        <Entry x:Name="Answer_Image_Texbox" Text="helpme"/>
-        <Button x:Name="Accept_Answer_Image" Clicked="Accept_Answer_Image_Click" />
+        <Entry x:Name="Answer_Image_Texbox" Text=""/>
+        <Button x:Name="Accept_Answer_Image" Text="Ввести" Clicked="Accept_Answer_Image_Click" />
+        <Label x:Name="score" Text="0" HorizontalTextAlignment="Center" FontSize="40"></Label>
     </StackLayout>
 </ContentPage>
