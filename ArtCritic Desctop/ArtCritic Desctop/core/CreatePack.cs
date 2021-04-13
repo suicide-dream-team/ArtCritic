@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;//для директорий
 using System.Text;
 using System.Threading;
@@ -58,6 +59,7 @@ namespace ArtCritic_Desctop.core
         /// медиафайл для юзера
         /// </summary>
         public MediaElement video_for_user;
+
         //создаётся папка в которую пользователь в зависимости от выбора кидает картинки/видео/музыку
         //внутри папки создаётся файл с путями+ответами 
         //вся папка архивируется архив сохраняется папка удаляется
@@ -72,6 +74,7 @@ namespace ArtCritic_Desctop.core
         /// <param name="TBck_for_user"></param>
         public CreatePack(int type_of_game, string pack_name, MediaElement video_for_create_user_pack, TextBox TB_For_Answer, TextBlock TBck_for_user)
         {
+
             Users_Answer = TB_For_Answer;
             Namepack = pack_name;
             type_OF_create_game = type_of_game;
@@ -279,7 +282,14 @@ namespace ArtCritic_Desctop.core
             {
                  img_for_user.Source = BitmapFrame.Create(stream, BitmapCreateOptions.None, BitmapCacheOption.OnLoad);
             }
+        }
 
+        public void Delete_Naher(object sender, CancelEventArgs e)
+        {
+            if (Directory.Exists(@"\PacksCreated\" + Namepack))
+            {
+                Directory.Delete(@"\PacksCreated\" + Namepack, true);
+            }
         }
     }
 }

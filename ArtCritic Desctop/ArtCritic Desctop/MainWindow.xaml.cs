@@ -329,7 +329,7 @@ namespace ArtCritic_Desctop
 
 
 
-
+           
 
         }
 
@@ -429,7 +429,7 @@ namespace ArtCritic_Desctop
              a = image_pack;
             Accept_Create_Name_Image_Pack.Visibility = Visibility.Hidden;
             Accept_Create_Answer_Image.Visibility = Visibility.Visible;
-        
+            this.Closing += a.Delete_Naher;
         }
 
         private void Music_accept_image_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -473,6 +473,7 @@ namespace ArtCritic_Desctop
             a = Video_pack;
             Accept_Create_Name_Video_Pack.Visibility = Visibility.Hidden;
             Accept_Create_Answer_Video.Visibility = Visibility.Visible;
+            this.Closing += a.Delete_Naher;
         }
 
         private void Accept_Create_Answer_Video_Click(object sender, RoutedEventArgs e)
