@@ -8,13 +8,22 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="PacksCreated\**" />
+    <Compile Remove="PacksFoulder\**" />
+    <EmbeddedResource Remove="PacksCreated\**" />
+    <EmbeddedResource Remove="PacksFoulder\**" />
+    <None Remove="PacksCreated\**" />
+    <None Remove="PacksFoulder\**" />
+    <Page Remove="PacksCreated\**" />
+    <Page Remove="PacksFoulder\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="DotNetZip" Version="1.15.0" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="core\Packs\" />
-    <Folder Include="PacksCreated\" />
-    <Folder Include="PacksFoulder\" />
   </ItemGroup>
 
 </Project>

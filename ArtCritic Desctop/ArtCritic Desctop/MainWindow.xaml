@@ -181,7 +181,7 @@
             <TextBox HorizontalAlignment="Center" Name="Answer_Image_Texbox" Grid.Row="3" Text="helpme" TextWrapping="Wrap" VerticalAlignment="Top" Width="416" Height="26" Margin="0,21,0,0"/>
             <Image Margin="0,32,0,2"  Name="pice" Grid.Row="1"  />
            
-            <Image MouseLeftButtonDown="exit_pic_MouseLeftButtonDown"  Name="exit_pic"  HorizontalAlignment="Left" Height="46" Margin="718,15,0,0" VerticalAlignment="Top" Source="\wallpapers__for_menu_music_pictures\exit.png" Width="56"/>
+            <Image MouseLeftButtonDown="exit_pic_MouseLeftButtonDown"  Name="exit_pic"  HorizontalAlignment="Left" Height="46" Margin="718,15,0,0" VerticalAlignment="Top"  Width="56"/>
 
             <Image Name="Accept_Answer_Image" HorizontalAlignment="Left" Margin="647,8,0,0" Grid.Row="3" VerticalAlignment="Top" Height="52" Width="81" MouseLeftButtonDown="Accept_Answer_Image_Click"/>
             

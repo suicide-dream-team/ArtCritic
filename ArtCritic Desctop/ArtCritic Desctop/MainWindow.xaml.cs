@@ -124,19 +124,6 @@ namespace ArtCritic_Desctop
 
             if (video_counter != db_video.Count) { LoadNewVideoQuestion(); }
             else { MessageBox.Show("Молодец! твой результат: " + answer_sum_video_correct + "/" + db_video.Count); Close(); }
-
-
-
-            //    if (word == currentAnswer_video)
-            //  {
-            //  MessageBox.Show("Молодец");
-            //LoadNewVideoQuestion();
-            //}
-            //else { MessageBox.Show("Неверно"); }
-
-
-
-
         }
 
 
