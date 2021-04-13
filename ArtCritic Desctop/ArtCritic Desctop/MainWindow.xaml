@@ -138,15 +138,18 @@
         </Grid>
 
 
-        <Grid x:Name="Video_game" ShowGridLines="True" d:IsHidden="True">
+        <Grid x:Name="Video_game" ShowGridLines="True">
 
-            <Button Content="Ввести" Name="Accept_Answer_Video" HorizontalAlignment="Left" Margin="647,8,0,0" Grid.Row="3" VerticalAlignment="Top" Height="52" Width="81" Click="Accept_Answer_Video_Click" d:IsHidden="True" />
+            <Image x:Name="Video_Background" Stretch="Fill" Grid.RowSpan="4" />
 
-            <TextBox HorizontalAlignment="Center" Name="Answer_Video_Texbox"  Grid.Row="3" Text="helpme" TextWrapping="Wrap" VerticalAlignment="Top" Width="416" Height="26" Margin="0,21,0,0" d:IsHidden="True"/>
+            <Image x:Name="Accept_Answer_Video" HorizontalAlignment="Left" Margin="647,8,0,0" Grid.Row="3" VerticalAlignment="Top" Height="52" Width="81" MouseLeftButtonDown="Accept_Answer_Video_Click" />
 
-            <Button Content="Exit" Name="Exit_For_Video" Click="Exit_Click" HorizontalAlignment="Left" Margin="714,15,0,0" VerticalAlignment="Top" Height="45" Width="55" d:IsHidden="True"/>
+            <TextBox HorizontalAlignment="Center" x:Name="Answer_Video_Texbox"  Grid.Row="3" TextWrapping="Wrap" VerticalAlignment="Top" Width="416" Height="26" Margin="0,21,0,0"/>
 
-            <MediaElement x:Name="video" Margin="0,32,0,2" Grid.Row="1" d:IsHidden="True" />
+            <Image  x:Name="Exit_For_Video" MouseLeftButtonDown="Exit_Click" HorizontalAlignment="Left" Margin="714,15,0,0" VerticalAlignment="Top" Height="45" Width="55"/>
+
+            <MediaElement x:Name="video" Margin="0,32,0,2" Grid.Row="1" />
+
 
             <Grid.RowDefinitions>
 
@@ -163,7 +166,7 @@
 
 
 
-        <Grid x:Name="Image_game" ShowGridLines="True">
+        <Grid x:Name="Image_game" ShowGridLines="True" d:IsHidden="True">
             <Grid.RowDefinitions>
 
                 <RowDefinition Height="85*"/>
@@ -173,12 +176,12 @@
 
             </Grid.RowDefinitions>
 
-            <Image Name="Image_Background"  Source="\wallpapers__for_menu_music_pictures\guess_picture.jpg" Stretch="Fill" Grid.RowSpan="4" />
+            <Image Name="Image_Background"  Stretch="Fill" Grid.RowSpan="4" />
 
 
         
 
-            <TextBox HorizontalAlignment="Center" Name="Answer_Image_Texbox" Grid.Row="3" Text="helpme" TextWrapping="Wrap" VerticalAlignment="Top" Width="416" Height="26" Margin="0,21,0,0"/>
+            <TextBox HorizontalAlignment="Center" Name="Answer_Image_Texbox" Grid.Row="3" TextWrapping="Wrap" VerticalAlignment="Top" Width="416" Height="26" Margin="0,21,0,0"/>
             <Image Margin="0,32,0,2"  Name="pice" Grid.Row="1"  />
            
             <Image MouseLeftButtonDown="exit_pic_MouseLeftButtonDown"  Name="exit_pic"  HorizontalAlignment="Left" Height="46" Margin="718,15,0,0" VerticalAlignment="Top"  Width="56"/>
