@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ArtCritic.ImageQuestionPage">
+    <StackLayout x:Name="Image_game">
+        <Image x:Name="pice"/>
+        <Entry x:Name="Answer_Image_Texbox" Text=""/>
+        <Button x:Name="Accept_Answer_Image" Text="Ввести" Clicked="Accept_Answer_Image_Click" />
+        <Label x:Name="score" Text="0" HorizontalTextAlignment="Center" FontSize="40"></Label>
+    </StackLayout>
+</ContentPage>

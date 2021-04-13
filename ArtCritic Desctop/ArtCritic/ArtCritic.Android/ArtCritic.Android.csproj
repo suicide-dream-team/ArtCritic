@@ -94,6 +94,24 @@
       <Name>ArtCritic</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\wallpapers__for_menu_music_pictures\exit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\wallpapers__for_menu_music_pictures\guess_music.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\wallpapers__for_menu_music_pictures\guess_picture.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\wallpapers__for_menu_music_pictures\menu.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\wallpapers__for_menu_music_pictures\play.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\wallpapers__for_menu_music_pictures\reference_menu.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
