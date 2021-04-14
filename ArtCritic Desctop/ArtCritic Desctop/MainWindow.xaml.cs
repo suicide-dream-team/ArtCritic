@@ -40,7 +40,7 @@ namespace ArtCritic_Desctop
         private List<VideoQuestion> db_video;
         int video_counter = 0;
         string currentAnswer_video;
-
+        MediaPlayer mediaplayer_for_create = new MediaPlayer();
 
 
         Player Player = new Player();
@@ -70,6 +70,11 @@ namespace ArtCritic_Desctop
             this.Pack_create_Video.Visibility = Visibility.Hidden;
             this.Accept_Create_Answer_Image.Visibility = Visibility.Hidden;
             this.Accept_Create_Answer_Video.Visibility = Visibility.Hidden;
+            this.Accept_Create_Answer_Mixed.Visibility = Visibility.Hidden;
+            this.Pack_create_Mixed.Visibility = Visibility.Hidden;
+            this.Image_for_create_Mixed.Visibility = Visibility.Hidden;
+            this.Video_for_create_Mixed.Visibility = Visibility.Hidden;
+            this.Image_for_create_Mixed_for_Music.Visibility = Visibility.Hidden;
             Music_question_window.Visibility = Visibility.Hidden;
           
 
@@ -427,9 +432,10 @@ namespace ArtCritic_Desctop
         {
              CreatePack image_pack = new CreatePack(2, Creat_Answer_Image_Texbox.Text, Image_for_create, Creat_Answer_Image_Texbox, Create_Question_Image_TBlock);
              a = image_pack;
+            this.Closing += a.Delete_Naher;
+            if (a.is_create == true) { this.Close(); }
             Accept_Create_Name_Image_Pack.Visibility = Visibility.Hidden;
             Accept_Create_Answer_Image.Visibility = Visibility.Visible;
-            this.Closing += a.Delete_Naher;
         }
 
         private void Music_accept_image_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -470,15 +476,70 @@ namespace ArtCritic_Desctop
         private void Accept_Create_Name_Video_Pack_Click(object sender, RoutedEventArgs e)
         {
             CreatePack Video_pack = new CreatePack(3, Creat_Answer_Video_Texbox.Text, Video_for_create, Creat_Answer_Video_Texbox, Create_Question_Video_TBlock);
+           
             a = Video_pack;
+            this.Closing += a.Delete_Naher;
+            if (a.is_create==true){ this.Close(); }
             Accept_Create_Name_Video_Pack.Visibility = Visibility.Hidden;
             Accept_Create_Answer_Video.Visibility = Visibility.Visible;
-            this.Closing += a.Delete_Naher;
+          
         }
+
+
 
         private void Accept_Create_Answer_Video_Click(object sender, RoutedEventArgs e)
         {
             a.User_Create_CLick(sender, e);
+            if (a.is_create == true) { this.Close(); }
+        }
+
+        private void Create_Mixed_Pack_Click(object sender, RoutedEventArgs e)
+        {
+            Pack_create.Visibility = Visibility.Hidden;
+            Pack_create_Mixed.Visibility = Visibility.Visible;
+            Create_Question_Mixed_TBlock.Text = "Как вы назовёте свой пак? ";
+        }
+
+        private void Accept_Create_Name_Mixed_Pack_Click(object sender, RoutedEventArgs e)
+        {
+            CreatePack Mixed_pack = new CreatePack(4, Creat_Answer_Mixed_Texbox.Text, Video_for_create_Mixed,Image_for_create_Mixed, mediaplayer_for_create, Creat_Answer_Mixed_Texbox, Create_Question_Mixed_TBlock);
+            a = Mixed_pack;
+            if (a.is_image == true) 
+            {
+                Image_for_create_Mixed.Visibility = Visibility.Visible;
+            }
+            if (a.is_video == true) 
+            {
+                Video_for_create_Mixed.Visibility = Visibility.Visible; 
+            }
+            if (a.is_music == true) 
+            {
+                Image_for_create_Mixed_for_Music.Visibility = Visibility.Visible;
+            }
+            this.Closing += a.Delete_Naher;
+            if (a.is_create == true) { this.Close(); }
+            Accept_Create_Name_Mixed_Pack.Visibility = Visibility.Hidden;
+            Accept_Create_Answer_Mixed.Visibility = Visibility.Visible;
+        }
+
+        private void Accept_Create_Answer_Mixed_Click(object sender, RoutedEventArgs e)
+        {
+            Image_for_create_Mixed.Visibility = Visibility.Hidden;
+            Video_for_create_Mixed.Visibility = Visibility.Hidden;
+            Image_for_create_Mixed_for_Music.Visibility = Visibility.Hidden;
+            a.User_Create_CLick(sender, e);
+            if (a.is_image == true) 
+            {
+                Image_for_create_Mixed.Visibility = Visibility.Visible;
+            }
+            if (a.is_video == true)
+            {
+                Video_for_create_Mixed.Visibility = Visibility.Visible;
+            }
+            if (a.is_music == true)
+            {
+                Image_for_create_Mixed_for_Music.Visibility = Visibility.Visible;
+            }
             if (a.is_create == true) { this.Close(); }
         }
     }
