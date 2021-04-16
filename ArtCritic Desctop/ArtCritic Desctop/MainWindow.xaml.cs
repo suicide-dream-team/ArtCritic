@@ -65,21 +65,35 @@ namespace ArtCritic_Desctop
             test_answers[0] = "Спанч Боб";
             test_answers[1] = "Спанч Боб Скрепенс";
             question = new QuestionKeeper("кто проживает на дне океана?", test_answers);
+            //окно выбора типа игры
             this.Type_of_game.Visibility = Visibility.Hidden;
+            //окно тестовой игры Данила
             this.Test_game_with_Image.Visibility = Visibility.Hidden;
+            //окно игры с картинками
             this.Image_game.Visibility = Visibility.Hidden;
+            //окно игры с видео
             this.Video_game.Visibility = Visibility.Hidden;
+            //создание пака
             this.Pack_create.Visibility = Visibility.Hidden;
+            //Создание пака Картинки
             this.Pack_create_Image.Visibility = Visibility.Hidden;
+            //создание пака музыки
             this.Pack_create_Music.Visibility = Visibility.Hidden;
+            //создание пака видео
             this.Pack_create_Video.Visibility = Visibility.Hidden;
+            //создание пака mixed
+            this.Pack_create_Mixed.Visibility = Visibility.Hidden;
+            //кнопки для соответствующих созданий паков (для принятия ответа на картинку/видео/музыку)
             this.Accept_Create_Answer_Image.Visibility = Visibility.Hidden;
             this.Accept_Create_Answer_Video.Visibility = Visibility.Hidden;
             this.Accept_Create_Answer_Mixed.Visibility = Visibility.Hidden;
-            this.Pack_create_Mixed.Visibility = Visibility.Hidden;
+            //картинка для показа (в создании mixed-картиночного вопроса)
             this.Image_for_create_Mixed.Visibility = Visibility.Hidden;
+            //видео для показа (в создании mixed-видео вопроса)
             this.Video_for_create_Mixed.Visibility = Visibility.Hidden;
+            //картинка для показа (в создании mixed-музыкального пака)
             this.Image_for_create_Mixed_for_Music.Visibility = Visibility.Hidden;
+            //окно игры с музыкой
             Music_question_window.Visibility = Visibility.Hidden;
           
 
@@ -87,19 +101,17 @@ namespace ArtCritic_Desctop
         }
 
         /// <summary>
-        /// Проверка корректности имени (только латинские и цифры)
+        /// Проверка корректности имени (только латинские и цифры размер максимум 1000 символов)
         /// </summary>
         /// <param name="pack_name"></param>
         /// <returns></returns>
         public bool name_control(string pack_name)
         {
-            
             return (!string.IsNullOrEmpty(pack_name) && Regex.IsMatch(pack_name, @"^([A-Za-z0-9]){1,1000}$", RegexOptions.Multiline));
         }
 
         void Create_Video_List()
         {
-
             db_video = new List<VideoQuestion>();
             video_counter = 0;
             var dataFile = File.ReadAllLines(@"..\..\..\Videos\answersV.txt");
@@ -107,7 +119,6 @@ namespace ArtCritic_Desctop
             {
                 var args = e.Split('|');
                 db_video.Add(new VideoQuestion(args[0], args[1]));
-
             }
 
         }
@@ -127,7 +138,7 @@ namespace ArtCritic_Desctop
         }
 
         /// <summary>
-        /// проверка вопроса видео
+        /// проверка ответа на видео
         /// </summary>
         public void Check_Answer_video()
         {
@@ -162,45 +173,38 @@ namespace ArtCritic_Desctop
         }
 
         /// <summary>
-        /// проверка вопроса картинок
+        /// проверка ответа на картинку
         /// </summary>
         public void Check_Answer_Image()
         {
-            string word = String.Empty;
-            word = Answer_Image_Texbox.Text;
+         string word = String.Empty;
+         word = Answer_Image_Texbox.Text;
 
             if (word == currentAnswer_image)
             {
-                answer_sum_image_correct++;
+             answer_sum_image_correct++;
             }
-
-
-
-            //  if (word == currentAnswer_image)
-            //   {
-            //     MessageBox.Show("Молодец");
-
-            if (image_counter != db.Count) { LoadNewImageQuestion(); }
-            else { MessageBox.Show("Молодец! твой результат: " + answer_sum_image_correct + "/" + db.Count); Close(); }
-            //  }
-            // else { MessageBox.Show("Неверно"); }
+            if (image_counter != db.Count) 
+            { 
+                LoadNewImageQuestion(); 
+            }
+            else 
+            {
+            MessageBox.Show("Молодец! твой результат: " + answer_sum_image_correct + "/" + db.Count); Close();
+            }
         }
-
-
-
         /// <summary>
         /// создание листа для картиночных вопросов
         /// </summary>
         void Create_Image_List()
         {
-
             db = new List<Image_Question>();
             image_counter = 0;
             var dataFile = File.ReadAllLines(@"..\..\..\Images\answers.txt");
             foreach (var e in dataFile)
             {
-                var args = e.Split('|');
-                db.Add(new Image_Question(args[0], args[1]));
+             var args = e.Split('|');
+             db.Add(new Image_Question(args[0], args[1]));
             }
 
         }
@@ -245,7 +249,6 @@ namespace ArtCritic_Desctop
             Main_menu.Visibility = Visibility.Hidden;
             Type_of_game.Visibility = Visibility.Visible;
         }
-
         private void Video_question_Click(object sender, RoutedEventArgs e)
         {
 
@@ -277,7 +280,6 @@ namespace ArtCritic_Desctop
 
             Create_Video_List();
             LoadNewVideoQuestion();
-
         }
 
         private void Accept_Answer_Video_Click(object sender, RoutedEventArgs e)
@@ -345,25 +347,12 @@ namespace ArtCritic_Desctop
 
             Create_Image_List();
             LoadNewImageQuestion();
-
-
-
-           
-
         }
-
         private void Accept_Answer_Image_Click(object sender, RoutedEventArgs e)
         {
             Check_Answer_Image();
             Answer_Image_Texbox.Text = "";
         }
-
-
-
-
-
-
-
         private void Accept_Click(object sender, RoutedEventArgs e)
         {
 
@@ -375,12 +364,10 @@ namespace ArtCritic_Desctop
             Test_game_with_Image.Visibility = Visibility.Hidden;
             Type_of_game.Visibility = Visibility.Visible;
         }
-
         private void Creat_Question_Button_Click(object sender, RoutedEventArgs e)
         {
             Main_menu.Visibility = Visibility.Hidden;
             Pack_create.Visibility = Visibility.Visible;
-
         }
 
         private void Music_exit_Click(object sender, RoutedEventArgs e)
@@ -406,25 +393,17 @@ namespace ArtCritic_Desctop
                 iter = 0;
             }
             else
-                music_Questions[iter].Play();
-            
+                music_Questions[iter].Play();  
         }
-
         private void Music_replay_music_Click(object sender, RoutedEventArgs e)
         {
             music_Questions[iter].Stop();
             music_Questions[iter].Play();
         }
-
         private void exit_pic_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             this.Close();
         }
-
-        
-
-
-
         private void Accept_Create_Image_Pack_Click(object sender, RoutedEventArgs e)
         {
             Pack_create.Visibility = Visibility.Hidden;
@@ -432,14 +411,11 @@ namespace ArtCritic_Desctop
             Pack_create_Image.Visibility = Visibility.Visible;
 
             Create_Question_Image_TBlock.Text = "Введите название пака";
-
-          
         }
-
-
         private void Accept_Create_Answer_Image_Click(object sender, RoutedEventArgs e)
         {
             a.User_Create_CLick(sender, e);
+            Creat_Answer_Image_Texbox.Text = "";
             if (a.is_create == true) { this.Close(); }
         }
         private void Accept_Create_Name_Image_Pack_Click(object sender, RoutedEventArgs e)
@@ -449,13 +425,15 @@ namespace ArtCritic_Desctop
                 CreatePack image_pack = new CreatePack(2, Creat_Answer_Image_Texbox.Text, Image_for_create, Creat_Answer_Image_Texbox, Create_Question_Image_TBlock);
                 a = image_pack;
                 this.Closing += a.Delete_Naher;
-                if (a.is_create == true) { this.Close(); }
+                if (a.is_create == true) {  this.Close(); }
                 Accept_Create_Name_Image_Pack.Visibility = Visibility.Hidden;
                 Accept_Create_Answer_Image.Visibility = Visibility.Visible;
+                Creat_Answer_Image_Texbox.Text = "";
             }
             else
             {
                 MessageBox.Show("Введите название состоящее только из букв(eng) и цифр.Без пробелов!");
+                Creat_Answer_Image_Texbox.Text = "";
             }
         }
 
@@ -504,21 +482,20 @@ namespace ArtCritic_Desctop
                 if (a.is_create == true) { this.Close(); }
                 Accept_Create_Name_Video_Pack.Visibility = Visibility.Hidden;
                 Accept_Create_Answer_Video.Visibility = Visibility.Visible;
+                Creat_Answer_Video_Texbox.Text = "";
             }
             else
             { 
-                MessageBox.Show("Введите название состоящее только из букв(eng) и цифр.Без пробелов!"); 
+                MessageBox.Show("Введите название состоящее только из букв(eng) и цифр.Без пробелов!");
+                Creat_Answer_Video_Texbox.Text = "";
             }
         }
-
-
-
         private void Accept_Create_Answer_Video_Click(object sender, RoutedEventArgs e)
         {
             a.User_Create_CLick(sender, e);
+            Creat_Answer_Video_Texbox.Text = "";
             if (a.is_create == true) { this.Close(); }
         }
-
         private void Create_Mixed_Pack_Click(object sender, RoutedEventArgs e)
         {
             Pack_create.Visibility = Visibility.Hidden;
@@ -549,9 +526,13 @@ namespace ArtCritic_Desctop
                 if (a.is_create == true) { this.Close(); }
                 Accept_Create_Name_Mixed_Pack.Visibility = Visibility.Hidden;
                 Accept_Create_Answer_Mixed.Visibility = Visibility.Visible;
+                Creat_Answer_Mixed_Texbox.Text = "";
             }
             else
-            { MessageBox.Show("Введите название состоящее только из букв(eng) и цифр.Без пробелов!"); }
+            {
+                MessageBox.Show("Введите название состоящее только из букв(eng) и цифр.Без пробелов!");
+                Creat_Answer_Mixed_Texbox.Text = "";
+            }
         }
 
         private void Accept_Create_Answer_Mixed_Click(object sender, RoutedEventArgs e)
@@ -560,6 +541,7 @@ namespace ArtCritic_Desctop
             Video_for_create_Mixed.Visibility = Visibility.Hidden;
             Image_for_create_Mixed_for_Music.Visibility = Visibility.Hidden;
             a.User_Create_CLick(sender, e);
+            Creat_Answer_Mixed_Texbox.Text = "";
             if (a.is_image == true) 
             {
                 Image_for_create_Mixed.Visibility = Visibility.Visible;
@@ -572,14 +554,10 @@ namespace ArtCritic_Desctop
             {
                 Image_for_create_Mixed_for_Music.Visibility = Visibility.Visible;
             }
-            if (a.is_create == true) { this.Close(); }
+            if (a.is_create == true) 
+            { 
+                this.Close();
+            }
         }
     }
-
-
-
-
-
-
-
 }

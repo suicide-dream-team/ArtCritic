@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;//для директорий
+using System.Reflection;
 using System.Text;
 using System.Threading;
 using System.Windows;
@@ -80,6 +81,10 @@ namespace ArtCritic_Desctop.core
         /// Для проверки имени
         /// </summary>
         public bool norm_name = true;
+        /// <summary>
+        /// для проверок на битые файлы
+        /// </summary>
+        int temp_kol_vo_in_dir = 0;
         //создаётся папка в которую пользователь в зависимости от выбора кидает картинки/видео/музыку
         //внутри папки создаётся файл с путями+ответами 
         //вся папка архивируется архив сохраняется папка удаляется
@@ -184,7 +189,7 @@ namespace ArtCritic_Desctop.core
                     is_video = true;
                     is_music = false;
                     Question_for_user.Text = "Какой вы хотите ответ для этого видео?";
-                  this.video_for_user.Source = new Uri(Path_toFile, UriKind.Absolute);
+                    this.video_for_user.Source = new Uri(Path_toFile, UriKind.Absolute);
                 }
                 if (expansion == ".mp3")
                 {
@@ -195,6 +200,12 @@ namespace ArtCritic_Desctop.core
                     Uri path_to_music=new Uri(Path_toFile, UriKind.Absolute);
                     this.music_for_user.Open(path_to_music);
                     this.music_for_user.Play();
+                    if (IsPlaying(music_for_user)) 
+                    {
+                    
+                    }
+
+
                 }
                 if (expansion == ".jpg") 
                 {
@@ -274,8 +285,47 @@ namespace ArtCritic_Desctop.core
                 }
             }
             else { is_create = true; kol_vo_in_dir = -1; }
-            Create_Video_for_user();
+            string Path_toVideo = Path.GetFullPath(Files[iter].FullName);
+            Create_Video_for_user(Path_toVideo);
         }
+
+        public void Check_video(MediaElement video) 
+        {
+
+            if (this.type_OF_create_game == 3)
+            {
+
+                if ( IsPlaying(this.video_for_user))
+                {
+                    //Всё заебумбно ничего не делаем
+                }
+                else
+                {
+                    File.Delete(Files[iter].FullName);
+                    iter++;
+                    temp_kol_vo_in_dir = kol_vo_in_dir;
+                    temp_kol_vo_in_dir--;
+                    if (temp_kol_vo_in_dir >= 1 && iter < kol_vo_in_dir)
+                    {
+                        string Path_toImage = Path.GetFullPath(Files[iter].FullName);
+                        Create_Video_for_user(Path_toImage);
+                    }
+                        if (temp_kol_vo_in_dir < 1)
+                    {
+                        is_create = true;
+                        MessageBox.Show("я удалил все повреждённые файлы, и папка кончилась. Check later! Пересоздай пак.");
+                    }
+                    if (iter == kol_vo_in_dir)
+                    {
+                        //значит удалили последний в списке повреждённый файл
+                    }
+                }
+            }
+
+
+
+        }
+
         public CreatePack(int type_of_game, string pack_name, Image image_for_create_user_pack, TextBox TB_For_Answer, TextBlock TBck_for_user)
         {
             Users_Answer = TB_For_Answer;
@@ -317,7 +367,6 @@ namespace ArtCritic_Desctop.core
                     int found = 0;
                     string expansion;
                     expansion = file;
-
                     if (Directory.Exists(expansion))
                     {
                         Directory.Delete(expansion);
@@ -341,98 +390,116 @@ namespace ArtCritic_Desctop.core
         public void User_Create_CLick(object sender, RoutedEventArgs e)
         {
             DirectoryInfo dirInfo = new DirectoryInfo(@"\PacksCreated\" + Namepack);
-
-            if (type_OF_create_game == 3) {
-                
-                string nameFile = Files[iter].Name;
-                using (StreamWriter w = File.AppendText(@"\PacksCreated\" + Namepack + @"\answersV.txt"))
+            if (is_create == true) { }
+            else
+            {
+                if (type_OF_create_game == 3)
                 {
-                    w.WriteLine(@"\Packs\" + Namepack + @"\" + nameFile + "|" + Users_Answer.Text);
-                }
-                iter++;
-                if (iter < kol_vo_in_dir)
-                {
-                    Create_Video_for_user();
-                }
-                else
-                {
-                    //создание архива
-                    ZipFile zf = new ZipFile(@"\PacksCreated\" + Namepack + ".zip");
-                    zf.AddDirectory(@"\PacksCreated\" + Namepack);
-                    zf.Save();
-                    Directory.Delete(@"\PacksCreated\" + Namepack, true);
-                    MessageBox.Show("Пак успешно создан");
-                    is_create = true;
-                }
 
-            }
-
-                if (type_OF_create_game == 2)
-            { 
                     string nameFile = Files[iter].Name;
-                    using (StreamWriter w = File.AppendText(@"\PacksCreated\" + Namepack + @"\answersI.txt"))
-                    { 
-                        w.WriteLine(@"\Packs\" + Namepack + @"\" + nameFile + "|" + Users_Answer.Text);
+                    using (StreamWriter w = File.AppendText(@"\PacksCreated\" + Namepack + @"\answersV.txt"))
+                    {
+                        w.WriteLine(@"..\..\..\Packs\" + Namepack + @"\" + nameFile + "|" + Users_Answer.Text);
                     }
                     iter++;
-                if (iter < kol_vo_in_dir)
-                {
-                    Create_Image_for_user();
+                    if (iter < kol_vo_in_dir)
+                    {
+                        string Path_toVideo = Path.GetFullPath(Files[iter].FullName);
+                        Create_Video_for_user(Path_toVideo);
+
+                    }
+                    else
+                    {
+                        //создание архива
+                        ZipFile zf = new ZipFile(@"\PacksCreated\" + Namepack + ".zip");
+                        zf.AddDirectory(@"\PacksCreated\" + Namepack);
+                        zf.Save();
+                        Directory.Delete(@"\PacksCreated\" + Namepack, true);
+                        MessageBox.Show("Пак успешно создан");
+                        is_create = true;
+                    }
+
                 }
-                else
+
+                if (type_OF_create_game == 2)
                 {
-                    //создание архива
-                    ZipFile zf = new ZipFile(@"\PacksCreated\" + Namepack + ".zip");
-                    zf.AddDirectory(@"\PacksCreated\" + Namepack);
-                    zf.Save();
-                    Directory.Delete(@"\PacksCreated\" + Namepack, true);
-                    MessageBox.Show("Пак успешно создан");
-                    is_create = true;
+                    string nameFile = Files[iter].Name;
+                    using (StreamWriter w = File.AppendText(@"\PacksCreated\" + Namepack + @"\answersI.txt"))
+                    {
+                        w.WriteLine(@"..\..\..\Packs\" + Namepack + @"\" + nameFile + "|" + Users_Answer.Text);
+                    }
+                    iter++;
+                    if (iter < kol_vo_in_dir)
+                    {
+                        Create_Image_for_user();
+                    }
+                    else
+                    {
+                        //создание архива
+                        ZipFile zf = new ZipFile(@"\PacksCreated\" + Namepack + ".zip");
+                        zf.AddDirectory(@"\PacksCreated\" + Namepack);
+                        zf.Save();
+                        Directory.Delete(@"\PacksCreated\" + Namepack, true);
+                        MessageBox.Show("Пак успешно создан");
+                        is_create = true;
+                    }
                 }
-            }
-            if (type_OF_create_game == 4) 
-            {
-                string nameFile = Files[iter].Name;
-                using (StreamWriter w = File.AppendText(@"\PacksCreated\" + Namepack + @"\answersM.txt"))
+                if (type_OF_create_game == 4)
                 {
-                    w.WriteLine(@"\Packs\" + Namepack + @"\" + nameFile + "|" + Users_Answer.Text);
-                }
-                iter++;
-                if (iter < kol_vo_in_dir)
-                {
-                    music_for_user.Stop();
-                    music_for_user.Close();
-                    Create_Mixed_for_user();
-                }
-                else
-                {
-                    //создание архива
-                    ZipFile zf = new ZipFile(@"\PacksCreated\" + Namepack + ".zip");
-                    zf.AddDirectory(@"\PacksCreated\" + Namepack);
-                    zf.Save();
-                    Directory.Delete(@"\PacksCreated\" + Namepack, true);
-                    MessageBox.Show("Пак успешно создан");
-                    is_create = true;
+                    string nameFile = Files[iter].Name;
+                    using (StreamWriter w = File.AppendText(@"\PacksCreated\" + Namepack + @"\answersM.txt"))
+                    {
+                        w.WriteLine(@"..\..\..\Packs\" + Namepack + @"\" + nameFile + "|" + Users_Answer.Text);
+                    }
+                    iter++;
+                    if (iter < kol_vo_in_dir)
+                    {
+                        music_for_user.Stop();
+                        music_for_user.Close();
+                        Create_Mixed_for_user();
+                    }
+                    else
+                    {
+                        //создание архива
+                        ZipFile zf = new ZipFile(@"\PacksCreated\" + Namepack + ".zip");
+                        zf.AddDirectory(@"\PacksCreated\" + Namepack);
+                        zf.Save();
+                        Directory.Delete(@"\PacksCreated\" + Namepack, true);
+                        MessageBox.Show("Пак успешно создан");
+                        is_create = true;
+                    }
+
                 }
 
             }
-
-
         }
         /// <summary>
         /// Показывает видео на экране
         /// </summary>
-        public void Create_Video_for_user() 
+        public void Create_Video_for_user(string Path_toVideo) 
         {
             if (kol_vo_in_dir > 0)
             {
                 Question_for_user.Text = "Какой вы хотите ответ для этого видео?";
-                string Path_toVideo = Path.GetFullPath(Files[iter].FullName);
                 this.video_for_user.Source = new Uri(Path_toVideo, UriKind.Absolute);
+                Check_video(this.video_for_user);
             }
             else { }
        }
-
+        bool IsPlaying(MediaPlayer music)
+        {
+            var pos1 = music.Position;
+            System.Threading.Thread.Sleep(1000);
+            var pos2 = music.Position;
+            return pos2 != pos1;
+        }
+        bool IsPlaying(MediaElement video_play)
+        {
+            var pos1 = video_play.Position;
+            System.Threading.Thread.Sleep(1000);
+            var pos2 = video_play.Position;
+            return pos2 != pos1;
+        }
         /// <summary>
         /// Показывает картинку на экране 
         /// </summary>
@@ -444,7 +511,6 @@ namespace ArtCritic_Desctop.core
                 string Path_toImage = Path.GetFullPath(Files[iter].FullName);
                 setImageSource(Path_toImage);
             }
-            else { }
         }
         /// <summary>
         /// Нужно было так сделать чтобы картинку можно было потом удалить(иначе выводит что картинка используется другим приложением)
@@ -454,7 +520,33 @@ namespace ArtCritic_Desctop.core
         {
             using (var stream = new FileStream(file, FileMode.Open, FileAccess.Read, FileShare.Read))
             {
-                image_for_user.Source = BitmapFrame.Create(stream, BitmapCreateOptions.None, BitmapCacheOption.OnLoad);
+                try
+                {
+                    image_for_user.Source = BitmapFrame.Create(stream, BitmapCreateOptions.None, BitmapCacheOption.OnLoad);
+                }
+                catch (System.IO.FileFormatException)
+                {
+                    image_for_user.Source = null;
+                    stream.Close();
+                    File.Delete(file);
+                    iter++;
+                    temp_kol_vo_in_dir = kol_vo_in_dir;
+                    temp_kol_vo_in_dir--;
+                    if (temp_kol_vo_in_dir >= 1 && iter < kol_vo_in_dir)
+                    {
+                        string Path_toImage = Path.GetFullPath(Files[iter].FullName);
+                        setImageSource(Path_toImage);
+                    }
+                    if (iter == kol_vo_in_dir) 
+                    { 
+                    //если мы удалили последний элемент всё на чилле тогда
+                    }
+                   if(temp_kol_vo_in_dir < 1) 
+                    {
+                        is_create = true;
+                        MessageBox.Show("я удалил все повреждённые файлы, и папка кончилась. Check later! Пересоздай пак.");
+                    }
+                }
             }
         }
         public void Delete_Naher(object sender, CancelEventArgs e)
