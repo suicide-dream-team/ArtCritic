@@ -28,7 +28,7 @@ namespace ArtCritic_Desctop.core
         //1 music game-
         //2 image game+
         //3 game_with_video+
-        //4 mixed-
+        //4 mixed+
         /// <summary>
         /// итератор для прохода под массиву файлов
         /// </summary>
@@ -88,7 +88,6 @@ namespace ArtCritic_Desctop.core
         //создаётся папка в которую пользователь в зависимости от выбора кидает картинки/видео/музыку
         //внутри папки создаётся файл с путями+ответами 
         //вся папка архивируется архив сохраняется папка удаляется
-
         /// <summary>
         /// Создаём папку и текстовый файл
         /// </summary>
@@ -190,6 +189,7 @@ namespace ArtCritic_Desctop.core
                     is_music = false;
                     Question_for_user.Text = "Какой вы хотите ответ для этого видео?";
                     this.video_for_user.Source = new Uri(Path_toFile, UriKind.Absolute);
+                    Check_video(this.video_for_user);
                 }
                 if (expansion == ".mp3")
                 {
@@ -197,15 +197,8 @@ namespace ArtCritic_Desctop.core
                     is_video = false;
                     is_music = true;
                     Question_for_user.Text = "Какой вы хотите ответ для этой музыки?";
-                    Uri path_to_music=new Uri(Path_toFile, UriKind.Absolute);
-                    this.music_for_user.Open(path_to_music);
-                    this.music_for_user.Play();
-                    if (IsPlaying(music_for_user)) 
-                    {
-                    
-                    }
-
-
+                    string path_tomusic = Files[iter].FullName;
+                    Create_Music_for_user(path_tomusic);
                 }
                 if (expansion == ".jpg") 
                 {
@@ -217,6 +210,14 @@ namespace ArtCritic_Desctop.core
                 }
             }
         }
+        /// <summary>
+        /// Создание видео
+        /// </summary>
+        /// <param name="type_of_game"></param>
+        /// <param name="pack_name"></param>
+        /// <param name="video_for_create_user_pack"></param>
+        /// <param name="TB_For_Answer"></param>
+        /// <param name="TBck_for_user"></param>
         public CreatePack(int type_of_game, string pack_name, MediaElement video_for_create_user_pack, TextBox TB_For_Answer, TextBlock TBck_for_user)
         {
             Users_Answer = TB_For_Answer;
@@ -288,7 +289,10 @@ namespace ArtCritic_Desctop.core
             string Path_toVideo = Path.GetFullPath(Files[iter].FullName);
             Create_Video_for_user(Path_toVideo);
         }
-
+        /// <summary>
+        /// проверяет видео на ломанность
+        /// </summary>
+        /// <param name="video"></param>
         public void Check_video(MediaElement video) 
         {
 
@@ -307,8 +311,8 @@ namespace ArtCritic_Desctop.core
                     temp_kol_vo_in_dir--;
                     if (temp_kol_vo_in_dir >= 1 && iter < kol_vo_in_dir)
                     {
-                        string Path_toImage = Path.GetFullPath(Files[iter].FullName);
-                        Create_Video_for_user(Path_toImage);
+                        string Path_toVideo = Path.GetFullPath(Files[iter].FullName);
+                        Create_Video_for_user(Path_toVideo);
                     }
                         if (temp_kol_vo_in_dir < 1)
                     {
@@ -321,11 +325,107 @@ namespace ArtCritic_Desctop.core
                     }
                 }
             }
+            if (this.type_OF_create_game == 4)
+            {
+                if (IsPlaying(this.video_for_user))
+                {
+                    //Всё заебумбно ничего не делаем
+                }
+                else
+                {
+                    File.Delete(Files[iter].FullName);
+                    iter++;
+                    temp_kol_vo_in_dir = kol_vo_in_dir;
+                    temp_kol_vo_in_dir--;
+                    if (temp_kol_vo_in_dir >= 1 && iter < kol_vo_in_dir)
+                    {
+                        Create_Mixed_for_user();
+                    }
+                    if (temp_kol_vo_in_dir < 1)
+                    {
+                        is_create = true;
+                        MessageBox.Show("я удалил все повреждённые файлы, и папка кончилась. Check later! Пересоздай пак.");
+                    }
+                    if (iter == kol_vo_in_dir)
+                    {
+                        //значит удалили последний в списке повреждённый файл
+                    }
+                }
+            }
+        }
+        /// <summary>
+        /// Проперка музыки на воспроизведение
+        /// </summary>
+        /// <param name="music"></param>
+        public void Check_music(MediaPlayer music) 
+        {
+            //this.music_for_user.Stop();
+            if (this.type_OF_create_game == 1)
+            {
 
-
+                if (IsPlaying(this.music_for_user))
+                {
+                    //Всё заебумбно ничего не делаем
+                }
+                else
+                {
+                    File.Delete(Files[iter].FullName);
+                    iter++;
+                    temp_kol_vo_in_dir = kol_vo_in_dir;
+                    temp_kol_vo_in_dir--;
+                    if (temp_kol_vo_in_dir >= 1 && iter < kol_vo_in_dir)
+                    {
+                        string Path_toVideo = Path.GetFullPath(Files[iter].FullName);
+                        Create_Music_for_user(Path_toVideo);
+                    }
+                    if (temp_kol_vo_in_dir < 1)
+                    {
+                        is_create = true;
+                        MessageBox.Show("я удалил все повреждённые файлы, и папка кончилась. Check later! Пересоздай пак.");
+                    }
+                    if (iter == kol_vo_in_dir)
+                    {
+                        //значит удалили последний в списке повреждённый файл
+                    }
+                }
+            }
+            if (this.type_OF_create_game == 4)
+            {
+                if (IsPlaying(this.music_for_user))
+                {
+                    //Всё заебумбно ничего не делаем
+                }
+                else
+                {
+                    File.Delete(Files[iter].FullName);
+                    iter++;
+                    temp_kol_vo_in_dir = kol_vo_in_dir;
+                    temp_kol_vo_in_dir--;
+                    if (temp_kol_vo_in_dir >= 1 && iter < kol_vo_in_dir)
+                    {
+                        Create_Mixed_for_user();
+                    }
+                    if (temp_kol_vo_in_dir < 1)
+                    {
+                        is_create = true;
+                        MessageBox.Show("я удалил все повреждённые файлы, и папка кончилась. Check later! Пересоздай пак.");
+                    }
+                    if (iter == kol_vo_in_dir)
+                    {
+                        //значит удалили последний в списке повреждённый файл
+                    }
+                }
+            }
 
         }
-
+        /// <summary>
+        /// Создание Image пака
+        /// </summary>
+        /// <param name="type_of_game"></param>
+        /// <param name="pack_name"></param>
+        /// <param name="image_for_create_user_pack"></param>
+        /// <param name="TB_For_Answer"></param>
+        /// <param name="TBck_for_user"></param>
         public CreatePack(int type_of_game, string pack_name, Image image_for_create_user_pack, TextBox TB_For_Answer, TextBlock TBck_for_user)
         {
             Users_Answer = TB_For_Answer;
@@ -387,6 +487,11 @@ namespace ArtCritic_Desctop.core
             }
             Create_Image_for_user(); 
         }
+        /// <summary>
+        /// Само нажатие пользователя на кнопку
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void User_Create_CLick(object sender, RoutedEventArgs e)
         {
             DirectoryInfo dirInfo = new DirectoryInfo(@"\PacksCreated\" + Namepack);
@@ -474,9 +579,48 @@ namespace ArtCritic_Desctop.core
             }
         }
         /// <summary>
+        /// корректно ли запустилась музыка
+        /// </summary>
+        /// <param name="music"></param>
+        /// <returns></returns>
+        bool IsPlaying(MediaPlayer music_play)
+        {
+            var pos1 = music_play.Position;
+            System.Threading.Thread.Sleep(1000);
+            var pos2 = music_play.Position;
+            return pos2 != pos1;
+        }
+        /// <summary>
+        /// корректно ли запустилось видео
+        /// </summary>
+        /// <param name="video_play"></param>
+        /// <returns></returns>
+        bool IsPlaying(MediaElement video_play)
+        {
+            var pos1 = video_play.Position;
+            System.Threading.Thread.Sleep(1000);
+            var pos2 = video_play.Position;
+            return pos2 != pos1;
+        }
+        /// <summary>
+        /// Включает музыку на экране
+        /// </summary>
+        /// <param name="Path_toMusic"></param>
+        public void Create_Music_for_user(string Path_toMusic) 
+        {
+            if (kol_vo_in_dir > 0)
+            {
+                Uri path_to_music = new Uri(Path_toMusic, UriKind.Absolute);
+                this.music_for_user.Open(path_to_music);
+                this.music_for_user.Play();
+                Check_music(this.music_for_user);
+            }
+            else { }
+        }
+        /// <summary>
         /// Показывает видео на экране
         /// </summary>
-        public void Create_Video_for_user(string Path_toVideo) 
+        public void Create_Video_for_user(string Path_toVideo)
         {
             if (kol_vo_in_dir > 0)
             {
@@ -485,20 +629,6 @@ namespace ArtCritic_Desctop.core
                 Check_video(this.video_for_user);
             }
             else { }
-       }
-        bool IsPlaying(MediaPlayer music)
-        {
-            var pos1 = music.Position;
-            System.Threading.Thread.Sleep(1000);
-            var pos2 = music.Position;
-            return pos2 != pos1;
-        }
-        bool IsPlaying(MediaElement video_play)
-        {
-            var pos1 = video_play.Position;
-            System.Threading.Thread.Sleep(1000);
-            var pos2 = video_play.Position;
-            return pos2 != pos1;
         }
         /// <summary>
         /// Показывает картинку на экране 
@@ -537,11 +667,34 @@ namespace ArtCritic_Desctop.core
                         string Path_toImage = Path.GetFullPath(Files[iter].FullName);
                         setImageSource(Path_toImage);
                     }
-                    if (iter == kol_vo_in_dir) 
-                    { 
-                    //если мы удалили последний элемент всё на чилле тогда
+                    if (iter == kol_vo_in_dir)
+                    {
+                        //если мы удалили последний элемент всё на чилле тогда
                     }
-                   if(temp_kol_vo_in_dir < 1) 
+                    if (temp_kol_vo_in_dir < 1)
+                    {
+                        is_create = true;
+                        MessageBox.Show("я удалил все повреждённые файлы, и папка кончилась. Check later! Пересоздай пак.");
+                    }
+                }
+                catch (System.NotSupportedException) 
+                {
+                    image_for_user.Source = null;
+                    stream.Close();
+                    File.Delete(file);
+                    iter++;
+                    temp_kol_vo_in_dir = kol_vo_in_dir;
+                    temp_kol_vo_in_dir--;
+                    if (temp_kol_vo_in_dir >= 1 && iter < kol_vo_in_dir)
+                    {
+                        string Path_toImage = Path.GetFullPath(Files[iter].FullName);
+                        setImageSource(Path_toImage);
+                    }
+                    if (iter == kol_vo_in_dir)
+                    {
+                        //если мы удалили последний элемент всё на чилле тогда
+                    }
+                    if (temp_kol_vo_in_dir < 1)
                     {
                         is_create = true;
                         MessageBox.Show("я удалил все повреждённые файлы, и папка кончилась. Check later! Пересоздай пак.");
@@ -549,6 +702,11 @@ namespace ArtCritic_Desctop.core
                 }
             }
         }
+        /// <summary>
+        /// Удаляет папку пака со всем содержимым при резком выходе
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void Delete_Naher(object sender, CancelEventArgs e)
         {
             if (Directory.Exists(@"\PacksCreated\" + Namepack))
