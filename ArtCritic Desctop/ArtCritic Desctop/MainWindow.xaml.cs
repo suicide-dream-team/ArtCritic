@@ -44,7 +44,7 @@ namespace ArtCritic_Desctop
         private List<VideoQuestion> db_video;
         int video_counter = 0;
         string currentAnswer_video;
-        MediaPlayer mediaplayer_for_create = new MediaPlayer();
+        MediaPlayer mediaplayer = new MediaPlayer();
 
 
         Player Player = new Player();
@@ -87,6 +87,7 @@ namespace ArtCritic_Desctop
             this.Accept_Create_Answer_Image.Visibility = Visibility.Hidden;
             this.Accept_Create_Answer_Video.Visibility = Visibility.Hidden;
             this.Accept_Create_Answer_Mixed.Visibility = Visibility.Hidden;
+            this.Accept_Create_Answer_Music.Visibility = Visibility.Hidden;
             //картинка для показа (в создании mixed-картиночного вопроса)
             this.Image_for_create_Mixed.Visibility = Visibility.Hidden;
             //видео для показа (в создании mixed-видео вопроса)
@@ -508,7 +509,7 @@ namespace ArtCritic_Desctop
             if (name_control(Creat_Answer_Mixed_Texbox.Text))
             {
 
-                CreatePack Mixed_pack = new CreatePack(4, Creat_Answer_Mixed_Texbox.Text, Video_for_create_Mixed, Image_for_create_Mixed, mediaplayer_for_create, Creat_Answer_Mixed_Texbox, Create_Question_Mixed_TBlock);
+                CreatePack Mixed_pack = new CreatePack(4, Creat_Answer_Mixed_Texbox.Text, Video_for_create_Mixed, Image_for_create_Mixed, mediaplayer, Creat_Answer_Mixed_Texbox, Create_Question_Mixed_TBlock);
                 a = Mixed_pack;
                 if (a.is_image == true)
                 {
@@ -558,6 +559,41 @@ namespace ArtCritic_Desctop
             { 
                 this.Close();
             }
+        }
+
+        private void Accept_Create_Answer_Music_Click(object sender, RoutedEventArgs e)
+        {
+            a.User_Create_CLick(sender, e);
+            Creat_Answer_Music_Texbox.Text = "";
+            if (a.is_create == true) { this.Close(); }
+        }
+
+        private void Accept_Create_Name_Music_Pack_Click(object sender, RoutedEventArgs e)
+        {
+            if (name_control(Creat_Answer_Music_Texbox.Text))
+            {
+                CreatePack Music_pack = new CreatePack(1, Creat_Answer_Music_Texbox.Text, mediaplayer, Creat_Answer_Music_Texbox, Create_Question_Music_TBlock);
+                a = Music_pack;
+                this.Closing += a.Delete_Naher;
+                if (a.is_create == true) { this.Close(); }
+                Accept_Create_Name_Music_Pack.Visibility = Visibility.Hidden;
+                Accept_Create_Answer_Music.Visibility = Visibility.Visible;
+                Creat_Answer_Music_Texbox.Text = "";
+            }
+            else
+            {
+                MessageBox.Show("Введите название состоящее только из букв(eng) и цифр.Без пробелов!");
+                Creat_Answer_Music_Texbox.Text = "";
+            }
+        }
+
+        private void Create_Music_Pack_Click(object sender, RoutedEventArgs e)
+        {
+            Pack_create.Visibility = Visibility.Hidden;
+
+            Pack_create_Music.Visibility = Visibility.Visible;
+
+            Create_Question_Music_TBlock.Text = "Как вы назовёте свой пак? ";
         }
     }
 }

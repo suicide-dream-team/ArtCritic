@@ -25,7 +25,7 @@ namespace ArtCritic_Desctop.core
         /// </summary>
         public int type_OF_create_game = 4;
         //0 text game only questions and answers-
-        //1 music game-
+        //1 music game+
         //2 image game+
         //3 game_with_video+
         //4 mixed+
@@ -89,7 +89,7 @@ namespace ArtCritic_Desctop.core
         //внутри папки создаётся файл с путями+ответами 
         //вся папка архивируется архив сохраняется папка удаляется
         /// <summary>
-        /// Создаём папку и текстовый файл
+        /// Создание mixed пака
         /// </summary>
         /// <param name="type_of_game"></param>
         /// <param name="pack_name"></param>
@@ -211,7 +211,7 @@ namespace ArtCritic_Desctop.core
             }
         }
         /// <summary>
-        /// Создание видео
+        /// Создание видео пака
         /// </summary>
         /// <param name="type_of_game"></param>
         /// <param name="pack_name"></param>
@@ -290,9 +290,156 @@ namespace ArtCritic_Desctop.core
             Create_Video_for_user(Path_toVideo);
         }
         /// <summary>
-        /// проверяет видео на ломанность
+        /// Создание картиночного пака
         /// </summary>
-        /// <param name="video"></param>
+        /// <param name="type_of_game"></param>
+        /// <param name="pack_name"></param>
+        /// <param name="image_for_create_user_pack"></param>
+        /// <param name="TB_For_Answer"></param>
+        /// <param name="TBck_for_user"></param>
+        public CreatePack(int type_of_game, string pack_name, Image image_for_create_user_pack, TextBox TB_For_Answer, TextBlock TBck_for_user)
+        {
+            Users_Answer = TB_For_Answer;
+            Namepack = pack_name;
+            type_OF_create_game = type_of_game;
+            image_for_user = image_for_create_user_pack;
+            Question_for_user = TBck_for_user;
+            DirectoryInfo dirInfo = new DirectoryInfo(@"\PacksCreated\" + pack_name);
+            if (!dirInfo.Exists)
+            {
+                dirInfo.Create();
+            }
+            System.Diagnostics.Process.Start("explorer", @"\PacksCreated\" + pack_name);
+            MessageBoxResult messageBoxResult = MessageBox.Show("Скидывайте свои картинки(.jpg) в папку как закинете нажмите ok ", " Закинули? ", MessageBoxButton.OKCancel);
+            if (messageBoxResult == MessageBoxResult.OK)
+            {
+                FileInfo[] GraphicFiles = dirInfo.GetFiles("*.jpg");
+                Files = GraphicFiles;
+                kol_vo_in_dir = GraphicFiles.Length;
+                //проверка на то что ни одного файла не скинули
+                if (kol_vo_in_dir == 0)
+                {
+                    while (kol_vo_in_dir == 0)
+                    {
+                        System.Diagnostics.Process.Start("explorer", @"\PacksCreated\" + pack_name);
+                        MessageBoxResult messageBoxResult1 = MessageBox.Show("Не ну будь ты человеком закинь хотябы 1 файл (.jpg) и потом нажми ОК", " Закинули? ", MessageBoxButton.OKCancel);
+                        if (messageBoxResult1 == MessageBoxResult.OK)
+                        {
+                            GraphicFiles = dirInfo.GetFiles("*.jpg");
+                            Files = GraphicFiles;
+                            kol_vo_in_dir = GraphicFiles.Length;
+                        }
+                        else { kol_vo_in_dir = -1; is_create = true; }
+                    }
+                }
+                //проверка что скинули всё нужное и если ненужное то удаляем нахер всё
+                foreach (var file in Directory.EnumerateFiles(@"\PacksCreated\" + pack_name, "*", SearchOption.TopDirectoryOnly))
+                {
+                    int found = 0;
+                    string expansion;
+                    expansion = file;
+                    if (Directory.Exists(expansion))
+                    {
+                        Directory.Delete(expansion);
+                    }
+                    else
+                    {
+                        found = expansion.IndexOf(".");
+                        expansion = expansion[found..];
+                        if (expansion != ".jpg") { File.Delete(file); }
+                    }
+                }
+                File.Create(@"\PacksCreated\" + pack_name + @"\answersI.txt").Close();
+            }
+            else
+            {
+                kol_vo_in_dir = -1;
+                is_create = true;
+            }
+            Create_Image_for_user();
+        }
+        /// <summary>
+        /// Создание музыкального пака
+        /// </summary>
+        /// <param name="type_of_game"></param>
+        /// <param name="pack_name"></param>
+        /// <param name="music_for_create_user_pack"></param>
+        /// <param name="TB_For_Answer"></param>
+        /// <param name="TBck_for_user"></param>
+        public CreatePack(int type_of_game, string pack_name, MediaPlayer music_for_create_user_pack, TextBox TB_For_Answer, TextBlock TBck_for_user) 
+        {
+            Users_Answer = TB_For_Answer;
+            Namepack = pack_name;
+            type_OF_create_game = type_of_game;
+            music_for_user = music_for_create_user_pack;
+            Question_for_user = TBck_for_user;
+            DirectoryInfo dirInfo = new DirectoryInfo(@"\PacksCreated\" + pack_name);
+            if (!dirInfo.Exists)
+            {
+                dirInfo.Create();
+            }
+            System.Diagnostics.Process.Start("explorer", @"\PacksCreated\" + pack_name);
+            MessageBoxResult messageBoxResult = MessageBox.Show("Скидывайте свою музыку (.mp3) в папку как закинете нажмите ok ", " Закинули? ", MessageBoxButton.OKCancel);
+            if (messageBoxResult == MessageBoxResult.OK)
+            {
+                FileInfo[] GraphicFiles = dirInfo.GetFiles("*.mp3");
+                Files = GraphicFiles;
+                kol_vo_in_dir = GraphicFiles.Length;
+                //проверка на то что ни одного файла не скинули
+                if (kol_vo_in_dir == 0)
+                {
+                    while (kol_vo_in_dir == 0)
+                    {
+                        System.Diagnostics.Process.Start("explorer", @"\PacksCreated\" + pack_name);
+                        MessageBoxResult messageBoxResult1 = MessageBox.Show("Не ну будь ты человеком закинь хотябы 1 файл (.mp3) и потом нажми ОК", " Закинули? ", MessageBoxButton.OKCancel);
+                        if (messageBoxResult1 == MessageBoxResult.OK)
+                        {
+                            GraphicFiles = dirInfo.GetFiles("*.mp3");
+                            Files = GraphicFiles;
+                            kol_vo_in_dir = GraphicFiles.Length;
+                        }
+                        else { kol_vo_in_dir = -1; is_create = true; }
+                    }
+                }
+                //проверка что скинули всё нужное и если ненужное то удаляем нахер всё
+                foreach (var file in Directory.EnumerateFiles(@"\PacksCreated\" + pack_name, "*", SearchOption.TopDirectoryOnly))
+                {
+                    int found = 0;
+                    string expansion;
+                    expansion = file;
+                    if (Directory.Exists(expansion))
+                    {
+                        Directory.Delete(expansion);
+                    }
+                    else
+                    {
+                        found = expansion.IndexOf(".");
+                        expansion = expansion[found..];
+                        if (expansion != ".mp3") { File.Delete(file); }
+                    }
+                }
+                File.Create(@"\PacksCreated\" + pack_name + @"\answersMU.txt").Close();
+            }
+            else
+            {
+                kol_vo_in_dir = -1;
+                is_create = true;
+            }
+            string Path_toMusic = Path.GetFullPath(Files[iter].FullName);
+            Create_Music_for_user(Path_toMusic);
+        }
+        /// <summary>
+    /// проверяет видео на ломанность
+    /// </summary>
+    /// <param name="video"></param>
+    /// <summary>
+    /// Создание Image пака
+    /// </summary>
+    /// <param name="type_of_game"></param>
+    /// <param name="pack_name"></param>
+    /// <param name="image_for_create_user_pack"></param>
+    /// <param name="TB_For_Answer"></param>
+    /// <param name="TBck_for_user"></param>
         public void Check_video(MediaElement video) 
         {
 
@@ -419,75 +566,6 @@ namespace ArtCritic_Desctop.core
 
         }
         /// <summary>
-        /// Создание Image пака
-        /// </summary>
-        /// <param name="type_of_game"></param>
-        /// <param name="pack_name"></param>
-        /// <param name="image_for_create_user_pack"></param>
-        /// <param name="TB_For_Answer"></param>
-        /// <param name="TBck_for_user"></param>
-        public CreatePack(int type_of_game, string pack_name, Image image_for_create_user_pack, TextBox TB_For_Answer, TextBlock TBck_for_user)
-        {
-            Users_Answer = TB_For_Answer;
-            Namepack = pack_name;
-            type_OF_create_game = type_of_game;
-            image_for_user = image_for_create_user_pack;
-            Question_for_user = TBck_for_user;
-            DirectoryInfo dirInfo = new DirectoryInfo(@"\PacksCreated\" + pack_name);
-            if (!dirInfo.Exists)
-            {
-                dirInfo.Create();
-            }
-            System.Diagnostics.Process.Start("explorer", @"\PacksCreated\" + pack_name);
-           MessageBoxResult messageBoxResult = MessageBox.Show("Скидывайте свои картинки(.jpg) в папку как закинете нажмите ok ", " Закинули? ", MessageBoxButton.OKCancel);
-            if (messageBoxResult == MessageBoxResult.OK)
-            {
-                FileInfo[] GraphicFiles = dirInfo.GetFiles("*.jpg");
-                    Files = GraphicFiles;
-                    kol_vo_in_dir = GraphicFiles.Length;
-                //проверка на то что ни одного файла не скинули
-                if (kol_vo_in_dir == 0)
-                {
-                    while (kol_vo_in_dir == 0)
-                    {
-                        System.Diagnostics.Process.Start("explorer", @"\PacksCreated\" + pack_name);
-                        MessageBoxResult messageBoxResult1 = MessageBox.Show("Не ну будь ты человеком закинь хотябы 1 файл (.jpg) и потом нажми ОК", " Закинули? ", MessageBoxButton.OKCancel);
-                        if (messageBoxResult1 == MessageBoxResult.OK)
-                        {
-                            GraphicFiles = dirInfo.GetFiles("*.jpg");
-                            Files = GraphicFiles;
-                            kol_vo_in_dir = GraphicFiles.Length;
-                        }
-                        else { kol_vo_in_dir = -1; is_create = true; }
-                    }
-                }
-                //проверка что скинули всё нужное и если ненужное то удаляем нахер всё
-                foreach (var file in Directory.EnumerateFiles(@"\PacksCreated\" + pack_name, "*", SearchOption.TopDirectoryOnly))
-                {
-                    int found = 0;
-                    string expansion;
-                    expansion = file;
-                    if (Directory.Exists(expansion))
-                    {
-                        Directory.Delete(expansion);
-                    }
-                    else
-                    { 
-                        found = expansion.IndexOf(".");
-                        expansion = expansion[found..];
-                        if (expansion != ".jpg") { File.Delete(file);}
-                    }
-                }
-                File.Create(@"\PacksCreated\" + pack_name + @"\answersI.txt").Close();
-            }
-            else
-            {
-                kol_vo_in_dir = -1;
-                is_create = true; 
-            }
-            Create_Image_for_user(); 
-        }
-        /// <summary>
         /// Само нажатие пользователя на кнопку
         /// </summary>
         /// <param name="sender"></param>
@@ -498,20 +576,20 @@ namespace ArtCritic_Desctop.core
             if (is_create == true) { }
             else
             {
-                if (type_OF_create_game == 3)
+                if (type_OF_create_game == 1)
                 {
-
                     string nameFile = Files[iter].Name;
-                    using (StreamWriter w = File.AppendText(@"\PacksCreated\" + Namepack + @"\answersV.txt"))
+                    using (StreamWriter w = File.AppendText(@"\PacksCreated\" + Namepack + @"\answersMU.txt"))
                     {
                         w.WriteLine(@"..\..\..\Packs\" + Namepack + @"\" + nameFile + "|" + Users_Answer.Text);
                     }
                     iter++;
                     if (iter < kol_vo_in_dir)
                     {
+                        music_for_user.Stop();
+                        music_for_user.Close();
                         string Path_toVideo = Path.GetFullPath(Files[iter].FullName);
-                        Create_Video_for_user(Path_toVideo);
-
+                        Create_Music_for_user(Path_toVideo);
                     }
                     else
                     {
@@ -523,9 +601,31 @@ namespace ArtCritic_Desctop.core
                         MessageBox.Show("Пак успешно создан");
                         is_create = true;
                     }
-
                 }
-
+                if (type_OF_create_game == 3)
+                {
+                    string nameFile = Files[iter].Name;
+                    using (StreamWriter w = File.AppendText(@"\PacksCreated\" + Namepack + @"\answersV.txt"))
+                    {
+                        w.WriteLine(@"..\..\..\Packs\" + Namepack + @"\" + nameFile + "|" + Users_Answer.Text);
+                    }
+                    iter++;
+                    if (iter < kol_vo_in_dir)
+                    {
+                        string Path_toVideo = Path.GetFullPath(Files[iter].FullName);
+                        Create_Video_for_user(Path_toVideo);
+                    }
+                    else
+                    {
+                        //создание архива
+                        ZipFile zf = new ZipFile(@"\PacksCreated\" + Namepack + ".zip");
+                        zf.AddDirectory(@"\PacksCreated\" + Namepack);
+                        zf.Save();
+                        Directory.Delete(@"\PacksCreated\" + Namepack, true);
+                        MessageBox.Show("Пак успешно создан");
+                        is_create = true;
+                    }
+                }
                 if (type_OF_create_game == 2)
                 {
                     string nameFile = Files[iter].Name;
@@ -573,9 +673,7 @@ namespace ArtCritic_Desctop.core
                         MessageBox.Show("Пак успешно создан");
                         is_create = true;
                     }
-
                 }
-
             }
         }
         /// <summary>
@@ -610,6 +708,7 @@ namespace ArtCritic_Desctop.core
         {
             if (kol_vo_in_dir > 0)
             {
+                Question_for_user.Text = "Какой вы хотите ответ для этой музыки?";
                 Uri path_to_music = new Uri(Path_toMusic, UriKind.Absolute);
                 this.music_for_user.Open(path_to_music);
                 this.music_for_user.Play();
