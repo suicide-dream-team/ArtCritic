@@ -302,8 +302,6 @@ namespace ArtCritic_Desctop
         {
             MessageBox.Show("пока в разработке");
         }
-
-
         private void test_Click(object sender, RoutedEventArgs e)
         {
             Type_of_game.Visibility = Visibility.Hidden;
@@ -311,6 +309,8 @@ namespace ArtCritic_Desctop
             textQuestion = question.GetText();
             Text.Text = textQuestion.Text;
         }
+
+
 
 
 

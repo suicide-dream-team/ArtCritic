@@ -593,13 +593,27 @@ namespace ArtCritic_Desctop.core
                     }
                     else
                     {
-                        //создание архива
-                        ZipFile zf = new ZipFile(@"\PacksCreated\" + Namepack + ".zip");
-                        zf.AddDirectory(@"\PacksCreated\" + Namepack);
-                        zf.Save();
-                        Directory.Delete(@"\PacksCreated\" + Namepack, true);
-                        MessageBox.Show("Пак успешно создан");
-                        is_create = true;
+                        if (File.Exists(@"\PacksCreated\" + Namepack + ".zip")) 
+                        {
+                            File.Delete(@"\PacksCreated\" + Namepack + ".zip");
+                            ZipFile zf = new ZipFile(@"\PacksCreated\" + Namepack + ".zip");
+                            zf.CompressionLevel = Ionic.Zlib.CompressionLevel.BestCompression;
+                            zf.AddDirectory(@"\PacksCreated\" + Namepack);
+                            zf.Save();
+                            Directory.Delete(@"\PacksCreated\" + Namepack, true);
+                            MessageBox.Show("Пак успешно создан");
+                            is_create = true;
+                        }
+                        else
+                        {
+                            ZipFile zf = new ZipFile(@"\PacksCreated\" + Namepack + ".zip");
+                            zf.CompressionLevel = Ionic.Zlib.CompressionLevel.BestCompression;
+                            zf.AddDirectory(@"\PacksCreated\" + Namepack);
+                            zf.Save();
+                            Directory.Delete(@"\PacksCreated\" + Namepack, true);
+                            MessageBox.Show("Пак успешно создан");
+                            is_create = true;
+                        }
                     }
                 }
                 if (type_OF_create_game == 3)
@@ -617,13 +631,27 @@ namespace ArtCritic_Desctop.core
                     }
                     else
                     {
-                        //создание архива
-                        ZipFile zf = new ZipFile(@"\PacksCreated\" + Namepack + ".zip");
-                        zf.AddDirectory(@"\PacksCreated\" + Namepack);
-                        zf.Save();
-                        Directory.Delete(@"\PacksCreated\" + Namepack, true);
-                        MessageBox.Show("Пак успешно создан");
-                        is_create = true;
+                        if (File.Exists(@"\PacksCreated\" + Namepack + ".zip"))
+                        {
+                            File.Delete(@"\PacksCreated\" + Namepack + ".zip");
+                            ZipFile zf = new ZipFile(@"\PacksCreated\" + Namepack + ".zip");
+                            zf.CompressionLevel = Ionic.Zlib.CompressionLevel.BestCompression;
+                            zf.AddDirectory(@"\PacksCreated\" + Namepack);
+                            zf.Save();
+                            Directory.Delete(@"\PacksCreated\" + Namepack, true);
+                            MessageBox.Show("Пак успешно создан");
+                            is_create = true;
+                        }
+                        else
+                        {
+                            ZipFile zf = new ZipFile(@"\PacksCreated\" + Namepack + ".zip");
+                            zf.CompressionLevel = Ionic.Zlib.CompressionLevel.BestCompression;
+                            zf.AddDirectory(@"\PacksCreated\" + Namepack);
+                            zf.Save();
+                            Directory.Delete(@"\PacksCreated\" + Namepack, true);
+                            MessageBox.Show("Пак успешно создан");
+                            is_create = true;
+                        }
                     }
                 }
                 if (type_OF_create_game == 2)
@@ -640,13 +668,27 @@ namespace ArtCritic_Desctop.core
                     }
                     else
                     {
-                        //создание архива
-                        ZipFile zf = new ZipFile(@"\PacksCreated\" + Namepack + ".zip");
-                        zf.AddDirectory(@"\PacksCreated\" + Namepack);
-                        zf.Save();
-                        Directory.Delete(@"\PacksCreated\" + Namepack, true);
-                        MessageBox.Show("Пак успешно создан");
-                        is_create = true;
+                        if (File.Exists(@"\PacksCreated\" + Namepack + ".zip"))
+                        {
+                            File.Delete(@"\PacksCreated\" + Namepack + ".zip");
+                            ZipFile zf = new ZipFile(@"\PacksCreated\" + Namepack + ".zip");
+                            zf.CompressionLevel = Ionic.Zlib.CompressionLevel.BestCompression;
+                            zf.AddDirectory(@"\PacksCreated\" + Namepack);
+                            zf.Save();
+                            Directory.Delete(@"\PacksCreated\" + Namepack, true);
+                            MessageBox.Show("Пак успешно создан");
+                            is_create = true;
+                        }
+                        else
+                        {
+                            ZipFile zf = new ZipFile(@"\PacksCreated\" + Namepack + ".zip");
+                            zf.CompressionLevel = Ionic.Zlib.CompressionLevel.BestCompression;
+                            zf.AddDirectory(@"\PacksCreated\" + Namepack);
+                            zf.Save();
+                            Directory.Delete(@"\PacksCreated\" + Namepack, true);
+                            MessageBox.Show("Пак успешно создан");
+                            is_create = true;
+                        }
                     }
                 }
                 if (type_OF_create_game == 4)
@@ -665,13 +707,27 @@ namespace ArtCritic_Desctop.core
                     }
                     else
                     {
-                        //создание архива
-                        ZipFile zf = new ZipFile(@"\PacksCreated\" + Namepack + ".zip");
-                        zf.AddDirectory(@"\PacksCreated\" + Namepack);
-                        zf.Save();
-                        Directory.Delete(@"\PacksCreated\" + Namepack, true);
-                        MessageBox.Show("Пак успешно создан");
-                        is_create = true;
+                        if (File.Exists(@"\PacksCreated\" + Namepack + ".zip"))
+                        {
+                            File.Delete(@"\PacksCreated\" + Namepack + ".zip");
+                            ZipFile zf = new ZipFile(@"\PacksCreated\" + Namepack + ".zip");
+                            zf.CompressionLevel = Ionic.Zlib.CompressionLevel.BestCompression;
+                            zf.AddDirectory(@"\PacksCreated\" + Namepack);
+                            zf.Save();
+                            Directory.Delete(@"\PacksCreated\" + Namepack, true);
+                            MessageBox.Show("Пак успешно создан");
+                            is_create = true;
+                        }
+                        else
+                        {
+                            ZipFile zf = new ZipFile(@"\PacksCreated\" + Namepack + ".zip");
+                            zf.CompressionLevel = Ionic.Zlib.CompressionLevel.BestCompression;
+                            zf.AddDirectory(@"\PacksCreated\" + Namepack);
+                            zf.Save();
+                            Directory.Delete(@"\PacksCreated\" + Namepack, true);
+                            MessageBox.Show("Пак успешно создан");
+                            is_create = true;
+                        }
                     }
                 }
             }
