@@ -36,7 +36,7 @@
             <Button x:Name="Exit" Content="Выход" Grid.Column="1" Grid.Row="7" 
                     Click="Exit_Click" d:IsHidden="True"></Button>
 
-            <Button x:Name="Creat_Question_Button" Content="Создать новый пак вопросов" Click="Creat_Question_Button_Click" d:IsHidden="True"></Button>
+            <Button x:Name="Create_Pack_Button" Content="Создать новый пак вопросов" Click="Create_Pack_Button_Click" d:IsHidden="True"></Button>
 
         </Grid>
 
@@ -205,7 +205,7 @@
 
             <TextBlock HorizontalAlignment="Center" Name="Which_pack_create" Text="Какой пак вы хотите создать?" TextWrapping="Wrap" VerticalAlignment="Center" Width="164" Height="55" d:IsHidden="True"/>
             <Button Content="МиксПак" Name= "Create_Mixed_Pack" HorizontalAlignment="Center" Grid.Row="2" VerticalAlignment="Center" Height="29" Width="80" Click="Create_Mixed_Pack_Click" d:IsHidden="True"/>
-            <Button Content="Картинка" Name="Create_Image_Pack" HorizontalAlignment="Left" Margin="120,90,0,0" Grid.Row="1" VerticalAlignment="Top" Height="52" Width="81" Click="Accept_Create_Image_Pack_Click" d:IsHidden="True" />
+            <Button Content="Картинка" Name="Create_Image_Pack" HorizontalAlignment="Left" Margin="120,90,0,0" Grid.Row="1" VerticalAlignment="Top" Height="52" Width="81" Click="Create_Image_Pack_Click" d:IsHidden="True" />
             <Button Content="Музыка" Name="Create_Music_Pack" HorizontalAlignment="Center" Margin="0,90,0,0" Grid.Row="1" VerticalAlignment="Top" Height="52" Width="80" d:IsHidden="True" Click="Create_Music_Pack_Click" />
             <Button Content="Видео" Name="Create_Video_Pack" HorizontalAlignment="Left" Margin="600,90,0,0" Grid.Row="1" VerticalAlignment="Top" Height="52" Width="81" Click="Create_Video_Pack_Click" d:IsHidden="True" />
         </Grid>

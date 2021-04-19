@@ -59,7 +59,6 @@ namespace ArtCritic_Desctop
 
 
             InitializeComponent();
-            //directory_name = new Regex(@"^([A - Za - z0 - 9]){ 1, 20 }$",RegexOptions.IgnoreCase);
             Player.statistic = 0;
             string[] test_answers = new string[2];
             test_answers[0] = "Спанч Боб";
@@ -96,10 +95,38 @@ namespace ArtCritic_Desctop
             this.Image_for_create_Mixed_for_Music.Visibility = Visibility.Hidden;
             //окно игры с музыкой
             Music_question_window.Visibility = Visibility.Hidden;
-          
+        }
 
+
+        //Элементы main меню
+
+        private void Create_Pack_Button_Click(object sender, RoutedEventArgs e)
+        {
+            Main_menu.Visibility = Visibility.Hidden;
+            Pack_create.Visibility = Visibility.Visible;
+        }
+        private void Game_Click(object sender, RoutedEventArgs e)
+        {
+            Main_menu.Visibility = Visibility.Hidden;
+            Type_of_game.Visibility = Visibility.Visible;
+        }
+        private void Settings_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("пока в разработке");
+        }
+        private void Satistyc_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("пока в разработке");
 
         }
+        private void Exit_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        //Конец элементов main меню
+
+        //Начало элементов для создания паков
 
         /// <summary>
         /// Проверка корректности имени (только латинские и цифры размер максимум 1000 символов)
@@ -111,301 +138,7 @@ namespace ArtCritic_Desctop
             return (!string.IsNullOrEmpty(pack_name) && Regex.IsMatch(pack_name, @"^([A-Za-z0-9]){1,1000}$", RegexOptions.Multiline));
         }
 
-        void Create_Video_List()
-        {
-            db_video = new List<VideoQuestion>();
-            video_counter = 0;
-            var dataFile = File.ReadAllLines(@"..\..\..\Videos\answersV.txt");
-            foreach (var e in dataFile)
-            {
-                var args = e.Split('|');
-                db_video.Add(new VideoQuestion(args[0], args[1]));
-            }
-
-        }
-
-        /// <summary>
-        /// загрузка нового вопроса видео
-        /// </summary>
-        private void LoadNewVideoQuestion()
-        {
-
-            // var g = db_video[video_counter % db_video.Count];
-
-            var g = db_video[video_counter];
-            video.Source = g.Path_To_Video;
-            currentAnswer_video = g.Answer_for_video;
-            video_counter++;
-        }
-
-        /// <summary>
-        /// проверка ответа на видео
-        /// </summary>
-        public void Check_Answer_video()
-        {
-            string word = String.Empty;
-            word = Answer_Video_Texbox.Text;
-
-            if (word == currentAnswer_video)
-            {
-
-                answer_sum_video_correct++;
-
-            }
-
-            if (video_counter != db_video.Count) { LoadNewVideoQuestion(); }
-            else { MessageBox.Show("Молодец! твой результат: " + answer_sum_video_correct + "/" + db_video.Count); Close(); }
-        }
-
-
-
-        /// <summary>
-        /// загрузка нового вопроса картинки
-        /// </summary>
-        private void LoadNewImageQuestion()
-        {
-
-            //var q = db[image_counter % db.Count];
-            var q = db[image_counter];
-            pice.Source = q.Picture;
-            currentAnswer_image = q.Answer;
-            image_counter++;
-
-        }
-
-        /// <summary>
-        /// проверка ответа на картинку
-        /// </summary>
-        public void Check_Answer_Image()
-        {
-         string word = String.Empty;
-         word = Answer_Image_Texbox.Text;
-
-            if (word == currentAnswer_image)
-            {
-             answer_sum_image_correct++;
-            }
-            if (image_counter != db.Count) 
-            { 
-                LoadNewImageQuestion(); 
-            }
-            else 
-            {
-            MessageBox.Show("Молодец! твой результат: " + answer_sum_image_correct + "/" + db.Count); Close();
-            }
-        }
-        /// <summary>
-        /// создание листа для картиночных вопросов
-        /// </summary>
-        void Create_Image_List()
-        {
-            db = new List<Image_Question>();
-            image_counter = 0;
-            var dataFile = File.ReadAllLines(@"..\..\..\Images\answers.txt");
-            foreach (var e in dataFile)
-            {
-             var args = e.Split('|');
-             db.Add(new Image_Question(args[0], args[1]));
-            }
-
-        }
-
-
-
-
-
-        void Creat_Music()
-        {           
-            for (int i = 0; i < 6; ++i)
-            {
-                StreamReader streamReader = new StreamReader(@"..\..\..\Links.txt");
-                string textFromFile = streamReader.ReadLine();
-                string[] cloud_answers;
-                cloud_answers = textFromFile.Split('|');
-                string[] ans = new string[1];
-                ans[0] = cloud_answers[1];
-                music_Questions.Add(new Music_question("угадайте название песни", ans, new Uri(cloud_answers[0], UriKind.Relative)));
-            }
-            
-        }
-
-        private void Settings_Click(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show("пока в разработке");
-        }
-
-        private void Satistyc_Click(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show("пока в разработке");
-
-        }
-
-        private void Exit_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
-        }
-
-        private void Game_Click(object sender, RoutedEventArgs e)
-        {
-            Main_menu.Visibility = Visibility.Hidden;
-            Type_of_game.Visibility = Visibility.Visible;
-        }
-        private void Video_question_Click(object sender, RoutedEventArgs e)
-        {
-
-            Type_of_game.Visibility = Visibility.Hidden;
-            Video_game.Visibility = Visibility.Visible;
-
-            Back_Ground = new BitmapImage();
-            Back_Ground.BeginInit();
-            string Background_Image_Path = System.IO.Path.GetFullPath(@"..\..\..\source_2.0\guess_film.jpg");
-            Back_Ground.UriSource = new Uri(Background_Image_Path, UriKind.RelativeOrAbsolute);
-            Back_Ground.EndInit();
-            Video_Background.Source = Back_Ground;
-
-
-
-            Exit_Button = new BitmapImage();
-            Exit_Button.BeginInit();
-            string Exit_Button_Image_Path = System.IO.Path.GetFullPath(@"..\..\..\source_2.0\exit.png");
-            Exit_Button.UriSource = new Uri(Exit_Button_Image_Path, UriKind.RelativeOrAbsolute);
-            Exit_Button.EndInit();
-            Exit_For_Video.Source = Exit_Button;
-
-            Check_Button = new BitmapImage();
-            Check_Button.BeginInit();
-            string Check_Button_Image_Path = System.IO.Path.GetFullPath(@"..\..\..\source_2.0\check.png");
-            Check_Button.UriSource = new Uri(Check_Button_Image_Path, UriKind.RelativeOrAbsolute);
-            Check_Button.EndInit();
-            Accept_Answer_Video.Source = Check_Button;
-
-            Create_Video_List();
-            LoadNewVideoQuestion();
-        }
-
-        private void Accept_Answer_Video_Click(object sender, RoutedEventArgs e)
-        {
-            Check_Answer_video();
-        }
-
-
-        private void Music_question_Click(object sender, RoutedEventArgs e)
-        {
-            Creat_Music();
-            Type_of_game.Visibility = Visibility.Hidden;
-            Music_question_window.Visibility = Visibility.Visible;
-            Music_question_xaml.Text = music_Questions[iter].Text;
-            music_Questions[iter].Play();
-        }
-
-        private void Mixed_questions_Click(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show("пока в разработке");
-        }
-        private void test_Click(object sender, RoutedEventArgs e)
-        {
-            Type_of_game.Visibility = Visibility.Hidden;
-            Test_game_with_Image.Visibility = Visibility.Visible;
-            textQuestion = question.GetText();
-            Text.Text = textQuestion.Text;
-        }
-
-
-
-
-
-        private void Image_question_Click(object sender, RoutedEventArgs e)
-        {
-
-            Type_of_game.Visibility = Visibility.Hidden;
-            Image_game.Visibility = Visibility.Visible;
-
-
-            
-            Back_Ground = new BitmapImage();
-            Back_Ground.BeginInit();
-            string Background_Image_Path = System.IO.Path.GetFullPath(@"..\..\..\source_2.0\guess_picture.jpg");
-            Back_Ground.UriSource = new Uri(Background_Image_Path, UriKind.RelativeOrAbsolute);
-            Back_Ground.EndInit();
-            Image_Background.Source = Back_Ground;
-
-
-
-            Exit_Button = new BitmapImage();
-            Exit_Button.BeginInit();
-            string Exit_Button_Image_Path = System.IO.Path.GetFullPath(@"..\..\..\source_2.0\exit.png");
-            Exit_Button.UriSource = new Uri(Exit_Button_Image_Path, UriKind.RelativeOrAbsolute);
-            Exit_Button.EndInit();
-            exit_pic.Source = Exit_Button;
-
-            Check_Button = new BitmapImage();
-            Check_Button.BeginInit();
-            string Check_Button_Image_Path= System.IO.Path.GetFullPath(@"..\..\..\source_2.0\check.png");
-            Check_Button.UriSource = new Uri(Check_Button_Image_Path, UriKind.RelativeOrAbsolute);
-            Check_Button.EndInit();
-            Accept_Answer_Image.Source = Check_Button;
-
-
-            Create_Image_List();
-            LoadNewImageQuestion();
-        }
-        private void Accept_Answer_Image_Click(object sender, RoutedEventArgs e)
-        {
-            Check_Answer_Image();
-            Answer_Image_Texbox.Text = "";
-        }
-        private void Accept_Click(object sender, RoutedEventArgs e)
-        {
-
-            if (textQuestion.Check_Answer(Answer.Text))
-            {
-                MessageBox.Show("Верно");
-            }
-            else { MessageBox.Show("Неверно"); }
-            Test_game_with_Image.Visibility = Visibility.Hidden;
-            Type_of_game.Visibility = Visibility.Visible;
-        }
-        private void Creat_Question_Button_Click(object sender, RoutedEventArgs e)
-        {
-            Main_menu.Visibility = Visibility.Hidden;
-            Pack_create.Visibility = Visibility.Visible;
-        }
-
-        private void Music_exit_Click(object sender, RoutedEventArgs e)
-        {
-            iter = 0;
-            Music_question_window.Visibility = Visibility.Hidden;
-            Type_of_game.Visibility = Visibility.Visible;
-            music_Questions[iter].Stop();
-        }
-
-        private void Music_accept_Click(object sender, RoutedEventArgs e)
-        {
-            music_Questions[iter].Stop();
-            if (music_Questions[iter].Check_Answer(Music_answer.Text))
-                Player.statistic = Player.statistic + 1;
-            Music_answer.Text = "";
-            ++iter;
-            if (iter == 4)
-            {
-                Music_question_window.Visibility = Visibility.Hidden;
-                Type_of_game.Visibility = Visibility.Visible;
-                MessageBox.Show("Вы отгадали " + Player.statistic);
-                iter = 0;
-            }
-            else
-                music_Questions[iter].Play();  
-        }
-        private void Music_replay_music_Click(object sender, RoutedEventArgs e)
-        {
-            music_Questions[iter].Stop();
-            music_Questions[iter].Play();
-        }
-        private void exit_pic_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            this.Close();
-        }
-        private void Accept_Create_Image_Pack_Click(object sender, RoutedEventArgs e)
+        private void Create_Image_Pack_Click(object sender, RoutedEventArgs e)
         {
             Pack_create.Visibility = Visibility.Hidden;
 
@@ -413,20 +146,14 @@ namespace ArtCritic_Desctop
 
             Create_Question_Image_TBlock.Text = "Введите название пака";
         }
-        private void Accept_Create_Answer_Image_Click(object sender, RoutedEventArgs e)
-        {
-            a.User_Create_CLick(sender, e);
-            Creat_Answer_Image_Texbox.Text = "";
-            if (a.is_create == true) { this.Close(); }
-        }
         private void Accept_Create_Name_Image_Pack_Click(object sender, RoutedEventArgs e)
         {
-            if (name_control(Creat_Answer_Image_Texbox.Text)) 
+            if (name_control(Creat_Answer_Image_Texbox.Text))
             {
                 CreatePack image_pack = new CreatePack(2, Creat_Answer_Image_Texbox.Text, Image_for_create, Creat_Answer_Image_Texbox, Create_Question_Image_TBlock);
                 a = image_pack;
                 this.Closing += a.Delete_Naher;
-                if (a.is_create == true) {  this.Close(); }
+                if (a.is_create == true) { this.Close(); }
                 Accept_Create_Name_Image_Pack.Visibility = Visibility.Hidden;
                 Accept_Create_Answer_Image.Visibility = Visibility.Visible;
                 Creat_Answer_Image_Texbox.Text = "";
@@ -437,31 +164,44 @@ namespace ArtCritic_Desctop
                 Creat_Answer_Image_Texbox.Text = "";
             }
         }
-
-        private void Music_accept_image_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void Accept_Create_Answer_Image_Click(object sender, RoutedEventArgs e)
         {
-            music_Questions[iter].Stop();
-            if (music_Questions[iter].Check_Answer(Music_answer.Text))
-                Player.statistic = Player.statistic + 1;
-            Music_answer.Text = "";
-            ++iter;
-            if (iter == 4)
-            {
-                Music_question_window.Visibility = Visibility.Hidden;
-                Type_of_game.Visibility = Visibility.Visible;
-                MessageBox.Show("Вы отгадали " + Player.statistic);
-                iter = 0;
-            }
-            else
-                music_Questions[iter].Play();
+            a.User_Create_CLick(sender, e);
+            Creat_Answer_Image_Texbox.Text = "";
+            if (a.is_create == true) { this.Close(); }
         }
 
-        private void Music_exit_image_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void Create_Music_Pack_Click(object sender, RoutedEventArgs e)
         {
-            iter = 0;
-            Music_question_window.Visibility = Visibility.Hidden;
-            Type_of_game.Visibility = Visibility.Visible;
-            music_Questions[iter].Stop();
+            Pack_create.Visibility = Visibility.Hidden;
+
+            Pack_create_Music.Visibility = Visibility.Visible;
+
+            Create_Question_Music_TBlock.Text = "Как вы назовёте свой пак? ";
+        }
+        private void Accept_Create_Name_Music_Pack_Click(object sender, RoutedEventArgs e)
+        {
+            if (name_control(Creat_Answer_Music_Texbox.Text))
+            {
+                CreatePack Music_pack = new CreatePack(1, Creat_Answer_Music_Texbox.Text, mediaplayer, Creat_Answer_Music_Texbox, Create_Question_Music_TBlock);
+                a = Music_pack;
+                this.Closing += a.Delete_Naher;
+                if (a.is_create == true) { this.Close(); }
+                Accept_Create_Name_Music_Pack.Visibility = Visibility.Hidden;
+                Accept_Create_Answer_Music.Visibility = Visibility.Visible;
+                Creat_Answer_Music_Texbox.Text = "";
+            }
+            else
+            {
+                MessageBox.Show("Введите название состоящее только из букв(eng) и цифр.Без пробелов!");
+                Creat_Answer_Music_Texbox.Text = "";
+            }
+        }
+        private void Accept_Create_Answer_Music_Click(object sender, RoutedEventArgs e)
+        {
+            a.User_Create_CLick(sender, e);
+            Creat_Answer_Music_Texbox.Text = "";
+            if (a.is_create == true) { this.Close(); }
         }
 
         private void Create_Video_Pack_Click(object sender, RoutedEventArgs e)
@@ -472,7 +212,6 @@ namespace ArtCritic_Desctop
 
             Create_Question_Video_TBlock.Text = "Как вы назовёте свой пак? ";
         }
-
         private void Accept_Create_Name_Video_Pack_Click(object sender, RoutedEventArgs e)
         {
             if (name_control(Creat_Answer_Video_Texbox.Text))
@@ -486,7 +225,7 @@ namespace ArtCritic_Desctop
                 Creat_Answer_Video_Texbox.Text = "";
             }
             else
-            { 
+            {
                 MessageBox.Show("Введите название состоящее только из букв(eng) и цифр.Без пробелов!");
                 Creat_Answer_Video_Texbox.Text = "";
             }
@@ -497,13 +236,14 @@ namespace ArtCritic_Desctop
             Creat_Answer_Video_Texbox.Text = "";
             if (a.is_create == true) { this.Close(); }
         }
+
+
         private void Create_Mixed_Pack_Click(object sender, RoutedEventArgs e)
         {
             Pack_create.Visibility = Visibility.Hidden;
             Pack_create_Mixed.Visibility = Visibility.Visible;
             Create_Question_Mixed_TBlock.Text = "Как вы назовёте свой пак? ";
         }
-
         private void Accept_Create_Name_Mixed_Pack_Click(object sender, RoutedEventArgs e)
         {
             if (name_control(Creat_Answer_Mixed_Texbox.Text))
@@ -535,7 +275,6 @@ namespace ArtCritic_Desctop
                 Creat_Answer_Mixed_Texbox.Text = "";
             }
         }
-
         private void Accept_Create_Answer_Mixed_Click(object sender, RoutedEventArgs e)
         {
             Image_for_create_Mixed.Visibility = Visibility.Hidden;
@@ -543,7 +282,7 @@ namespace ArtCritic_Desctop
             Image_for_create_Mixed_for_Music.Visibility = Visibility.Hidden;
             a.User_Create_CLick(sender, e);
             Creat_Answer_Mixed_Texbox.Text = "";
-            if (a.is_image == true) 
+            if (a.is_image == true)
             {
                 Image_for_create_Mixed.Visibility = Visibility.Visible;
             }
@@ -555,45 +294,302 @@ namespace ArtCritic_Desctop
             {
                 Image_for_create_Mixed_for_Music.Visibility = Visibility.Visible;
             }
-            if (a.is_create == true) 
-            { 
+            if (a.is_create == true)
+            {
                 this.Close();
             }
         }
 
-        private void Accept_Create_Answer_Music_Click(object sender, RoutedEventArgs e)
+        //Конец элементов для создания паков
+
+        //Элементы меню Game
+
+        private void Video_question_Click(object sender, RoutedEventArgs e)
         {
-            a.User_Create_CLick(sender, e);
-            Creat_Answer_Music_Texbox.Text = "";
-            if (a.is_create == true) { this.Close(); }
+
+            Type_of_game.Visibility = Visibility.Hidden;
+            Video_game.Visibility = Visibility.Visible;
+
+            Back_Ground = new BitmapImage();
+            Back_Ground.BeginInit();
+            string Background_Image_Path = System.IO.Path.GetFullPath(@"..\..\..\source_2.0\guess_film.jpg");
+            Back_Ground.UriSource = new Uri(Background_Image_Path, UriKind.RelativeOrAbsolute);
+            Back_Ground.EndInit();
+            Video_Background.Source = Back_Ground;
+
+            Exit_Button = new BitmapImage();
+            Exit_Button.BeginInit();
+            string Exit_Button_Image_Path = System.IO.Path.GetFullPath(@"..\..\..\source_2.0\exit.png");
+            Exit_Button.UriSource = new Uri(Exit_Button_Image_Path, UriKind.RelativeOrAbsolute);
+            Exit_Button.EndInit();
+            Exit_For_Video.Source = Exit_Button;
+
+            Check_Button = new BitmapImage();
+            Check_Button.BeginInit();
+            string Check_Button_Image_Path = System.IO.Path.GetFullPath(@"..\..\..\source_2.0\check.png");
+            Check_Button.UriSource = new Uri(Check_Button_Image_Path, UriKind.RelativeOrAbsolute);
+            Check_Button.EndInit();
+            Accept_Answer_Video.Source = Check_Button;
+
+            Create_Video_List();
+            LoadNewVideoQuestion();
+        }
+        private void Music_question_Click(object sender, RoutedEventArgs e)
+        {
+            Creat_Music();
+            Type_of_game.Visibility = Visibility.Hidden;
+            Music_question_window.Visibility = Visibility.Visible;
+            Music_question_xaml.Text = music_Questions[iter].Text;
+            music_Questions[iter].Play();
+        }
+        private void Image_question_Click(object sender, RoutedEventArgs e)
+        {
+
+            Type_of_game.Visibility = Visibility.Hidden;
+            Image_game.Visibility = Visibility.Visible;
+
+
+
+            Back_Ground = new BitmapImage();
+            Back_Ground.BeginInit();
+            string Background_Image_Path = System.IO.Path.GetFullPath(@"..\..\..\source_2.0\guess_picture.jpg");
+            Back_Ground.UriSource = new Uri(Background_Image_Path, UriKind.RelativeOrAbsolute);
+            Back_Ground.EndInit();
+            Image_Background.Source = Back_Ground;
+
+
+
+            Exit_Button = new BitmapImage();
+            Exit_Button.BeginInit();
+            string Exit_Button_Image_Path = System.IO.Path.GetFullPath(@"..\..\..\source_2.0\exit.png");
+            Exit_Button.UriSource = new Uri(Exit_Button_Image_Path, UriKind.RelativeOrAbsolute);
+            Exit_Button.EndInit();
+            exit_pic.Source = Exit_Button;
+
+            Check_Button = new BitmapImage();
+            Check_Button.BeginInit();
+            string Check_Button_Image_Path = System.IO.Path.GetFullPath(@"..\..\..\source_2.0\check.png");
+            Check_Button.UriSource = new Uri(Check_Button_Image_Path, UriKind.RelativeOrAbsolute);
+            Check_Button.EndInit();
+            Accept_Answer_Image.Source = Check_Button;
+
+
+            Create_Image_List();
+            LoadNewImageQuestion();
+        }
+        private void Mixed_questions_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("пока в разработке");
         }
 
-        private void Accept_Create_Name_Music_Pack_Click(object sender, RoutedEventArgs e)
+        //Конец элементов меню Game
+
+        //Элементы для режима игры Видео
+
+        /// <summary>
+        /// Создаётся List элементов Video_question
+        /// </summary>
+        void Create_Video_List()
         {
-            if (name_control(Creat_Answer_Music_Texbox.Text))
+            db_video = new List<VideoQuestion>();
+            video_counter = 0;
+            var dataFile = File.ReadAllLines(@"..\..\..\Videos\answersV.txt");
+            foreach (var e in dataFile)
             {
-                CreatePack Music_pack = new CreatePack(1, Creat_Answer_Music_Texbox.Text, mediaplayer, Creat_Answer_Music_Texbox, Create_Question_Music_TBlock);
-                a = Music_pack;
-                this.Closing += a.Delete_Naher;
-                if (a.is_create == true) { this.Close(); }
-                Accept_Create_Name_Music_Pack.Visibility = Visibility.Hidden;
-                Accept_Create_Answer_Music.Visibility = Visibility.Visible;
-                Creat_Answer_Music_Texbox.Text = "";
+                var args = e.Split('|');
+                db_video.Add(new VideoQuestion(args[0], args[1]));
+            }
+
+        }
+        /// <summary>
+        /// загрузка нового вопроса видео
+        /// </summary>
+        private void LoadNewVideoQuestion()
+        {
+
+            // var g = db_video[video_counter % db_video.Count];
+
+            var g = db_video[video_counter];
+            video.Source = g.Path_To_Video;
+            currentAnswer_video = g.Answer_for_video;
+            video_counter++;
+        }
+        /// <summary>
+        /// Нажатие на кнопку "Ввести"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Accept_Answer_Video_Click(object sender, RoutedEventArgs e)
+        {
+            Check_Answer_video();
+        }
+        /// <summary>
+        /// проверка ответа на видео
+        /// </summary>
+        public void Check_Answer_video()
+        {
+            string word = String.Empty;
+            word = Answer_Video_Texbox.Text;
+
+            if (word == currentAnswer_video)
+            {
+
+                answer_sum_video_correct++;
+
+            }
+
+            if (video_counter != db_video.Count) { LoadNewVideoQuestion(); }
+            else { MessageBox.Show("Молодец! твой результат: " + answer_sum_video_correct + "/" + db_video.Count); Close(); }
+        }
+
+        //Конец элементов для режима Видео
+
+        //Элементы для режима игры Музыка
+
+        void Creat_Music()
+        {
+            for (int i = 0; i < 6; ++i)
+            {
+                StreamReader streamReader = new StreamReader(@"..\..\..\Links.txt");
+                string textFromFile = streamReader.ReadLine();
+                string[] cloud_answers;
+                cloud_answers = textFromFile.Split('|');
+                string[] ans = new string[1];
+                ans[0] = cloud_answers[1];
+                music_Questions.Add(new Music_question("угадайте название песни", ans, new Uri(cloud_answers[0], UriKind.Relative)));
+            }
+
+        }
+        private void Music_accept_Click(object sender, RoutedEventArgs e)
+        {
+            music_Questions[iter].Stop();
+            if (music_Questions[iter].Check_Answer(Music_answer.Text))
+                Player.statistic = Player.statistic + 1;
+            Music_answer.Text = "";
+            ++iter;
+            if (iter == 4)
+            {
+                Music_question_window.Visibility = Visibility.Hidden;
+                Type_of_game.Visibility = Visibility.Visible;
+                MessageBox.Show("Вы отгадали " + Player.statistic);
+                iter = 0;
+            }
+            else
+                music_Questions[iter].Play();
+        }
+        private void Music_replay_music_Click(object sender, RoutedEventArgs e)
+        {
+            music_Questions[iter].Stop();
+            music_Questions[iter].Play();
+        }
+        private void Music_exit_Click(object sender, RoutedEventArgs e)
+        {
+            iter = 0;
+            Music_question_window.Visibility = Visibility.Hidden;
+            Type_of_game.Visibility = Visibility.Visible;
+            music_Questions[iter].Stop();
+        }
+        private void exit_pic_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            this.Close();
+        }
+        private void Music_accept_image_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            music_Questions[iter].Stop();
+            if (music_Questions[iter].Check_Answer(Music_answer.Text))
+                Player.statistic = Player.statistic + 1;
+            Music_answer.Text = "";
+            ++iter;
+            if (iter == 4)
+            {
+                Music_question_window.Visibility = Visibility.Hidden;
+                Type_of_game.Visibility = Visibility.Visible;
+                MessageBox.Show("Вы отгадали " + Player.statistic);
+                iter = 0;
+            }
+            else
+                music_Questions[iter].Play();
+        }
+        private void Music_exit_image_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            iter = 0;
+            Music_question_window.Visibility = Visibility.Hidden;
+            Type_of_game.Visibility = Visibility.Visible;
+            music_Questions[iter].Stop();
+        }
+
+        //Конец элементов для режима игры Музыка
+
+        //Элементы для режима игры Картинка
+
+        void Create_Image_List()
+        {
+            db = new List<Image_Question>();
+            image_counter = 0;
+            var dataFile = File.ReadAllLines(@"..\..\..\Images\answers.txt");
+            foreach (var e in dataFile)
+            {
+                var args = e.Split('|');
+                db.Add(new Image_Question(args[0], args[1]));
+            }
+        }
+        private void LoadNewImageQuestion()
+        {
+
+            //var q = db[image_counter % db.Count];
+            var q = db[image_counter];
+            pice.Source = q.Picture;
+            currentAnswer_image = q.Answer;
+            image_counter++;
+
+        }
+        private void Accept_Answer_Image_Click(object sender, RoutedEventArgs e)
+        {
+            Check_Answer_Image();
+            Answer_Image_Texbox.Text = "";
+        }
+        public void Check_Answer_Image()
+        {
+            string word = String.Empty;
+            word = Answer_Image_Texbox.Text;
+
+            if (word == currentAnswer_image)
+            {
+                answer_sum_image_correct++;
+            }
+            if (image_counter != db.Count)
+            {
+                LoadNewImageQuestion();
             }
             else
             {
-                MessageBox.Show("Введите название состоящее только из букв(eng) и цифр.Без пробелов!");
-                Creat_Answer_Music_Texbox.Text = "";
+                MessageBox.Show("Молодец! твой результат: " + answer_sum_image_correct + "/" + db.Count); Close();
             }
         }
 
-        private void Create_Music_Pack_Click(object sender, RoutedEventArgs e)
+        //Конец элементов для режима игры Картинка
+        
+        //Какая-то вещь известного назначения
+
+        private void test_Click(object sender, RoutedEventArgs e)
         {
-            Pack_create.Visibility = Visibility.Hidden;
-
-            Pack_create_Music.Visibility = Visibility.Visible;
-
-            Create_Question_Music_TBlock.Text = "Как вы назовёте свой пак? ";
+            Type_of_game.Visibility = Visibility.Hidden;
+            Test_game_with_Image.Visibility = Visibility.Visible;
+            textQuestion = question.GetText();
+            Text.Text = textQuestion.Text;
         }
+        private void Accept_Click(object sender, RoutedEventArgs e)
+        {
+
+            if (textQuestion.Check_Answer(Answer.Text))
+            {
+                MessageBox.Show("Верно");
+            }
+            else { MessageBox.Show("Неверно"); }
+            Test_game_with_Image.Visibility = Visibility.Hidden;
+            Type_of_game.Visibility = Visibility.Visible;
+        }
+
+
     }
 }

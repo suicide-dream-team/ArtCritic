@@ -21,9 +21,10 @@ namespace ArtCritic_Desctop.core
         /// </summary>
         public string Namepack;
         /// <summary>
-        /// тип созданной игры 4 потому что ещё не выбран тип
+        /// тип созданной игры 5 потому что ещё не выбран тип
         /// </summary>
-        public int type_OF_create_game = 4;
+        public int type_OF_create_game = 5;
+        //Type of games:
         //0 text game only questions and answers-
         //1 music game+
         //2 image game+
@@ -42,7 +43,7 @@ namespace ArtCritic_Desctop.core
         /// </summary>
         public bool is_create=false;
         /// <summary>
-        /// главный массив для файлов хранит все кроме текстового
+        /// главный массив для файлов хранит все кроме текстового файла
         /// </summary>
         public FileInfo[] Files;
         /// <summary>
@@ -171,44 +172,6 @@ namespace ArtCritic_Desctop.core
             }
             else { is_create = true; kol_vo_in_dir = -1; }
             Create_Mixed_for_user();
-        }
-        public void Create_Mixed_for_user()
-        {
-            if (kol_vo_in_dir > 0) 
-            {
-                string Path_toFile = Path.GetFullPath(Files[iter].FullName);
-                int found = 0;
-                string expansion;
-                expansion = Path.GetFullPath(Files[iter].FullName);
-                found = expansion.IndexOf(".");
-                expansion = expansion[found..];
-                if (expansion == ".mp4") 
-                {
-                    is_image = false;
-                    is_video = true;
-                    is_music = false;
-                    Question_for_user.Text = "Какой вы хотите ответ для этого видео?";
-                    this.video_for_user.Source = new Uri(Path_toFile, UriKind.Absolute);
-                    Check_video(this.video_for_user);
-                }
-                if (expansion == ".mp3")
-                {
-                    is_image = false;
-                    is_video = false;
-                    is_music = true;
-                    Question_for_user.Text = "Какой вы хотите ответ для этой музыки?";
-                    string path_tomusic = Files[iter].FullName;
-                    Create_Music_for_user(path_tomusic);
-                }
-                if (expansion == ".jpg") 
-                {
-                    is_image = true;
-                    is_video = false;
-                    is_music = false;
-                    Question_for_user.Text = "Какой вы хотите ответ для этой картинки?";
-                    setImageSource(Path_toFile);
-                }
-            }
         }
         /// <summary>
         /// Создание видео пака
@@ -501,7 +464,7 @@ namespace ArtCritic_Desctop.core
             }
         }
         /// <summary>
-        /// Проперка музыки на воспроизведение
+        /// Проверка музыки на воспроизведение
         /// </summary>
         /// <param name="music"></param>
         public void Check_music(MediaPlayer music) 
@@ -564,173 +527,6 @@ namespace ArtCritic_Desctop.core
                 }
             }
 
-        }
-        /// <summary>
-        /// Само нажатие пользователя на кнопку
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        public void User_Create_CLick(object sender, RoutedEventArgs e)
-        {
-            DirectoryInfo dirInfo = new DirectoryInfo(@"\PacksCreated\" + Namepack);
-            if (is_create == true) { }
-            else
-            {
-                if (type_OF_create_game == 1)
-                {
-                    string nameFile = Files[iter].Name;
-                    using (StreamWriter w = File.AppendText(@"\PacksCreated\" + Namepack + @"\answersMU.txt"))
-                    {
-                        w.WriteLine(@"..\..\..\Packs\" + Namepack + @"\" + nameFile + "|" + Users_Answer.Text);
-                    }
-                    iter++;
-                    if (iter < kol_vo_in_dir)
-                    {
-                        music_for_user.Stop();
-                        music_for_user.Close();
-                        string Path_toVideo = Path.GetFullPath(Files[iter].FullName);
-                        Create_Music_for_user(Path_toVideo);
-                    }
-                    else
-                    {
-                        if (File.Exists(@"\PacksCreated\" + Namepack + ".zip")) 
-                        {
-                            File.Delete(@"\PacksCreated\" + Namepack + ".zip");
-                            ZipFile zf = new ZipFile(@"\PacksCreated\" + Namepack + ".zip");
-                            zf.CompressionLevel = Ionic.Zlib.CompressionLevel.BestCompression;
-                            zf.AddDirectory(@"\PacksCreated\" + Namepack);
-                            zf.Save();
-                            Directory.Delete(@"\PacksCreated\" + Namepack, true);
-                            MessageBox.Show("Пак успешно создан");
-                            is_create = true;
-                        }
-                        else
-                        {
-                            ZipFile zf = new ZipFile(@"\PacksCreated\" + Namepack + ".zip");
-                            zf.CompressionLevel = Ionic.Zlib.CompressionLevel.BestCompression;
-                            zf.AddDirectory(@"\PacksCreated\" + Namepack);
-                            zf.Save();
-                            Directory.Delete(@"\PacksCreated\" + Namepack, true);
-                            MessageBox.Show("Пак успешно создан");
-                            is_create = true;
-                        }
-                    }
-                }
-                if (type_OF_create_game == 3)
-                {
-                    string nameFile = Files[iter].Name;
-                    using (StreamWriter w = File.AppendText(@"\PacksCreated\" + Namepack + @"\answersV.txt"))
-                    {
-                        w.WriteLine(@"..\..\..\Packs\" + Namepack + @"\" + nameFile + "|" + Users_Answer.Text);
-                    }
-                    iter++;
-                    if (iter < kol_vo_in_dir)
-                    {
-                        string Path_toVideo = Path.GetFullPath(Files[iter].FullName);
-                        Create_Video_for_user(Path_toVideo);
-                    }
-                    else
-                    {
-                        if (File.Exists(@"\PacksCreated\" + Namepack + ".zip"))
-                        {
-                            File.Delete(@"\PacksCreated\" + Namepack + ".zip");
-                            ZipFile zf = new ZipFile(@"\PacksCreated\" + Namepack + ".zip");
-                            zf.CompressionLevel = Ionic.Zlib.CompressionLevel.BestCompression;
-                            zf.AddDirectory(@"\PacksCreated\" + Namepack);
-                            zf.Save();
-                            Directory.Delete(@"\PacksCreated\" + Namepack, true);
-                            MessageBox.Show("Пак успешно создан");
-                            is_create = true;
-                        }
-                        else
-                        {
-                            ZipFile zf = new ZipFile(@"\PacksCreated\" + Namepack + ".zip");
-                            zf.CompressionLevel = Ionic.Zlib.CompressionLevel.BestCompression;
-                            zf.AddDirectory(@"\PacksCreated\" + Namepack);
-                            zf.Save();
-                            Directory.Delete(@"\PacksCreated\" + Namepack, true);
-                            MessageBox.Show("Пак успешно создан");
-                            is_create = true;
-                        }
-                    }
-                }
-                if (type_OF_create_game == 2)
-                {
-                    string nameFile = Files[iter].Name;
-                    using (StreamWriter w = File.AppendText(@"\PacksCreated\" + Namepack + @"\answersI.txt"))
-                    {
-                        w.WriteLine(@"..\..\..\Packs\" + Namepack + @"\" + nameFile + "|" + Users_Answer.Text);
-                    }
-                    iter++;
-                    if (iter < kol_vo_in_dir)
-                    {
-                        Create_Image_for_user();
-                    }
-                    else
-                    {
-                        if (File.Exists(@"\PacksCreated\" + Namepack + ".zip"))
-                        {
-                            File.Delete(@"\PacksCreated\" + Namepack + ".zip");
-                            ZipFile zf = new ZipFile(@"\PacksCreated\" + Namepack + ".zip");
-                            zf.CompressionLevel = Ionic.Zlib.CompressionLevel.BestCompression;
-                            zf.AddDirectory(@"\PacksCreated\" + Namepack);
-                            zf.Save();
-                            Directory.Delete(@"\PacksCreated\" + Namepack, true);
-                            MessageBox.Show("Пак успешно создан");
-                            is_create = true;
-                        }
-                        else
-                        {
-                            ZipFile zf = new ZipFile(@"\PacksCreated\" + Namepack + ".zip");
-                            zf.CompressionLevel = Ionic.Zlib.CompressionLevel.BestCompression;
-                            zf.AddDirectory(@"\PacksCreated\" + Namepack);
-                            zf.Save();
-                            Directory.Delete(@"\PacksCreated\" + Namepack, true);
-                            MessageBox.Show("Пак успешно создан");
-                            is_create = true;
-                        }
-                    }
-                }
-                if (type_OF_create_game == 4)
-                {
-                    string nameFile = Files[iter].Name;
-                    using (StreamWriter w = File.AppendText(@"\PacksCreated\" + Namepack + @"\answersM.txt"))
-                    {
-                        w.WriteLine(@"..\..\..\Packs\" + Namepack + @"\" + nameFile + "|" + Users_Answer.Text);
-                    }
-                    iter++;
-                    if (iter < kol_vo_in_dir)
-                    {
-                        music_for_user.Stop();
-                        music_for_user.Close();
-                        Create_Mixed_for_user();
-                    }
-                    else
-                    {
-                        if (File.Exists(@"\PacksCreated\" + Namepack + ".zip"))
-                        {
-                            File.Delete(@"\PacksCreated\" + Namepack + ".zip");
-                            ZipFile zf = new ZipFile(@"\PacksCreated\" + Namepack + ".zip");
-                            zf.CompressionLevel = Ionic.Zlib.CompressionLevel.BestCompression;
-                            zf.AddDirectory(@"\PacksCreated\" + Namepack);
-                            zf.Save();
-                            Directory.Delete(@"\PacksCreated\" + Namepack, true);
-                            MessageBox.Show("Пак успешно создан");
-                            is_create = true;
-                        }
-                        else
-                        {
-                            ZipFile zf = new ZipFile(@"\PacksCreated\" + Namepack + ".zip");
-                            zf.CompressionLevel = Ionic.Zlib.CompressionLevel.BestCompression;
-                            zf.AddDirectory(@"\PacksCreated\" + Namepack);
-                            zf.Save();
-                            Directory.Delete(@"\PacksCreated\" + Namepack, true);
-                            MessageBox.Show("Пак успешно создан");
-                            is_create = true;
-                        }
-                    }
-                }
-            }
         }
         /// <summary>
         /// корректно ли запустилась музыка
@@ -798,7 +594,7 @@ namespace ArtCritic_Desctop.core
             }
         }
         /// <summary>
-        /// Нужно было так сделать чтобы картинку можно было потом удалить(иначе выводит что картинка используется другим приложением)
+        /// создаёт поток для картинки потому что если её просто поместить в BitmapImage то картинка открывается и не может закрыться
         /// </summary>
         /// <param name="file"></param>
         void setImageSource(string file)
@@ -811,7 +607,7 @@ namespace ArtCritic_Desctop.core
                 }
                 catch (System.IO.FileFormatException)
                 {
-                    image_for_user.Source = null;
+                   // image_for_user.Source = null;
                     stream.Close();
                     File.Delete(file);
                     iter++;
@@ -832,7 +628,7 @@ namespace ArtCritic_Desctop.core
                         MessageBox.Show("я удалил все повреждённые файлы, и папка кончилась. Check later! Пересоздай пак.");
                     }
                 }
-                catch (System.NotSupportedException) 
+                catch (System.NotSupportedException)
                 {
                     image_for_user.Source = null;
                     stream.Close();
@@ -858,6 +654,74 @@ namespace ArtCritic_Desctop.core
             }
         }
         /// <summary>
+        /// воспроизводит элемент из mixed на экране
+        /// </summary>
+        public void Create_Mixed_for_user()
+        {
+            if (kol_vo_in_dir > 0)
+            {
+                string Path_toFile = Path.GetFullPath(Files[iter].FullName);
+                int found = 0;
+                string expansion;
+                expansion = Path.GetFullPath(Files[iter].FullName);
+                found = expansion.IndexOf(".");
+                expansion = expansion[found..];
+                if (expansion == ".mp4")
+                {
+                    is_image = false;
+                    is_video = true;
+                    is_music = false;
+                    Question_for_user.Text = "Какой вы хотите ответ для этого видео?";
+                    this.video_for_user.Source = new Uri(Path_toFile, UriKind.Absolute);
+                    Check_video(this.video_for_user);
+                }
+                if (expansion == ".mp3")
+                {
+                    is_image = false;
+                    is_video = false;
+                    is_music = true;
+                    Question_for_user.Text = "Какой вы хотите ответ для этой музыки?";
+                    string path_tomusic = Files[iter].FullName;
+                    Create_Music_for_user(path_tomusic);
+                }
+                if (expansion == ".jpg")
+                {
+                    is_image = true;
+                    is_video = false;
+                    is_music = false;
+                    Question_for_user.Text = "Какой вы хотите ответ для этой картинки?";
+                    setImageSource(Path_toFile);
+                }
+            }
+        }
+        /// <summary>
+        /// Создание архива
+        /// </summary>
+        public void Create_zip_archieve() 
+        {
+            if (File.Exists(@"\PacksCreated\" + Namepack + ".zip"))
+            {
+                File.Delete(@"\PacksCreated\" + Namepack + ".zip");
+                ZipFile zf = new ZipFile(@"\PacksCreated\" + Namepack + ".zip");
+                zf.CompressionLevel = Ionic.Zlib.CompressionLevel.BestCompression;
+                zf.AddDirectory(@"\PacksCreated\" + Namepack);
+                zf.Save();
+                Directory.Delete(@"\PacksCreated\" + Namepack, true);
+                MessageBox.Show("Пак успешно создан");
+                is_create = true;
+            }
+            else
+            {
+                ZipFile zf = new ZipFile(@"\PacksCreated\" + Namepack + ".zip");
+                zf.CompressionLevel = Ionic.Zlib.CompressionLevel.BestCompression;
+                zf.AddDirectory(@"\PacksCreated\" + Namepack);
+                zf.Save();
+                Directory.Delete(@"\PacksCreated\" + Namepack, true);
+                MessageBox.Show("Пак успешно создан");
+                is_create = true;
+            }
+        }
+        /// <summary>
         /// Удаляет папку пака со всем содержимым при резком выходе
         /// </summary>
         /// <param name="sender"></param>
@@ -867,6 +731,93 @@ namespace ArtCritic_Desctop.core
             if (Directory.Exists(@"\PacksCreated\" + Namepack))
             {
                 Directory.Delete(@"\PacksCreated\" + Namepack, true);
+            }
+        }
+        /// <summary>
+        /// Само нажатие пользователя на кнопку
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        public void User_Create_CLick(object sender, RoutedEventArgs e)
+        {
+            //    DirectoryInfo dirInfo = new DirectoryInfo(@"\PacksCreated\" + Namepack);
+            if (is_create == true) { }
+            else
+            {
+                if (type_OF_create_game == 1)
+                {
+                    string nameFile = Files[iter].Name;
+                    using (StreamWriter w = File.AppendText(@"\PacksCreated\" + Namepack + @"\answersMU.txt"))
+                    {
+                        w.WriteLine(@"..\..\..\Packs\" + Namepack + @"\" + nameFile + "|" + Users_Answer.Text);
+                    }
+                    iter++;
+                    if (iter < kol_vo_in_dir)
+                    {
+                        music_for_user.Stop();
+                        music_for_user.Close();
+                        string Path_toVideo = Path.GetFullPath(Files[iter].FullName);
+                        Create_Music_for_user(Path_toVideo);
+                    }
+                    else
+                    {
+                        Create_zip_archieve();
+                    }
+                }
+                if (type_OF_create_game == 3)
+                {
+                    string nameFile = Files[iter].Name;
+                    using (StreamWriter w = File.AppendText(@"\PacksCreated\" + Namepack + @"\answersV.txt"))
+                    {
+                        w.WriteLine(@"..\..\..\Packs\" + Namepack + @"\" + nameFile + "|" + Users_Answer.Text);
+                    }
+                    iter++;
+                    if (iter < kol_vo_in_dir)
+                    {
+                        string Path_toVideo = Path.GetFullPath(Files[iter].FullName);
+                        Create_Video_for_user(Path_toVideo);
+                    }
+                    else
+                    {
+                        Create_zip_archieve();
+                    }
+                }
+                if (type_OF_create_game == 2)
+                {
+                    string nameFile = Files[iter].Name;
+                    using (StreamWriter w = File.AppendText(@"\PacksCreated\" + Namepack + @"\answersI.txt"))
+                    {
+                        w.WriteLine(@"..\..\..\Packs\" + Namepack + @"\" + nameFile + "|" + Users_Answer.Text);
+                    }
+                    iter++;
+                    if (iter < kol_vo_in_dir)
+                    {
+                        Create_Image_for_user();
+                    }
+                    else
+                    {
+                        Create_zip_archieve();
+                    }
+                }
+                if (type_OF_create_game == 4)
+                {
+                    string nameFile = Files[iter].Name;
+                    using (StreamWriter w = File.AppendText(@"\PacksCreated\" + Namepack + @"\answersM.txt"))
+                    {
+                        w.WriteLine(@"..\..\..\Packs\" + Namepack + @"\" + nameFile + "|" + Users_Answer.Text);
+                    }
+                    iter++;
+                    if (iter < kol_vo_in_dir)
+                    {
+                        music_for_user.Stop();
+                        music_for_user.Close();
+                        Create_Mixed_for_user();
+                    }
+                    else
+                    {
+                        Create_zip_archieve();
+                    }
+                }
             }
         }
     }
