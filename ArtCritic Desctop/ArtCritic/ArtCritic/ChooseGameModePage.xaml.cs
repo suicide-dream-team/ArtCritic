@@ -24,7 +24,7 @@ namespace ArtCritic
 
         async private void Music_question_Click(object sender, EventArgs e)
         {
-            await DisplayAlert("Не работает", "Пока в разработке", "OK");
+            await Navigation.PushAsync(new MusicQuestionPage());
         }
 
         async private void Mixed_questions_Click(object sender, EventArgs e)

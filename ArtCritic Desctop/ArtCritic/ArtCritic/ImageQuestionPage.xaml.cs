@@ -41,10 +41,10 @@ namespace ArtCritic
             image_counter = 0;
 
             
-            pice.Source = ImageSource.FromResource("ArtCritic.Images.pic0.jpg");
+            pice.Source = ImageSource.FromResource("ArtCritic.source.Images.pic0.jpg");
 
             var assembly = Assembly.GetExecutingAssembly();
-            var resourceName = "ArtCritic.Images.answers.txt";
+            var resourceName = "ArtCritic.source.Images.answers.txt";
 
             using (Stream stream = assembly.GetManifestResourceStream(resourceName))
             using (StreamReader reader = new StreamReader(stream))
@@ -70,10 +70,10 @@ namespace ArtCritic
             string word = String.Empty;
             word = Answer_Image_Texbox.Text;
 
-            if (word == currentAnswer_image)
+            if (word.ToLower() == currentAnswer_image.ToLower())
             {
                 answer_sum_image_correct++;
-                score.Text = answer_sum_image_correct.ToString();
+                image_score.Text = answer_sum_image_correct.ToString();
             }
 
             if (image_counter != db.Count) { LoadNewImageQuestion(); }

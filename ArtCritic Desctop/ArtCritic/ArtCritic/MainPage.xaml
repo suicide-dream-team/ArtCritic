@@ -4,7 +4,7 @@
              x:Class="ArtCritic.MainPage">
     <StackLayout>
         <Frame BackgroundColor="#2196F3" Padding="24" CornerRadius="0">
-            <Label Text="ArtCritic" HorizontalTextAlignment="Center" TextColor="White" FontSize="70"/>
+            <Label x:Name ="title" Text="ArtCritic" HorizontalTextAlignment="Center" TextColor="White" FontSize="70"/>
         </Frame>
         <Button x:Name ="Game" Text="Игра" FontSize="36" Clicked ="Game_Click"></Button>
         <Button x:Name ="Settings" Text="Настройки" FontSize="36" Clicked="Settings_Click"></Button>
