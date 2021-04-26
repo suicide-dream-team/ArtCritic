@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ArtCritic_Desctop
+namespace ArtCritic
 {
     class TextQuestion
     {
@@ -16,7 +16,7 @@ namespace ArtCritic_Desctop
             //foreach(string ch_ans in Answers)
             for (int i = 0; i < Answers.Length; ++i)
             {
-                bool check = (Answers[i]==ans);
+                bool check = (Answers[i].ToLower()==ans.ToLower());
                 if (check)                    
                 { 
                     return true; 

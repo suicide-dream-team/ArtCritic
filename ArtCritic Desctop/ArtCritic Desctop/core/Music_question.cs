@@ -13,7 +13,7 @@ namespace ArtCritic_Desctop
         {            
             music = new MediaPlayer();
             music.Open(uriQestion);
-            music.Stop();
+            music.Play();
         }
         public void Play()
         {
