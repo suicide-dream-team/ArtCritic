@@ -7,11 +7,11 @@ namespace ArtCritic_Desctop.core
 
     class PlayerStat
     {
-        private int Id { get; set; }
-        private int PlayedGames { get; set; }
-        private int TotalQuestions { get; set; }
-        private int TotalCorrectAnswers { get; set; }
-        private double CurrentResult { get; set; }
+        public int Id { get; set; }
+        public int PlayedGames { get; set; }
+        public int TotalQuestions { get; set; }
+        public int TotalCorrectAnswers { get; set; }
+        public double CurrentResult { get; set; }
 
         public PlayerStat() { }
         public PlayerStat(int Id, int PlayedGames, int TotalQuestions, int TotalCorrectAnswers, double CurrentResult)

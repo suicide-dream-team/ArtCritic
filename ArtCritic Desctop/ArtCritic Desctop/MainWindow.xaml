@@ -8,10 +8,6 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid x:Name="G1" >
 
-        <Grid x:Name="Game_stat" d:IsHidden="True" >
-              
-        </Grid>
-        
         <Grid x:Name="Main_menu" d:IsHidden="True" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition></ColumnDefinition>
@@ -45,7 +41,35 @@
             <Button x:Name="Create_Pack_Button" Content="Создать новый пак вопросов" Click="Create_Pack_Button_Click" d:IsHidden="True"></Button>
 
         </Grid>
-        
+
+        <Grid x:Name="Game_stat" d:IsHidden="True" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Label x:Name="Played_Games_Label1" Content="Сыграно игр" Grid.Column="1" Grid.Row="1"/>
+            <Label x:Name="Played_Games_Label2" Content="" Grid.Column="3" Grid.Row="1"/>
+            <Label x:Name="TotalQuestionsLabel" Content="Всего вопросов" Grid.Column="1" Grid.Row="2"/>
+            <Label x:Name="TotalQuestionsLabe2" Content="" Grid.Column="3" Grid.Row="2"/>
+            <Label x:Name="TotalCorrectAnswersLabel" Content="Правильных ответов" Grid.Column="1" Grid.Row="3"/>
+            <Label x:Name="TotalCorrectAnswersLabe2" Content="" Grid.Column="3" Grid.Row="3"/>
+            <Label x:Name="CurrentResultLabel" Content="Текущий результат" Grid.Column="1" Grid.Row="4"/>
+            <Label x:Name="CurrentResultLabe2" Content="" Grid.Column="3" Grid.Row="4"/>
+            <Button x:Name="ReturnButton" Content="Меню" Grid.Column="2" Grid.Row="5" Click="Statictics_Back"/>
+        </Grid>
 
         <Grid x:Name="Type_of_game" d:IsHidden="True" >
 

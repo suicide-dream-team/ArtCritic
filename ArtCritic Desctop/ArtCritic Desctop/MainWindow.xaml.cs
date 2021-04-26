@@ -67,20 +67,18 @@ namespace ArtCritic_Desctop
 
         public MainWindow()
         {
-
-
             InitializeComponent();
             CreateAndCheckDb();
 
             Player.statistic = 0;
             statistics = GetStatistics();
 
-
             string[] test_answers = new string[2];
             test_answers[0] = "Спанч Боб";
             test_answers[1] = "Спанч Боб Скрепенс";
             question = new QuestionKeeper("кто проживает на дне океана?", test_answers);
             //окно выбора типа игры
+            this.Game_stat.Visibility = Visibility.Hidden;
             this.Type_of_game.Visibility = Visibility.Hidden;
             //окно тестовой игры Данила
             this.Test_game_with_Image.Visibility = Visibility.Hidden;
@@ -173,6 +171,34 @@ namespace ArtCritic_Desctop
         }
 
 
+        private void updateStatistics(int correctAnswer, int totalAnswer)
+        {
+            statistics.CurrentResult = (statistics.CurrentResult * statistics.PlayedGames + correctAnswer * 100 / totalAnswer) / (statistics.PlayedGames + 1);
+            statistics.PlayedGames++;
+            statistics.TotalQuestions += totalAnswer;
+            statistics.TotalCorrectAnswers += correctAnswer;
+            saveStatistics();
+        }
+
+        private void saveStatistics()
+        {
+            try
+            {
+                m_sqlCmd.CommandText = "UPDATE player_stat SET played_games = '"
+                    + statistics.PlayedGames.ToString() + "', total_questions = '"
+                    + statistics.TotalQuestions.ToString() + "', total_correct_answers = '"
+                    + statistics.TotalCorrectAnswers.ToString() + "', current_result = '"
+                    + statistics.CurrentResult.ToString() + "' WHERE id = '1'";
+                m_sqlCmd.ExecuteNonQuery();
+            }
+            catch (SQLiteException ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+                this.Close();
+            }
+        }
+
+
         //Элементы main меню
 
         private void Create_Pack_Button_Click(object sender, RoutedEventArgs e)
@@ -191,9 +217,20 @@ namespace ArtCritic_Desctop
         }
         private void Satistyc_Click(object sender, RoutedEventArgs e)
         {
-            Main_menu.Visibility = Visibility.Hidden;
+            Played_Games_Label2.Content = statistics.PlayedGames;
+            TotalQuestionsLabe2.Content = statistics.TotalQuestions;
+            TotalCorrectAnswersLabe2.Content = statistics.TotalCorrectAnswers;
+            CurrentResultLabe2.Content = statistics.CurrentResult + "%";
             Game_stat.Visibility = Visibility.Visible;
+            Main_menu.Visibility = Visibility.Hidden;
         }
+
+        private void Statictics_Back(object sender, RoutedEventArgs e)
+        {
+            Game_stat.Visibility = Visibility.Hidden;
+            Main_menu.Visibility = Visibility.Visible;
+        }
+
         private void Exit_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
@@ -514,7 +551,11 @@ namespace ArtCritic_Desctop
             }
 
             if (video_counter != db_video.Count) { LoadNewVideoQuestion(); }
-            else { MessageBox.Show("Молодец! твой результат: " + answer_sum_video_correct + "/" + db_video.Count); Close(); }
+            else {
+                MessageBox.Show("Молодец! твой результат: " + answer_sum_video_correct + "/" + db_video.Count);
+                updateStatistics(answer_sum_video_correct, db_video.Count);
+                Close();
+            }
         }
 
         //Конец элементов для режима Видео
@@ -546,7 +587,8 @@ namespace ArtCritic_Desctop
             {
                 Music_question_window.Visibility = Visibility.Hidden;
                 Type_of_game.Visibility = Visibility.Visible;
-                MessageBox.Show("Вы отгадали " + Player.statistic);
+                MessageBox.Show("Вы отгадали верно " + Player.statistic);
+                updateStatistics(Player.statistic, iter);
                 iter = 0;
             }
             else
@@ -579,7 +621,9 @@ namespace ArtCritic_Desctop
             {
                 Music_question_window.Visibility = Visibility.Hidden;
                 Type_of_game.Visibility = Visibility.Visible;
-                MessageBox.Show("Вы отгадали " + Player.statistic);
+                MessageBox.Show("Вы отгадали правильно " + Player.statistic);
+                updateStatistics(Player.statistic, iter);
+
                 iter = 0;
             }
             else
@@ -639,6 +683,7 @@ namespace ArtCritic_Desctop
             else
             {
                 MessageBox.Show("Молодец! твой результат: " + answer_sum_image_correct + "/" + db.Count); Close();
+                updateStatistics(answer_sum_image_correct, db.Count);
             }
         }
 
@@ -667,4 +712,5 @@ namespace ArtCritic_Desctop
 
 
     }
+
 }
