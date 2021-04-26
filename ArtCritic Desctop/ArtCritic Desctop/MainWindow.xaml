@@ -8,7 +8,7 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid x:Name="G1" >
 
-        <Grid x:Name="Main_menu" d:IsHidden="True" >
+        <Grid x:Name="Main_menu" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
@@ -25,21 +25,30 @@
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
+            <Image x:Name="I_Background" Grid.Row="0" Grid.RowSpan="9" Grid.ColumnSpan="3" Stretch="Fill" ></Image>
+            <Button x:Name="Game" Content="Игра" Grid.Column="1" Grid.Row="1" Visibility="Hidden"
+                    Click="Game_Click" />
 
-            <Button x:Name="Game" Content="Игра" Grid.Column="1" Grid.Row="1" 
-                    Click="Game_Click" d:IsHidden="True" />
+            <Image x:Name="I_Game" Grid.Column="1" Grid.Row="3" MouseLeftButtonDown="I_Game_MouseLeftButtonDown"></Image>
 
-            <Button x:Name="Settings" Content="Настройки" Grid.Column="1" Grid.Row="3"
-                    Click="Settings_Click" d:IsHidden="True"/>
+            <Button x:Name="Settings" Content="Настройки" Grid.Column="1" Grid.Row="3" Visibility="Hidden"
+                    Click="Settings_Click"/>
 
-            <Button x:Name="Statistics" Content="Статистика" Grid.Column="1" Grid.Row="5" 
-                    Click="Satistyc_Click" d:IsHidden="True"/>
+            <Image x:Name="I_Settings" Grid.Column="1" Grid.Row="4" MouseLeftButtonDown="I_Settings_MouseLeftButtonDown"></Image>
+            
+            <Button x:Name="Statistics" Content="Статистика" Grid.Column="1" Grid.Row="5" Visibility="Hidden"
+                    Click="Satistyc_Click"/>
 
-            <Button x:Name="Exit" Content="Выход" Grid.Column="1" Grid.Row="7" 
-                    Click="Exit_Click" d:IsHidden="True"/>
+            <Image x:Name="I_Statistics" Grid.Column="1" Grid.Row="5" MouseLeftButtonDown="I_Statistics_MouseLeftButtonDown"></Image>
+           
+            <Button x:Name="Exit" Content="Выход" Grid.Column="1" Grid.Row="7" Visibility="Hidden"
+                    Click="Exit_Click"/>
 
-            <Button x:Name="Create_Pack_Button" Content="Создать новый пак вопросов" Click="Create_Pack_Button_Click" d:IsHidden="True"/>
+            <Image x:Name="I_Exit" Grid.Column="1" Grid.Row="6" MouseLeftButtonDown="exit_pic_MouseLeftButtonDown"></Image>
+            
+            <Button x:Name="Create_Pack_Button" Content="Создать новый пак вопросов" Click="Create_Pack_Button_Click"/>
 
+           
         </Grid>
 
         <Grid x:Name="Game_stat" d:IsHidden="True" >
@@ -169,7 +178,7 @@
         </Grid>
 
 
-        <Grid x:Name="Video_game" ShowGridLines="True">
+        <Grid x:Name="Video_game" ShowGridLines="True" d:IsHidden="True">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="165*"/>
                 <ColumnDefinition Width="443*"/>

@@ -1,21 +1,21 @@
 ﻿using System.Windows;
 using System;
 using System.IO;
-using System.Data;
+//using System.Data;
 using System.Data.SQLite;
 using System.Collections.Generic;
-using System.Linq;
+/*using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
+using System.Windows.Documents;*/
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
+/*using System.Windows.Navigation;
 using System.Windows.Shapes;
-using System.Reflection;
+using System.Reflection;*/
 using ArtCritic_Desctop.core;
 using System.Text.RegularExpressions;
 
@@ -55,7 +55,7 @@ namespace ArtCritic_Desctop
         private List<Uri> uris = new List<Uri>();
         private QuestionKeeper question;
         private TextQuestion textQuestion;
-        MediaPlayer[] mediaPlayer = new MediaPlayer[4];
+        
 
 
         private PlayerStat statistics;
@@ -72,7 +72,7 @@ namespace ArtCritic_Desctop
 
             Player.statistic = 0;
             statistics = GetStatistics();
-
+            creat_start_menu();
             string[] test_answers = new string[2];
             test_answers[0] = "Спанч Боб";
             test_answers[1] = "Спанч Боб Скрепенс";
@@ -111,6 +111,29 @@ namespace ArtCritic_Desctop
             Music_question_window.Visibility = Visibility.Hidden;
         }
 
+        private void creat_start_menu()
+        {
+            string I_Game_Path = System.IO.Path.GetFullPath("..\\..\\..\\Buttons\\button_game.png");
+            string I_Settings_Path = System.IO.Path.GetFullPath("..\\..\\..\\Buttons\\button_settings.png");
+            string I_Statistics_Path = System.IO.Path.GetFullPath("..\\..\\..\\Buttons\\button_statistics.png");
+            string I_Exit_Path = System.IO.Path.GetFullPath("..\\..\\..\\Buttons\\button_exit.png");
+            string I_Background_Path = System.IO.Path.GetFullPath("..\\..\\..\\wallpapers__for_menu_music_pictures\\menu.jpg");
+            Uri I_Game_U_Path = new Uri(I_Game_Path, UriKind.RelativeOrAbsolute);
+            Uri I_Settings_U_Path = new Uri(I_Settings_Path, UriKind.RelativeOrAbsolute);
+            Uri I_Statistics_U_Path = new Uri(I_Statistics_Path, UriKind.RelativeOrAbsolute);
+            Uri I_Exit_U_Path = new Uri(I_Exit_Path, UriKind.RelativeOrAbsolute);
+            Uri I_Background_U_Path = new Uri(I_Background_Path, UriKind.RelativeOrAbsolute);
+            BitmapImage I_Game_Bitmap = new BitmapImage(I_Game_U_Path);
+            BitmapImage I_Settings_Bitmap = new BitmapImage(I_Settings_U_Path);
+            BitmapImage I_Statistics_Bitmap = new BitmapImage(I_Statistics_U_Path);
+            BitmapImage I_Exit_Bitmap = new BitmapImage(I_Exit_U_Path);
+            BitmapImage I_Background_Bitmap = new BitmapImage(I_Background_U_Path);
+            this.I_Exit.Source = I_Exit_Bitmap;
+            this.I_Game.Source = I_Game_Bitmap;
+            this.I_Settings.Source = I_Settings_Bitmap;
+            this.I_Statistics.Source = I_Statistics_Bitmap;
+            this.I_Background.Source = I_Background_Bitmap;
+        }
 
         // Проверяем существование базы данных, если её нет - создаём
         private void CreateAndCheckDb()
@@ -562,9 +585,10 @@ namespace ArtCritic_Desctop
 
         void Creat_Music()
         {
+            StreamReader streamReader = new StreamReader(@"..\..\..\Links.txt");
             for (int i = 0; i < 6; ++i)
             {
-                StreamReader streamReader = new StreamReader(@"..\..\..\Links.txt");
+                
                 string textFromFile = streamReader.ReadLine();
                 string[] cloud_answers;
                 cloud_answers = textFromFile.Split('|');
@@ -599,10 +623,11 @@ namespace ArtCritic_Desctop
         }
         private void Music_exit_Click(object sender, RoutedEventArgs e)
         {
+            music_Questions[iter].Stop();
             iter = 0;
             Music_question_window.Visibility = Visibility.Hidden;
             Type_of_game.Visibility = Visibility.Visible;
-            music_Questions[iter].Stop();
+            
         }
         private void exit_pic_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
@@ -708,7 +733,26 @@ namespace ArtCritic_Desctop
             Type_of_game.Visibility = Visibility.Visible;
         }
 
+        private void I_Game_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            Main_menu.Visibility = Visibility.Hidden;
+            Type_of_game.Visibility = Visibility.Visible;
+        }
 
+        private void I_Settings_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            MessageBox.Show("Пока в разработке");
+        }
+
+        private void I_Statistics_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            Played_Games_Label2.Content = statistics.PlayedGames;
+            TotalQuestionsLabe2.Content = statistics.TotalQuestions;
+            TotalCorrectAnswersLabe2.Content = statistics.TotalCorrectAnswers;
+            CurrentResultLabe2.Content = statistics.CurrentResult + "%";
+            Game_stat.Visibility = Visibility.Visible;
+            Main_menu.Visibility = Visibility.Hidden;
+        }        
     }
 
 }
