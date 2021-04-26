@@ -7,6 +7,11 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid x:Name="G1" >
+
+        <Grid x:Name="Game_stat" d:IsHidden="True" >
+              
+        </Grid>
+        
         <Grid x:Name="Main_menu" d:IsHidden="True" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition></ColumnDefinition>
@@ -24,6 +29,7 @@
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
+
             <Button x:Name="Game" Content="Игра" Grid.Column="1" Grid.Row="1" 
                     Click="Game_Click" d:IsHidden="True" ></Button>
 
@@ -39,6 +45,7 @@
             <Button x:Name="Create_Pack_Button" Content="Создать новый пак вопросов" Click="Create_Pack_Button_Click" d:IsHidden="True"></Button>
 
         </Grid>
+        
 
         <Grid x:Name="Type_of_game" d:IsHidden="True" >
 

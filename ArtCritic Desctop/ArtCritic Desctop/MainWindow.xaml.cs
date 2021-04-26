@@ -1,6 +1,8 @@
 ﻿using System.Windows;
 using System;
 using System.IO;
+using System.Data;
+using System.Data.SQLite;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -54,12 +56,26 @@ namespace ArtCritic_Desctop
         private QuestionKeeper question;
         private TextQuestion textQuestion;
         MediaPlayer[] mediaPlayer = new MediaPlayer[4];
+
+
+        private PlayerStat statistics;
+        // Для БД
+        private String dbFileName;
+        private SQLiteConnection m_dbConn;
+        private SQLiteCommand m_sqlCmd;
+
+
         public MainWindow()
         {
 
 
             InitializeComponent();
+            CreateAndCheckDb();
+
             Player.statistic = 0;
+            statistics = GetStatistics();
+
+
             string[] test_answers = new string[2];
             test_answers[0] = "Спанч Боб";
             test_answers[1] = "Спанч Боб Скрепенс";
@@ -98,6 +114,65 @@ namespace ArtCritic_Desctop
         }
 
 
+        // Проверяем существование базы данных, если её нет - создаём
+        private void CreateAndCheckDb()
+        {
+            m_dbConn = new SQLiteConnection();
+            m_sqlCmd = new SQLiteCommand();
+            dbFileName = "db.sqlite";
+
+            if (!File.Exists(dbFileName))
+                SQLiteConnection.CreateFile(dbFileName);
+
+            try
+            {
+                m_dbConn = new SQLiteConnection("Data Source=" + dbFileName + ";Version=3;");
+                m_dbConn.Open();
+                m_sqlCmd.Connection = m_dbConn;
+
+                m_sqlCmd.CommandText = "CREATE TABLE IF NOT EXISTS player_stat (id INTEGER PRIMARY KEY UNIQUE NOT NULL, played_games INTEGER NOT NULL, total_questions INTEGER NOT NULL, total_correct_answers INTEGER NOT NULL, current_result DOUBLE NOT NULL)";
+                m_sqlCmd.ExecuteNonQuery();
+
+                m_sqlCmd.CommandText = "SELECT id FROM player_stat WHERE ID = 1";
+                SQLiteDataReader reader = m_sqlCmd.ExecuteReader();
+                if (!reader.HasRows)
+                {
+                    reader.Close();
+                    m_sqlCmd.CommandText = "INSERT INTO player_stat(id, played_games, total_questions, total_correct_answers, current_result) VALUES (1, 0, 0, 0, 0.0)";
+                    m_sqlCmd.ExecuteNonQuery();
+                }
+                reader.Close();
+            }
+            catch (SQLiteException ex)
+            {
+                MessageBox.Show("Ошибка подключения к БД: " + ex.Message);
+                this.Close();
+            }
+        }
+
+        private PlayerStat GetStatistics()
+        {
+            PlayerStat result;
+            try
+            {
+                m_sqlCmd.CommandText = "SELECT * FROM player_stat WHERE ID = 1";
+                SQLiteDataReader reader = m_sqlCmd.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    reader.Read();
+                    result = new PlayerStat(reader.GetInt32(0), reader.GetInt32(1), reader.GetInt32(2), reader.GetInt32(3), reader.GetDouble(4));
+                    return result;
+                }
+            }
+            catch (SQLiteException ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+                this.Close();
+            }
+            return null;
+        }
+
+
         //Элементы main меню
 
         private void Create_Pack_Button_Click(object sender, RoutedEventArgs e)
@@ -116,8 +191,8 @@ namespace ArtCritic_Desctop
         }
         private void Satistyc_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("пока в разработке");
-
+            Main_menu.Visibility = Visibility.Hidden;
+            Game_stat.Visibility = Visibility.Visible;
         }
         private void Exit_Click(object sender, RoutedEventArgs e)
         {
