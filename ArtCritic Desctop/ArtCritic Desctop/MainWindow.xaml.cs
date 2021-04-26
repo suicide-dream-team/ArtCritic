@@ -312,21 +312,21 @@ namespace ArtCritic_Desctop
 
             Back_Ground = new BitmapImage();
             Back_Ground.BeginInit();
-            string Background_Image_Path = System.IO.Path.GetFullPath(@"..\..\..\source_2.0\guess_film.jpg");
+            string Background_Image_Path = System.IO.Path.GetFullPath(@"..\..\..\wallpapers__for_menu_music_pictures\guess_film.jpg");
             Back_Ground.UriSource = new Uri(Background_Image_Path, UriKind.RelativeOrAbsolute);
             Back_Ground.EndInit();
             Video_Background.Source = Back_Ground;
 
             Exit_Button = new BitmapImage();
             Exit_Button.BeginInit();
-            string Exit_Button_Image_Path = System.IO.Path.GetFullPath(@"..\..\..\source_2.0\exit.png");
+            string Exit_Button_Image_Path = System.IO.Path.GetFullPath(@"..\..\..\Buttons\button_exit_game.png");
             Exit_Button.UriSource = new Uri(Exit_Button_Image_Path, UriKind.RelativeOrAbsolute);
             Exit_Button.EndInit();
             Exit_For_Video.Source = Exit_Button;
 
             Check_Button = new BitmapImage();
             Check_Button.BeginInit();
-            string Check_Button_Image_Path = System.IO.Path.GetFullPath(@"..\..\..\source_2.0\check.png");
+            string Check_Button_Image_Path = System.IO.Path.GetFullPath(@"..\..\..\Buttons\button_next.png");
             Check_Button.UriSource = new Uri(Check_Button_Image_Path, UriKind.RelativeOrAbsolute);
             Check_Button.EndInit();
             Accept_Answer_Video.Source = Check_Button;
@@ -352,23 +352,21 @@ namespace ArtCritic_Desctop
 
             Back_Ground = new BitmapImage();
             Back_Ground.BeginInit();
-            string Background_Image_Path = System.IO.Path.GetFullPath(@"..\..\..\source_2.0\guess_picture.jpg");
+            string Background_Image_Path = System.IO.Path.GetFullPath(@"..\..\..\wallpapers__for_menu_music_pictures\guess_picture.jpg");
             Back_Ground.UriSource = new Uri(Background_Image_Path, UriKind.RelativeOrAbsolute);
             Back_Ground.EndInit();
             Image_Background.Source = Back_Ground;
 
-
-
             Exit_Button = new BitmapImage();
             Exit_Button.BeginInit();
-            string Exit_Button_Image_Path = System.IO.Path.GetFullPath(@"..\..\..\source_2.0\exit.png");
+            string Exit_Button_Image_Path = System.IO.Path.GetFullPath(@"..\..\..\Buttons\button_exit_game.png");
             Exit_Button.UriSource = new Uri(Exit_Button_Image_Path, UriKind.RelativeOrAbsolute);
             Exit_Button.EndInit();
             exit_pic.Source = Exit_Button;
 
             Check_Button = new BitmapImage();
             Check_Button.BeginInit();
-            string Check_Button_Image_Path = System.IO.Path.GetFullPath(@"..\..\..\source_2.0\check.png");
+            string Check_Button_Image_Path = System.IO.Path.GetFullPath(@"..\..\..\Buttons\button_next.png");
             Check_Button.UriSource = new Uri(Check_Button_Image_Path, UriKind.RelativeOrAbsolute);
             Check_Button.EndInit();
             Accept_Answer_Image.Source = Check_Button;

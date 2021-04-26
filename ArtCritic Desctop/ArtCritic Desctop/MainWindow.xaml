@@ -25,18 +25,18 @@
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
             <Button x:Name="Game" Content="Игра" Grid.Column="1" Grid.Row="1" 
-                    Click="Game_Click" d:IsHidden="True" ></Button>
+                    Click="Game_Click" d:IsHidden="True" />
 
             <Button x:Name="Settings" Content="Настройки" Grid.Column="1" Grid.Row="3"
-                    Click="Settings_Click" d:IsHidden="True"></Button>
+                    Click="Settings_Click" d:IsHidden="True"/>
 
             <Button x:Name="Statistics" Content="Статистика" Grid.Column="1" Grid.Row="5" 
-                    Click="Satistyc_Click" d:IsHidden="True"></Button>
+                    Click="Satistyc_Click" d:IsHidden="True"/>
 
             <Button x:Name="Exit" Content="Выход" Grid.Column="1" Grid.Row="7" 
-                    Click="Exit_Click" d:IsHidden="True"></Button>
+                    Click="Exit_Click" d:IsHidden="True"/>
 
-            <Button x:Name="Create_Pack_Button" Content="Создать новый пак вопросов" Click="Create_Pack_Button_Click" d:IsHidden="True"></Button>
+            <Button x:Name="Create_Pack_Button" Content="Создать новый пак вопросов" Click="Create_Pack_Button_Click" d:IsHidden="True"/>
 
         </Grid>
 
@@ -138,19 +138,13 @@
         </Grid>
 
 
-        <Grid x:Name="Video_game" ShowGridLines="True" d:IsHidden="True">
-
-            <Image x:Name="Video_Background" Stretch="Fill" Grid.RowSpan="4" />
-
-            <Image x:Name="Accept_Answer_Video" HorizontalAlignment="Left" Margin="647,8,0,0" Grid.Row="3" VerticalAlignment="Top" Height="52" Width="81" MouseLeftButtonDown="Accept_Answer_Video_Click" />
-
-            <TextBox HorizontalAlignment="Center" x:Name="Answer_Video_Texbox"  Grid.Row="3" TextWrapping="Wrap" VerticalAlignment="Top" Width="416" Height="26" Margin="0,21,0,0"/>
-
-            <Image  x:Name="Exit_For_Video" MouseLeftButtonDown="Exit_Click" HorizontalAlignment="Left" Margin="714,15,0,0" VerticalAlignment="Top" Height="45" Width="55"/>
-
-            <MediaElement x:Name="video" Margin="0,32,0,2" Grid.Row="1" />
-
-
+        <Grid x:Name="Video_game" ShowGridLines="True">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="165*"/>
+                <ColumnDefinition Width="443*"/>
+                <ColumnDefinition Width="102*"/>
+                <ColumnDefinition Width="90*"/>
+            </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
 
                 <RowDefinition Height="85*"/>
@@ -159,6 +153,17 @@
                 <RowDefinition Height="77*"/>
 
             </Grid.RowDefinitions>
+
+            <Image x:Name="Video_Background" Stretch="Fill" Grid.RowSpan="4" Grid.ColumnSpan="4" />
+
+            <Image x:Name="Accept_Answer_Video" HorizontalAlignment="Left" Margin="12,10,0,0" Grid.Row="3" VerticalAlignment="Top" Height="52" Width="81" MouseLeftButtonDown="Accept_Answer_Video_Click" Grid.Column="2" />
+
+            <TextBox HorizontalAlignment="Center" x:Name="Answer_Video_Texbox"  Grid.Row="3" TextWrapping="Wrap" VerticalAlignment="Top" Width="416" Height="26" Margin="0,13,0,0" Grid.Column="1"/>
+
+            <Image  x:Name="Exit_For_Video" MouseLeftButtonDown="Exit_Click" HorizontalAlignment="Left" Margin="9,15,0,0" VerticalAlignment="Top" Height="49" Width="65" Grid.Column="3"/>
+
+            <MediaElement x:Name="video" Margin="0,32,0,2" Grid.Row="1" Grid.ColumnSpan="4" />
+
 
 
         </Grid>
@@ -167,6 +172,12 @@
 
 
         <Grid x:Name="Image_game" ShowGridLines="True" d:IsHidden="True">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="165*"/>
+                <ColumnDefinition Width="443*"/>
+                <ColumnDefinition Width="102*"/>
+                <ColumnDefinition Width="90*"/>
+            </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
 
                 <RowDefinition Height="85*"/>
@@ -176,18 +187,15 @@
 
             </Grid.RowDefinitions>
 
-            <Image Name="Image_Background"  Stretch="Fill" Grid.RowSpan="4" />
+            <Image Name="Image_Background"  Stretch="Fill" Grid.RowSpan="4" Grid.ColumnSpan="4" />
 
+            <TextBox HorizontalAlignment="Center" Name="Answer_Image_Texbox" Grid.Row="3" TextWrapping="Wrap" VerticalAlignment="Top" Width="416" Height="26" Margin="0,13,0,0" Grid.Column="1"/>
 
+            <Image  Name="pice" Margin="0,32,0,2" Grid.Row="1" Grid.ColumnSpan="4" />
 
+            <Image MouseLeftButtonDown="exit_pic_MouseLeftButtonDown"  Name="exit_pic"  HorizontalAlignment="Left" Margin="9,15,0,0" VerticalAlignment="Top" Height="45" Width="55" Grid.Column="3"/>
 
-            <TextBox HorizontalAlignment="Center" Name="Answer_Image_Texbox" Grid.Row="3" TextWrapping="Wrap" VerticalAlignment="Top" Width="416" Height="26" Margin="0,21,0,0"/>
-            <Image Margin="0,32,0,2"  Name="pice" Grid.Row="1"  />
-
-            <Image MouseLeftButtonDown="exit_pic_MouseLeftButtonDown"  Name="exit_pic"  HorizontalAlignment="Left" Height="46" Margin="718,15,0,0" VerticalAlignment="Top"  Width="56"/>
-
-            <Image Name="Accept_Answer_Image" HorizontalAlignment="Left" Margin="647,8,0,0" Grid.Row="3" VerticalAlignment="Top" Height="52" Width="81" MouseLeftButtonDown="Accept_Answer_Image_Click"/>
-
+            <Image Name="Accept_Answer_Image" HorizontalAlignment="Left" Margin="12,10,0,0" Grid.Row="3" VerticalAlignment="Top" Height="52" Width="81" MouseLeftButtonDown="Accept_Answer_Image_Click" Grid.Column="2"/>
 
         </Grid>
 
@@ -235,8 +243,8 @@
             <Image Margin="0,17,0,17"  Name="Image_for_create_Mixed_for_Music" Grid.Row="1"/>
 
         </Grid>
-        
-        
+
+
         <Grid x:Name="Pack_create_Image" ShowGridLines="True" d:IsHidden="True">
             <Grid.RowDefinitions>
 
@@ -260,7 +268,7 @@
         </Grid>
 
 
-        <Grid x:Name="Pack_create_Music" ShowGridLines="True">
+        <Grid x:Name="Pack_create_Music" ShowGridLines="True" d:IsHidden="True">
             <Grid.RowDefinitions>
 
                 <RowDefinition Height="85*"/>
