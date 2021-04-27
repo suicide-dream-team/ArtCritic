@@ -599,59 +599,117 @@ namespace ArtCritic_Desctop.core
         /// <param name="file"></param>
         void setImageSource(string file)
         {
-            using (var stream = new FileStream(file, FileMode.Open, FileAccess.Read, FileShare.Read))
+            if (type_OF_create_game == 1)
             {
-                try
+                using (var stream = new FileStream(file, FileMode.Open, FileAccess.Read, FileShare.Read))
                 {
-                    image_for_user.Source = BitmapFrame.Create(stream, BitmapCreateOptions.None, BitmapCacheOption.OnLoad);
-                }
-                catch (System.IO.FileFormatException)
-                {
-                   // image_for_user.Source = null;
-                    stream.Close();
-                    File.Delete(file);
-                    iter++;
-                    temp_kol_vo_in_dir = kol_vo_in_dir;
-                    temp_kol_vo_in_dir--;
-                    if (temp_kol_vo_in_dir >= 1 && iter < kol_vo_in_dir)
+                    try
                     {
-                        string Path_toImage = Path.GetFullPath(Files[iter].FullName);
-                        setImageSource(Path_toImage);
+                        image_for_user.Source = BitmapFrame.Create(stream, BitmapCreateOptions.None, BitmapCacheOption.OnLoad);
                     }
-                    if (iter == kol_vo_in_dir)
+                    catch (System.IO.FileFormatException)
                     {
-                        //если мы удалили последний элемент всё на чилле тогда
+                        // image_for_user.Source = null;
+                        stream.Close();
+                        File.Delete(file);
+                        iter++;
+                        temp_kol_vo_in_dir = kol_vo_in_dir;
+                        temp_kol_vo_in_dir--;
+                        if (temp_kol_vo_in_dir >= 1 && iter < kol_vo_in_dir)
+                        {
+                            string Path_toImage = Path.GetFullPath(Files[iter].FullName);
+                            setImageSource(Path_toImage);
+                        }
+                        if (iter == kol_vo_in_dir)
+                        {
+                            //если мы удалили последний элемент всё на чилле тогда
+                        }
+                        if (temp_kol_vo_in_dir < 1)
+                        {
+                            is_create = true;
+                            MessageBox.Show("я удалил все повреждённые файлы, и папка кончилась. Check later! Пересоздай пак.");
+                        }
                     }
-                    if (temp_kol_vo_in_dir < 1)
+                    catch (System.NotSupportedException)
                     {
-                        is_create = true;
-                        MessageBox.Show("я удалил все повреждённые файлы, и папка кончилась. Check later! Пересоздай пак.");
-                    }
-                }
-                catch (System.NotSupportedException)
-                {
-                    image_for_user.Source = null;
-                    stream.Close();
-                    File.Delete(file);
-                    iter++;
-                    temp_kol_vo_in_dir = kol_vo_in_dir;
-                    temp_kol_vo_in_dir--;
-                    if (temp_kol_vo_in_dir >= 1 && iter < kol_vo_in_dir)
-                    {
-                        string Path_toImage = Path.GetFullPath(Files[iter].FullName);
-                        setImageSource(Path_toImage);
-                    }
-                    if (iter == kol_vo_in_dir)
-                    {
-                        //если мы удалили последний элемент всё на чилле тогда
-                    }
-                    if (temp_kol_vo_in_dir < 1)
-                    {
-                        is_create = true;
-                        MessageBox.Show("я удалил все повреждённые файлы, и папка кончилась. Check later! Пересоздай пак.");
+                        image_for_user.Source = null;
+                        stream.Close();
+                        File.Delete(file);
+                        iter++;
+                        temp_kol_vo_in_dir = kol_vo_in_dir;
+                        temp_kol_vo_in_dir--;
+                        if (temp_kol_vo_in_dir >= 1 && iter < kol_vo_in_dir)
+                        {
+                            string Path_toImage = Path.GetFullPath(Files[iter].FullName);
+                            setImageSource(Path_toImage);
+                        }
+                        if (iter == kol_vo_in_dir)
+                        {
+                            //если мы удалили последний элемент всё на чилле тогда
+                        }
+                        if (temp_kol_vo_in_dir < 1)
+                        {
+                            is_create = true;
+                            MessageBox.Show("я удалил все повреждённые файлы, и папка кончилась. Check later! Пересоздай пак.");
+                        }
                     }
                 }
             }
+            if (type_OF_create_game == 4) 
+            {
+                using (var stream = new FileStream(file, FileMode.Open, FileAccess.Read, FileShare.Read))
+                {
+                    try
+                    {
+                        image_for_user.Source = BitmapFrame.Create(stream, BitmapCreateOptions.None, BitmapCacheOption.OnLoad);
+                    }
+                    catch (System.IO.FileFormatException)
+                    {
+                        // image_for_user.Source = null;
+                        stream.Close();
+                        File.Delete(file);
+                        iter++;
+                        temp_kol_vo_in_dir = kol_vo_in_dir;
+                        temp_kol_vo_in_dir--;
+                        if (temp_kol_vo_in_dir >= 1 && iter < kol_vo_in_dir)
+                        {
+                            Create_Mixed_for_user();
+                        }
+                        if (iter == kol_vo_in_dir)
+                        {
+                            //если мы удалили последний элемент всё на чилле тогда
+                        }
+                        if (temp_kol_vo_in_dir < 1)
+                        {
+                            is_create = true;
+                            MessageBox.Show("я удалил все повреждённые файлы, и папка кончилась. Check later! Пересоздай пак.");
+                        }
+                    }
+                    catch (System.NotSupportedException)
+                    {
+                        image_for_user.Source = null;
+                        stream.Close();
+                        File.Delete(file);
+                        iter++;
+                        temp_kol_vo_in_dir = kol_vo_in_dir;
+                        temp_kol_vo_in_dir--;
+                        if (temp_kol_vo_in_dir >= 1 && iter < kol_vo_in_dir)
+                        {
+                            Create_Mixed_for_user();
+                        }
+                        if (iter == kol_vo_in_dir)
+                        {
+                            //если мы удалили последний элемент всё на чилле тогда
+                        }
+                        if (temp_kol_vo_in_dir < 1)
+                        {
+                            is_create = true;
+                            MessageBox.Show("я удалил все повреждённые файлы, и папка кончилась. Check later! Пересоздай пак.");
+                        }
+                    }
+                }
+            }
+
         }
         /// <summary>
         /// воспроизводит элемент из mixed на экране
