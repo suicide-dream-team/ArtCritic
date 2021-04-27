@@ -1,0 +1,10 @@
+ArtCritic.Data.Images.pic0.jpg|богатыри
+ArtCritic.Data.Images.pic1.jpg|боярыня морозова
+ArtCritic.Data.Images.pic2.jpg|девятый вал
+ArtCritic.Data.Images.pic3.jpg|демон сидящий
+ArtCritic.Data.Images.pic4.jpg|иван грозный и сын его
+ArtCritic.Data.Images.pic5.jpg|купание красного коня
+ArtCritic.Data.Images.pic6.jpg|мона лиза
+ArtCritic.Data.Images.pic7.jpg|последний день помпеи
+ArtCritic.Data.Images.pic8.jpg|троица
+ArtCritic.Data.Images.pic9.jpg|утро в сосновом лесу

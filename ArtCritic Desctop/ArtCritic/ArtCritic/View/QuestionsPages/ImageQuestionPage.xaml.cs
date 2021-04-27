@@ -41,10 +41,10 @@ namespace ArtCritic
             image_counter = 0;
 
             
-            pice.Source = ImageSource.FromResource("ArtCritic.source.Images.pic0.jpg");
+            pice.Source = ImageSource.FromResource("ArtCritic.Data.Images.pic0.jpg");
 
             var assembly = Assembly.GetExecutingAssembly();
-            var resourceName = "ArtCritic.source.Images.answers.txt";
+            var resourceName = "ArtCritic.Data.Images.answers.txt";
 
             using (Stream stream = assembly.GetManifestResourceStream(resourceName))
             using (StreamReader reader = new StreamReader(stream))

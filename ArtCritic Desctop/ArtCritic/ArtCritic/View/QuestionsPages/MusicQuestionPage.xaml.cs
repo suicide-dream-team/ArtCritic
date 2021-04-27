@@ -30,7 +30,7 @@ namespace ArtCritic
         void Creat_Music()
         {
             var assembly = Assembly.GetExecutingAssembly();
-            var resourceName = "ArtCritic.source.Music.answers.txt";
+            var resourceName = "ArtCritic.Data.Music.answers.txt";
 
             using (Stream stream = assembly.GetManifestResourceStream(resourceName))
             using (StreamReader reader = new StreamReader(stream))

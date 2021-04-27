@@ -58,7 +58,6 @@
     <PackageReference Include="Xamarin.Essentials" Version="1.5.3.2" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DeviceInfo.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="AndroidMediaPlayer.cs" />
     <Compile Include="Resources\Resource.designer.cs" />

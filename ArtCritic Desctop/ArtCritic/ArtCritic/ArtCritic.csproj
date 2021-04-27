@@ -11,101 +11,101 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="core\Packs\**" />
-    <EmbeddedResource Remove="core\Packs\**" />
-    <None Remove="core\Packs\**" />
+    <Compile Remove="Model\Packs\**" />
+    <EmbeddedResource Remove="Model\Packs\**" />
+    <None Remove="Model\Packs\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="source\Images\answers.txt" />
-    <None Remove="source\Images\pic0.jpg" />
-    <None Remove="source\Images\pic1.jpg" />
-    <None Remove="source\Images\pic2.jpg" />
-    <None Remove="source\Images\pic3.jpg" />
-    <None Remove="source\Images\pic4.jpg" />
-    <None Remove="source\Images\pic5.jpg" />
-    <None Remove="source\Images\pic6.jpg" />
-    <None Remove="source\Images\pic7.jpg" />
-    <None Remove="source\Images\pic8.jpg" />
-    <None Remove="source\Images\pic9.jpg" />
-    <None Remove="source\Music\answers.txt" />
-    <None Remove="source\Music\Dvakusochekakolbaski.mp3" />
-    <None Remove="source\Music\Eksponat.mp3" />
-    <None Remove="source\Music\Imena1.mp3" />
-    <None Remove="source\Music\Imena2.mp3" />
-    <None Remove="source\Music\Imena3.mp3" />
-    <None Remove="source\Music\Imena4.mp3" />
-    <None Remove="source\Music\Kukushka.mp3" />
-    <None Remove="source\Music\Moeserdce.mp3" />
-    <None Remove="source\Music\Multipulti1.mp3" />
-    <None Remove="source\Music\Multipulti2.mp3" />
-    <None Remove="source\Music\Multipulti3.mp3" />
-    <None Remove="source\Music\Multipulti4.mp3" />
-    <None Remove="source\Music\Muzikakino1.mp3" />
-    <None Remove="source\Music\Muzikakino2.mp3" />
-    <None Remove="source\Music\Muzikakino3.mp3" />
-    <None Remove="source\Music\Muzikakino4.mp3" />
-    <None Remove="source\Music\Pesnyaodruge.mp3" />
-    <None Remove="source\Music\Rayonikvartali.mp3" />
-    <None Remove="source\Music\Vitenadoviyti.mp3" />
-    <None Remove="source\Music\Vmirezhivotnih1.mp3" />
-    <None Remove="source\Music\Vmirezhivotnih2.mp3" />
-    <None Remove="source\Music\Vmirezhivotnih3.mp3" />
-    <None Remove="source\Music\Vmirezhivotnih4.mp3" />
-    <None Remove="source\Music\Voennayakafedra1.mp3" />
-    <None Remove="source\Music\Voennayakafedra2.mp3" />
-    <None Remove="source\Music\Voennayakafedra3.mp3" />
-    <None Remove="source\Music\Voennayakafedra4.mp3" />
-    <None Remove="source\Music\Vremenagoda1.mp3" />
-    <None Remove="source\Music\Vremenagoda2.mp3" />
-    <None Remove="source\Music\Vremenagoda3.mp3" />
-    <None Remove="source\Music\Vremenagoda4.mp3" />
+    <None Remove="Data\Images\answers.txt" />
+    <None Remove="Data\Images\pic0.jpg" />
+    <None Remove="Data\Images\pic1.jpg" />
+    <None Remove="Data\Images\pic2.jpg" />
+    <None Remove="Data\Images\pic3.jpg" />
+    <None Remove="Data\Images\pic4.jpg" />
+    <None Remove="Data\Images\pic5.jpg" />
+    <None Remove="Data\Images\pic6.jpg" />
+    <None Remove="Data\Images\pic7.jpg" />
+    <None Remove="Data\Images\pic8.jpg" />
+    <None Remove="Data\Images\pic9.jpg" />
+    <None Remove="Data\Music\answers.txt" />
+    <None Remove="Data\Music\Dvakusochekakolbaski.mp3" />
+    <None Remove="Data\Music\Eksponat.mp3" />
+    <None Remove="Data\Music\Imena1.mp3" />
+    <None Remove="Data\Music\Imena2.mp3" />
+    <None Remove="Data\Music\Imena3.mp3" />
+    <None Remove="Data\Music\Imena4.mp3" />
+    <None Remove="Data\Music\Kukushka.mp3" />
+    <None Remove="Data\Music\Moeserdce.mp3" />
+    <None Remove="Data\Music\Multipulti1.mp3" />
+    <None Remove="Data\Music\Multipulti2.mp3" />
+    <None Remove="Data\Music\Multipulti3.mp3" />
+    <None Remove="Data\Music\Multipulti4.mp3" />
+    <None Remove="Data\Music\Muzikakino1.mp3" />
+    <None Remove="Data\Music\Muzikakino2.mp3" />
+    <None Remove="Data\Music\Muzikakino3.mp3" />
+    <None Remove="Data\Music\Muzikakino4.mp3" />
+    <None Remove="Data\Music\Pesnyaodruge.mp3" />
+    <None Remove="Data\Music\Rayonikvartali.mp3" />
+    <None Remove="Data\Music\Vitenadoviyti.mp3" />
+    <None Remove="Data\Music\Vmirezhivotnih1.mp3" />
+    <None Remove="Data\Music\Vmirezhivotnih2.mp3" />
+    <None Remove="Data\Music\Vmirezhivotnih3.mp3" />
+    <None Remove="Data\Music\Vmirezhivotnih4.mp3" />
+    <None Remove="Data\Music\Voennayakafedra1.mp3" />
+    <None Remove="Data\Music\Voennayakafedra2.mp3" />
+    <None Remove="Data\Music\Voennayakafedra3.mp3" />
+    <None Remove="Data\Music\Voennayakafedra4.mp3" />
+    <None Remove="Data\Music\Vremenagoda1.mp3" />
+    <None Remove="Data\Music\Vremenagoda2.mp3" />
+    <None Remove="Data\Music\Vremenagoda3.mp3" />
+    <None Remove="Data\Music\Vremenagoda4.mp3" />
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="source\Images\answers.txt" />
-    <EmbeddedResource Include="source\Images\pic0.jpg" />
-    <EmbeddedResource Include="source\Images\pic1.jpg" />
-    <EmbeddedResource Include="source\Images\pic2.jpg" />
-    <EmbeddedResource Include="source\Images\pic3.jpg" />
-    <EmbeddedResource Include="source\Images\pic4.jpg" />
-    <EmbeddedResource Include="source\Images\pic5.jpg" />
-    <EmbeddedResource Include="source\Images\pic6.jpg" />
-    <EmbeddedResource Include="source\Images\pic7.jpg" />
-    <EmbeddedResource Include="source\Images\pic8.jpg" />
-    <EmbeddedResource Include="source\Images\pic9.jpg" />
-    <EmbeddedResource Include="source\Music\answers.txt" />
-    <EmbeddedResource Include="source\Music\Dvakusochekakolbaski.mp3" />
-    <EmbeddedResource Include="source\Music\Eksponat.mp3" />
-    <EmbeddedResource Include="source\Music\Imena1.mp3" />
-    <EmbeddedResource Include="source\Music\Imena2.mp3" />
-    <EmbeddedResource Include="source\Music\Imena3.mp3" />
-    <EmbeddedResource Include="source\Music\Imena4.mp3" />
-    <EmbeddedResource Include="source\Music\Kukushka.mp3" />
-    <EmbeddedResource Include="source\Music\Moeserdce.mp3" />
-    <EmbeddedResource Include="source\Music\Multipulti1.mp3" />
-    <EmbeddedResource Include="source\Music\Multipulti2.mp3" />
-    <EmbeddedResource Include="source\Music\Multipulti3.mp3" />
-    <EmbeddedResource Include="source\Music\Multipulti4.mp3" />
-    <EmbeddedResource Include="source\Music\Muzikakino1.mp3" />
-    <EmbeddedResource Include="source\Music\Muzikakino2.mp3" />
-    <EmbeddedResource Include="source\Music\Muzikakino3.mp3" />
-    <EmbeddedResource Include="source\Music\Muzikakino4.mp3" />
-    <EmbeddedResource Include="source\Music\Pesnyaodruge.mp3" />
-    <EmbeddedResource Include="source\Music\Rayonikvartali.mp3" />
-    <EmbeddedResource Include="source\Music\Vitenadoviyti.mp3" />
-    <EmbeddedResource Include="source\Music\Vmirezhivotnih1.mp3" />
-    <EmbeddedResource Include="source\Music\Vmirezhivotnih2.mp3" />
-    <EmbeddedResource Include="source\Music\Vmirezhivotnih3.mp3" />
-    <EmbeddedResource Include="source\Music\Vmirezhivotnih4.mp3" />
-    <EmbeddedResource Include="source\Music\Voennayakafedra1.mp3" />
-    <EmbeddedResource Include="source\Music\Voennayakafedra2.mp3" />
-    <EmbeddedResource Include="source\Music\Voennayakafedra3.mp3" />
-    <EmbeddedResource Include="source\Music\Voennayakafedra4.mp3" />
-    <EmbeddedResource Include="source\Music\Vremenagoda1.mp3" />
-    <EmbeddedResource Include="source\Music\Vremenagoda2.mp3" />
-    <EmbeddedResource Include="source\Music\Vremenagoda3.mp3" />
-    <EmbeddedResource Include="source\Music\Vremenagoda4.mp3" />
+    <EmbeddedResource Include="Data\Images\answers.txt" />
+    <EmbeddedResource Include="Data\Images\pic0.jpg" />
+    <EmbeddedResource Include="Data\Images\pic1.jpg" />
+    <EmbeddedResource Include="Data\Images\pic2.jpg" />
+    <EmbeddedResource Include="Data\Images\pic3.jpg" />
+    <EmbeddedResource Include="Data\Images\pic4.jpg" />
+    <EmbeddedResource Include="Data\Images\pic5.jpg" />
+    <EmbeddedResource Include="Data\Images\pic6.jpg" />
+    <EmbeddedResource Include="Data\Images\pic7.jpg" />
+    <EmbeddedResource Include="Data\Images\pic8.jpg" />
+    <EmbeddedResource Include="Data\Images\pic9.jpg" />
+    <EmbeddedResource Include="Data\Music\answers.txt" />
+    <EmbeddedResource Include="Data\Music\Dvakusochekakolbaski.mp3" />
+    <EmbeddedResource Include="Data\Music\Eksponat.mp3" />
+    <EmbeddedResource Include="Data\Music\Imena1.mp3" />
+    <EmbeddedResource Include="Data\Music\Imena2.mp3" />
+    <EmbeddedResource Include="Data\Music\Imena3.mp3" />
+    <EmbeddedResource Include="Data\Music\Imena4.mp3" />
+    <EmbeddedResource Include="Data\Music\Kukushka.mp3" />
+    <EmbeddedResource Include="Data\Music\Moeserdce.mp3" />
+    <EmbeddedResource Include="Data\Music\Multipulti1.mp3" />
+    <EmbeddedResource Include="Data\Music\Multipulti2.mp3" />
+    <EmbeddedResource Include="Data\Music\Multipulti3.mp3" />
+    <EmbeddedResource Include="Data\Music\Multipulti4.mp3" />
+    <EmbeddedResource Include="Data\Music\Muzikakino1.mp3" />
+    <EmbeddedResource Include="Data\Music\Muzikakino2.mp3" />
+    <EmbeddedResource Include="Data\Music\Muzikakino3.mp3" />
+    <EmbeddedResource Include="Data\Music\Muzikakino4.mp3" />
+    <EmbeddedResource Include="Data\Music\Pesnyaodruge.mp3" />
+    <EmbeddedResource Include="Data\Music\Rayonikvartali.mp3" />
+    <EmbeddedResource Include="Data\Music\Vitenadoviyti.mp3" />
+    <EmbeddedResource Include="Data\Music\Vmirezhivotnih1.mp3" />
+    <EmbeddedResource Include="Data\Music\Vmirezhivotnih2.mp3" />
+    <EmbeddedResource Include="Data\Music\Vmirezhivotnih3.mp3" />
+    <EmbeddedResource Include="Data\Music\Vmirezhivotnih4.mp3" />
+    <EmbeddedResource Include="Data\Music\Voennayakafedra1.mp3" />
+    <EmbeddedResource Include="Data\Music\Voennayakafedra2.mp3" />
+    <EmbeddedResource Include="Data\Music\Voennayakafedra3.mp3" />
+    <EmbeddedResource Include="Data\Music\Voennayakafedra4.mp3" />
+    <EmbeddedResource Include="Data\Music\Vremenagoda1.mp3" />
+    <EmbeddedResource Include="Data\Music\Vremenagoda2.mp3" />
+    <EmbeddedResource Include="Data\Music\Vremenagoda3.mp3" />
+    <EmbeddedResource Include="Data\Music\Vremenagoda4.mp3" />
   </ItemGroup>
 
   <ItemGroup>
@@ -114,13 +114,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="ChooseGameModePage.xaml">
+    <EmbeddedResource Update="View\NavigationPages\ChooseGameModePage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="ImageQuestionPage.xaml">
+    <EmbeddedResource Update="View\QuestionsPages\ImageQuestionPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="MusicQuestionPage.xaml">
+    <EmbeddedResource Update="View\QuestionsPages\MusicQuestionPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>
