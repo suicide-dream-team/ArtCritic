@@ -116,19 +116,16 @@ namespace ArtCritic_Desctop
             string I_Game_Path = System.IO.Path.GetFullPath("..\\..\\..\\Buttons\\button_game.png");
             string I_Settings_Path = System.IO.Path.GetFullPath("..\\..\\..\\Buttons\\button_settings.png");
             string I_Statistics_Path = System.IO.Path.GetFullPath("..\\..\\..\\Buttons\\button_statistics.png");
-            string I_Creat_Pack_Path = System.IO.Path.GetFullPath("..\\..\\..\\Buttons\\button_download.png");
             string I_Exit_Path = System.IO.Path.GetFullPath("..\\..\\..\\Buttons\\button_exit.png");
             string I_Background_Path = System.IO.Path.GetFullPath("..\\..\\..\\wallpapers__for_menu_music_pictures\\menu.jpg");
             Uri I_Game_U_Path = new Uri(I_Game_Path, UriKind.RelativeOrAbsolute);
             Uri I_Settings_U_Path = new Uri(I_Settings_Path, UriKind.RelativeOrAbsolute);
             Uri I_Statistics_U_Path = new Uri(I_Statistics_Path, UriKind.RelativeOrAbsolute);
-            Uri I_Creat_Pack_U_Path = new Uri(I_Creat_Pack_Path, UriKind.RelativeOrAbsolute);
             Uri I_Exit_U_Path = new Uri(I_Exit_Path, UriKind.RelativeOrAbsolute);
             Uri I_Background_U_Path = new Uri(I_Background_Path, UriKind.RelativeOrAbsolute);
             BitmapImage I_Game_Bitmap = new BitmapImage(I_Game_U_Path);
             BitmapImage I_Settings_Bitmap = new BitmapImage(I_Settings_U_Path);
             BitmapImage I_Statistics_Bitmap = new BitmapImage(I_Statistics_U_Path);
-            BitmapImage I_Creat_Pack_Bitmap = new BitmapImage(I_Creat_Pack_U_Path);
             BitmapImage I_Exit_Bitmap = new BitmapImage(I_Exit_U_Path);
             BitmapImage I_Background_Bitmap = new BitmapImage(I_Background_U_Path);
             this.I_Exit.Source = I_Exit_Bitmap;
@@ -136,7 +133,6 @@ namespace ArtCritic_Desctop
             this.I_Settings.Source = I_Settings_Bitmap;
             this.I_Statistics.Source = I_Statistics_Bitmap;
             this.I_Background.Source = I_Background_Bitmap;
-            this.I_Create_Pack_Button.Source = I_Creat_Pack_Bitmap;
         }
 
         // Проверяем существование базы данных, если её нет - создаём
@@ -599,24 +595,8 @@ namespace ArtCritic_Desctop
                 string[] ans = new string[1];
                 ans[0] = cloud_answers[1];
                 music_Questions.Add(new Music_question("угадайте название песни", ans, new Uri(cloud_answers[0], UriKind.Relative)));
-                music_Questions[i].Stop();
             }
-            string I_Music_Replay_Path = System.IO.Path.GetFullPath("..\\..\\..\\Buttons\\button_repeat.png");
-            string I_Music_Accept_Path = System.IO.Path.GetFullPath("..\\..\\..\\Buttons\\button_next.png");
-            string I_Music_Exit_Path = System.IO.Path.GetFullPath("..\\..\\..\\Buttons\\button_exit_game.png");
-            string I_Background_Path = System.IO.Path.GetFullPath("..\\..\\..\\wallpapers__for_menu_music_pictures\\guess_music.jpg");
-            Uri I_Music_Replay_U_Path = new Uri(I_Music_Replay_Path, UriKind.RelativeOrAbsolute);
-            Uri I_Music_Accept_U_Path = new Uri(I_Music_Accept_Path, UriKind.RelativeOrAbsolute);
-            Uri I_Music_Exit_U_Path = new Uri(I_Music_Exit_Path, UriKind.RelativeOrAbsolute);
-            Uri I_Background_U_Path = new Uri(I_Background_Path, UriKind.RelativeOrAbsolute);
-            BitmapImage I_Music_Replay_Bitmap = new BitmapImage(I_Music_Replay_U_Path);
-            BitmapImage I_Music_Accept_Bitmap = new BitmapImage(I_Music_Accept_U_Path);
-            BitmapImage I_Music_Exit_Bitmap = new BitmapImage(I_Music_Exit_U_Path);
-            BitmapImage I_Background_Bitmap = new BitmapImage(I_Background_U_Path);
-            this.I_Music_Exit.Source = I_Music_Exit_Bitmap;
-            this.I_Music_accept.Source = I_Music_Accept_Bitmap;
-            this.I_Music_replay.Source = I_Music_Replay_Bitmap;           
-            this.I_Music_background.Source = I_Background_Bitmap;            
+
         }
         private void Music_accept_Click(object sender, RoutedEventArgs e)
         {
@@ -674,16 +654,10 @@ namespace ArtCritic_Desctop
         }
         private void Music_exit_image_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            music_Questions[iter].Stop();
             iter = 0;
             Music_question_window.Visibility = Visibility.Hidden;
             Type_of_game.Visibility = Visibility.Visible;
-
-        }
-        private void I_Music_replay_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
             music_Questions[iter].Stop();
-            music_Questions[iter].Play();
         }
 
         //Конец элементов для режима игры Музыка
@@ -736,9 +710,6 @@ namespace ArtCritic_Desctop
             }
         }
 
-        
- 
-
         //Конец элементов для режима игры Картинка
         
         //Какая-то вещь известного назначения
@@ -781,15 +752,7 @@ namespace ArtCritic_Desctop
             CurrentResultLabe2.Content = statistics.CurrentResult + "%";
             Game_stat.Visibility = Visibility.Visible;
             Main_menu.Visibility = Visibility.Hidden;
-        }
-
-        private void I_Create_Pack_Button_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            Main_menu.Visibility = Visibility.Hidden;
-            Pack_create.Visibility = Visibility.Visible;
-        }
-
-       
+        }        
     }
 
 }

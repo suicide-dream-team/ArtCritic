@@ -8,7 +8,7 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid x:Name="G1" >
 
-        <Grid x:Name="Main_menu" d:IsHidden="True" >
+        <Grid x:Name="Main_menu" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
@@ -35,21 +35,20 @@
                     Click="Settings_Click"/>
 
             <Image x:Name="I_Settings" Grid.Column="1" Grid.Row="4" MouseLeftButtonDown="I_Settings_MouseLeftButtonDown"></Image>
-
+            
             <Button x:Name="Statistics" Content="Статистика" Grid.Column="1" Grid.Row="5" Visibility="Hidden"
                     Click="Satistyc_Click"/>
 
             <Image x:Name="I_Statistics" Grid.Column="1" Grid.Row="5" MouseLeftButtonDown="I_Statistics_MouseLeftButtonDown"></Image>
-
-            <Button x:Name="Exit" Content="Выход" Grid.Column="1" Grid.Row="6" Visibility="Hidden"
+           
+            <Button x:Name="Exit" Content="Выход" Grid.Column="1" Grid.Row="7" Visibility="Hidden"
                     Click="Exit_Click"/>
 
             <Image x:Name="I_Exit" Grid.Column="1" Grid.Row="6" MouseLeftButtonDown="exit_pic_MouseLeftButtonDown"></Image>
+            
+            <Button x:Name="Create_Pack_Button" Content="Создать новый пак вопросов" Click="Create_Pack_Button_Click"/>
 
-            <Button x:Name="Create_Pack_Button" Content="Создать новый пак вопросов" Click="Create_Pack_Button_Click" Visibility="Hidden"/>
-
-            <Image x:Name="I_Create_Pack_Button" Grid.Column="0" Grid.Row="7" Grid.RowSpan="2" MouseLeftButtonDown="I_Create_Pack_Button_MouseLeftButtonDown"></Image>
-
+           
         </Grid>
 
         <Grid x:Name="Game_stat" d:IsHidden="True" >
@@ -140,7 +139,7 @@
             <Button x:Name="Accept" Content="Ввести" Grid.Column="1" Grid.Row="7" Click="Accept_Click"></Button>
         </Grid>
 
-        <Grid x:Name="Music_question_window">
+        <Grid x:Name="Music_question_window" d:IsHidden="True">
             <Grid.RowDefinitions>
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
@@ -160,27 +159,24 @@
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
 
-            <Image x:Name="I_Music_background" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="6" Grid.RowSpan="7" Stretch="Fill"></Image>
 
-            <TextBlock x:Name="Music_question_xaml" Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="4" />
+            <TextBlock x:Name="Music_question_xaml" Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="3" d:IsHidden="True" ></TextBlock>
 
-            <TextBox x:Name="Music_answer" Grid.Row="5" Grid.Column="2" Grid.ColumnSpan="2"/>
+            <TextBox x:Name="Music_answer" Grid.Row="5" Grid.Column="2" Grid.ColumnSpan="2" d:IsHidden="True"></TextBox>
 
-            <Button x:Name="Music_Accept_button" Grid.Row="5" Grid.Column="5" Click="Music_accept_Click" Visibility="Hidden"></Button>
+            <Button x:Name="Music_Accept_button" Content="Ввести" Grid.Row="5" Grid.Column="5" Click="Music_accept_Click" d:IsHidden="True"></Button>
 
-            <Image x:Name="I_Music_accept" Grid.Row="5" Grid.Column="4" MouseLeftButtonDown="Music_accept_image_MouseLeftButtonDown"/>
-            
-            <Button x:Name="Music_exit_button" Content="Выйти" Grid.Row="0" Grid.Column="5" Click="Music_exit_Click" Visibility="Hidden"/>
+            <Image x:Name="Music_exit_image" Source="\source_2.0\exit.png" Grid.Row="0" Grid.Column="5" Visibility="Hidden" MouseLeftButtonDown="Music_exit_image_MouseLeftButtonDown" d:IsHidden="True"></Image>
 
-            <Image x:Name="I_Music_Exit" Grid.Row="0" Grid.Column="5"  MouseLeftButtonDown="Music_exit_image_MouseLeftButtonDown"/>
+            <Button x:Name="Music_exit_button" Content="Выйти" Grid.Row="0" Grid.Column="5" Click="Music_exit_Click" d:IsHidden="True"></Button>
 
-            <Button x:Name="Music_replay_music" Content="повторить" Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="1" Grid.RowSpan="2" Click="Music_replay_music_Click" Visibility="Hidden"/>
+            <Image x:Name="Music_accept_image" Grid.Row="5" Grid.Column="5" Source="\source_2.0\check.png" Visibility="Hidden" MouseLeftButtonDown="Music_accept_image_MouseLeftButtonDown" d:IsHidden="True"></Image>
 
-            <Image x:Name="I_Music_replay" Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="2" Grid.RowSpan="2" MouseLeftButtonDown="I_Music_replay_MouseLeftButtonDown"></Image>
+            <Button x:Name="Music_replay_music" Content="повторить" Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="1" Grid.RowSpan="2" Click="Music_replay_music_Click" d:IsHidden="True"></Button>
+
 
         </Grid>
 
-        
 
         <Grid x:Name="Video_game" ShowGridLines="True" d:IsHidden="True">
             <Grid.ColumnDefinitions>
@@ -262,8 +258,7 @@
             <Button Content="Видео" Name="Create_Video_Pack" HorizontalAlignment="Left" Margin="600,90,0,0" Grid.Row="1" VerticalAlignment="Top" Height="52" Width="81" Click="Create_Video_Pack_Click" d:IsHidden="True" />
         </Grid>
 
-
-        <Grid x:Name="Pack_create_Mixed" ShowGridLines="True" Height="434" Width="800" d:IsHidden="True">
+        <Grid x:Name="Pack_create_Mixed" ShowGridLines="True" d:IsHidden="True">
             <Grid.RowDefinitions>
 
                 <RowDefinition Height="85*"/>
@@ -273,22 +268,23 @@
 
             </Grid.RowDefinitions>
 
-            <TextBlock HorizontalAlignment="Center" x:Name="Create_Question_Mixed_TBlock" Grid.Row="2"  TextWrapping="Wrap" VerticalAlignment="Center" Width="416" Height="26"/>
+            <TextBlock HorizontalAlignment="Center" Name="Create_Question_Mixed_TBlock" Grid.Row="2"  TextWrapping="Wrap" VerticalAlignment="Center" Width="416" Height="26"/>
 
-            <Button Content="Ввести" x:Name="Accept_Create_Answer_Mixed" HorizontalAlignment="Left" Margin="647,8,0,0" Grid.Row="3" VerticalAlignment="Top" Height="52" Width="81" Click="Accept_Create_Answer_Mixed_Click"/>
+            <Button Content="Ввести" Name="Accept_Create_Answer_Mixed" HorizontalAlignment="Left" Margin="647,8,0,0" Grid.Row="3" VerticalAlignment="Top" Height="52" Width="81" Click="Accept_Create_Answer_Mixed_Click"/>
 
-            <Button Content="Принять" x:Name="Accept_Create_Name_Mixed_Pack" HorizontalAlignment="Left" Margin="647,8,0,0" Grid.Row="3" VerticalAlignment="Top" Height="52" Width="81" Click="Accept_Create_Name_Mixed_Pack_Click" />
+            <Button Content="Принять" Name="Accept_Create_Name_Mixed_Pack" HorizontalAlignment="Left" Margin="647,8,0,0" Grid.Row="3" VerticalAlignment="Top" Height="52" Width="81" Click="Accept_Create_Name_Mixed_Pack_Click" />
 
-            <TextBox HorizontalAlignment="Center" x:Name="Creat_Answer_Mixed_Texbox" Grid.Row="3" TextWrapping="Wrap" VerticalAlignment="Top" Width="416" Height="50" Margin="0,10,0,0"/>
+            <TextBox HorizontalAlignment="Center" Name="Creat_Answer_Mixed_Texbox" Grid.Row="3" TextWrapping="Wrap" VerticalAlignment="Top" Width="416" Height="50" Margin="0,10,0,0"/>
 
-            <Image Margin="0,17,0,17"  x:Name="Image_for_create_Mixed" Grid.Row="1" />
+            <Image Margin="0,17,0,17"  Name="Image_for_create_Mixed" Grid.Row="1" />
 
-            <MediaElement Margin="0,17,0,17"  x:Name="Video_for_create_Mixed" Grid.Row="1" />
+            <MediaElement Margin="0,17,0,17"  Name="Video_for_create_Mixed" Grid.Row="1" />
 
-            <Image Margin="0,17,0,17"  x:Name="Image_for_create_Mixed_for_Music" Grid.Row="1"/>
+            <Image Margin="0,17,0,17"  Name="Image_for_create_Mixed_for_Music" Grid.Row="1"/>
 
         </Grid>
-        
+
+
         <Grid x:Name="Pack_create_Image" ShowGridLines="True" d:IsHidden="True">
             <Grid.RowDefinitions>
 
