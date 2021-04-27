@@ -3,9 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ArtCritic.ChooseGameModePage">
     <StackLayout>
-        <Button x:Name="Video_question" Text="Video question"  Clicked="Video_question_Click" />
-        <Button x:Name="Music_question" Text="Music question"  Clicked="Music_question_Click"/>
-        <Button x:Name="Image_question" Text="Image question"  Clicked="Image_question_Click"/>
-        <Button x:Name="Mixed_questions" Text="Mixed questions"  Clicked="Mixed_questions_Click"/>
+        <Button x:Name="Video_question" Text="Video question" FontSize="36" Clicked="Video_question_Click" />
+        <Button x:Name="Music_question" Text="Music question" FontSize="36"  Clicked="Music_question_Click"/>
+        <Button x:Name="Image_question" Text="Image question" FontSize="36" Clicked="Image_question_Click"/>
+        <Button x:Name="Mixed_questions" Text="Mixed questions" FontSize="36"  Clicked="Mixed_questions_Click"/>
     </StackLayout>
 </ContentPage>
