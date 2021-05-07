@@ -77,6 +77,9 @@ namespace ArtCritic_Desctop
             test_answers[0] = "Спанч Боб";
             test_answers[1] = "Спанч Боб Скрепенс";
             question = new QuestionKeeper("кто проживает на дне океана?", test_answers);
+            Reg_Window.Visibility = Visibility.Hidden;
+
+            this.Main_menu.Visibility = Visibility.Hidden;
             //окно выбора типа игры
             this.Game_stat.Visibility = Visibility.Hidden;
             this.Type_of_game.Visibility = Visibility.Hidden;
@@ -789,7 +792,101 @@ namespace ArtCritic_Desctop
             Pack_create.Visibility = Visibility.Visible;
         }
 
-       
+
+        private void Button_Login_Click(object sender, RoutedEventArgs e)
+        {
+            if (Login_Textbox.Text.Length > 0) // проверяем введён ли логин     
+            {
+                
+                if (Password_Passbox.Password.Length > 0) // проверяем введён ли пароль         
+                {
+                    //Не совсем понял как это работает
+                    /*
+                    // ищем в базе данных пользователя с такими данными         
+                    DataTable dt_user = mainWindow.Select("SELECT * FROM [dbo].[users] WHERE [login] = '" + textBox_login.Text + "' AND [password] = '" + password.Password + "'");
+                    if (dt_user.Rows.Count > 0) // если такая запись существует       
+                    {
+                        MessageBox.Show("Пользователь авторизовался"); // говорим, что авторизовался 
+                        Login_Window.Visibility=Visibility.Hidden;    
+                        Main_menu.Visibility = Visibility.Visible;
+                    }
+                    else MessageBox.Show("Пользователя не найден"); // выводим ошибку  
+                    */
+                    Login_Window.Visibility = Visibility.Hidden;
+                    Main_menu.Visibility = Visibility.Visible;
+                }
+                else MessageBox.Show("Введите пароль"); // выводим ошибку    
+            }
+            else MessageBox.Show("Введите логин"); // выводим ошибку 
+        }
+
+        private void Button_Reg_Registration_Click(object sender, RoutedEventArgs e)
+        {
+            if (Textbox_Login_Reg.Text.Length > 0) // проверяем логин
+            {
+                if (Password_Reg1.Password.Length > 0) // проверяем пароль
+	            {
+                    if (Password_Reg2.Password.Length > 0) // проверяем второй пароль
+		            {
+                        if (Password_Reg1.Password.Length >= 6)
+                        {
+                            bool en = true; // английская раскладка
+                            bool symbol = false; // символ
+                            bool number = false; // цифра
+
+                            for (int i = 0; i < Password_Reg1.Password.Length; i++) // перебираем символы
+                            {
+                            if (Password_Reg1.Password[i] >= 'А' && Password_Reg1.Password[i] <= 'Я') en = false; // если русская раскладка
+                            if (Password_Reg1.Password[i] >= '0' && Password_Reg1.Password[i] <= '9') number = true; // если цифры
+                            if (Password_Reg1.Password[i] == '_' || Password_Reg1.Password[i] == '-' || Password_Reg1.Password[i] == '!') symbol = true; // если символ
+                            }
+
+                        if (!en)
+                            MessageBox.Show("Доступна только английская раскладка"); // выводим сообщение
+                        else if (!symbol)
+                            MessageBox.Show("Добавьте один из следующих символов: _ - !"); // выводим сообщение
+                        else if (!number)
+                            MessageBox.Show("Добавьте хотя бы одну цифру"); // выводим сообщение
+                        if (en && symbol && number) // проверяем соответствие
+	                    {
+                                if (Password_Reg1.Password == Password_Reg2.Password) // проверка на совпадение паролей
+                                {
+                                    // Вот тут записывать в бд нужно
+                                    MessageBox.Show("Пользователь зарегистрирован");
+                                    Password_Reg1.Clear();
+                                    Password_Reg2.Clear();
+                                    Textbox_Login_Reg.Clear();
+                                    Reg_Window.Visibility = Visibility.Hidden;
+                                    Login_Window.Visibility = Visibility.Visible;
+                                }
+                                else MessageBox.Show("Пароли не совподают");
+                            }
+                        }
+                        else MessageBox.Show("пароль слишком короткий, минимум 6 символов");
+                    }
+                    else MessageBox.Show("Повторите пароль");
+                }
+                else MessageBox.Show("Укажите пароль");
+            }
+            else MessageBox.Show("Укажите логин");
+        }
+
+        private void Cancel_Click(object sender, RoutedEventArgs e)
+        {
+            Login_Textbox.Clear();
+            Password_Passbox.Clear();
+            Reg_Window.Visibility = Visibility.Hidden;
+            Login_Window.Visibility = Visibility.Visible;
+        }
+
+        private void Button_Reg_Login_Click(object sender, RoutedEventArgs e)
+        {
+            Password_Reg1.Clear();
+            Password_Reg2.Clear();
+            Textbox_Login_Reg.Clear();
+            Login_Window.Visibility = Visibility.Hidden;
+            Reg_Window.Visibility = Visibility.Visible;
+        }
     }
 
 }
