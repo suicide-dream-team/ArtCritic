@@ -5,34 +5,21 @@ using System.Windows.Controls;
 
 namespace ArtCritic_Desctop
 {
-    public class VideoQuestion
+    public class VideoQuestion : TextQuestion
     {
 
         public Uri Path_To_Video;
 
         //Ответ на картинку
-        public string Answer_for_video { get; set; }
+        //public string Answer_for_video { get; set; }
+        //унаследовал от текстового
 
-
-        public VideoQuestion(string PathBitmapVideoSource, string AnswerSource)
+        public VideoQuestion(string PathBitmapVideoSource, string AnswerSource):base("", AnswerSource)
         {
             this.Path_To_Video = new Uri(PathBitmapVideoSource, UriKind.RelativeOrAbsolute);
-            this.Answer_for_video = AnswerSource;
-
         }
 
-
-
-
-
-
-
-
     }
-
-
-    // Uri lol = new Uri("C:/Users/Ярослав/source/repos/ArtCritic/ArtCritic Desctop/ArtCritic Desctop/core/Videos/Video.mp4");
-
 
 }
 
