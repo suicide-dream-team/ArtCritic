@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using ArtCritic.View.QuestionsPages;
 
 namespace ArtCritic
 {
@@ -18,7 +19,7 @@ namespace ArtCritic
         }
         async private void Video_question_Click(object sender, EventArgs e)
         {
-            await DisplayAlert("Не работает", "Пока в разработке", "OK");
+            await Navigation.PushAsync(new VideoQuestionPage());
         }
 
 
