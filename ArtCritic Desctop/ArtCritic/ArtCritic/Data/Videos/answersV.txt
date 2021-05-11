@@ -1,0 +1,6 @@
+ms-appx:///video0.mp4|1+1
+ms-appx:///video1.mp4|аватар
+ms-appx:///video2.mp4|кавказская пленница
+ms-appx:///video3.mp4|мстители
+ms-appx:///video4.mp4|один дома
+ms-appx:///video5.mp4|пираты карибского моря

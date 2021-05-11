@@ -4,13 +4,18 @@ using System.Text;
 
 namespace ArtCritic_Desctop
 {
-    class TextQuestion
+    public class TextQuestion
     {
         public readonly string Text;//публично временно, на время тестов
-        protected string[] Answers;//публично временно, на время тестов
+        public string[] Answers;//публично временно, на время тестов
         public TextQuestion(string text, string[] answers) {
             Text = text;
             Answers = answers;
+        }
+        public TextQuestion(string text, string answer) {
+            Answers = new string[1];
+            Answers[0] = answer;
+            Text = text;
         }
         public bool Check_Answer(string ans) {
             //foreach(string ch_ans in Answers)

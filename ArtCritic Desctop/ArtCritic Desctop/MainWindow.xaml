@@ -140,7 +140,8 @@
             <Button x:Name="Accept" Content="Ввести" Grid.Column="1" Grid.Row="7" Click="Accept_Click"></Button>
         </Grid>
 
-        <Grid x:Name="Music_question_window" d:IsHidden="True">
+       
+        <Grid x:Name="Music_question_window">
             <Grid.RowDefinitions>
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>

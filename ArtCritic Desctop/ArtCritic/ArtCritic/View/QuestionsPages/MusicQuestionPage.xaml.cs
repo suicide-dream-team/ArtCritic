@@ -16,13 +16,13 @@ namespace ArtCritic
     {
         private int score = 0;
         private int iter = 0;
-        private List<Music_question> music_Questions = new List<Music_question>();
-        IMediaPlayer musicPlayer;
+        private List<MusicQuestion> music_Questions = new List<MusicQuestion>();
+        IMusicPlayer musicPlayer;
         public MusicQuestionPage()
         {
             InitializeComponent();
             Creat_Music();
-            musicPlayer = DependencyService.Get<IMediaPlayer>();
+            musicPlayer = DependencyService.Get<IMusicPlayer>();
             musicPlayer.Open(music_Questions[iter].questionFilename);
             musicPlayer.Play();
         }
@@ -41,7 +41,7 @@ namespace ArtCritic
                     var args = e.Split('|');
                     string[] ans = new string[1];
                     ans[0] = args[1];
-                    music_Questions.Add(new Music_question("Угадайте название песни", ans, args[0]));
+                    music_Questions.Add(new MusicQuestion("Угадайте название песни", ans, args[0]));
                 }
             }
         }

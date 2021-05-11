@@ -53,6 +53,7 @@ namespace ArtCritic_Desctop
         private int iter = 0; //пока я не сделаю нормальную обертку итерируем вопросы этой штукой
         private List<Music_question> music_Questions = new List<Music_question>();
         private List<Uri> uris = new List<Uri>();
+        private List<TextQuestion> textQuestions = new List<TextQuestion>();
         private QuestionKeeper question;
         private TextQuestion textQuestion;
         
@@ -519,12 +520,137 @@ namespace ArtCritic_Desctop
         }
         private void Mixed_questions_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("пока в разработке");
+            create_Mixed_Question();
         }
 
         //Конец элементов меню Game
 
         //Элементы для режима игры Видео
+
+        void create_Mixed_Question()
+        {
+            Type_of_game.Visibility = Visibility.Hidden;
+
+            StreamReader streamReader = new StreamReader(@"..\..\..\Links.txt");
+                for (int i = 0; i < 6; ++i)
+                {
+
+                    string textFromFile = streamReader.ReadLine();
+                    string[] cloud_answers;
+                    cloud_answers = textFromFile.Split('|');
+                    string[] ans = new string[1];
+                    ans[0] = cloud_answers[1];
+                    music_Questions.Add(new Music_question("угадайте название песни", ans, new Uri(cloud_answers[0], UriKind.Relative)));
+                    music_Questions[i].Stop();
+                }
+            db_video = new List<VideoQuestion>();
+            video_counter = 0;
+            var dataFile = File.ReadAllLines(@"..\..\..\Videos\answersV.txt");           
+            foreach (var e in dataFile)
+            {
+                var args = e.Split('|');
+                db_video.Add(new VideoQuestion(args[0], args[1]));
+            }
+            db = new List<Image_Question>();
+            image_counter = 0;
+            var dataFile1 = File.ReadAllLines(@"..\..\..\Images\answers.txt");
+            foreach (var e in dataFile1)
+            {
+                var args = e.Split('|');
+                db.Add(new Image_Question(args[0], args[1]));
+            }
+            for (int i=0; i < 6; ++i)
+            {                
+                textQuestions.Add((TextQuestion)music_Questions[i]);
+                textQuestions.Add((TextQuestion)db[i]);
+                textQuestions.Add((TextQuestion)db_video[i]);
+            }
+            string I_Music_Replay_Path = System.IO.Path.GetFullPath("..\\..\\..\\Buttons\\button_repeat.png");
+            string I_Music_Accept_Path = System.IO.Path.GetFullPath("..\\..\\..\\Buttons\\button_next.png");
+            string I_Music_Exit_Path = System.IO.Path.GetFullPath("..\\..\\..\\Buttons\\button_exit_game.png");
+            string I_Background_Path = System.IO.Path.GetFullPath("..\\..\\..\\wallpapers__for_menu_music_pictures\\guess_music.jpg");
+            Uri I_Music_Replay_U_Path = new Uri(I_Music_Replay_Path, UriKind.RelativeOrAbsolute);
+            Uri I_Music_Accept_U_Path = new Uri(I_Music_Accept_Path, UriKind.RelativeOrAbsolute);
+            Uri I_Music_Exit_U_Path = new Uri(I_Music_Exit_Path, UriKind.RelativeOrAbsolute);
+            Uri I_Background_U_Path = new Uri(I_Background_Path, UriKind.RelativeOrAbsolute);
+            BitmapImage I_Music_Replay_Bitmap = new BitmapImage(I_Music_Replay_U_Path);
+            BitmapImage I_Music_Accept_Bitmap = new BitmapImage(I_Music_Accept_U_Path);
+            BitmapImage I_Music_Exit_Bitmap = new BitmapImage(I_Music_Exit_U_Path);
+            BitmapImage I_Background_Bitmap = new BitmapImage(I_Background_U_Path);
+            this.I_Music_Exit.Source = I_Music_Exit_Bitmap;
+            this.I_Mixed_accept.Source = I_Music_Accept_Bitmap;
+            this.I_Music_replay.Source = I_Music_Replay_Bitmap;
+            this.I_Music_background.Source = I_Background_Bitmap;
+
+            Back_Ground = new BitmapImage();
+            Back_Ground.BeginInit();
+            string Background_Image_Path = System.IO.Path.GetFullPath(@"..\..\..\wallpapers__for_menu_music_pictures\guess_picture.jpg");
+            Back_Ground.UriSource = new Uri(Background_Image_Path, UriKind.RelativeOrAbsolute);
+            Back_Ground.EndInit();
+            Image_Background.Source = Back_Ground;
+
+            Exit_Button = new BitmapImage();
+            Exit_Button.BeginInit();
+            string Exit_Button_Image_Path = System.IO.Path.GetFullPath(@"..\..\..\Buttons\button_exit_game.png");
+            Exit_Button.UriSource = new Uri(Exit_Button_Image_Path, UriKind.RelativeOrAbsolute);
+            Exit_Button.EndInit();
+            exit_pic.Source = Exit_Button;
+
+            Back_Ground = new BitmapImage();
+            Back_Ground.BeginInit();
+            Background_Image_Path = System.IO.Path.GetFullPath(@"..\..\..\wallpapers__for_menu_music_pictures\guess_film.jpg");
+            Back_Ground.UriSource = new Uri(Background_Image_Path, UriKind.RelativeOrAbsolute);
+            Back_Ground.EndInit();
+            Video_Background.Source = Back_Ground;
+
+            Exit_Button = new BitmapImage();
+            Exit_Button.BeginInit();
+            Exit_Button_Image_Path = System.IO.Path.GetFullPath(@"..\..\..\Buttons\button_exit_game.png");
+            Exit_Button.UriSource = new Uri(Exit_Button_Image_Path, UriKind.RelativeOrAbsolute);
+            Exit_Button.EndInit();
+            Exit_For_Video.Source = Exit_Button;
+
+            
+            this.I_Music_Exit.Source = I_Music_Exit_Bitmap;           
+            this.I_Music_replay.Source = I_Music_Replay_Bitmap;
+            this.I_Music_background.Source = I_Background_Bitmap;
+            video_counter = 3;
+            Show_mixed_question();
+           
+        }
+
+        private Music_question music_;
+        private Image_Question Image_;
+        private VideoQuestion Video_;
+        void Show_mixed_question() {
+            switch (video_counter) {
+                case 1:
+                    music_ = (Music_question)textQuestions[iter];
+                    music_.Play();
+                    Music_question_window.Visibility = Visibility.Visible;
+                    break;
+                case 2:
+                    Image_ = (Image_Question)textQuestions[iter];
+                    Image_game.Visibility = Visibility.Visible;
+                    pice.Source = Image_.Picture;
+                    currentAnswer_image = Image_.Answers[0];
+                    break;
+                case 3:
+                    Video_ = (VideoQuestion)textQuestions[iter];
+                    video.Source = Video_.Path_To_Video;
+                    currentAnswer_video = Video_.Answers[0];
+                    Video_game.Visibility = Visibility.Visible;
+                    break;
+                default:
+                    MessageBox.Show("Error");
+                    break;
+            }
+        }
+
+        private void I_Mixed_accept_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+
+        }
 
         /// <summary>
         /// Создаётся List элементов Video_question
@@ -551,7 +677,7 @@ namespace ArtCritic_Desctop
 
             var g = db_video[video_counter];
             video.Source = g.Path_To_Video;
-            currentAnswer_video = g.Answer_for_video;
+            currentAnswer_video = g.Answers[0];
             video_counter++;
         }
         /// <summary>
@@ -710,7 +836,7 @@ namespace ArtCritic_Desctop
             //var q = db[image_counter % db.Count];
             var q = db[image_counter];
             pice.Source = q.Picture;
-            currentAnswer_image = q.Answer;
+            currentAnswer_image = q.Answers[0];
             image_counter++;
 
         }
