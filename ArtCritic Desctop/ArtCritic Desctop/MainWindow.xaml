@@ -357,7 +357,7 @@
 
         </Grid>
 
-        <Grid  x:Name="Login_Window">
+        <Grid  x:Name="Login_Window" d:IsHidden="True">
             <Label Content="Введите логин:" HorizontalAlignment="Center" Margin="0,120,0,0" VerticalAlignment="Top" Width="212"/>
             <Label Content="Введите пароль:" HorizontalAlignment="Left" Margin="294,174,0,0" VerticalAlignment="Top" Width="106"/>
             <TextBox x:Name="Login_Textbox" HorizontalAlignment="Left" Margin="294,151,0,0"  TextWrapping="Wrap" VerticalAlignment="Top" Width="123"/>
