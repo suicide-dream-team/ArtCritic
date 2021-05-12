@@ -160,9 +160,9 @@
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
 
-            <Image x:Name="I_Mixed_accept" Grid.Row="5" Grid.Column="4" MouseLeftButtonDown="I_Mixed_accept_MouseLeftButtonDown"></Image>
+            <Image x:Name="I_Mixed_accept" Grid.Row="4" Grid.Column="4" MouseLeftButtonDown="I_Mixed_accept_MouseLeftButtonDown" Grid.ColumnSpan="2" Margin="57,62,77,0" Grid.RowSpan="2" ></Image>
         </Grid>
-        
+
         <Grid x:Name="Music_question_window" d:IsHidden="True">
             <Grid.RowDefinitions>
                 <RowDefinition></RowDefinition>
@@ -192,10 +192,10 @@
             <Button x:Name="Music_Accept_button" Grid.Row="5" Grid.Column="5" Click="Music_accept_Click" Visibility="Hidden"></Button>
 
             <Image x:Name="I_Music_accept" Grid.Row="5" Grid.Column="4" MouseLeftButtonDown="Music_accept_image_MouseLeftButtonDown"/>
-            
-            <Button x:Name="Music_exit_button" Content="Выйти" Grid.Row="0" Grid.Column="5" Click="Music_exit_Click" Visibility="Hidden"/>
 
-            <Image x:Name="I_Music_Exit" Grid.Row="0" Grid.Column="5"  MouseLeftButtonDown="Music_exit_image_MouseLeftButtonDown"/>
+            <Button x:Name="Music_exit_button" Content="Выйти" Grid.Row="0" Grid.Column="5" Click="Exit_Click" Visibility="Hidden"/>
+
+            <Image x:Name="I_Music_Exit" Grid.Row="0" Grid.Column="5"  MouseLeftButtonDown="exit_pic_MouseLeftButtonDown"/>
 
             <Button x:Name="Music_replay_music" Content="повторить" Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="1" Grid.RowSpan="2" Click="Music_replay_music_Click" Visibility="Hidden"/>
 
@@ -203,7 +203,7 @@
 
         </Grid>
 
-        
+
 
         <Grid x:Name="Video_game" ShowGridLines="True" d:IsHidden="True">
             <Grid.ColumnDefinitions>
@@ -311,7 +311,7 @@
             <Image Margin="0,17,0,17"  x:Name="Image_for_create_Mixed_for_Music" Grid.Row="1"/>
 
         </Grid>
-        
+
         <Grid x:Name="Pack_create_Image" ShowGridLines="True" d:IsHidden="True">
             <Grid.RowDefinitions>
 

@@ -527,7 +527,7 @@ namespace ArtCritic_Desctop
         void create_Mixed_Question()
         {
             Type_of_game.Visibility = Visibility.Hidden;
-
+            Mixed_game.Visibility = Visibility.Hidden;
             StreamReader streamReader = new StreamReader(@"..\..\..\Links.txt");
                 for (int i = 0; i < 6; ++i)
                 {
@@ -565,26 +565,25 @@ namespace ArtCritic_Desctop
             string I_Music_Replay_Path = System.IO.Path.GetFullPath("..\\..\\..\\Buttons\\button_repeat.png");
             string I_Music_Accept_Path = System.IO.Path.GetFullPath("..\\..\\..\\Buttons\\button_next.png");
             string I_Music_Exit_Path = System.IO.Path.GetFullPath("..\\..\\..\\Buttons\\button_exit_game.png");
-            string I_Background_Path = System.IO.Path.GetFullPath("..\\..\\..\\wallpapers__for_menu_music_pictures\\guess_music.jpg");
+            //string I_Background_Path = System.IO.Path.GetFullPath("..\\..\\..\\wallpapers__for_menu_music_pictures\\guess_music.jpg");
             Uri I_Music_Replay_U_Path = new Uri(I_Music_Replay_Path, UriKind.RelativeOrAbsolute);
             Uri I_Music_Accept_U_Path = new Uri(I_Music_Accept_Path, UriKind.RelativeOrAbsolute);
             Uri I_Music_Exit_U_Path = new Uri(I_Music_Exit_Path, UriKind.RelativeOrAbsolute);
-            Uri I_Background_U_Path = new Uri(I_Background_Path, UriKind.RelativeOrAbsolute);
+            //Uri I_Background_U_Path = new Uri(I_Background_Path, UriKind.RelativeOrAbsolute);
             BitmapImage I_Music_Replay_Bitmap = new BitmapImage(I_Music_Replay_U_Path);
             BitmapImage I_Music_Accept_Bitmap = new BitmapImage(I_Music_Accept_U_Path);
             BitmapImage I_Music_Exit_Bitmap = new BitmapImage(I_Music_Exit_U_Path);
-            BitmapImage I_Background_Bitmap = new BitmapImage(I_Background_U_Path);
+            //BitmapImage I_Background_Bitmap = new BitmapImage(I_Background_U_Path);
             this.I_Music_Exit.Source = I_Music_Exit_Bitmap;
-            this.I_Mixed_accept.Source = I_Music_Accept_Bitmap;
             this.I_Music_replay.Source = I_Music_Replay_Bitmap;
-            this.I_Music_background.Source = I_Background_Bitmap;
+            //this.I_Music_background.Source = I_Background_Bitmap;
 
             Back_Ground = new BitmapImage();
             Back_Ground.BeginInit();
             string Background_Image_Path = System.IO.Path.GetFullPath(@"..\..\..\wallpapers__for_menu_music_pictures\guess_picture.jpg");
             Back_Ground.UriSource = new Uri(Background_Image_Path, UriKind.RelativeOrAbsolute);
             Back_Ground.EndInit();
-            Image_Background.Source = Back_Ground;
+            //Image_Background.Source = Back_Ground;
 
             Exit_Button = new BitmapImage();
             Exit_Button.BeginInit();
@@ -598,7 +597,7 @@ namespace ArtCritic_Desctop
             Background_Image_Path = System.IO.Path.GetFullPath(@"..\..\..\wallpapers__for_menu_music_pictures\guess_film.jpg");
             Back_Ground.UriSource = new Uri(Background_Image_Path, UriKind.RelativeOrAbsolute);
             Back_Ground.EndInit();
-            Video_Background.Source = Back_Ground;
+            //Video_Background.Source = Back_Ground;
 
             Exit_Button = new BitmapImage();
             Exit_Button.BeginInit();
@@ -610,8 +609,10 @@ namespace ArtCritic_Desctop
             
             this.I_Music_Exit.Source = I_Music_Exit_Bitmap;           
             this.I_Music_replay.Source = I_Music_Replay_Bitmap;
-            this.I_Music_background.Source = I_Background_Bitmap;
-            video_counter = 3;
+            //this.I_Music_background.Source = I_Background_Bitmap;
+            this.I_Mixed_accept.Source = I_Music_Accept_Bitmap;
+
+            video_counter = 1;
             Show_mixed_question();
            
         }
@@ -625,6 +626,7 @@ namespace ArtCritic_Desctop
                     music_ = (Music_question)textQuestions[iter];
                     music_.Play();
                     Music_question_window.Visibility = Visibility.Visible;
+                    Mixed_game.Visibility = Visibility.Visible;
                     break;
                 case 2:
                     Image_ = (Image_Question)textQuestions[iter];
@@ -642,11 +644,42 @@ namespace ArtCritic_Desctop
                     MessageBox.Show("Error");
                     break;
             }
+            
         }
 
         private void I_Mixed_accept_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
+            switch (video_counter) {
+                case 1:
+                    if (music_.Check_Answer(Music_answer.Text)) { MessageBox.Show("Верно"); }
+                    else
+                    { MessageBox.Show("Неверно"); }
+                    video_counter = 2;
+                    Music_question_window.Visibility = Visibility.Hidden;
+                    break;
+                case 2:
+                    if (Image_.Check_Answer(Answer_Image_Texbox.Text)) { MessageBox.Show("Верно"); }
+                    else
+                    { MessageBox.Show("Неверно"); }
+                    video_counter = 3;
+                    Image_game.Visibility = Visibility.Hidden;
+                    break;
+                case 3:
 
+                    if (Video_.Check_Answer(Answer_Video_Texbox.Text)) { MessageBox.Show("Верно"); }
+                    else
+                    { MessageBox.Show("Неверно"); }
+                    video_counter = 1;
+                    Video_game.Visibility = Visibility.Hidden;
+                    break;
+            }
+            iter++;
+            if (iter >= 18)
+            {
+                MessageBox.Show("конец игры");
+                Video_game.Visibility = Visibility.Hidden;
+            }
+            Show_mixed_question();
         }
 
         /// <summary>
