@@ -6,7 +6,7 @@ using System.Text;
 
 namespace ArtCritic_Desctop.core.db
 {
-    class PlayerDao
+    public class PlayerDao
     {
         private static SQLiteConnection DbCon { get; set; }
         private static SQLiteCommand SqlCmd { get; set; }
@@ -97,22 +97,22 @@ namespace ArtCritic_Desctop.core.db
                 {
                     reader.Read();
                     int _id = reader.GetInt32(0);
-                    string _name = reader.GetString(1);
-                    string _password = reader.GetString(2);
-                    int _player_stat_id = reader.GetInt32(3);
+                    int _player_stat_id = reader.GetInt32(1);
+                    string _name = reader.GetString(2);
+                    string _password = reader.GetString(3);
 
                     Player result = null;
                     if (_password.Equals(password))
                         result = new Player(_id, PlayerStatDao.GetByPlayerId(_id), _name, _password);
                     else
-                        throw new Exception("Пароли не совпадают");
+                        throw new PasswordIsIncorrectException("Пароли не совпадают");
 
                     reader.Close();
                     return result;
                 }
                 else
                 {
-                    throw new Exception("Пользователя с таким именем не существует");
+                    throw new PlayerNotFoundException("Пользователя с таким именем не существует");
                 }
             }
             catch (SQLiteException ex)
@@ -252,4 +252,19 @@ namespace ArtCritic_Desctop.core.db
             }
         }
     }
+
+    public class PlayerNotFoundException : Exception
+    {
+        public PlayerNotFoundException(string message)
+        : base(message)
+        { }
+    }
+
+    public class PasswordIsIncorrectException : Exception
+    {
+        public PasswordIsIncorrectException(string message)
+        : base(message)
+        { }
+    }
+
 }

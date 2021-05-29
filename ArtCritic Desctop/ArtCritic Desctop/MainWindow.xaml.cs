@@ -64,14 +64,13 @@ namespace ArtCritic_Desctop
         private int correctAnswer = 0;
 
 
-
         public MainWindow()
         {
             InitializeComponent();
             CreateAndCheckDb();
 
 
-            Player = new Player("Anon", "superpassword123");
+            Player = null;
 
 
             creat_start_menu();
@@ -870,20 +869,23 @@ namespace ArtCritic_Desctop
                 
                 if (Password_Passbox.Password.Length > 0) // проверяем введён ли пароль         
                 {
-                    //Не совсем понял как это работает
-                    /*
-                    // ищем в базе данных пользователя с такими данными         
-                    DataTable dt_user = mainWindow.Select("SELECT * FROM [dbo].[users] WHERE [login] = '" + textBox_login.Text + "' AND [password] = '" + password.Password + "'");
-                    if (dt_user.Rows.Count > 0) // если такая запись существует       
+                    try
                     {
-                        MessageBox.Show("Пользователь авторизовался"); // говорим, что авторизовался 
-                        Login_Window.Visibility=Visibility.Hidden;    
+                        Player = PlayerDao.Get(Login_Textbox.Text, Password_Passbox.Password);
+                        MessageBox.Show("Пользователь авторизовался");
+                        Login_Window.Visibility = Visibility.Hidden;
                         Main_menu.Visibility = Visibility.Visible;
+
+                    } catch (PlayerNotFoundException ex)
+                    {
+                        MessageBox.Show("Пользователь с таким логином не зарегистрирован");
+                        Login_Textbox.Text = "";
+                        Password_Passbox.Password = "";
+                    } catch (PasswordIsIncorrectException ex)
+                    {
+                        MessageBox.Show("Пароль не подходит. Попробуйте ещё раз");
+                        Password_Passbox.Password = "";
                     }
-                    else MessageBox.Show("Пользователя не найден"); // выводим ошибку  
-                    */
-                    Login_Window.Visibility = Visibility.Hidden;
-                    Main_menu.Visibility = Visibility.Visible;
                 }
                 else MessageBox.Show("Введите пароль"); // выводим ошибку    
             }
@@ -923,6 +925,9 @@ namespace ArtCritic_Desctop
                                 {
                                     // Вот тут записывать в бд нужно
                                     MessageBox.Show("Пользователь зарегистрирован");
+                                    Player = new Player(Textbox_Login_Reg.Text, Password_Reg1.Password);
+                                    Player = PlayerDao.Add(Player);
+
                                     Password_Reg1.Clear();
                                     Password_Reg2.Clear();
                                     Textbox_Login_Reg.Clear();
