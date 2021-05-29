@@ -150,7 +150,7 @@ namespace ArtCritic_Desctop.core.db
             }
         }
 
-        public static void Add(Pack pack)
+        public static Pack Add(Pack pack)
         {
             try
             {
@@ -161,6 +161,21 @@ namespace ArtCritic_Desctop.core.db
 
                 SqlCmd.CommandText = String.Format("INSERT INTO pack (name, path, type) VALUES('{0}', '{1}', '{2}');", pack.Name, pack.Path, pack.Type);
                 SqlCmd.ExecuteNonQuery();
+
+                SqlCmd.CommandText = "SELECT id FROM pack WHERE rowid = last_insert_rowid()";
+                SQLiteDataReader reader = SqlCmd.ExecuteReader();
+                int packId;
+                if (reader.HasRows)
+                {
+                    reader.Read();
+                    packId = reader.GetInt32(0);
+                    reader.Close();
+                    return PackDao.Get(packId);
+                }
+                else
+                {
+                    throw new SQLiteException("Ошибка при получении id игрока");
+                }
 
             }
             catch(SQLiteException ex)
