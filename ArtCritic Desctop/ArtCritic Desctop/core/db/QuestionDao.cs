@@ -112,7 +112,7 @@ namespace ArtCritic_Desctop.core.db
             }
         }
 
-        public static void Add(Question q)
+        public static Question Add(Question q)
         {
             try
             {
@@ -123,6 +123,22 @@ namespace ArtCritic_Desctop.core.db
 
                 SqlCmd.CommandText = String.Format("INSERT INTO question (pack_id, type, text, answer, file_name) VALUES('{0}', '{1}', '{2}', '{3}', '{4}');", q.Pack.Id, q.Type, q.Text, q.Answer, q.FileName);
                 SqlCmd.ExecuteNonQuery();
+
+                SqlCmd.CommandText = "SELECT id FROM question WHERE rowid = last_insert_rowid()";
+                SQLiteDataReader reader = SqlCmd.ExecuteReader();
+                int statId;
+                if (reader.HasRows)
+                {
+                    reader.Read();
+                    statId = reader.GetInt32(0);
+                    reader.Close();
+                    return QuestionDao.Get(statId);
+                }
+                else
+                {
+                    throw new SQLiteException("Ошибка при получении id игрока");
+                }
+
             }
             catch (SQLiteException ex)
             {
@@ -134,7 +150,7 @@ namespace ArtCritic_Desctop.core.db
             }
         }
 
-        public static void Update(Question q)
+        public static Question Update(Question q)
         {
             try
             {
@@ -145,6 +161,8 @@ namespace ArtCritic_Desctop.core.db
 
                 SqlCmd.CommandText = String.Format("UPDATE question SET pack_id = '{1}', type = '{2}', text = '{3}', answer = '{4}', file_name = '{5}' WHERE id = '{0}';", q.Id, q.Pack.Id, q.Type, q.Text, q.Answer, q.FileName);
                 SqlCmd.ExecuteNonQuery();
+
+                return QuestionDao.Get(q.Id);
             }
             catch (SQLiteException ex)
             {
@@ -154,6 +172,11 @@ namespace ArtCritic_Desctop.core.db
             {
                 DbCon.Close();
             }
+        }
+
+        public static void Delete(Question q)
+        {
+            Delete(q.Id);
         }
 
         public static void Delete(int id)

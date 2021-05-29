@@ -152,7 +152,7 @@ namespace ArtCritic_Desctop.core.db
             }
         }
 
-        public static void Update(PlayerStat stat)
+        public static PlayerStat Update(PlayerStat stat)
         {
             try
             {
@@ -163,6 +163,8 @@ namespace ArtCritic_Desctop.core.db
 
                 SqlCmd.CommandText = String.Format("UPDATE player_stat SET played_games = '{1}', total_questions = '{2}', total_correct_answers = '{3}', current_result = '{4}' WHERE id = '{0}';", stat.Id, stat.PlayedGames, stat.TotalQuestions, stat.TotalCorrectAnswers, stat.CurrentResult);
                 SqlCmd.ExecuteNonQuery();
+
+                return PlayerStatDao.Get(stat.Id);
             }
             catch (SQLiteException ex)
             {

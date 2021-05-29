@@ -197,7 +197,7 @@ namespace ArtCritic_Desctop.core.db
             }
         }
 
-        public static void Update(Player p)
+        public static Player Update(Player p)
         {
             try
             {
@@ -208,6 +208,8 @@ namespace ArtCritic_Desctop.core.db
 
                 SqlCmd.CommandText = String.Format("UPDATE player SET player_stat_id = '{1}', name = '{2}', password = '{3}' WHERE id = '{0}';", p.Id, p.Stat.Id, p.Name, p.Password);
                 SqlCmd.ExecuteNonQuery();
+
+                return PlayerDao.Get(p.Id);
             }
             catch (SQLiteException ex)
             {
@@ -217,6 +219,11 @@ namespace ArtCritic_Desctop.core.db
             {
                 DbCon.Close();
             }
+        }
+
+        public static void Delete(Player p)
+        {
+            Delete(p.Id);
         }
 
         public static void Delete(int id)

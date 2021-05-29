@@ -171,7 +171,7 @@ namespace ArtCritic_Desctop
             Player.Stat.TotalQuestions += totalAnswer;
             Player.Stat.TotalCorrectAnswers += correctAnswer;
 
-            PlayerStatDao.Update(Player.Stat);
+            Player.Stat = PlayerStatDao.Update(Player.Stat);
         }
 
         //Элементы main меню

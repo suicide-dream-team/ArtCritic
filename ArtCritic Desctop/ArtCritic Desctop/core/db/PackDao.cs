@@ -188,7 +188,7 @@ namespace ArtCritic_Desctop.core.db
             }
         }
 
-        public static void Update(Pack pack)
+        public static Pack Update(Pack pack)
         {
             try
             {
@@ -199,6 +199,8 @@ namespace ArtCritic_Desctop.core.db
 
                 SqlCmd.CommandText = String.Format("UPDATE pack SET name = '{1}', path = '{2}', type = '{3}' WHERE id = '{0}';", pack.Id, pack.Name, pack.Path, pack.Type);
                 SqlCmd.ExecuteNonQuery();
+
+                return PackDao.Get(pack.Id);
             }
             catch (SQLiteException ex)
             {
@@ -208,6 +210,11 @@ namespace ArtCritic_Desctop.core.db
             {
                 DbCon.Close();
             }
+        }
+
+        public static void Delete(Pack p)
+        {
+            Delete(p.Id);
         }
 
         public static void Delete(int id)
