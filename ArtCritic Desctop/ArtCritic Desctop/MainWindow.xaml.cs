@@ -18,6 +18,7 @@ using System.Windows.Shapes;
 using System.Reflection;*/
 using ArtCritic_Desctop.core;
 using System.Text.RegularExpressions;
+using ArtCritic_Desctop.core.db;
 
 namespace ArtCritic_Desctop
 {
@@ -26,6 +27,9 @@ namespace ArtCritic_Desctop
     /// </summary>
     public partial class MainWindow : Window
     {
+        public static string DbFileName = "db.sqlite";
+
+
         private List<Image_Question> db;
         int image_counter = 0;
         string currentAnswer_image;
@@ -49,21 +53,15 @@ namespace ArtCritic_Desctop
         MediaPlayer mediaplayer = new MediaPlayer();
 
 
-        Player Player = new Player();
+        Player Player = null;
         private int iter = 0; //пока я не сделаю нормальную обертку итерируем вопросы этой штукой
         private List<Music_question> music_Questions = new List<Music_question>();
         private List<Uri> uris = new List<Uri>();
         private List<TextQuestion> textQuestions = new List<TextQuestion>();
         private QuestionKeeper question;
         private TextQuestion textQuestion;
-        
 
-
-        private PlayerStat statistics;
-        // Для БД
-        private String dbFileName;
-        private SQLiteConnection m_dbConn;
-        private SQLiteCommand m_sqlCmd;
+        private int correctAnswer = 0;
 
 
         public MainWindow()
@@ -71,8 +69,10 @@ namespace ArtCritic_Desctop
             InitializeComponent();
             CreateAndCheckDb();
 
-            Player.statistic = 0;
-            statistics = GetStatistics();
+
+            Player = null;
+
+
             creat_start_menu();
             string[] test_answers = new string[2];
             test_answers[0] = "Спанч Боб";
@@ -146,89 +146,32 @@ namespace ArtCritic_Desctop
         // Проверяем существование базы данных, если её нет - создаём
         private void CreateAndCheckDb()
         {
-            m_dbConn = new SQLiteConnection();
-            m_sqlCmd = new SQLiteCommand();
-            dbFileName = "db.sqlite";
-
-            if (!File.Exists(dbFileName))
-                SQLiteConnection.CreateFile(dbFileName);
+            if (!File.Exists(DbFileName))
+                SQLiteConnection.CreateFile(DbFileName);
 
             try
             {
-                m_dbConn = new SQLiteConnection("Data Source=" + dbFileName + ";Version=3;");
-                m_dbConn.Open();
-                m_sqlCmd.Connection = m_dbConn;
-
-                m_sqlCmd.CommandText = "CREATE TABLE IF NOT EXISTS player_stat (id INTEGER PRIMARY KEY UNIQUE NOT NULL, played_games INTEGER NOT NULL, total_questions INTEGER NOT NULL, total_correct_answers INTEGER NOT NULL, current_result DOUBLE NOT NULL)";
-                m_sqlCmd.ExecuteNonQuery();
-
-                m_sqlCmd.CommandText = "SELECT id FROM player_stat WHERE ID = 1";
-                SQLiteDataReader reader = m_sqlCmd.ExecuteReader();
-                if (!reader.HasRows)
-                {
-                    reader.Close();
-                    m_sqlCmd.CommandText = "INSERT INTO player_stat(id, played_games, total_questions, total_correct_answers, current_result) VALUES (1, 0, 0, 0, 0.0)";
-                    m_sqlCmd.ExecuteNonQuery();
-                }
-                reader.Close();
+                PlayerDao.Init();
+                PlayerStatDao.Init();
+                PackDao.Init();
+                QuestionDao.Init();
             }
             catch (SQLiteException ex)
             {
                 MessageBox.Show("Ошибка подключения к БД: " + ex.Message);
-                this.Close();
+                throw new Exception("Ошибка подключения к БД", ex);
             }
         }
-
-        private PlayerStat GetStatistics()
-        {
-            PlayerStat result;
-            try
-            {
-                m_sqlCmd.CommandText = "SELECT * FROM player_stat WHERE ID = 1";
-                SQLiteDataReader reader = m_sqlCmd.ExecuteReader();
-                if (reader.HasRows)
-                {
-                    reader.Read();
-                    result = new PlayerStat(reader.GetInt32(0), reader.GetInt32(1), reader.GetInt32(2), reader.GetInt32(3), reader.GetDouble(4));
-                    return result;
-                }
-            }
-            catch (SQLiteException ex)
-            {
-                MessageBox.Show("Error: " + ex.Message);
-                this.Close();
-            }
-            return null;
-        }
-
 
         private void updateStatistics(int correctAnswer, int totalAnswer)
         {
-            statistics.CurrentResult = (statistics.CurrentResult * statistics.PlayedGames + correctAnswer * 100 / totalAnswer) / (statistics.PlayedGames + 1);
-            statistics.PlayedGames++;
-            statistics.TotalQuestions += totalAnswer;
-            statistics.TotalCorrectAnswers += correctAnswer;
-            saveStatistics();
-        }
+            Player.Stat.CurrentResult = (Player.Stat.CurrentResult * Player.Stat.PlayedGames + correctAnswer * 100 / totalAnswer) / (Player.Stat.PlayedGames + 1);
+            Player.Stat.PlayedGames += 1;
+            Player.Stat.TotalQuestions += totalAnswer;
+            Player.Stat.TotalCorrectAnswers += correctAnswer;
 
-        private void saveStatistics()
-        {
-            try
-            {
-                m_sqlCmd.CommandText = "UPDATE player_stat SET played_games = '"
-                    + statistics.PlayedGames.ToString() + "', total_questions = '"
-                    + statistics.TotalQuestions.ToString() + "', total_correct_answers = '"
-                    + statistics.TotalCorrectAnswers.ToString() + "', current_result = '"
-                    + statistics.CurrentResult.ToString() + "' WHERE id = '1'";
-                m_sqlCmd.ExecuteNonQuery();
-            }
-            catch (SQLiteException ex)
-            {
-                MessageBox.Show("Error: " + ex.Message);
-                this.Close();
-            }
+            Player.Stat = PlayerStatDao.Update(Player.Stat);
         }
-
 
         //Элементы main меню
 
@@ -248,10 +191,10 @@ namespace ArtCritic_Desctop
         }
         private void Satistyc_Click(object sender, RoutedEventArgs e)
         {
-            Played_Games_Label2.Content = statistics.PlayedGames;
-            TotalQuestionsLabe2.Content = statistics.TotalQuestions;
-            TotalCorrectAnswersLabe2.Content = statistics.TotalCorrectAnswers;
-            CurrentResultLabe2.Content = statistics.CurrentResult + "%";
+            Played_Games_Label2.Content = Player.Stat.PlayedGames;
+            TotalQuestionsLabe2.Content = Player.Stat.TotalQuestions;
+            TotalCorrectAnswersLabe2.Content = Player.Stat.TotalCorrectAnswers;
+            CurrentResultLabe2.Content = Player.Stat.CurrentResult + "%";
             Game_stat.Visibility = Visibility.Visible;
             Main_menu.Visibility = Visibility.Hidden;
         }
@@ -751,15 +694,15 @@ namespace ArtCritic_Desctop
         {
             music_Questions[iter].Stop();
             if (music_Questions[iter].Check_Answer(Music_answer.Text))
-                Player.statistic = Player.statistic + 1;
+                correctAnswer += 1;
             Music_answer.Text = "";
             ++iter;
             if (iter == 4)
             {
                 Music_question_window.Visibility = Visibility.Hidden;
                 Type_of_game.Visibility = Visibility.Visible;
-                MessageBox.Show("Вы отгадали верно " + Player.statistic);
-                updateStatistics(Player.statistic, iter);
+                MessageBox.Show("Вы отгадали верно " + correctAnswer);
+                updateStatistics(correctAnswer, iter);
                 iter = 0;
             }
             else
@@ -786,15 +729,15 @@ namespace ArtCritic_Desctop
         {
             music_Questions[iter].Stop();
             if (music_Questions[iter].Check_Answer(Music_answer.Text))
-                Player.statistic = Player.statistic + 1;
+                correctAnswer = correctAnswer + 1;
             Music_answer.Text = "";
             ++iter;
             if (iter == 4)
             {
                 Music_question_window.Visibility = Visibility.Hidden;
                 Type_of_game.Visibility = Visibility.Visible;
-                MessageBox.Show("Вы отгадали правильно " + Player.statistic);
-                updateStatistics(Player.statistic, iter);
+                MessageBox.Show("Вы отгадали правильно " + correctAnswer);
+                updateStatistics(correctAnswer, iter);
 
                 iter = 0;
             }
@@ -904,10 +847,10 @@ namespace ArtCritic_Desctop
 
         private void I_Statistics_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            Played_Games_Label2.Content = statistics.PlayedGames;
-            TotalQuestionsLabe2.Content = statistics.TotalQuestions;
-            TotalCorrectAnswersLabe2.Content = statistics.TotalCorrectAnswers;
-            CurrentResultLabe2.Content = statistics.CurrentResult + "%";
+            Played_Games_Label2.Content = Player.Stat.PlayedGames;
+            TotalQuestionsLabe2.Content = Player.Stat.TotalQuestions;
+            TotalCorrectAnswersLabe2.Content = Player.Stat.TotalCorrectAnswers;
+            CurrentResultLabe2.Content = Player.Stat.CurrentResult + "%";
             Game_stat.Visibility = Visibility.Visible;
             Main_menu.Visibility = Visibility.Hidden;
         }
@@ -926,20 +869,23 @@ namespace ArtCritic_Desctop
                 
                 if (Password_Passbox.Password.Length > 0) // проверяем введён ли пароль         
                 {
-                    //Не совсем понял как это работает
-                    /*
-                    // ищем в базе данных пользователя с такими данными         
-                    DataTable dt_user = mainWindow.Select("SELECT * FROM [dbo].[users] WHERE [login] = '" + textBox_login.Text + "' AND [password] = '" + password.Password + "'");
-                    if (dt_user.Rows.Count > 0) // если такая запись существует       
+                    try
                     {
-                        MessageBox.Show("Пользователь авторизовался"); // говорим, что авторизовался 
-                        Login_Window.Visibility=Visibility.Hidden;    
+                        Player = PlayerDao.Get(Login_Textbox.Text, Password_Passbox.Password);
+                        MessageBox.Show("Пользователь авторизовался");
+                        Login_Window.Visibility = Visibility.Hidden;
                         Main_menu.Visibility = Visibility.Visible;
+
+                    } catch (PlayerNotFoundException ex)
+                    {
+                        MessageBox.Show("Пользователь с таким логином не зарегистрирован");
+                        Login_Textbox.Text = "";
+                        Password_Passbox.Password = "";
+                    } catch (PasswordIsIncorrectException ex)
+                    {
+                        MessageBox.Show("Пароль не подходит. Попробуйте ещё раз");
+                        Password_Passbox.Password = "";
                     }
-                    else MessageBox.Show("Пользователя не найден"); // выводим ошибку  
-                    */
-                    Login_Window.Visibility = Visibility.Hidden;
-                    Main_menu.Visibility = Visibility.Visible;
                 }
                 else MessageBox.Show("Введите пароль"); // выводим ошибку    
             }
@@ -979,6 +925,9 @@ namespace ArtCritic_Desctop
                                 {
                                     // Вот тут записывать в бд нужно
                                     MessageBox.Show("Пользователь зарегистрирован");
+                                    Player = new Player(Textbox_Login_Reg.Text, Password_Reg1.Password);
+                                    Player = PlayerDao.Add(Player);
+
                                     Password_Reg1.Clear();
                                     Password_Reg2.Clear();
                                     Textbox_Login_Reg.Clear();
