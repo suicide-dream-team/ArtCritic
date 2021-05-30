@@ -115,6 +115,7 @@ namespace ArtCritic_Desctop.core
             image_for_user = image_for_create_user_pack;
             music_for_user = music_for_create_user_pack;
             p.Name = pack_name;
+            p.Path = pack_name;
             DirectoryInfo dirInfo = new DirectoryInfo(path + @"\Packs\" + pack_name);
             if (!dirInfo.Exists)
             {
@@ -195,6 +196,7 @@ namespace ArtCritic_Desctop.core
             Question_for_user = TBck_for_user;
             video_for_user = video_for_create_user_pack;
             p.Name = pack_name;
+            p.Path = pack_name;
             DirectoryInfo dirInfo = new DirectoryInfo(path + @"\Packs\" + pack_name);
             if (!dirInfo.Exists)
             {
@@ -267,6 +269,7 @@ namespace ArtCritic_Desctop.core
             image_for_user = image_for_create_user_pack;
             Question_for_user = TBck_for_user;
             p.Name = pack_name;
+            p.Path = pack_name;
             DirectoryInfo dirInfo = new DirectoryInfo(path + @"\Packs\" + pack_name);
             if (!dirInfo.Exists)
             {
@@ -325,6 +328,7 @@ namespace ArtCritic_Desctop.core
             music_for_user = music_for_create_user_pack;
             Question_for_user = TBck_for_user;
             p.Name = pack_name;
+            p.Path = pack_name;
             DirectoryInfo dirInfo = new DirectoryInfo(path + @"\Packs\" + pack_name);
             if (!dirInfo.Exists)
             {
@@ -807,6 +811,7 @@ namespace ArtCritic_Desctop.core
                     {
                         //Create_zip_archieve();
                         p = PackDao.Add(p);
+                        MessageBox.Show("Пак успешно создан");
                         is_create = true;
                     }
                 }
@@ -827,6 +832,7 @@ namespace ArtCritic_Desctop.core
                     else
                     {
                         p = PackDao.Add(p);
+                        MessageBox.Show("Пак успешно создан");
                         is_create = true;
                         //Create_zip_archieve();
                     }
@@ -849,6 +855,7 @@ namespace ArtCritic_Desctop.core
                     else
                     {
                         p = PackDao.Add(p);
+                        MessageBox.Show("Пак успешно создан");
                         is_create = true;
                         //Create_zip_archieve();
                     }
