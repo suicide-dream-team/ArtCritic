@@ -12,6 +12,12 @@ namespace ArtCritic_Desctop.core.db
         public Question.QuestionType Type { get; set; }
 
         public Pack() { }
+        public Pack(string Name, string Path, Question.QuestionType Type)
+        {
+            this.Name = Name;
+            this.Path = Path;
+            this.Type = Type;
+        }
         public Pack(int Id, string Name, string Path, Question.QuestionType Type)
         {
             this.Id = Id;

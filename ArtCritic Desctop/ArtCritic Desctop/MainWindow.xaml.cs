@@ -148,7 +148,6 @@ namespace ArtCritic_Desctop
         {
             if (!File.Exists(DbFileName))
                 SQLiteConnection.CreateFile(DbFileName);
-
             try
             {
                 PlayerDao.Init();

@@ -121,7 +121,7 @@ namespace ArtCritic_Desctop.core.db
                 DbCon.Open();
                 SqlCmd.Connection = DbCon;
 
-                SqlCmd.CommandText = String.Format("INSERT INTO question (pack_id, type, text, answer, file_name) VALUES('{0}', '{1}', '{2}', '{3}', '{4}');", q.Pack.Id, q.Type, q.Text, q.Answer, q.FileName);
+                SqlCmd.CommandText = String.Format("INSERT INTO question (pack_id, type, text, answer, file_name) VALUES('{0}', '{1}', '{2}', '{3}', '{4}');", q.Pack.Id, (int)q.Type, q.Text, q.Answer, q.FileName);
                 SqlCmd.ExecuteNonQuery();
 
                 SqlCmd.CommandText = "SELECT id FROM question WHERE rowid = last_insert_rowid()";
@@ -159,7 +159,7 @@ namespace ArtCritic_Desctop.core.db
                 DbCon.Open();
                 SqlCmd.Connection = DbCon;
 
-                SqlCmd.CommandText = String.Format("UPDATE question SET pack_id = '{1}', type = '{2}', text = '{3}', answer = '{4}', file_name = '{5}' WHERE id = '{0}';", q.Id, q.Pack.Id, q.Type, q.Text, q.Answer, q.FileName);
+                SqlCmd.CommandText = String.Format("UPDATE question SET pack_id = '{1}', type = '{2}', text = '{3}', answer = '{4}', file_name = '{5}' WHERE id = '{0}';", q.Id, q.Pack.Id, (int)q.Type, q.Text, q.Answer, q.FileName);
                 SqlCmd.ExecuteNonQuery();
 
                 return QuestionDao.Get(q.Id);

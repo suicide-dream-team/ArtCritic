@@ -159,7 +159,7 @@ namespace ArtCritic_Desctop.core.db
                 DbCon.Open();
                 SqlCmd.Connection = DbCon;
 
-                SqlCmd.CommandText = String.Format("INSERT INTO pack (name, path, type) VALUES('{0}', '{1}', '{2}');", pack.Name, pack.Path, pack.Type);
+                SqlCmd.CommandText = String.Format("INSERT INTO pack (name, path, type) VALUES('{0}', '{1}', '{2}');", pack.Name, pack.Path, (int)pack.Type);
                 SqlCmd.ExecuteNonQuery();
 
                 SqlCmd.CommandText = "SELECT id FROM pack WHERE rowid = last_insert_rowid()";
@@ -197,7 +197,8 @@ namespace ArtCritic_Desctop.core.db
                 DbCon.Open();
                 SqlCmd.Connection = DbCon;
 
-                SqlCmd.CommandText = String.Format("UPDATE pack SET name = '{1}', path = '{2}', type = '{3}' WHERE id = '{0}';", pack.Id, pack.Name, pack.Path, pack.Type);
+                SqlCmd.CommandText = String.Format("UPDATE pack SET name = '{1}', path = '{2}', type = '{3}' WHERE id = '{0}';", pack.Id, pack.Name, pack.Path, (int)pack.Type);
+
                 SqlCmd.ExecuteNonQuery();
 
                 return PackDao.Get(pack.Id);

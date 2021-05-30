@@ -10,23 +10,32 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 //using Ionic.Zip;//зип прикол
+using ArtCritic_Desctop.core.db;
 using Microsoft.Win32;
 
 namespace ArtCritic_Desctop.core
 {
     class CreatePack
     {
-        /// <summary>
+
+        /// Имя файла в паке
+
+        public string nameFile;
+
+        /// Пак для бд
+
+        Pack p = new Pack();
+
         /// Путь к нашей рабочей папке
-        /// </summary>
+
         string path = Directory.GetCurrentDirectory();
-        /// <summary>
+
         /// Имя пака 
-        /// </summary>
+
         public string Namepack;
-        /// <summary>
+
         /// тип созданной игры 5 потому что ещё не выбран тип
-        /// </summary>
+
         public int type_OF_create_game = 5;
         //Type of games:
         //0 text game only questions and answers-
@@ -34,73 +43,68 @@ namespace ArtCritic_Desctop.core
         //2 image game+
         //3 game_with_video+
         //4 mixed+
-        /// <summary>
+
         /// итератор для прохода под массиву файлов
-        /// </summary>
+
         public int iter = 0;
-        /// <summary>
+
         /// количество файлов в папке кроме текстового
-        /// </summary> 
+ 
         public int kol_vo_in_dir = 0;
-        /// <summary>
+
         /// Создался пак или нет(чтобы закрыть окно)
-        /// </summary>
+
         public bool is_create = false;
-        /// <summary>
+
         /// главный массив для файлов хранит все кроме текстового файла
-        /// </summary>
+
         public FileInfo[] Files;
-        /// <summary>
+
         /// Текстбокс для Юзера чтобы он вводил имя/ответ на картинку
-        /// </summary>
+
         public TextBox Users_Answer;
-        /// <summary>
+
         /// Текстблок для вывода вопроса для юзера(Какое имя пака/ответ для этой картинки)
-        /// </summary>
+
         public TextBlock Question_for_user;
-        /// <summary>
+
         /// Картинка для юзера
-        /// </summary>
+
         public Image image_for_user;
-        /// <summary>
+
         /// медиафайл для юзера
-        /// </summary>
+
         public MediaElement video_for_user;
-        /// <summary>
+
         /// Музыка для юзера
-        /// </summary>
+
         public MediaPlayer music_for_user;
-        /// <summary>
+
         /// Для показывания нужной формы в Mixed
-        /// </summary>
+
         public bool is_image = false;
-        /// <summary>
+
         /// Для показывания нужной формы в Mixed
-        /// </summary>
+
         public bool is_video = false;
-        /// <summary>
+
         /// Для показывания нужной формы в Mixed
-        /// </summary>
+
         public bool is_music = false;
-        /// <summary>
+
         /// Для проверки имени
-        /// </summary>
+
         public bool norm_name = true;
-        /// <summary>
+
         /// для проверок на битые файлы
-        /// </summary>
+
         int temp_kol_vo_in_dir = 0;
         //создаётся папка в которую пользователь в зависимости от выбора кидает картинки/видео/музыку
         //внутри папки создаётся файл с путями+ответами 
         //вся папка архивируется архив сохраняется папка удаляется
-        /// <summary>
+
         /// Создание mixed пака
-        /// </summary>
-        /// <param name="type_of_game"></param>
-        /// <param name="pack_name"></param>
-        /// <param name="video_for_create_user_pack"></param>
-        /// <param name="TB_For_Answer"></param>
-        /// <param name="TBck_for_user"></param>
+
         public CreatePack(int type_of_game, string pack_name, MediaElement video_for_create_user_pack, Image image_for_create_user_pack, MediaPlayer music_for_create_user_pack, TextBox TB_For_Answer, TextBlock TBck_for_user)
         {
             Users_Answer = TB_For_Answer;
@@ -110,11 +114,14 @@ namespace ArtCritic_Desctop.core
             video_for_user = video_for_create_user_pack;
             image_for_user = image_for_create_user_pack;
             music_for_user = music_for_create_user_pack;
+            p.Name = pack_name;
             DirectoryInfo dirInfo = new DirectoryInfo(path + @"\Packs\" + pack_name);
             if (!dirInfo.Exists)
             {
                 dirInfo.Create();
             }
+            p.Path = "dirInfo";
+            p.Type = Question.QuestionType.Mixed;
 
             //открытие папки которую создал пользователь 
             System.Diagnostics.Process.Start("explorer", path + @"\Packs\" + pack_name);
@@ -172,20 +179,14 @@ namespace ArtCritic_Desctop.core
                         }
                     }
                     //txt файл создание
-                    File.Create(path + @"\Packs\" + pack_name + @"\answersM.txt").Close();
+                    //File.Create(path + @"\Packs\" + pack_name + @"\answersM.txt").Close();
                 }
             }
             else { is_create = true; kol_vo_in_dir = -1; }
             Create_Mixed_for_user();
         }
-        /// <summary>
+
         /// Создание видео пака
-        /// </summary>
-        /// <param name="type_of_game"></param>
-        /// <param name="pack_name"></param>
-        /// <param name="video_for_create_user_pack"></param>
-        /// <param name="TB_For_Answer"></param>
-        /// <param name="TBck_for_user"></param>
         public CreatePack(int type_of_game, string pack_name, MediaElement video_for_create_user_pack, TextBox TB_For_Answer, TextBlock TBck_for_user)
         {
             Users_Answer = TB_For_Answer;
@@ -193,6 +194,7 @@ namespace ArtCritic_Desctop.core
             type_OF_create_game = type_of_game;
             Question_for_user = TBck_for_user;
             video_for_user = video_for_create_user_pack;
+            p.Name = pack_name;
             DirectoryInfo dirInfo = new DirectoryInfo(path + @"\Packs\" + pack_name);
             if (!dirInfo.Exists)
             {
@@ -248,21 +250,15 @@ namespace ArtCritic_Desctop.core
                         }
                     }
                     //txt файл создание
-                    File.Create(path + @"\Packs\" + pack_name + @"\answersV.txt").Close();
+                    //File.Create(path + @"\Packs\" + pack_name + @"\answersV.txt").Close();
                 }
             }
             else { is_create = true; kol_vo_in_dir = -1; }
             string Path_toVideo = Path.GetFullPath(Files[iter].FullName);
             Create_Video_for_user(Path_toVideo);
         }
-        /// <summary>
+
         /// Создание картиночного пака
-        /// </summary>
-        /// <param name="type_of_game"></param>
-        /// <param name="pack_name"></param>
-        /// <param name="image_for_create_user_pack"></param>
-        /// <param name="TB_For_Answer"></param>
-        /// <param name="TBck_for_user"></param>
         public CreatePack(int type_of_game, string pack_name, Image image_for_create_user_pack, TextBox TB_For_Answer, TextBlock TBck_for_user)
         {
             Users_Answer = TB_For_Answer;
@@ -270,9 +266,7 @@ namespace ArtCritic_Desctop.core
             type_OF_create_game = type_of_game;
             image_for_user = image_for_create_user_pack;
             Question_for_user = TBck_for_user;
-
-
-
+            p.Name = pack_name;
             DirectoryInfo dirInfo = new DirectoryInfo(path + @"\Packs\" + pack_name);
             if (!dirInfo.Exists)
             {
@@ -312,7 +306,7 @@ namespace ArtCritic_Desctop.core
                         if (expansion != ".jpg") { File.Delete(file); }
                     }
                 }
-                File.Create(path + @"\Packs\" + pack_name + @"\answersI.txt").Close();
+                //File.Create(path + @"\Packs\" + pack_name + @"\answersI.txt").Close();
             }
             else
             {
@@ -321,14 +315,8 @@ namespace ArtCritic_Desctop.core
             }
             Create_Image_for_user();
         }
-        /// <summary>
+
         /// Создание музыкального пака
-        /// </summary>
-        /// <param name="type_of_game"></param>
-        /// <param name="pack_name"></param>
-        /// <param name="music_for_create_user_pack"></param>
-        /// <param name="TB_For_Answer"></param>
-        /// <param name="TBck_for_user"></param>
         public CreatePack(int type_of_game, string pack_name, MediaPlayer music_for_create_user_pack, TextBox TB_For_Answer, TextBlock TBck_for_user)
         {
             Users_Answer = TB_For_Answer;
@@ -336,6 +324,7 @@ namespace ArtCritic_Desctop.core
             type_OF_create_game = type_of_game;
             music_for_user = music_for_create_user_pack;
             Question_for_user = TBck_for_user;
+            p.Name = pack_name;
             DirectoryInfo dirInfo = new DirectoryInfo(path + @"\Packs\" + pack_name);
             if (!dirInfo.Exists)
             {
@@ -379,7 +368,7 @@ namespace ArtCritic_Desctop.core
                         if (expansion != ".mp3") { File.Delete(file); }
                     }
                 }
-                File.Create(path + @"\Packs\" + pack_name + @"\answersMU.txt").Close();
+                //File.Create(path + @"\Packs\" + pack_name + @"\answersMU.txt").Close();
             }
             else
             {
@@ -389,18 +378,8 @@ namespace ArtCritic_Desctop.core
             string Path_toMusic = Path.GetFullPath(Files[iter].FullName);
             Create_Music_for_user(Path_toMusic);
         }
-        /// <summary>
+
         /// проверяет видео на ломанность
-        /// </summary>
-        /// <param name="video"></param>
-        /// <summary>
-        /// Создание Image пака
-        /// </summary>
-        /// <param name="type_of_game"></param>
-        /// <param name="pack_name"></param>
-        /// <param name="image_for_create_user_pack"></param>
-        /// <param name="TB_For_Answer"></param>
-        /// <param name="TBck_for_user"></param>
         public void Check_video(MediaElement video)
         {
 
@@ -409,7 +388,6 @@ namespace ArtCritic_Desctop.core
 
                 if (IsPlaying(this.video_for_user))
                 {
-                    //Всё заебумбно ничего не делаем
                 }
                 else
                 {
@@ -437,7 +415,8 @@ namespace ArtCritic_Desctop.core
             {
                 if (IsPlaying(this.video_for_user))
                 {
-                    //Всё заебумбно ничего не делаем
+                    Question q = new Question(p, 4, "", Users_Answer.Text, nameFile);
+                    q = QuestionDao.Add(q);
                 }
                 else
                 {
@@ -460,11 +439,11 @@ namespace ArtCritic_Desctop.core
                     }
                 }
             }
+
         }
-        /// <summary>
+
         /// Проверка музыки на воспроизведение
-        /// </summary>
-        /// <param name="music"></param>
+
         public void Check_music(MediaPlayer music)
         {
             //this.music_for_user.Stop();
@@ -473,7 +452,8 @@ namespace ArtCritic_Desctop.core
 
                 if (IsPlaying(this.music_for_user))
                 {
-                    //Всё заебумбно ничего не делаем
+                    Question q = new Question(p, 3, "", Users_Answer.Text, nameFile);
+                    q = QuestionDao.Add(q);
                 }
                 else
                 {
@@ -501,7 +481,8 @@ namespace ArtCritic_Desctop.core
             {
                 if (IsPlaying(this.music_for_user))
                 {
-                    //Всё заебумбно ничего не делаем
+                    Question q = new Question(p, 3, "", Users_Answer.Text, nameFile);
+                    q = QuestionDao.Add(q);
                 }
                 else
                 {
@@ -526,11 +507,9 @@ namespace ArtCritic_Desctop.core
             }
 
         }
-        /// <summary>
+
         /// корректно ли запустилась музыка
-        /// </summary>
-        /// <param name="music"></param>
-        /// <returns></returns>
+
         bool IsPlaying(MediaPlayer music_play)
         {
             var pos1 = music_play.Position;
@@ -538,11 +517,9 @@ namespace ArtCritic_Desctop.core
             var pos2 = music_play.Position;
             return pos2 != pos1;
         }
-        /// <summary>
+
         /// корректно ли запустилось видео
-        /// </summary>
-        /// <param name="video_play"></param>
-        /// <returns></returns>
+
         bool IsPlaying(MediaElement video_play)
         {
             var pos1 = video_play.Position;
@@ -550,10 +527,9 @@ namespace ArtCritic_Desctop.core
             var pos2 = video_play.Position;
             return pos2 != pos1;
         }
-        /// <summary>
+
         /// Включает музыку на экране
-        /// </summary>
-        /// <param name="Path_toMusic"></param>
+
         public void Create_Music_for_user(string Path_toMusic)
         {
             if (kol_vo_in_dir > 0)
@@ -566,9 +542,9 @@ namespace ArtCritic_Desctop.core
             }
             else { }
         }
-        /// <summary>
+
         /// Показывает видео на экране
-        /// </summary>
+
         public void Create_Video_for_user(string Path_toVideo)
         {
             if (kol_vo_in_dir > 0)
@@ -579,9 +555,9 @@ namespace ArtCritic_Desctop.core
             }
             else { }
         }
-        /// <summary>
+
         /// Показывает картинку на экране 
-        /// </summary>
+
         public void Create_Image_for_user()
         {
             if (kol_vo_in_dir > 0)
@@ -591,10 +567,9 @@ namespace ArtCritic_Desctop.core
                 setImageSource(Path_toImage);
             }
         }
-        /// <summary>
+
         /// создаёт поток для картинки потому что если её просто поместить в BitmapImage то картинка открывается и не может закрыться
-        /// </summary>
-        /// <param name="file"></param>
+
         void setImageSource(string file)
         {
             if (type_OF_create_game == 2)
@@ -704,12 +679,12 @@ namespace ArtCritic_Desctop.core
                         }
                     }
                 }
+                Question q = new Question(p, 2, "", Users_Answer.Text, nameFile);
+                q = QuestionDao.Add(q);
             }
 
         }
-        /// <summary>
         /// воспроизводит элемент из mixed на экране
-        /// </summary>
         public void Create_Mixed_for_user()
         {
             if (kol_vo_in_dir > 0)
@@ -746,9 +721,7 @@ namespace ArtCritic_Desctop.core
                 }
             }
         }
-        /// <summary>
         /// Создание архива
-        /// </summary>
         /*   public void Create_zip_archieve()
            {
                if (File.Exists(path + @"\Packs\" + Namepack + ".zip"))
@@ -774,11 +747,8 @@ namespace ArtCritic_Desctop.core
                }
            }
         */
-        /// <summary>
+
         /// Удаляет папку пака со всем содержимым при резком выходе
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         /* public void Delete_Naher(object sender, CancelEventArgs e)
          {
              if (Directory.Exists(path + @"\Packs\" + Namepack))
@@ -787,11 +757,7 @@ namespace ArtCritic_Desctop.core
              }
          }
         */
-        /// <summary>
         /// Само нажатие пользователя на кнопку
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         public void User_Create_CLick(object sender, RoutedEventArgs e)
         {
             if (is_create == true) { }
@@ -799,11 +765,13 @@ namespace ArtCritic_Desctop.core
             {
                 if (type_OF_create_game == 1)
                 {
-                    string nameFile = Files[iter].Name;
-                    using (StreamWriter w = File.AppendText(path + @"\Packs\" + Namepack + @"\answersMU.txt"))
-                    {
-                        w.WriteLine(@"\Packs\" + Namepack + @"\" + nameFile + " | " + Users_Answer.Text);
-                    }
+                    nameFile = Files[iter].Name;
+                   // using (StreamWriter w = File.AppendText(path + @"\Packs\" + Namepack + @"\answersMU.txt"))
+                    //{
+                      //  w.WriteLine(@"\Packs\" + Namepack + @"\" + nameFile + " | " + Users_Answer.Text);
+                        Question q = new Question(p, 3, "", Users_Answer.Text, nameFile);
+                        q = QuestionDao.Add(q);
+                    //}
                     iter++;
                     if (iter < kol_vo_in_dir)
                     {
@@ -814,16 +782,21 @@ namespace ArtCritic_Desctop.core
                     }
                     else
                     {
+                        p = PackDao.Add(p);
+                        MessageBox.Show("Пак успешно создан");
+                        is_create = true;
                         //Create_zip_archieve();
                     }
                 }
                 if (type_OF_create_game == 3)
                 {
-                    string nameFile = Files[iter].Name;
-                    using (StreamWriter w = File.AppendText(path + @"\Packs\" + Namepack + @"\answersV.txt"))
-                    {
-                        w.WriteLine(@"\Packs\" + Namepack + @"\" + nameFile + " | " + Users_Answer.Text);
-                    }
+                    nameFile = Files[iter].Name;
+                    //   using (StreamWriter w = File.AppendText(path + @"\Packs\" + Namepack + @"\answersV.txt"))
+                    // {
+                    //   w.WriteLine(@"\Packs\" + Namepack + @"\" + nameFile + " | " + Users_Answer.Text);
+                    // }
+                    Question q = new Question(p, 4, "", Users_Answer.Text, nameFile);
+                    q = QuestionDao.Add(q);
                     iter++;
                     if (iter < kol_vo_in_dir)
                     {
@@ -833,15 +806,19 @@ namespace ArtCritic_Desctop.core
                     else
                     {
                         //Create_zip_archieve();
+                        p = PackDao.Add(p);
+                        is_create = true;
                     }
                 }
                 if (type_OF_create_game == 2)
                 {
-                    string nameFile = Files[iter].Name;
-                    using (StreamWriter w = File.AppendText(path + @"\Packs\" + Namepack + @"\answersI.txt"))
-                    {
-                        w.WriteLine(@"\Packs\" + Namepack + @"\" + nameFile + " | " + Users_Answer.Text);
-                    }
+                    nameFile = Files[iter].Name;
+                    // using (StreamWriter w = File.AppendText(path + @"\Packs\" + Namepack + @"\answersI.txt"))
+                    //{
+                    //   w.WriteLine(@"\Packs\" + Namepack + @"\" + nameFile + " | " + Users_Answer.Text);
+                    //}
+                    Question q = new Question(p, 2, "", Users_Answer.Text, nameFile);
+                    q = QuestionDao.Add(q);
                     iter++;
                     if (iter < kol_vo_in_dir)
                     {
@@ -849,25 +826,30 @@ namespace ArtCritic_Desctop.core
                     }
                     else
                     {
+                        p = PackDao.Add(p);
+                        is_create = true;
                         //Create_zip_archieve();
                     }
                 }
                 if (type_OF_create_game == 4)
                 {
-                    string nameFile = Files[iter].Name;
-                    using (StreamWriter w = File.AppendText(path + @"\Packs\" + Namepack + @"\answersM.txt"))
-                    {
-                        w.WriteLine(@"\Packs\" + Namepack + @"\" + nameFile + " | " + Users_Answer.Text);
-                    }
+                    nameFile = Files[iter].Name;
+                    //  using (StreamWriter w = File.AppendText(path + @"\Packs\" + Namepack + @"\answersM.txt"))
+                    // {
+                    //    w.WriteLine(@"\Packs\" + Namepack + @"\" + nameFile + " | " + Users_Answer.Text);
+                    //}
                     iter++;
                     if (iter < kol_vo_in_dir)
                     {
                         music_for_user.Stop();
                         music_for_user.Close();
+                        video_for_user.Close();
                         Create_Mixed_for_user();
                     }
                     else
                     {
+                        p = PackDao.Add(p);
+                        is_create = true;
                         //Create_zip_archieve();
                     }
                 }
