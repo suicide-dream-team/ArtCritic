@@ -18,6 +18,8 @@ namespace ArtCritic_Desctop.core
     class CreatePack
     {
 
+        public int Qu_type;
+
         /// Имя файла в паке
 
         public string nameFile;
@@ -116,6 +118,8 @@ namespace ArtCritic_Desctop.core
             music_for_user = music_for_create_user_pack;
             p.Name = pack_name;
             p.Path = pack_name;
+            p.Type = Question.QuestionType.Mixed;
+            p = PackDao.Add(p);
             DirectoryInfo dirInfo = new DirectoryInfo(path + @"\Packs\" + pack_name);
             if (!dirInfo.Exists)
             {
@@ -197,6 +201,8 @@ namespace ArtCritic_Desctop.core
             video_for_user = video_for_create_user_pack;
             p.Name = pack_name;
             p.Path = pack_name;
+            p.Type = Question.QuestionType.Video;
+            p = PackDao.Add(p);
             DirectoryInfo dirInfo = new DirectoryInfo(path + @"\Packs\" + pack_name);
             if (!dirInfo.Exists)
             {
@@ -270,6 +276,8 @@ namespace ArtCritic_Desctop.core
             Question_for_user = TBck_for_user;
             p.Name = pack_name;
             p.Path = pack_name;
+            p.Type = Question.QuestionType.Picture;
+            p = PackDao.Add(p);
             DirectoryInfo dirInfo = new DirectoryInfo(path + @"\Packs\" + pack_name);
             if (!dirInfo.Exists)
             {
@@ -329,6 +337,8 @@ namespace ArtCritic_Desctop.core
             Question_for_user = TBck_for_user;
             p.Name = pack_name;
             p.Path = pack_name;
+            p.Type = Question.QuestionType.Audio;
+            p = PackDao.Add(p);
             DirectoryInfo dirInfo = new DirectoryInfo(path + @"\Packs\" + pack_name);
             if (!dirInfo.Exists)
             {
@@ -419,8 +429,6 @@ namespace ArtCritic_Desctop.core
             {
                 if (IsPlaying(this.video_for_user))
                 {
-                    Question q = new Question(p, 4, "", Users_Answer.Text, nameFile);
-                    q = QuestionDao.Add(q);
                 }
                 else
                 {
@@ -456,8 +464,6 @@ namespace ArtCritic_Desctop.core
 
                 if (IsPlaying(this.music_for_user))
                 {
-                    Question q = new Question(p, 3, "", Users_Answer.Text, nameFile);
-                    q = QuestionDao.Add(q);
                 }
                 else
                 {
@@ -485,8 +491,6 @@ namespace ArtCritic_Desctop.core
             {
                 if (IsPlaying(this.music_for_user))
                 {
-                    Question q = new Question(p, 3, "", Users_Answer.Text, nameFile);
-                    q = QuestionDao.Add(q);
                 }
                 else
                 {
@@ -683,8 +687,6 @@ namespace ArtCritic_Desctop.core
                         }
                     }
                 }
-                Question q = new Question(p, 2, "", Users_Answer.Text, nameFile);
-                q = QuestionDao.Add(q);
             }
 
         }
@@ -699,6 +701,7 @@ namespace ArtCritic_Desctop.core
                 expansion = expansion.Substring(expansion.Length - 4);
                 if (expansion == ".mp4")
                 {
+                    Qu_type = 4;
                     is_image = false;
                     is_video = true;
                     is_music = false;
@@ -708,7 +711,8 @@ namespace ArtCritic_Desctop.core
                 }
                 if (expansion == ".mp3")
                 {
-                    is_image = false;
+                    Qu_type = 3;
+                   is_image = false;
                     is_video = false;
                     is_music = true;
                     Question_for_user.Text = "Какой вы хотите ответ для этой музыки?";
@@ -717,7 +721,8 @@ namespace ArtCritic_Desctop.core
                 }
                 if (expansion == ".jpg")
                 {
-                    is_image = true;
+                    Qu_type=2;
+                   is_image = true;
                     is_video = false;
                     is_music = false;
                     Question_for_user.Text = "Какой вы хотите ответ для этой картинки?";
@@ -786,7 +791,6 @@ namespace ArtCritic_Desctop.core
                     }
                     else
                     {
-                        p = PackDao.Add(p);
                         MessageBox.Show("Пак успешно создан");
                         is_create = true;
                         //Create_zip_archieve();
@@ -810,7 +814,7 @@ namespace ArtCritic_Desctop.core
                     else
                     {
                         //Create_zip_archieve();
-                        p = PackDao.Add(p);
+
                         MessageBox.Show("Пак успешно создан");
                         is_create = true;
                     }
@@ -831,7 +835,7 @@ namespace ArtCritic_Desctop.core
                     }
                     else
                     {
-                        p = PackDao.Add(p);
+
                         MessageBox.Show("Пак успешно создан");
                         is_create = true;
                         //Create_zip_archieve();
@@ -844,21 +848,24 @@ namespace ArtCritic_Desctop.core
                     // {
                     //    w.WriteLine(@"\Packs\" + Namepack + @"\" + nameFile + " | " + Users_Answer.Text);
                     //}
+
+                    Question q = new Question(p, Qu_type, "", Users_Answer.Text, nameFile);
+                    q = QuestionDao.Add(q);
                     iter++;
                     if (iter < kol_vo_in_dir)
                     {
                         music_for_user.Stop();
                         music_for_user.Close();
-                        video_for_user.Close();
                         Create_Mixed_for_user();
                     }
                     else
                     {
-                        p = PackDao.Add(p);
+
                         MessageBox.Show("Пак успешно создан");
                         is_create = true;
                         //Create_zip_archieve();
                     }
+
                 }
             }
         }

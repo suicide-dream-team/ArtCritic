@@ -230,6 +230,8 @@ namespace ArtCritic_Desctop
             Pack_create_Image.Visibility = Visibility.Visible;
 
             Create_Question_Image_TBlock.Text = "Введите название пака";
+
+
         }
         private void Accept_Create_Name_Image_Pack_Click(object sender, RoutedEventArgs e)
         {
