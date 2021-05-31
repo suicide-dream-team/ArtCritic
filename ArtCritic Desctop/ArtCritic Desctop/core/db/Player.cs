@@ -6,6 +6,9 @@ using System.Text;
 
 namespace ArtCritic_Desctop.core.db
 {
+    /// <summary>
+    /// Класс для сущности игрока.
+    /// </summary>
     public class Player
     {
         public int Id { get; set; }

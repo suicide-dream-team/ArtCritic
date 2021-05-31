@@ -6,6 +6,10 @@ using System.Text;
 
 namespace ArtCritic_Desctop.core.db
 {
+    /// <summary>
+    /// Класс, осуществляющий взаимодействие БД SQLite с сущностями статистик игроков.
+    /// Реализованы статические методы CRUD.
+    /// </summary>
     class PlayerStatDao
     {
         private static SQLiteConnection DbCon { get; set; }
@@ -19,6 +23,9 @@ namespace ArtCritic_Desctop.core.db
             SqlCmd = null;
         }
 
+        /// <summary>
+        /// Инициализирует таблицу для хранения статистик в БД, если её ещё нет.
+        /// </summary>
         public static void Init()
         {
             if (!File.Exists(DbFileName))
@@ -43,6 +50,12 @@ namespace ArtCritic_Desctop.core.db
                 DbCon.Close();
             }
         }
+
+        /// <summary>
+        /// Возвращает статистику из БД по её идентификатору.
+        /// </summary>
+        /// <param name="id">Идентификатор искомой статистики.</param>
+        /// <returns>Объект PlayerStat с идентификатором id, или же null, если записи с таким id нет в БД.</returns>
         public static PlayerStat Get(int id)
         {
             try
@@ -79,6 +92,11 @@ namespace ArtCritic_Desctop.core.db
             }
         }
 
+        /// <summary>
+        /// Возвращает статистику из БД по идентификатору пользователя.
+        /// </summary>
+        /// <param name="id">Идентификатор пользователя.</param>
+        /// <returns>Объект PlayerStat для пользователя с идентификатором id, или же null, если записи нет в БД.</returns>
         public static PlayerStat GetByPlayerId(int id)
         {
             try
@@ -115,6 +133,10 @@ namespace ArtCritic_Desctop.core.db
             }
         }
 
+        /// <summary>
+        /// Добавляет в БД новую чистую статистику и возвращает id её записи.
+        /// </summary>
+        /// <returns>Идентификатор созданной статистики.</returns>
         public static int Add()
         {
             try
@@ -139,7 +161,7 @@ namespace ArtCritic_Desctop.core.db
                 }
                 else
                 {
-                    throw new SQLiteException("Ошибка при получении id игрока");
+                    throw new SQLiteException("Ошибка при получении id статистики");
                 }
             }
             catch (SQLiteException ex)
@@ -152,6 +174,11 @@ namespace ArtCritic_Desctop.core.db
             }
         }
 
+        /// <summary>
+        /// Обновляет уже хранящуюся в БД статистику. Обновление происходит по id статистики.
+        /// </summary>
+        /// <param name="stat">Обновляемая статистика.</param>
+        /// <returns>Объект PlayerStat хранящейся в БД только что обновлённой статистики.</returns>
         public static PlayerStat Update(PlayerStat stat)
         {
             try
@@ -176,6 +203,10 @@ namespace ArtCritic_Desctop.core.db
             }
         }
 
+        /// <summary>
+        /// Удаляет статистику из БД по её идентификатору.
+        /// </summary>
+        /// <param name="id">Идентификатор удаляемой из БД статистики.</param>
         public static void Delete(int id)
         {
             try

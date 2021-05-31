@@ -4,7 +4,10 @@ using System.Text;
 
 namespace ArtCritic_Desctop.core.db
 {
-    class Pack
+    /// <summary>
+    /// Класс для сущности пакета вопросов.
+    /// </summary>
+    public class Pack
     {
         public int Id { get; set; }
         public string Name { get; set; }

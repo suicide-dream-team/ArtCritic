@@ -6,6 +6,10 @@ using System.Text;
 
 namespace ArtCritic_Desctop.core.db
 {
+    /// <summary>
+    /// Класс, осуществляющий взаимодействие БД SQLite с сущностями игроков.
+    /// Реализованы статические методы CRUD.
+    /// </summary>
     public class PlayerDao
     {
         private static SQLiteConnection DbCon { get; set; }
@@ -19,6 +23,9 @@ namespace ArtCritic_Desctop.core.db
             SqlCmd = null;
         }
 
+        /// <summary>
+        /// Инициализирует таблицу для хранения игроков в БД, если её ещё нет.
+        /// </summary>
         public static void Init()
         {
             if (!File.Exists(DbFileName))
@@ -44,6 +51,11 @@ namespace ArtCritic_Desctop.core.db
             }
         }
 
+        /// <summary>
+        /// Возвращает из БД игрока по его идентификатору.
+        /// </summary>
+        /// <param name="id">Идентификатор искомого игрока.</param>
+        /// <returns>Объект Player с идентификатором id, или же null, если записи с таким id нет в БД.</returns>
         public static Player Get(int id)
         {
             try
@@ -80,6 +92,14 @@ namespace ArtCritic_Desctop.core.db
             }
         }
 
+        /// <summary>
+        /// Возвращает из БД игрока по его имени и паролю.
+        /// </summary>
+        /// <param name="name">Имя искомого игрока.</param>
+        /// <param name="password">Пароль искомого игрока.</param>
+        /// <returns>Объект Player с именем name и паролем password, если такая запись есть в БД.</returns>
+        /// <exception cref="PlayerNotFoundException">Если игрок с таким именем не найден.</exception>
+        /// <exception cref="PasswordIsIncorrectException">Если пароли не совпали.</exception>
         public static Player Get(string name, string password)
         {
             try
@@ -125,6 +145,10 @@ namespace ArtCritic_Desctop.core.db
             }
         }
 
+        /// <summary>
+        /// Возвращает список всех хранящихся в БД игроков.
+        /// </summary>
+        /// <returns>Список List с игроками Player, или пустой список, если в БД нет игроков.</returns>
         public static List<Player> GetPlayers()
         {
             try
@@ -158,6 +182,12 @@ namespace ArtCritic_Desctop.core.db
             }
         }
 
+        /// <summary>
+        /// Добавляет в БД новую запись для игрока, после чего возвращает её с присвоенным ей идентификатором.
+        /// </summary>
+        /// <param name="p">Игрок, добавляемый в БД.</param>
+        /// <returns>Объект Player хранящегося в БД только что добавленного игрока.</returns>
+        /// <exception cref="SQLiteException">При неудачном добавлении игрока в БД.</exception>
         public static Player Add(Player p)
         {
             try
@@ -197,6 +227,11 @@ namespace ArtCritic_Desctop.core.db
             }
         }
 
+        /// <summary>
+        /// Обновляет уже хранящегося в БД игрока p. Обновление происходит по id игрока.
+        /// </summary>
+        /// <param name="p">Обновляемый игрок.</param>
+        /// <returns>Объект Player хранящегося в БД только что обновлённого игрока.</returns>
         public static Player Update(Player p)
         {
             try
@@ -221,11 +256,19 @@ namespace ArtCritic_Desctop.core.db
             }
         }
 
+        /// <summary>
+        /// Удаляет игрока из БД.
+        /// </summary>
+        /// <param name="p">Удаляемый из БД игрок.</param>
         public static void Delete(Player p)
         {
             Delete(p.Id);
         }
 
+        /// <summary>
+        /// Удаляет игрока из БД по его идентификатору.
+        /// </summary>
+        /// <param name="id">Идентификатор удаляемого из БД игрока.</param>
         public static void Delete(int id)
         {
             try
@@ -253,6 +296,9 @@ namespace ArtCritic_Desctop.core.db
         }
     }
 
+    /// <summary>
+    /// Пользователь не найден в БД.
+    /// </summary>
     public class PlayerNotFoundException : Exception
     {
         public PlayerNotFoundException(string message)
@@ -260,6 +306,9 @@ namespace ArtCritic_Desctop.core.db
         { }
     }
 
+    /// <summary>
+    /// Пароль пользователя не совпадает с хранящимся в БД.
+    /// </summary>
     public class PasswordIsIncorrectException : Exception
     {
         public PasswordIsIncorrectException(string message)

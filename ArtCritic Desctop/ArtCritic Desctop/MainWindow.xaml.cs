@@ -143,7 +143,10 @@ namespace ArtCritic_Desctop
             this.I_Create_Pack_Button.Source = I_Creat_Pack_Bitmap;
         }
 
-        // Проверяем существование базы данных, если её нет - создаём
+        /// <summary>
+        /// Проверяет сущестование файла БД и создаёт его при необходимости.
+        /// Инициализирует Dao-объекты для возможности работы с БД.
+        /// </summary>
         private void CreateAndCheckDb()
         {
             if (!File.Exists(DbFileName))
@@ -162,6 +165,11 @@ namespace ArtCritic_Desctop
             }
         }
 
+        /// <summary>
+        /// Обновляет статистику для текущего игрока.
+        /// </summary>
+        /// <param name="correctAnswer">Количество верных ответов.</param>
+        /// <param name="totalAnswer">Всего ответов.</param>
         private void updateStatistics(int correctAnswer, int totalAnswer)
         {
             Player.Stat.CurrentResult = (Player.Stat.CurrentResult * Player.Stat.PlayedGames + correctAnswer * 100 / totalAnswer) / (Player.Stat.PlayedGames + 1);

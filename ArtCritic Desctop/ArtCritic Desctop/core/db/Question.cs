@@ -4,8 +4,14 @@ using System.Text;
 
 namespace ArtCritic_Desctop.core.db
 {
-    class Question
+    /// <summary>
+    /// Класс для сущности вопроса.
+    /// </summary>
+    public class Question
     {
+        /// <summary>
+        /// Возможные типы пакетов и вопросов. Вопросам не следует присваивать тип Mixed.
+        /// </summary>
         public enum QuestionType
         {
             Mixed,

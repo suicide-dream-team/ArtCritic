@@ -4,6 +4,9 @@ using System.Text;
 
 namespace ArtCritic_Desctop.core.db
 {
+    /// <summary>
+    /// Класс для сущности статистики игрока.
+    /// </summary>
     public class PlayerStat
     {
         public int Id { get; set; }

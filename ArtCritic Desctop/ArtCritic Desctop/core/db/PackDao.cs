@@ -6,7 +6,11 @@ using System.IO;
 
 namespace ArtCritic_Desctop.core.db
 {
-    class PackDao
+    /// <summary>
+    /// Класс, осуществляющий взаимодействие БД SQLite с сущностями пакетов.
+    /// Реализованы статические методы CRUD.
+    /// </summary>
+    public class PackDao
     {
         private static SQLiteConnection DbCon { get; set; }
         private static SQLiteCommand SqlCmd { get; set; }
@@ -19,6 +23,9 @@ namespace ArtCritic_Desctop.core.db
             SqlCmd = null;
         }
 
+        /// <summary>
+        /// Инициализирует таблицу для хранения пакетов в БД, если её ещё нет.
+        /// </summary>
         public static void Init()
         {
             if (!File.Exists(DbFileName))
@@ -44,6 +51,11 @@ namespace ArtCritic_Desctop.core.db
             }
         }
 
+        /// <summary>
+        /// Возвращает из БД пакет по его идентификатору.
+        /// </summary>
+        /// <param name="id">Идентификатор искомого пакета.</param>
+        /// <returns>Объект Pack с идентификатором id, или же null, если записи с таким id нет в БД.</returns>
         public static Pack Get(int id)
         {
             try
@@ -80,6 +92,10 @@ namespace ArtCritic_Desctop.core.db
             }
         }
 
+        /// <summary>
+        /// Возвращает список всех хранящихся в БД пакетов вопросов.
+        /// </summary>
+        /// <returns>Список List с пакетами Pack, или пустой список, если в БД нет пакетов.</returns>
         public static List<Pack> GetPacks()
         {
             try
@@ -114,6 +130,11 @@ namespace ArtCritic_Desctop.core.db
             }
         }
 
+        /// <summary>
+        /// Возвращает из БД пакет по его имени.
+        /// </summary>
+        /// <param name="name">Имя искомого пакета.</param>
+        /// <returns>Объект Pack с именем name, или же null, если пакета с таким именем нет в БД.</returns>
         public static Pack GetByName(string name)
         {
             try
@@ -150,6 +171,14 @@ namespace ArtCritic_Desctop.core.db
             }
         }
 
+        /// <summary>
+        /// Добавляет в БД новую запись для пакета, после чего возвращает её с присвоенным ей идентификатором.
+        /// </summary>
+        /// <exception>
+        /// Выбрасывает исключение SQLiteException при неудачном добавлении пакета в БД.
+        /// </exception>
+        /// <param name="pack">Пакет, добавляемый в БД.</param>
+        /// <returns>Объект Pack хранящегося в БД только что добавленного пакета.</returns>
         public static Pack Add(Pack pack)
         {
             try
@@ -174,7 +203,9 @@ namespace ArtCritic_Desctop.core.db
                 }
                 else
                 {
-                    throw new SQLiteException("Ошибка при получении id игрока");
+                    // Если строки в БД нет - значит, произошла ошибка при добавлении записи в БД
+                    // Выбрасываем исключение
+                    throw new SQLiteException("Ошибка при получении id пакета");
                 }
 
             }
@@ -188,6 +219,11 @@ namespace ArtCritic_Desctop.core.db
             }
         }
 
+        /// <summary>
+        /// Обновляет уже хранящийся в БД пакет pack. Обновление происходит по id пакета.
+        /// </summary>
+        /// <param name="pack">Обновляемый пакет.</param>
+        /// <returns>Объект Pack хранящегося в БД только что обновлённого пакета.</returns>
         public static Pack Update(Pack pack)
         {
             try
@@ -213,11 +249,19 @@ namespace ArtCritic_Desctop.core.db
             }
         }
 
-        public static void Delete(Pack p)
+        /// <summary>
+        /// Удаляет пакет из БД.
+        /// </summary>
+        /// <param name="pack">Удаляемый из БД пакет.</param>
+        public static void Delete(Pack pack)
         {
-            Delete(p.Id);
+            Delete(pack.Id);
         }
 
+        /// <summary>
+        /// Удаляет пакет из БД по его идентификатору.
+        /// </summary>
+        /// <param name="id">Идентификатор удаляемого из БД пакета.</param>
         public static void Delete(int id)
         {
             try
