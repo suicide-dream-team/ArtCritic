@@ -140,7 +140,8 @@
             <Button x:Name="Accept" Content="Ввести" Grid.Column="1" Grid.Row="7" Click="Accept_Click"></Button>
         </Grid>
 
-        <Grid x:Name="Mixed_game">
+       
+        <Grid x:Name="Music_question_window">
             <Grid.RowDefinitions>
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
@@ -160,46 +161,23 @@
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
 
-            <Image x:Name="I_Mixed_accept" Grid.Row="4" Grid.Column="4" MouseLeftButtonDown="I_Mixed_accept_MouseLeftButtonDown" Grid.ColumnSpan="2" Margin="57,62,77,0" Grid.RowSpan="2" ></Image>
-        </Grid>
+            <Image x:Name="I_Music_background" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="6" Grid.RowSpan="7" Stretch="Fill" d:IsHidden="True"></Image>
 
-        <Grid x:Name="Music_question_window" d:IsHidden="True">
-            <Grid.RowDefinitions>
-                <RowDefinition></RowDefinition>
-                <RowDefinition></RowDefinition>
-                <RowDefinition></RowDefinition>
-                <RowDefinition></RowDefinition>
-                <RowDefinition></RowDefinition>
-                <RowDefinition></RowDefinition>
-                <RowDefinition></RowDefinition>
-            </Grid.RowDefinitions>
+            <TextBlock x:Name="Music_question_xaml" Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="4" d:IsHidden="True" />
 
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
-            </Grid.ColumnDefinitions>
+            <TextBox x:Name="Music_answer" Grid.Row="5" Grid.Column="2" Grid.ColumnSpan="2" d:IsHidden="True"/>
 
-            <Image x:Name="I_Music_background" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="6" Grid.RowSpan="7" Stretch="Fill"></Image>
+            <Button x:Name="Music_Accept_button" Grid.Row="5" Grid.Column="5" Click="Music_accept_Click" Visibility="Hidden" d:IsHidden="True"></Button>
 
-            <TextBlock x:Name="Music_question_xaml" Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="4" />
+            <Image x:Name="I_Music_accept" Grid.Row="5" Grid.Column="4" MouseLeftButtonDown="Music_accept_image_MouseLeftButtonDown" d:IsHidden="True"/>
 
-            <TextBox x:Name="Music_answer" Grid.Row="5" Grid.Column="2" Grid.ColumnSpan="2"/>
+            <Button x:Name="Music_exit_button" Content="Выйти" Grid.Row="0" Grid.Column="5" Click="Music_exit_Click" Visibility="Hidden" d:IsHidden="True"/>
 
-            <Button x:Name="Music_Accept_button" Grid.Row="5" Grid.Column="5" Click="Music_accept_Click" Visibility="Hidden"></Button>
+            <Image x:Name="I_Music_Exit" Grid.Row="0" Grid.Column="5"  MouseLeftButtonDown="Music_exit_image_MouseLeftButtonDown" d:IsHidden="True"/>
 
-            <Image x:Name="I_Music_accept" Grid.Row="5" Grid.Column="4" MouseLeftButtonDown="Music_accept_image_MouseLeftButtonDown"/>
+            <Button x:Name="Music_replay_music" Content="повторить" Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="1" Grid.RowSpan="2" Click="Music_replay_music_Click" Visibility="Hidden" d:IsHidden="True"/>
 
-            <Button x:Name="Music_exit_button" Content="Выйти" Grid.Row="0" Grid.Column="5" Click="Exit_Click" Visibility="Hidden"/>
-
-            <Image x:Name="I_Music_Exit" Grid.Row="0" Grid.Column="5"  MouseLeftButtonDown="exit_pic_MouseLeftButtonDown"/>
-
-            <Button x:Name="Music_replay_music" Content="повторить" Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="1" Grid.RowSpan="2" Click="Music_replay_music_Click" Visibility="Hidden"/>
-
-            <Image x:Name="I_Music_replay" Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="2" Grid.RowSpan="2" MouseLeftButtonDown="I_Music_replay_MouseLeftButtonDown"></Image>
+            <Image x:Name="I_Music_replay" Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="2" Grid.RowSpan="2" MouseLeftButtonDown="I_Music_replay_MouseLeftButtonDown" d:IsHidden="True"></Image>
 
         </Grid>
 
@@ -380,6 +358,30 @@
 
         </Grid>
 
+        <Grid  x:Name="Login_Window" d:IsHidden="True">
+            <Label Content="Введите логин:" HorizontalAlignment="Center" Margin="0,120,0,0" VerticalAlignment="Top" Width="212"/>
+            <Label Content="Введите пароль:" HorizontalAlignment="Left" Margin="294,174,0,0" VerticalAlignment="Top" Width="106"/>
+            <TextBox x:Name="Login_Textbox" HorizontalAlignment="Left" Margin="294,151,0,0"  TextWrapping="Wrap" VerticalAlignment="Top" Width="123"/>
+            <PasswordBox x:Name="Password_Passbox" HorizontalAlignment="Left" Margin="294,205,0,0" VerticalAlignment="Top" Width="123"/>
+            <Button x:Name="Button_Login" Content="Войти" HorizontalAlignment="Left" Margin="294,233,0,0" VerticalAlignment="Top" Click="Button_Login_Click" />
+            <Button x:Name="Button_Reg_Login" Content="Регистрация" HorizontalAlignment="Left" Margin="345,233,0,0" VerticalAlignment="Top" Click="Button_Reg_Login_Click" />
+                
+        </Grid>
+
+        <Grid x:Name="Reg_Window" d:IsHidden="True">
+            <Label Content="Введите логин" HorizontalAlignment="Center" Margin="0,135,0,0" VerticalAlignment="Top" d:IsHidden="True"/>
+            <Label Content="Введите пароль" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,191,0,0" d:IsHidden="True"/>
+            <Label Content="Повторите пароль" HorizontalAlignment="Center" Margin="0,248,0,0" VerticalAlignment="Top" d:IsHidden="True"/>
+            <TextBox x:Name="Textbox_Login_Reg" HorizontalAlignment="Center" Margin="0,166,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" d:IsHidden="True" />
+            <PasswordBox x:Name="Password_Reg1" HorizontalAlignment="Center" Margin="0,222,0,0" VerticalAlignment="Top" Width="120" d:IsHidden="True"/>
+            <PasswordBox x:Name="Password_Reg2" HorizontalAlignment="Center" Margin="0,279,0,0" VerticalAlignment="Top" Width="120" d:IsHidden="True"/>
+            <Button x:Name="Button_Reg_Registration" Content="Регистрация" HorizontalAlignment="Left" Margin="340,319,0,0" VerticalAlignment="Top" Width="72" Click="Button_Reg_Registration_Click" d:IsHidden="True"/>
+            <Button x:Name="Cancel" Content="Отмена" HorizontalAlignment="Left" Margin="414,319,0,0" VerticalAlignment="Top" Click="Cancel_Click" d:IsHidden="True" />
+
+
+
+
+        </Grid>
 
 
 
