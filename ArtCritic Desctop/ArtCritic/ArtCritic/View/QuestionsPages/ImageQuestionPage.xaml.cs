@@ -11,10 +11,8 @@ namespace ArtCritic
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ImageQuestionPage : ContentPage
     {
-        private List<Image_Question> db;
+        private List<ImageQuestion> db;
         private int image_counter = 0;
-        private string currentAnswer_image;
-
         private int answer_sum_image_correct = 0;
 
         public ImageQuestionPage()
@@ -31,16 +29,15 @@ namespace ArtCritic
         {
             var q = db[image_counter];
             pice.Source = q.Picture.Source;
-            currentAnswer_image = q.Answer;
             image_counter++;
         }
 
         private void Create_Image_List()
         {
-            db = new List<Image_Question>();
+            db = new List<ImageQuestion>();
             image_counter = 0;
 
-            
+
             pice.Source = ImageSource.FromResource("ArtCritic.Data.Images.pic0.jpg");
 
             var assembly = Assembly.GetExecutingAssembly();
@@ -53,7 +50,7 @@ namespace ArtCritic
                 {
                     var e = reader.ReadLine();
                     var args = e.Split('|');
-                    db.Add(new Image_Question(args[0], args[1]));
+                    db.Add(new ImageQuestion(args[0], args[1]));
                 }
             }
         }
@@ -70,7 +67,7 @@ namespace ArtCritic
             string word = String.Empty;
             word = Answer_Image_Texbox.Text;
 
-            if (word.ToLower() == currentAnswer_image.ToLower())
+            if (db[image_counter].CheckAnswer(word))
             {
                 answer_sum_image_correct++;
                 image_score.Text = answer_sum_image_correct.ToString();

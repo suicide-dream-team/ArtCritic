@@ -23,7 +23,7 @@ namespace ArtCritic
             InitializeComponent();
             Creat_Music();
             musicPlayer = DependencyService.Get<IMusicPlayer>();
-            musicPlayer.Open(music_Questions[iter].questionFilename);
+            musicPlayer.Open(music_Questions[iter].QuestionFilename);
             musicPlayer.Play();
         }
 
@@ -48,9 +48,9 @@ namespace ArtCritic
         async private void Music_accept_Click(object sender, EventArgs e)
         {
             musicPlayer.Stop();
-            if (music_Questions[iter].Check_Answer(Music_answer.Text))
+            if (music_Questions[iter].CheckAnswer(Music_answer.Text))
                 score++;
-                music_score.Text = score.ToString();
+            music_score.Text = score.ToString();
             Music_answer.Text = "";
             ++iter;
             if (iter == 4)
@@ -60,14 +60,14 @@ namespace ArtCritic
             }
             else
             {
-                musicPlayer.Open(music_Questions[iter].questionFilename);
+                musicPlayer.Open(music_Questions[iter].QuestionFilename);
                 musicPlayer.Play();
             }
         }
 
         private void Music_replay_music_Click(object sender, EventArgs e)
         {
-            musicPlayer.Open(music_Questions[iter].questionFilename);
+            musicPlayer.Open(music_Questions[iter].QuestionFilename);
             musicPlayer.Play();
         }
 

@@ -4,24 +4,42 @@ using System.Text;
 
 namespace ArtCritic
 {
-    class TextQuestion
+    /// <summary>
+    /// Базовый класс вопроса: текстовый вопрос
+    /// </summary>
+    public class TextQuestion
     {
-        public readonly string Text;//публично временно, на время тестов
-        protected string[] Answers;//публично временно, на время тестов
-        public TextQuestion(string text, string[] answers) {
-            Text = text;
-            Answers = answers;
+        private readonly string _text;// текст вопроса
+        protected string[] _correctAnswers;// !FIXME публично временно, на время тестов
+
+        public TextQuestion(string text, string[] answers)
+        {
+            _text = text;
+            _correctAnswers = answers;
         }
-        public bool Check_Answer(string ans) {
-            //foreach(string ch_ans in Answers)
-            for (int i = 0; i < Answers.Length; ++i)
+
+        public TextQuestion(string text, string answer)
+        {
+            _correctAnswers = new string[1];
+            _correctAnswers[0] = answer;
+            _text = text;
+        }
+
+        /// <summary>
+        /// Проверка ответа на правильность
+        /// Ищет ответ в массиве всех ответов
+        /// </summary>
+        /// <param name="answer">ответ, который нужно проверить </param>
+        /// <returns>Верность ответа</returns>
+        public bool CheckAnswer(string answerToCheck)
+        {
+            foreach (string correctAnswer in _correctAnswers)
             {
-                bool check = (Answers[i].ToLower()==ans.ToLower());
-                if (check)                    
-                { 
-                    return true; 
+                if (correctAnswer.ToLower() == answerToCheck.ToLower())
+                {
+                    return true;
                 }
-               
+
             }
             return false;
         }

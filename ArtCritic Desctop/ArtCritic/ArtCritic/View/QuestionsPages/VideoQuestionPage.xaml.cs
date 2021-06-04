@@ -14,11 +14,9 @@ namespace ArtCritic.View.QuestionsPages
 {
     public partial class VideoQuestionPage : ContentPage
     {
-
         private List<VideoQuestion> db_video;
         int video_counter = 0;
         int answer_sum_video_correct = 0;
-        string currentAnswer_video;
 
         public VideoQuestionPage()
         {
@@ -57,7 +55,7 @@ namespace ArtCritic.View.QuestionsPages
         {
             var newVideoQuestion = db_video[video_counter];
             mediaElement.Source = newVideoQuestion.Path_To_Video;
-            currentAnswer_video = newVideoQuestion.Answer_for_video;
+
             video_counter++;
         }
         /// <summary>
@@ -78,13 +76,16 @@ namespace ArtCritic.View.QuestionsPages
             word = Answer_Video_Texbox.Text;
             Answer_Video_Texbox.Text = "";
 
-            if (word.ToLower() == currentAnswer_video.ToLower())
+            if (db_video[video_counter].CheckAnswer(word.ToLower()))
             {
                 answer_sum_video_correct++;
                 video_score.Text = answer_sum_video_correct.ToString();
             }
 
-            if (video_counter != db_video.Count) { LoadNewVideoQuestion(); }
+            if (video_counter != db_video.Count)
+            {
+                LoadNewVideoQuestion();
+            }
             else
             {
                 await DisplayAlert("Молодец!", "твой результат: " + answer_sum_video_correct + "/" + db_video.Count, "OK");

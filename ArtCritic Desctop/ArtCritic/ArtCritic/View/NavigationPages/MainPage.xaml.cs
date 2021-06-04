@@ -14,17 +14,13 @@ namespace ArtCritic
         {
             InitializeComponent();
         }
-        async private void Settings_Click(object sender, EventArgs e)
+
+        async private void StatisticsClick(object sender, EventArgs e)
         {
             await DisplayAlert("Не работает", "Пока в разработке", "OK");
         }
 
-        async private void Satistyc_Click(object sender, EventArgs e)
-        {
-            await DisplayAlert("Не работает", "Пока в разработке", "OK");
-        }
-
-        async private void Game_Click(object sender, EventArgs e)
+        async private void GameClick(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new ChooseGameModePage());
         }

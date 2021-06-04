@@ -2,19 +2,15 @@
 
 namespace ArtCritic
 {
-    public class Image_Question
+    public class ImageQuestion : TextQuestion
     {
         //Изображение для View
         public Image Picture { get; set; }
 
-        //Ответ на картинку
-        public string Answer { get; set; }
-
-        public Image_Question(string PathImageSource, string AnswerSource)
+        public ImageQuestion(string pathToImageSource, string answerSource) : base("", answerSource)
         {
             this.Picture = new Image();
-            this.Picture.Source = ImageSource.FromResource(PathImageSource);
-            this.Answer = AnswerSource;
+            this.Picture.Source = ImageSource.FromResource(pathToImageSource);
         }
     }
 }
