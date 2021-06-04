@@ -2,19 +2,19 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ArtCritic.ImageQuestionPage">
-    <StackLayout x:Name="Image_game">
-        <Label x:Name="image_question" Text="Введите ответ на вопрос!" HorizontalTextAlignment="Center" FontSize="40"></Label>
+    <StackLayout x:Name="ImageGame">
+        <Label x:Name="QuestionLabel" Text="Введите ответ на вопрос!" HorizontalTextAlignment="Center" FontSize="40"></Label>
         <Grid 
                 HorizontalOptions="FillAndExpand"
                 VerticalOptions="FillAndExpand"
                  >
             <Image
-                   x:Name="pice"                         
+                   x:Name="currentPicture"                         
                    Aspect="AspectFit"                    
                 />
         </Grid>
-        <Entry x:Name="Answer_Image_Texbox" Text=""/>
-        <Button x:Name="Accept_Answer_Image" Text="Ввести" Clicked="Accept_Answer_Image_Click" />
-        <Label x:Name="image_score" Text="0" HorizontalTextAlignment="Center" FontSize="40"></Label>
+        <Entry x:Name="UserAnswerEntry" Text=""/>
+        <Button x:Name="AcceptAnswerButton" Text="Ввести" Clicked="AcceptAnswerImageClick" />
+        <Label x:Name="ScoreLabel" Text="0" HorizontalTextAlignment="Center" FontSize="40"></Label>
     </StackLayout>
 </ContentPage>

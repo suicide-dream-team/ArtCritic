@@ -6,7 +6,7 @@
     <StackLayout>
         <Label x:Name="video_question" Text="Введите ответ на вопрос!" HorizontalTextAlignment="Center" FontSize="40"></Label>
         <xct:MediaElement x:Name="mediaElement" Source="ms-appx:///video0.mp4" AutoPlay="False" HeightRequest="500" WidthRequest="600" HorizontalOptions="Center" />
-        <Entry x:Name="Answer_Video_Texbox" ></Entry>
+        <Entry x:Name="AnswerTextbox" ></Entry>
         <Button x:Name="Video_Accept_button" Text="Ввести" Clicked="Accept_Answer_Video_Click"></Button>
         <Label x:Name="video_score" Text="0" HorizontalTextAlignment="Center" FontSize="40"></Label>
     </StackLayout>

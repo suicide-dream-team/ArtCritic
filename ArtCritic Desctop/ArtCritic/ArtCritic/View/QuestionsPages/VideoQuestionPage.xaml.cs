@@ -1,14 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
-using Xamarin.CommunityToolkit.Core;
 
 namespace ArtCritic.View.QuestionsPages
 {
@@ -73,8 +68,8 @@ namespace ArtCritic.View.QuestionsPages
         async public void Check_Answer_video()
         {
             string word = String.Empty;
-            word = Answer_Video_Texbox.Text;
-            Answer_Video_Texbox.Text = "";
+            word = AnswerTextbox.Text;
+            AnswerTextbox.Text = "";
 
             if (db_video[video_counter].CheckAnswer(word.ToLower()))
             {

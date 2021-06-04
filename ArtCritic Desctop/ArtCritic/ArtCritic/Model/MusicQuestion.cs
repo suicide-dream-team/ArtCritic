@@ -1,7 +1,3 @@
-using System;
-using Xamarin.Forms;
-
-
 namespace ArtCritic
 {
     class MusicQuestion : TextQuestion

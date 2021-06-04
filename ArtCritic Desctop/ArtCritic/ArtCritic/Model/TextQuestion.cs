@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace ArtCritic
+﻿namespace ArtCritic
 {
     /// <summary>
     /// Базовый класс вопроса: текстовый вопрос

@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿using ArtCritic.Controller;
+using ArtCritic.View.QuestionsPages;
+using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using ArtCritic.View.QuestionsPages;
 
 namespace ArtCritic
 {
@@ -33,9 +29,11 @@ namespace ArtCritic
             await DisplayAlert("Не работает", "Пока в разработке", "OK");
         }
 
-        async private void Image_question_Click(object sender, EventArgs e)
+        async private void ImageQuestionClick(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new ImageQuestionPage());
+            QuestionsController questionsController = new QuestionsController();
+            questionsController.LoadImageQuestions();
+            await Navigation.PushAsync(new ImageQuestionPage(questionsController));
         }
     }
 }

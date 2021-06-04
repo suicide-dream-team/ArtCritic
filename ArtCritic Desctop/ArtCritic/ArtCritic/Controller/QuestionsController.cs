@@ -1,32 +1,34 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.IO;
 using System.Reflection;
-using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
 namespace ArtCritic.Controller
 {
 
-    class QuestionsController
+    public class QuestionsController
     {
-        private List<TextQuestion> _Questions;
-        private int _currentIndexOfQuestion = 0;
-        private int _NumberOfCorrectAnswers = 0;
+        private List<TextQuestion> _Questions = new List<TextQuestion>();
+        private int _currentIndexOfQuestion = -1;
+        private int _numberOfCorrectAnswers = 0;
         public int NumberOfCorrectAnswers
         {
             get
             {
-                return _NumberOfCorrectAnswers;
+                return _numberOfCorrectAnswers;
             }
+        }
+
+        public int GetNumberOfQuestions()
+        {
+            return _Questions.Count;
         }
 
         public void ShuffleQuestionsList()
         {
             Random random = new Random();
             int n = _Questions.Count;
-            while (n>1)
+            while (n > 1)
             {
                 n--;
                 int k = random.Next(n + 1);
@@ -38,11 +40,15 @@ namespace ArtCritic.Controller
 
         public bool IsTheAnyQuestionsAvailable()
         {
-            return _currentIndexOfQuestion != _Questions.Count-1;
+            return _currentIndexOfQuestion != _Questions.Count - 1;
         }
 
-        public TextQuestion GetNextQuestion()
+        public TextQuestion GetNextQuestion(string UserAnswer)
         {
+            if (_currentIndexOfQuestion != -1 && _Questions[_currentIndexOfQuestion].CheckAnswer(UserAnswer.ToLower()))
+            {
+                _numberOfCorrectAnswers++;
+            }
             _currentIndexOfQuestion++;
             return _Questions[_currentIndexOfQuestion];
         }
@@ -62,11 +68,6 @@ namespace ArtCritic.Controller
                     _Questions.Add(new ImageQuestion(args[0], args[1]));
                 }
             }
-        }
-
-        public bool IsCorrectAnswer(string userAnswer)
-        {
-            return _Questions[_currentIndexOfQuestion].CheckAnswer(userAnswer.ToLower());
         }
 
         public void LoadVideoQuestions()
