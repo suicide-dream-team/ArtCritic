@@ -8,27 +8,6 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid x:Name="G1" >
 
-        <Grid x:Name="Mixed_game" Visibility="Hidden">
-            <Grid.RowDefinitions>
-                <RowDefinition></RowDefinition>
-                <RowDefinition></RowDefinition>
-                <RowDefinition></RowDefinition>
-                <RowDefinition></RowDefinition>
-                <RowDefinition></RowDefinition>
-                <RowDefinition></RowDefinition>
-                <RowDefinition></RowDefinition>
-            </Grid.RowDefinitions>
-
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
-            </Grid.ColumnDefinitions>
-            <Image x:Name="I_Mixed_accept" Grid.Row="5" Grid.Column="4" MouseLeftButtonDown="I_Mixed_accept_MouseLeftButtonDown"></Image>
-        </Grid>
         
         
         <Grid x:Name="Main_menu" d:IsHidden="True" >
@@ -411,6 +390,27 @@
 
         </Grid>
 
+        <Grid x:Name="Mixed_game" Visibility="Hidden">
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Image x:Name="I_Mixed_accept" Grid.Row="5" Grid.Column="5" MouseLeftButtonDown="I_Mixed_accept_MouseLeftButtonDown"></Image>
+        </Grid>
 
 
     </Grid>

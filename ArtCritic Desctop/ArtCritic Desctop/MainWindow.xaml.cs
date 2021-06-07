@@ -529,19 +529,19 @@ namespace ArtCritic_Desctop
              }*/
             
             string I_Music_Replay_Path = System.IO.Path.GetFullPath("..\\..\\..\\Buttons\\button_repeat.png");
-            string I_Mixed_Accept_Path = System.IO.Path.GetFullPath("..\\..\\..\\Buttons\\button_next.png");
+           
             string I_Music_Exit_Path = System.IO.Path.GetFullPath("..\\..\\..\\Buttons\\button_exit_game.png");
             string I_Background_Path = System.IO.Path.GetFullPath("..\\..\\..\\wallpapers__for_menu_music_pictures\\guess_music.jpg");
             Uri I_Music_Replay_U_Path = new Uri(I_Music_Replay_Path, UriKind.RelativeOrAbsolute);
-            Uri I_Mixed_Accept_U_Path = new Uri(I_Mixed_Accept_Path, UriKind.RelativeOrAbsolute);
+           
             Uri I_Music_Exit_U_Path = new Uri(I_Music_Exit_Path, UriKind.RelativeOrAbsolute);
             Uri I_Background_U_Path = new Uri(I_Background_Path, UriKind.RelativeOrAbsolute);
             BitmapImage I_Music_Replay_Bitmap = new BitmapImage(I_Music_Replay_U_Path);
-            BitmapImage I_Mixed_Accept_Bitmap = new BitmapImage(I_Mixed_Accept_U_Path);
+                    
             BitmapImage I_Music_Exit_Bitmap = new BitmapImage(I_Music_Exit_U_Path);
             BitmapImage I_Background_Bitmap = new BitmapImage(I_Background_U_Path);
             this.I_Music_Exit.Source = I_Music_Exit_Bitmap;
-            this.I_Mixed_accept.Source = I_Mixed_Accept_Bitmap;
+            
             this.I_Music_replay.Source = I_Music_Replay_Bitmap;
             this.I_Music_background.Source = I_Background_Bitmap;
 
@@ -564,7 +564,7 @@ namespace ArtCritic_Desctop
             Background_Image_Path = System.IO.Path.GetFullPath(@"..\..\..\wallpapers__for_menu_music_pictures\guess_film.jpg");
             Back_Ground.UriSource = new Uri(Background_Image_Path, UriKind.RelativeOrAbsolute);
             Back_Ground.EndInit();
-            Video_Background.Source = Back_Ground;
+            //Video_Background.Source = Back_Ground;
 
             Exit_Button = new BitmapImage();
             Exit_Button.BeginInit();
@@ -578,9 +578,12 @@ namespace ArtCritic_Desctop
             this.I_Music_replay.Source = I_Music_Replay_Bitmap;
             this.I_Music_background.Source = I_Background_Bitmap;
             video_counter = 3;
-            Mixed_game.Visibility = Visibility.Visible;
-            Show_mixed_question();
-           
+
+            string I_Mixed_Accept_Path = System.IO.Path.GetFullPath("..\\..\\..\\Buttons\\button_next.png");
+            Uri I_Mixed_Accept_U_Path = new Uri(I_Mixed_Accept_Path, UriKind.RelativeOrAbsolute);
+            BitmapImage I_Mixed_Accept_Bitmap = new BitmapImage(I_Mixed_Accept_U_Path);
+            this.I_Mixed_accept.Source = I_Mixed_Accept_Bitmap;
+            Show_mixed_question();           
         }
 
         private Music_question music_;
@@ -590,21 +593,24 @@ namespace ArtCritic_Desctop
         void Show_mixed_question() {
             switch (questions[iter].Type) {
                 case Question.QuestionType.Audio:
-                    music_ = new Music_question(questions[iter].FileName, questions[iter].Answer);
+                    music_ = new Music_question(questions[iter].GetFullPath(), questions[iter].Answer);
                     music_.Play();
-                    Music_question_window.Visibility = Visibility.Visible;
+                    this.Mixed_game.Visibility = Visibility.Visible;
+                    Music_question_window.Visibility = Visibility.Visible;                    
                     break;
                 case Question.QuestionType.Picture:
-                    Image_ = new Image_Question(questions[iter].FileName, questions[iter].Answer);
+                    Image_ = new Image_Question(questions[iter].GetFullPath(), questions[iter].Answer);
+                    this.Mixed_game.Visibility = Visibility.Visible;
                     Image_game.Visibility = Visibility.Visible;
                     pice.Source = Image_.Picture;
-                    currentAnswer_image = Image_.Answers[0];
+                    currentAnswer_image = Image_.Answers[0];                                       
                     break;
                 case Question.QuestionType.Video:
-                    Video_ = new VideoQuestion(questions[iter].FileName, questions[iter].Answer);
+                    Video_ = new VideoQuestion(questions[iter].GetFullPath(), questions[iter].Answer);
                     video.Source = Video_.Path_To_Video;
                     currentAnswer_video = Video_.Answers[0];
-                    Video_game.Visibility = Visibility.Visible;
+                    this.Mixed_game.Visibility = Visibility.Visible;
+                    Video_game.Visibility = Visibility.Visible;                    
                     break;
                 default:
                     MessageBox.Show("Error");
@@ -641,8 +647,18 @@ namespace ArtCritic_Desctop
             {
 
             }
-            iter++;
-            Show_mixed_question();
+            if (iter+1 == questions.Count)
+            {
+                MessageBox.Show("игра закончена");
+                this.Mixed_game.Visibility = Visibility.Hidden;
+                iter = 0;
+                this.Type_of_game.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                iter++;
+                Show_mixed_question();
+            }
         }
         private void Start_game_Click(object sender, RoutedEventArgs e)
         {
