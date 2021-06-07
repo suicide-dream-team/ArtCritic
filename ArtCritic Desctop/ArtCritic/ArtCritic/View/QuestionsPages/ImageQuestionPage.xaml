@@ -1,9 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="ArtCritic.ImageQuestionPage">
+             x:Class="ArtCritic.ImageQuestionPage"
+             BackgroundImageSource="background_guess_picture.png">
     <StackLayout x:Name="ImageGame">
-        <Label x:Name="QuestionLabel" Text="Введите ответ на вопрос!" HorizontalTextAlignment="Center" FontSize="40"></Label>
+        <Label x:Name="QuestionLabel" Text="" HorizontalTextAlignment="Center" FontSize="40"></Label>
         <Grid 
                 HorizontalOptions="FillAndExpand"
                 VerticalOptions="FillAndExpand"

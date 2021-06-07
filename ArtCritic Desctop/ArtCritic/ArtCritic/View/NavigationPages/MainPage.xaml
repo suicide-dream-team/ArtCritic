@@ -14,7 +14,7 @@
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
         <ImageButton x:Name ="Game" Grid.Row="1" Source="button_play.png" Clicked ="GameClick" BackgroundColor="Transparent"></ImageButton>
-        <ImageButton x:Name ="Statistics" Grid.Row = "2" Source="button_statistics.png" Clicked="StatisticsClick" BackgroundColor="Transparent"></ImageButton>
+        <ImageButton x:Name ="Help" Grid.Row = "2" Source="button_help.png" Clicked="HelpClick" BackgroundColor="Transparent"></ImageButton>
     </Grid>
 </ContentPage>
 

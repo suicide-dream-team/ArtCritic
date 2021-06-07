@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Reflection;
-
+﻿using ArtCritic.Controller;
+using ArtCritic.View.QuestionsPages;
+using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using ArtCritic.Controller;
-using ArtCritic.View.QuestionsPages;
 
 namespace ArtCritic
 {
@@ -19,6 +15,9 @@ namespace ArtCritic
         public MusicQuestionPage(QuestionsController questionsController)
         {
             InitializeComponent();
+
+
+
             musicPlayer = DependencyService.Get<IMusicPlayer>();
             _questionsController = questionsController;
 
@@ -28,6 +27,10 @@ namespace ArtCritic
             {
                 DisplayCurrentQuestion();
             }
+
+
+
+
         }
 
         /// <summary>
@@ -58,10 +61,16 @@ namespace ArtCritic
             else if (typeof(VideoQuestion).IsInstanceOfType(question))
             {
                 Navigation.PushAsync(new VideoQuestionPage(_questionsController));
+                musicPlayer.Stop();
+                NavigationPage navigationPage = (NavigationPage)App.Current.MainPage;
+                navigationPage.Navigation.RemovePage(navigationPage.Navigation.NavigationStack[navigationPage.Navigation.NavigationStack.Count - 2]);
             }
             else if (typeof(ImageQuestion).IsInstanceOfType(question))
             {
                 Navigation.PushAsync(new ImageQuestionPage(_questionsController));
+                musicPlayer.Stop();
+                NavigationPage navigationPage = (NavigationPage)App.Current.MainPage;
+                navigationPage.Navigation.RemovePage(navigationPage.Navigation.NavigationStack[navigationPage.Navigation.NavigationStack.Count - 2]);
             }
         }
 

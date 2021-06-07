@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Reflection;
-using ArtCritic.Controller;
-
+﻿using ArtCritic.Controller;
+using System;
 using Xamarin.Forms;
 
 namespace ArtCritic.View.QuestionsPages
@@ -15,6 +11,7 @@ namespace ArtCritic.View.QuestionsPages
         public VideoQuestionPage(QuestionsController questionsController)
         {
             InitializeComponent();
+
             _questionsController = questionsController;
 
             // Обновляем Label с количеством очков, так как возможно мы пришли от другого типа вопроса
@@ -53,10 +50,14 @@ namespace ArtCritic.View.QuestionsPages
             else if (typeof(ImageQuestion).IsInstanceOfType(question))
             {
                 Navigation.PushAsync(new ImageQuestionPage(_questionsController));
+                NavigationPage navigationPage = (NavigationPage)App.Current.MainPage;
+                navigationPage.Navigation.RemovePage(navigationPage.Navigation.NavigationStack[navigationPage.Navigation.NavigationStack.Count - 2]);
             }
             else if (typeof(MusicQuestion).IsInstanceOfType(question))
             {
                 Navigation.PushAsync(new MusicQuestionPage(_questionsController));
+                NavigationPage navigationPage = (NavigationPage)App.Current.MainPage;
+                navigationPage.Navigation.RemovePage(navigationPage.Navigation.NavigationStack[navigationPage.Navigation.NavigationStack.Count - 2]);
             }
         }
 

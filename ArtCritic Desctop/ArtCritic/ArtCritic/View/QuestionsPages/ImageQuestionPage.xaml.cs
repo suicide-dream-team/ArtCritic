@@ -1,8 +1,8 @@
 ﻿using ArtCritic.Controller;
+using ArtCritic.View.QuestionsPages;
 using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using ArtCritic.View.QuestionsPages;
 
 namespace ArtCritic
 {
@@ -54,10 +54,14 @@ namespace ArtCritic
             else if (typeof(VideoQuestion).IsInstanceOfType(question))
             {
                 Navigation.PushAsync(new VideoQuestionPage(_questionsController));
+                NavigationPage navigationPage = (NavigationPage)App.Current.MainPage;
+                navigationPage.Navigation.RemovePage(navigationPage.Navigation.NavigationStack[navigationPage.Navigation.NavigationStack.Count - 2]);
             }
             else if (typeof(MusicQuestion).IsInstanceOfType(question))
             {
                 Navigation.PushAsync(new MusicQuestionPage(_questionsController));
+                NavigationPage navigationPage = (NavigationPage)App.Current.MainPage;
+                navigationPage.Navigation.RemovePage(navigationPage.Navigation.NavigationStack[navigationPage.Navigation.NavigationStack.Count - 2]);
             }
         }
 
@@ -90,5 +94,7 @@ namespace ArtCritic
                 await DisplayAlert("Молодец!", "твой результат: " + numberOfCorrectAnswers + "/" + numberOfAllQuestions, "OK");
             }
         }
+
+
     }
 }
