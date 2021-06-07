@@ -9,13 +9,21 @@ namespace ArtCritic.Controller
     public class QuestionsController
     {
         private List<TextQuestion> _Questions = new List<TextQuestion>();
-        private int _currentIndexOfQuestion = -1;
+        private int _currentIndexOfQuestion = 0;
         private int _numberOfCorrectAnswers = 0;
         public int NumberOfCorrectAnswers
         {
             get
             {
                 return _numberOfCorrectAnswers;
+            }
+        }
+
+        public int CurrentIndexOfQuestion
+        {
+            get
+            {
+                return _currentIndexOfQuestion;
             }
         }
 
@@ -41,6 +49,11 @@ namespace ArtCritic.Controller
         public bool IsTheAnyQuestionsAvailable()
         {
             return _currentIndexOfQuestion != _Questions.Count - 1;
+        }
+
+        public TextQuestion GetCurrentQuestion()
+        {
+            return _Questions[_currentIndexOfQuestion];
         }
 
         public TextQuestion GetNextQuestion(string UserAnswer)

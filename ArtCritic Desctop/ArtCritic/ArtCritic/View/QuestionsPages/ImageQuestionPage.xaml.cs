@@ -2,6 +2,7 @@
 using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using ArtCritic.View.QuestionsPages;
 
 namespace ArtCritic
 {
@@ -11,23 +12,33 @@ namespace ArtCritic
 
         private QuestionsController _questionsController;
 
-        public ImageQuestionPage(QuestionsController QuestionsController)
+        public ImageQuestionPage(QuestionsController questionsController)
         {
             InitializeComponent();
-            _questionsController = QuestionsController;
+            _questionsController = questionsController;
 
             // Обновляем Label с количеством очков, так как возможно мы пришли от другого типа вопроса
             ScoreLabel.Text = _questionsController.NumberOfCorrectAnswers.ToString();
             if (_questionsController.IsTheAnyQuestionsAvailable())
             {
-                LoadNewQuestion();
+                DisplayCurrentQuestion();
             }
+        }
+
+
+        /// <summary>
+        /// Отображение текущего вопроса
+        /// </summary>
+        private void DisplayCurrentQuestion()
+        {
+            ImageQuestion question = (ImageQuestion)_questionsController.GetCurrentQuestion();
+            currentPicture.Source = question.Picture.Source;
         }
 
         /// <summary>
         /// Загрузка нового вопроса с возможным переходом на другой тип страницы
         /// </summary>
-        private void LoadNewQuestion()
+        async private void LoadNewQuestion()
         {
             // Получаем следующий вопрос
             string answer = UserAnswerEntry.Text;
@@ -39,6 +50,10 @@ namespace ArtCritic
                 ScoreLabel.Text = _questionsController.NumberOfCorrectAnswers.ToString();
                 ImageQuestion imageQuestion = (ImageQuestion)question;
                 currentPicture.Source = imageQuestion.Picture.Source;
+            }
+            else if (typeof(VideoQuestion).IsInstanceOfType(question))
+            {
+                await Navigation.PushAsync(new VideoQuestionPage(_questionsController));
             }
         }
 

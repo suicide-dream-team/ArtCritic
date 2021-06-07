@@ -15,7 +15,9 @@ namespace ArtCritic
         }
         async private void Video_question_Click(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new VideoQuestionPage());
+            QuestionsController questionsController = new QuestionsController();
+            questionsController.LoadVideoQuestions();
+            await Navigation.PushAsync(new VideoQuestionPage(questionsController));
         }
 
 
@@ -26,7 +28,19 @@ namespace ArtCritic
 
         async private void Mixed_questions_Click(object sender, EventArgs e)
         {
-            await DisplayAlert("Не работает", "Пока в разработке", "OK");
+            QuestionsController questionsController = new QuestionsController();
+            questionsController.LoadImageQuestions();
+            questionsController.LoadVideoQuestions();
+            questionsController.ShuffleQuestionsList();
+            TextQuestion question = questionsController.GetCurrentQuestion();
+            if (typeof(VideoQuestion).IsInstanceOfType(question))
+            {
+                await Navigation.PushAsync(new VideoQuestionPage(questionsController));
+            }
+            else if (typeof(ImageQuestion).IsInstanceOfType(question))
+            {
+                await Navigation.PushAsync(new ImageQuestionPage(questionsController));
+            }
         }
 
         async private void ImageQuestionClick(object sender, EventArgs e)
