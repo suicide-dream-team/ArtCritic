@@ -1032,7 +1032,10 @@ namespace ArtCritic_Desctop
             Reg_Window.Visibility = Visibility.Visible;
         }
 
-        
+        private void Stroy_help_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+
+        }
     }
 
 }

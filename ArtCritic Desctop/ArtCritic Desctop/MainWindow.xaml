@@ -390,7 +390,7 @@
 
         </Grid>
 
-        <Grid x:Name="Mixed_game" Visibility="Hidden">
+        <Grid x:Name="Mixed_game" Visibility="Hidden" d:IsHidden="True">
             <Grid.RowDefinitions>
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
@@ -412,6 +412,43 @@
             <Image x:Name="I_Mixed_accept" Grid.Row="5" Grid.Column="5" MouseLeftButtonDown="I_Mixed_accept_MouseLeftButtonDown"></Image>
         </Grid>
 
+        <Grid x:Name="Story_game">
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Image x:Name="Story_background" Stretch="Fill" Grid.ColumnSpan="6" Grid.RowSpan="7" ></Image>
+
+            <Image x:Name="Stroy_help" Grid.Row="7" Grid.Column="6" MouseLeftButtonDown="Stroy_help_MouseLeftButtonDown"></Image>
+            
+            <Image x:Name="Story_B1"  Grid.Column="4" Grid.Row="1" ></Image>
+            <Image x:Name="Story_B2" Grid.Column="4" Grid.Row="5"  ></Image>
+            <Image x:Name="Story_B3" Grid.Column="3" Grid.Row="3"  ></Image>
+            <Image x:Name="Story_B4" Grid.ColumnSpan="2" Grid.Column="2" Margin="67,21,67,41" Grid.RowSpan="2" Grid.Row="1"  ></Image>
+            <Image x:Name="Story_B5" Grid.ColumnSpan="2" Margin="57,21,77,41" Grid.RowSpan="2" Grid.Row="4" ></Image>
+            <Image x:Name="Story_B6" Grid.ColumnSpan="2" Grid.Column="1" Margin="77,31,57,31" Grid.RowSpan="2" Grid.Row="4" ></Image>
+            <Image x:Name="Story_B7" Grid.ColumnSpan="2" Grid.Column="2" Margin="57,41,77,21" Grid.RowSpan="2" Grid.Row="5" ></Image>
+            <Image x:Name="Story_B8" Grid.Column="3" Margin="0,31,0,31" Grid.RowSpan="2" ></Image>
+            <Image x:Name="Story_B9" Grid.ColumnSpan="2" Grid.Column="1" Margin="46,26,88,36" Grid.RowSpan="2" Grid.Row="3"></Image>
+            <Image x:Name="Story_B10" Grid.Column="4" Margin="0,31,0,31" Grid.RowSpan="2" Grid.Row="3"></Image>
+            <Image x:Name="Story_B11" Grid.ColumnSpan="2" Grid.Column="2" Margin="98,41,36,21" Grid.RowSpan="2" Grid.Row="4"></Image>
+            <Image x:Name="Story_B12" Grid.ColumnSpan="2" Grid.Column="4" Margin="62,31,71,31" Grid.RowSpan="2" Grid.Row="2"></Image>
+            <Image x:Name="Story_B13" Grid.Column="2" Margin="0,57,0,5" Grid.RowSpan="2" Grid.Row="2"></Image>
+        </Grid>
 
     </Grid>
 
