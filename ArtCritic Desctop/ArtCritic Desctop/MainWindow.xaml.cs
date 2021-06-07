@@ -645,7 +645,7 @@ namespace ArtCritic_Desctop
             }
             if (check)
             {
-
+                MessageBox.Show(check.ToString()); //вместо этого нужно впилить апдейт игрока
             }
             if (iter+1 == questions.Count)
             {
