@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
+using ArtCritic.Controller;
 
 using Xamarin.Forms;
 
@@ -9,81 +10,83 @@ namespace ArtCritic.View.QuestionsPages
 {
     public partial class VideoQuestionPage : ContentPage
     {
-        private List<VideoQuestion> db_video;
-        int video_counter = 0;
-        int answer_sum_video_correct = 0;
+        private QuestionsController _questionsController;
 
-        public VideoQuestionPage()
+        public VideoQuestionPage(QuestionsController questionsController)
         {
             InitializeComponent();
-            Create_Video_List();
-            LoadNewVideoQuestion();
+            _questionsController = questionsController;
+
+            // Обновляем Label с количеством очков, так как возможно мы пришли от другого типа вопроса
+            ScoreLabel.Text = _questionsController.NumberOfCorrectAnswers.ToString();
+            if (_questionsController.IsTheAnyQuestionsAvailable())
+            {
+                DisplayCurrentQuestion();
+            }
         }
 
         /// <summary>
-        /// Создаётся List элементов Video_question
+        /// Отображение текущего вопроса
         /// </summary>
-        void Create_Video_List()
+        private void DisplayCurrentQuestion()
         {
-            db_video = new List<VideoQuestion>();
-            video_counter = 0;
-
-            var assembly = Assembly.GetExecutingAssembly();
-            var resourceName = "ArtCritic.Data.Videos.answersV.txt";
-
-            using (Stream stream = assembly.GetManifestResourceStream(resourceName))
-            using (StreamReader reader = new StreamReader(stream))
-            {
-                while (!reader.EndOfStream)
-                {
-                    var e = reader.ReadLine();
-                    var args = e.Split('|');
-                    db_video.Add(new VideoQuestion(args[0], args[1]));
-                }
-            }
+            VideoQuestion question = (VideoQuestion)_questionsController.GetCurrentQuestion();
+            mediaElement.Source = question.Path_To_Video;
         }
 
         /// <summary>
         /// загрузка нового вопроса видео
         /// </summary>
-        private void LoadNewVideoQuestion()
+        private void LoadNewQuestion()
         {
-            var newVideoQuestion = db_video[video_counter];
-            mediaElement.Source = newVideoQuestion.Path_To_Video;
+            // Получаем следующий вопрос
+            string answer = UserAnswerEntry.Text;
+            TextQuestion question = _questionsController.GetNextQuestion(answer);
 
-            video_counter++;
+            // Если вопрос - картинка
+            if (typeof(VideoQuestion).IsInstanceOfType(question))
+            {
+                ScoreLabel.Text = _questionsController.NumberOfCorrectAnswers.ToString();
+                VideoQuestion videoQuestion = (VideoQuestion)question;
+                mediaElement.Source = videoQuestion.Path_To_Video;
+            }
+            else if (typeof(ImageQuestion).IsInstanceOfType(question))
+            {
+                Navigation.PushAsync(new ImageQuestionPage(_questionsController));
+            }
+            else if (typeof(MusicQuestion).IsInstanceOfType(question))
+            {
+                Navigation.PushAsync(new MusicQuestionPage(_questionsController));
+            }
         }
+
         /// <summary>
-        /// Нажатие на кнопку "Ввести"
+        /// EventHandler нажатия на кнопку ввода ответа
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void Accept_Answer_Video_Click(object sender, EventArgs e)
+        private void AcceptAnswerClick(object sender, EventArgs e)
         {
-            Check_Answer_video();
+            CheckForEnd();
+            UserAnswerEntry.Text = "";
         }
+
         /// <summary>
-        /// проверка ответа на видео
+        /// Загрузка следующего вопроса с проверкой на конец игры
         /// </summary>
-        async public void Check_Answer_video()
+        async private void CheckForEnd()
         {
-            string word = String.Empty;
-            word = AnswerTextbox.Text;
-            AnswerTextbox.Text = "";
-
-            if (db_video[video_counter].CheckAnswer(word.ToLower()))
+            if (_questionsController.IsTheAnyQuestionsAvailable())
             {
-                answer_sum_video_correct++;
-                video_score.Text = answer_sum_video_correct.ToString();
-            }
-
-            if (video_counter != db_video.Count)
-            {
-                LoadNewVideoQuestion();
+                LoadNewQuestion();
             }
             else
             {
-                await DisplayAlert("Молодец!", "твой результат: " + answer_sum_video_correct + "/" + db_video.Count, "OK");
+                // Выводим результат
+                int numberOfCorrectAnswers = _questionsController.NumberOfCorrectAnswers;
+                int numberOfAllQuestions = _questionsController.GetNumberOfQuestions();
+
+                await DisplayAlert("Молодец!", "твой результат: " + numberOfCorrectAnswers + "/" + numberOfAllQuestions, "OK");
             }
         }
 
