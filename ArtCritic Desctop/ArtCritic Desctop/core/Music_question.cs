@@ -15,6 +15,16 @@ namespace ArtCritic_Desctop
             music.Open(uriQestion);
             music.Play();
         }
+        public Music_question(string path, string answers)
+        {
+            string[] s = new string[1];
+            s[0] = answers;
+            this.Answers = s;
+            this.Text = "";
+            music = new MediaPlayer();
+            music.Open(new Uri(path, UriKind.RelativeOrAbsolute));
+            music.Play();
+        }
         public void Play()
         {
             music.Play();

@@ -6,8 +6,9 @@ namespace ArtCritic_Desctop
 {
     public class TextQuestion
     {
-        public readonly string Text;//публично временно, на время тестов
+        public string Text;//публично временно, на время тестов
         public string[] Answers;//публично временно, на время тестов
+        public TextQuestion() { }
         public TextQuestion(string text, string[] answers) {
             Text = text;
             Answers = answers;
