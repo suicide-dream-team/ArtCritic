@@ -8,6 +8,8 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid x:Name="G1" >
 
+        
+        
         <Grid x:Name="Main_menu" d:IsHidden="True" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition></ColumnDefinition>
@@ -34,7 +36,7 @@
             <Button x:Name="Settings" Content="Настройки" Grid.Column="1" Grid.Row="3" Visibility="Hidden"
                     Click="Settings_Click"/>
 
-            <Image x:Name="I_Settings" Grid.Column="1" Grid.Row="4" MouseLeftButtonDown="I_Settings_MouseLeftButtonDown"></Image>
+            
 
             <Button x:Name="Statistics" Content="Статистика" Grid.Column="1" Grid.Row="5" Visibility="Hidden"
                     Click="Satistyc_Click"/>
@@ -107,11 +109,16 @@
 
 
             </Grid.RowDefinitions>
-            <Button x:Name="test" Content="test" Grid.Column="0" Grid.Row="0" Click="test_Click" Visibility="Hidden" />
-            <Button x:Name="Video_question" Content="Video question" Grid.Column="1" Grid.Row="1" Click="Video_question_Click" />
-            <Button x:Name="Music_question" Content="Music question" Grid.Column="1" Grid.Row="3" Click="Music_question_Click"/>
-            <Button x:Name="Image_question" Content="Image question" Grid.Column="1" Grid.Row="5" Click="Image_question_Click"/>
-            <Button x:Name="Mixed_questions" Content="Mixed questions" Grid.Column="1" Grid.Row="7" Click="Mixed_questions_Click"/>
+            <TextBlock Grid.Row="2" Grid.Column="1" Text="Введите название пака"></TextBlock>
+            <TextBox x:Name="Name_of_pack" Grid.Row="4" Grid.Column="1"></TextBox>
+            <Button x:Name="Start_game" Content="Начать игру" Grid.Column="1" Grid.Row="7" Click="Start_game_Click"></Button>
+            <Button x:Name="Back_to_menu" Content="Назад" Click="Back_to_menu_Click"></Button>
+            
+            <Button x:Name="test"  Content="test" Grid.Column="0" Grid.Row="0" Click="test_Click" Visibility="Hidden" d:IsHidden="True" />
+            <Button x:Name="Video_question" Content="Video question" Grid.Column="1" Grid.Row="1" Click="Video_question_Click" Visibility="Hidden" d:IsHidden="True" />
+            <Button x:Name="Music_question" Content="Music question" Grid.Column="1" Grid.Row="3" Click="Music_question_Click" Visibility="Hidden" d:IsHidden="True"/>
+            <Button x:Name="Image_question" Content="Image question" Grid.Column="1" Grid.Row="5" Click="Image_question_Click" Visibility="Hidden" d:IsHidden="True"/>
+            <Button x:Name="Mixed_questions" Content="Mixed questions" Grid.Column="1" Grid.Row="7" Click="Mixed_questions_Click" Visibility="Hidden" d:IsHidden="True"/>
         </Grid>
 
         <Grid x:Name="Test_game_with_Image" d:IsHidden="True">
@@ -141,7 +148,7 @@
         </Grid>
 
        
-        <Grid x:Name="Music_question_window">
+        <Grid x:Name="Music_question_window" d:IsHidden="True">
             <Grid.RowDefinitions>
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
@@ -161,13 +168,13 @@
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
 
-            <Image x:Name="I_Music_background" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="6" Grid.RowSpan="7" Stretch="Fill" d:IsHidden="True"></Image>
+            <Image x:Name="I_Music_background" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="6" Grid.RowSpan="7" Stretch="Fill" d:IsHidden="True"/>
 
             <TextBlock x:Name="Music_question_xaml" Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="4" d:IsHidden="True" />
 
             <TextBox x:Name="Music_answer" Grid.Row="5" Grid.Column="2" Grid.ColumnSpan="2" d:IsHidden="True"/>
 
-            <Button x:Name="Music_Accept_button" Grid.Row="5" Grid.Column="5" Click="Music_accept_Click" Visibility="Hidden" d:IsHidden="True"></Button>
+            <Button x:Name="Music_Accept_button" Grid.Row="5" Grid.Column="5" Click="Music_accept_Click" Visibility="Hidden" d:IsHidden="True"/>
 
             <Image x:Name="I_Music_accept" Grid.Row="5" Grid.Column="4" MouseLeftButtonDown="Music_accept_image_MouseLeftButtonDown" d:IsHidden="True"/>
 
@@ -177,7 +184,7 @@
 
             <Button x:Name="Music_replay_music" Content="повторить" Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="1" Grid.RowSpan="2" Click="Music_replay_music_Click" Visibility="Hidden" d:IsHidden="True"/>
 
-            <Image x:Name="I_Music_replay" Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="2" Grid.RowSpan="2" MouseLeftButtonDown="I_Music_replay_MouseLeftButtonDown" d:IsHidden="True"></Image>
+            <Image x:Name="I_Music_replay" Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="2" Grid.RowSpan="2" MouseLeftButtonDown="I_Music_replay_MouseLeftButtonDown" d:IsHidden="True"/>
 
         </Grid>
 
@@ -383,6 +390,27 @@
 
         </Grid>
 
+        <Grid x:Name="Mixed_game" Visibility="Hidden">
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Image x:Name="I_Mixed_accept" Grid.Row="5" Grid.Column="5" MouseLeftButtonDown="I_Mixed_accept_MouseLeftButtonDown"></Image>
+        </Grid>
 
 
     </Grid>

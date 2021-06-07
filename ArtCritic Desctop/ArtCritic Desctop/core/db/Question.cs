@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.IO;
 
 namespace ArtCritic_Desctop.core.db
 {
@@ -45,6 +46,10 @@ namespace ArtCritic_Desctop.core.db
             this.Text = text;
             this.Answer = answer;
             this.FileName = fileName;
+        }
+        public string GetFullPath()
+        {
+            return String.Format(@"{0}\Packs\{1}\{2}", Directory.GetCurrentDirectory(), Pack.Name, this.FileName);            
         }
     }
 }

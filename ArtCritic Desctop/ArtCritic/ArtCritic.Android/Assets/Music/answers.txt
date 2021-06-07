@@ -1,6 +1,0 @@
-﻿ArtCritic.source.Music.Voennayakafedra1.mp3|Полковнику никто не пишет
-ArtCritic.source.Music.Voennayakafedra2.mp3|Граница
-ArtCritic.source.Music.Voennayakafedra3.mp3|Юность в сапогах
-ArtCritic.source.Music.Voennayakafedra4.mp3|Комбат
-ArtCritic.source.Music.Rayonikvartali.mp3|Районы, кварталы
-ArtCritic.source.Music.Pesnyaodruge.mp3|Песня о друге

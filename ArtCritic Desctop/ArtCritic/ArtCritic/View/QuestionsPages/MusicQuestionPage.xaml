@@ -1,13 +1,23 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="ArtCritic.MusicQuestionPage">
-    <StackLayout x:Name="Music_question_window">
-        <Label x:Name="music_question" Text="Введите ответ на вопрос!" HorizontalTextAlignment="Center" FontSize="40"></Label>
-        <Label x:Name="Music_question_xaml"></Label>
-        <Entry x:Name="Music_answer" ></Entry>
-        <Button x:Name="Music_Accept_button" Text="Ввести" Clicked="Music_accept_Click"></Button>
-        <Label x:Name="music_score" Text="0" HorizontalTextAlignment="Center" FontSize="40"></Label>
-        <Button x:Name="Music_replay_music" Text="Повторить" Clicked="Music_replay_music_Click"></Button>
-    </StackLayout>
+             x:Class="ArtCritic.MusicQuestionPage"
+             BackgroundImageSource="background_guess_music.png">
+    <Grid x:Name="Music_question_window">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="200"></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Entry x:Name="UserAnswerEntry" Grid.Row ="2" Text=""></Entry>
+        <Button x:Name="Music_Accept_button" Grid.Row="3" Text="Ввести" Clicked="AcceptAnswerClick"></Button>
+        <Label x:Name="ScoreLabel" Text="0" Grid.Row="4" HorizontalTextAlignment="Center" FontSize="40"></Label>
+        <Button x:Name="Music_replay_music" Grid.Row="5" Text="Повторить" Clicked="Music_replay_music_Click"></Button>
+    </Grid>
 </ContentPage>

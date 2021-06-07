@@ -1,21 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace ArtCritic
 {
-    public class VideoQuestion
+    public class VideoQuestion : TextQuestion
     {
         public Uri Path_To_Video;
 
-        //Ответ на картинку
-        public string Answer_for_video { get; set; }
-
-        public VideoQuestion(string PathBitmapVideoSource, string AnswerSource)
+        public VideoQuestion(string PathBitmapVideoSource, string AnswerSource) : base("", AnswerSource)
         {
             this.Path_To_Video = new Uri(PathBitmapVideoSource, UriKind.RelativeOrAbsolute);
-            this.Answer_for_video = AnswerSource;
-
         }
     }
 }

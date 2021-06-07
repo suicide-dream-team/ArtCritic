@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ArtCritic.Controller;
+using ArtCritic.View.QuestionsPages;
+using System;
 using Xamarin.Forms;
 
 namespace ArtCritic
@@ -14,19 +11,33 @@ namespace ArtCritic
         {
             InitializeComponent();
         }
-        async private void Settings_Click(object sender, EventArgs e)
+
+        async private void HelpClick(object sender, EventArgs e)
         {
-            await DisplayAlert("Не работает", "Пока в разработке", "OK");
+            await DisplayAlert("Помощь", "Данное приложения является портом Desktop-игры, разработанной в ходе предмета Операционные системы", "OK");
         }
 
-        async private void Satistyc_Click(object sender, EventArgs e)
+        async private void GameClick(object sender, EventArgs e)
         {
-            await DisplayAlert("Не работает", "Пока в разработке", "OK");
-        }
-
-        async private void Game_Click(object sender, EventArgs e)
-        {
-            await Navigation.PushAsync(new ChooseGameModePage());
+            QuestionsController questionsController = new QuestionsController();
+            questionsController.LoadImageQuestions();
+            questionsController.LoadVideoQuestions();
+            questionsController.LoadMusicQuestions();
+            questionsController.ShuffleQuestionsList();
+            TextQuestion question = questionsController.GetCurrentQuestion();
+            if (typeof(VideoQuestion).IsInstanceOfType(question))
+            {
+                await Navigation.PushAsync(new VideoQuestionPage(questionsController));
+            }
+            else if (typeof(ImageQuestion).IsInstanceOfType(question))
+            {
+                await Navigation.PushAsync(new ImageQuestionPage(questionsController));
+            }
+            else if (typeof(MusicQuestion).IsInstanceOfType(question))
+            {
+                await Navigation.PushAsync(new MusicQuestionPage(questionsController));
+            }
+            //await Navigation.PushAsync(new ChooseGameModePage());
         }
 
     }

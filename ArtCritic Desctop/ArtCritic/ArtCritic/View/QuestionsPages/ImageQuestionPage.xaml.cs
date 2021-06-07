@@ -1,86 +1,100 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Reflection;
+﻿using ArtCritic.Controller;
+using ArtCritic.View.QuestionsPages;
+using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-
 
 namespace ArtCritic
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ImageQuestionPage : ContentPage
     {
-        private List<Image_Question> db;
-        private int image_counter = 0;
-        private string currentAnswer_image;
 
-        private int answer_sum_image_correct = 0;
+        private QuestionsController _questionsController;
 
-        public ImageQuestionPage()
+        public ImageQuestionPage(QuestionsController questionsController)
         {
             InitializeComponent();
-            Create_Image_List();
-            LoadNewImageQuestion();
+            _questionsController = questionsController;
+
+            // Обновляем Label с количеством очков, так как возможно мы пришли от другого типа вопроса
+            ScoreLabel.Text = _questionsController.NumberOfCorrectAnswers.ToString();
+            if (_questionsController.IsTheAnyQuestionsAvailable())
+            {
+                DisplayCurrentQuestion();
+            }
+        }
+
+
+        /// <summary>
+        /// Отображение текущего вопроса
+        /// </summary>
+        private void DisplayCurrentQuestion()
+        {
+            ImageQuestion question = (ImageQuestion)_questionsController.GetCurrentQuestion();
+            currentPicture.Source = question.Picture.Source;
         }
 
         /// <summary>
-        /// загрузка нового вопроса картинки
+        /// Загрузка нового вопроса с возможным переходом на другой тип страницы
         /// </summary>
-        private void LoadNewImageQuestion()
+        private void LoadNewQuestion()
         {
-            var q = db[image_counter];
-            pice.Source = q.Picture.Source;
-            currentAnswer_image = q.Answer;
-            image_counter++;
-        }
+            // Получаем следующий вопрос
+            string answer = UserAnswerEntry.Text;
+            TextQuestion question = _questionsController.GetNextQuestion(answer);
 
-        private void Create_Image_List()
-        {
-            db = new List<Image_Question>();
-            image_counter = 0;
-
-            
-            pice.Source = ImageSource.FromResource("ArtCritic.Data.Images.pic0.jpg");
-
-            var assembly = Assembly.GetExecutingAssembly();
-            var resourceName = "ArtCritic.Data.Images.answers.txt";
-
-            using (Stream stream = assembly.GetManifestResourceStream(resourceName))
-            using (StreamReader reader = new StreamReader(stream))
+            // Если вопрос - картинка
+            if (typeof(ImageQuestion).IsInstanceOfType(question))
             {
-                while (!reader.EndOfStream)
-                {
-                    var e = reader.ReadLine();
-                    var args = e.Split('|');
-                    db.Add(new Image_Question(args[0], args[1]));
-                }
+                ScoreLabel.Text = _questionsController.NumberOfCorrectAnswers.ToString();
+                ImageQuestion imageQuestion = (ImageQuestion)question;
+                currentPicture.Source = imageQuestion.Picture.Source;
+            }
+            else if (typeof(VideoQuestion).IsInstanceOfType(question))
+            {
+                Navigation.PushAsync(new VideoQuestionPage(_questionsController));
+                NavigationPage navigationPage = (NavigationPage)App.Current.MainPage;
+                navigationPage.Navigation.RemovePage(navigationPage.Navigation.NavigationStack[navigationPage.Navigation.NavigationStack.Count - 2]);
+            }
+            else if (typeof(MusicQuestion).IsInstanceOfType(question))
+            {
+                Navigation.PushAsync(new MusicQuestionPage(_questionsController));
+                NavigationPage navigationPage = (NavigationPage)App.Current.MainPage;
+                navigationPage.Navigation.RemovePage(navigationPage.Navigation.NavigationStack[navigationPage.Navigation.NavigationStack.Count - 2]);
             }
         }
 
-
-        private void Accept_Answer_Image_Click(object sender, EventArgs e)
+        /// <summary>
+        /// EventHandler нажатия на кнопку ввода ответа
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void AcceptAnswerImageClick(object sender, EventArgs e)
         {
-            Check_Answer_Image();
-            Answer_Image_Texbox.Text = "";
+            CheckForEnd();
+            UserAnswerEntry.Text = "";
         }
 
-        async public void Check_Answer_Image()
+        /// <summary>
+        /// Загрузка следующего вопроса с проверкой на конец игры
+        /// </summary>
+        async private void CheckForEnd()
         {
-            string word = String.Empty;
-            word = Answer_Image_Texbox.Text;
-
-            if (word.ToLower() == currentAnswer_image.ToLower())
+            if (_questionsController.IsTheAnyQuestionsAvailable())
             {
-                answer_sum_image_correct++;
-                image_score.Text = answer_sum_image_correct.ToString();
+                LoadNewQuestion();
             }
-
-            if (image_counter != db.Count) { LoadNewImageQuestion(); }
             else
             {
-                await DisplayAlert("Молодец!", "твой результат: " + answer_sum_image_correct + "/" + db.Count, "OK");
+                // Выводим результат
+                int numberOfCorrectAnswers = _questionsController.NumberOfCorrectAnswers;
+                int numberOfAllQuestions = _questionsController.GetNumberOfQuestions();
+
+                await DisplayAlert("Молодец!", "твой результат: " + numberOfCorrectAnswers + "/" + numberOfAllQuestions, "OK");
             }
         }
+
+
     }
 }
