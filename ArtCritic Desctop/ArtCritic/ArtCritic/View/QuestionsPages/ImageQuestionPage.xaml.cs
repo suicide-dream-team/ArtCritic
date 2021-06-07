@@ -38,7 +38,7 @@ namespace ArtCritic
         /// <summary>
         /// Загрузка нового вопроса с возможным переходом на другой тип страницы
         /// </summary>
-        async private void LoadNewQuestion()
+        private void LoadNewQuestion()
         {
             // Получаем следующий вопрос
             string answer = UserAnswerEntry.Text;
@@ -53,7 +53,11 @@ namespace ArtCritic
             }
             else if (typeof(VideoQuestion).IsInstanceOfType(question))
             {
-                await Navigation.PushAsync(new VideoQuestionPage(_questionsController));
+                Navigation.PushAsync(new VideoQuestionPage(_questionsController));
+            }
+            else if (typeof(MusicQuestion).IsInstanceOfType(question))
+            {
+                Navigation.PushAsync(new MusicQuestionPage(_questionsController));
             }
         }
 

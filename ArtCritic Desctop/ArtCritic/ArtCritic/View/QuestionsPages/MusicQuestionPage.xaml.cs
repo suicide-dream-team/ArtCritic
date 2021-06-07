@@ -5,67 +5,94 @@ using System.Reflection;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using ArtCritic.Controller;
+using ArtCritic.View.QuestionsPages;
 
 namespace ArtCritic
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MusicQuestionPage : ContentPage
     {
-        private int score = 0;
-        private int iter = 0;
-        private List<MusicQuestion> music_Questions = new List<MusicQuestion>();
+        private QuestionsController _questionsController;
+
         IMusicPlayer musicPlayer;
-        public MusicQuestionPage()
+        public MusicQuestionPage(QuestionsController questionsController)
         {
             InitializeComponent();
-            Creat_Music();
             musicPlayer = DependencyService.Get<IMusicPlayer>();
-            musicPlayer.Open(music_Questions[iter].QuestionFilename);
+            _questionsController = questionsController;
+
+            // Обновляем Label с количеством очков, так как возможно мы пришли от другого типа вопроса
+            ScoreLabel.Text = _questionsController.NumberOfCorrectAnswers.ToString();
+            if (_questionsController.IsTheAnyQuestionsAvailable())
+            {
+                DisplayCurrentQuestion();
+            }
+        }
+
+        /// <summary>
+        /// Отображение текущего вопроса
+        /// </summary>
+        private void DisplayCurrentQuestion()
+        {
+            MusicQuestion question = (MusicQuestion)_questionsController.GetCurrentQuestion();
+            musicPlayer.Open(question.QuestionFilename);
             musicPlayer.Play();
         }
 
-        void Creat_Music()
+        private void LoadNewQuestion()
         {
-            var assembly = Assembly.GetExecutingAssembly();
-            var resourceName = "ArtCritic.Data.Music.answers.txt";
+            // Получаем следующий вопрос
+            string answer = UserAnswerEntry.Text;
+            TextQuestion question = _questionsController.GetNextQuestion(answer);
 
-            using (Stream stream = assembly.GetManifestResourceStream(resourceName))
-            using (StreamReader reader = new StreamReader(stream))
+            // Если вопрос - картинка
+            if (typeof(MusicQuestion).IsInstanceOfType(question))
             {
-                while (!reader.EndOfStream)
-                {
-                    var e = reader.ReadLine();
-                    var args = e.Split('|');
-                    string[] ans = new string[1];
-                    ans[0] = args[1];
-                    music_Questions.Add(new MusicQuestion("Угадайте название песни", ans, args[0]));
-                }
+                ScoreLabel.Text = _questionsController.NumberOfCorrectAnswers.ToString();
+                MusicQuestion musicQuestion = (MusicQuestion)question;
+
+                musicPlayer.Open(musicQuestion.QuestionFilename);
+                musicPlayer.Play();
+            }
+            else if (typeof(VideoQuestion).IsInstanceOfType(question))
+            {
+                Navigation.PushAsync(new VideoQuestionPage(_questionsController));
+            }
+            else if (typeof(ImageQuestion).IsInstanceOfType(question))
+            {
+                Navigation.PushAsync(new ImageQuestionPage(_questionsController));
             }
         }
-        async private void Music_accept_Click(object sender, EventArgs e)
+
+        private void AcceptAnswerClick(object sender, EventArgs e)
         {
-            musicPlayer.Stop();
-            if (music_Questions[iter].CheckAnswer(Music_answer.Text))
-                score++;
-            music_score.Text = score.ToString();
-            Music_answer.Text = "";
-            ++iter;
-            if (iter == 4)
+            CheckForEnd();
+            UserAnswerEntry.Text = "";
+        }
+
+        /// <summary>
+        /// Загрузка следующего вопроса с проверкой на конец игры
+        /// </summary>
+        async private void CheckForEnd()
+        {
+            if (_questionsController.IsTheAnyQuestionsAvailable())
             {
-                await DisplayAlert("Молодец!", "твой результат: " + score + "/" + music_Questions.Count, "OK");
-                iter = 0;
+                LoadNewQuestion();
             }
             else
             {
-                musicPlayer.Open(music_Questions[iter].QuestionFilename);
-                musicPlayer.Play();
+                // Выводим результат
+                int numberOfCorrectAnswers = _questionsController.NumberOfCorrectAnswers;
+                int numberOfAllQuestions = _questionsController.GetNumberOfQuestions();
+
+                await DisplayAlert("Молодец!", "твой результат: " + numberOfCorrectAnswers + "/" + numberOfAllQuestions, "OK");
             }
         }
 
         private void Music_replay_music_Click(object sender, EventArgs e)
         {
-            musicPlayer.Open(music_Questions[iter].QuestionFilename);
-            musicPlayer.Play();
+            DisplayCurrentQuestion();
         }
 
         protected override void OnDisappearing()

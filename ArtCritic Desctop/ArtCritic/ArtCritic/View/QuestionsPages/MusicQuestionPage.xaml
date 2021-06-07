@@ -5,9 +5,9 @@
     <StackLayout x:Name="Music_question_window">
         <Label x:Name="music_question" Text="Введите ответ на вопрос!" HorizontalTextAlignment="Center" FontSize="40"></Label>
         <Label x:Name="Music_question_xaml"></Label>
-        <Entry x:Name="Music_answer" ></Entry>
-        <Button x:Name="Music_Accept_button" Text="Ввести" Clicked="Music_accept_Click"></Button>
-        <Label x:Name="music_score" Text="0" HorizontalTextAlignment="Center" FontSize="40"></Label>
+        <Entry x:Name="UserAnswerEntry" Text=""></Entry>
+        <Button x:Name="Music_Accept_button" Text="Ввести" Clicked="AcceptAnswerClick"></Button>
+        <Label x:Name="ScoreLabel" Text="0" HorizontalTextAlignment="Center" FontSize="40"></Label>
         <Button x:Name="Music_replay_music" Text="Повторить" Clicked="Music_replay_music_Click"></Button>
     </StackLayout>
 </ContentPage>

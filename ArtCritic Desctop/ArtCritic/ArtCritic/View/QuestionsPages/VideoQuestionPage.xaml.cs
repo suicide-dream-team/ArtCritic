@@ -50,6 +50,14 @@ namespace ArtCritic.View.QuestionsPages
                 VideoQuestion videoQuestion = (VideoQuestion)question;
                 mediaElement.Source = videoQuestion.Path_To_Video;
             }
+            else if (typeof(ImageQuestion).IsInstanceOfType(question))
+            {
+                Navigation.PushAsync(new ImageQuestionPage(_questionsController));
+            }
+            else if (typeof(MusicQuestion).IsInstanceOfType(question))
+            {
+                Navigation.PushAsync(new MusicQuestionPage(_questionsController));
+            }
         }
 
         /// <summary>

@@ -23,7 +23,9 @@ namespace ArtCritic
 
         async private void Music_question_Click(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new MusicQuestionPage());
+            QuestionsController questionsController = new QuestionsController();
+            questionsController.LoadMusicQuestions();
+            await Navigation.PushAsync(new MusicQuestionPage(questionsController));
         }
 
         async private void Mixed_questions_Click(object sender, EventArgs e)
@@ -31,6 +33,7 @@ namespace ArtCritic
             QuestionsController questionsController = new QuestionsController();
             questionsController.LoadImageQuestions();
             questionsController.LoadVideoQuestions();
+            questionsController.LoadMusicQuestions();
             questionsController.ShuffleQuestionsList();
             TextQuestion question = questionsController.GetCurrentQuestion();
             if (typeof(VideoQuestion).IsInstanceOfType(question))
@@ -40,6 +43,10 @@ namespace ArtCritic
             else if (typeof(ImageQuestion).IsInstanceOfType(question))
             {
                 await Navigation.PushAsync(new ImageQuestionPage(questionsController));
+            }
+            else if (typeof(MusicQuestion).IsInstanceOfType(question))
+            {
+                await Navigation.PushAsync(new MusicQuestionPage(questionsController));
             }
         }
 
