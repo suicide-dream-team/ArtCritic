@@ -8,7 +8,7 @@
         <Label Text=" " HeightRequest="200" FontSize="50"></Label>
         <xct:MediaElement x:Name="mediaElement" Source="ms-appx:///video0.mp4" AutoPlay="True" HeightRequest="500" WidthRequest="500" HorizontalOptions="Center" />
 
-        <Entry x:Name="UserAnswerEntry" Text=""></Entry>
+        <Entry x:Name="UserAnswerEntry" Text="" Completed="AcceptAnswerClick"></Entry>
         <Button x:Name="Video_Accept_button" Text="Ввести" Clicked="AcceptAnswerClick"></Button>
         <Label x:Name="ScoreLabel"  Text="0" HorizontalTextAlignment="Center" FontSize="40"></Label>
     </StackLayout>

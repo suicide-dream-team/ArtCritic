@@ -19,7 +19,7 @@ namespace ArtCritic
 
         async private void GameClick(object sender, EventArgs e)
         {
-            bool debug = true;
+            bool debug = false;
 
             if (debug)
             {

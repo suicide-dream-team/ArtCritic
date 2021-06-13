@@ -12,3 +12,6 @@ ms-appx:///video10.mp4|большой лебовски
 ms-appx:///video11.mp4|брат
 ms-appx:///video12.mp4|история игрушек
 ms-appx:///video13.mp4|красотка
+ms-appx:///video14.mp4|люди в черном
+ms-appx:///video15.mp4|люди икс
+ms-appx:///video16.mp4|матрица

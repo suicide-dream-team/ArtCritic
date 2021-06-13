@@ -15,7 +15,7 @@
             <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
-        <Entry x:Name="UserAnswerEntry" Grid.Row ="2" Text=""></Entry>
+        <Entry x:Name="UserAnswerEntry" Grid.Row ="2" Completed="AcceptAnswerClick" Text=""></Entry>
         <Button x:Name="Music_Accept_button" Grid.Row="3" Text="Ввести" Clicked="AcceptAnswerClick"></Button>
         <Label x:Name="ScoreLabel" Text="0" Grid.Row="4" HorizontalTextAlignment="Center" FontSize="40"></Label>
         <Button x:Name="Music_replay_music" Grid.Row="5" Text="Повторить" Clicked="Music_replay_music_Click"></Button>

@@ -16786,28 +16786,37 @@ namespace ArtCritic.Droid
 			public const int video13 = 2131623941;
 			
 			// aapt resource value: 0x7F0E0006
-			public const int video2 = 2131623942;
+			public const int video14 = 2131623942;
 			
 			// aapt resource value: 0x7F0E0007
-			public const int video3 = 2131623943;
+			public const int video15 = 2131623943;
 			
 			// aapt resource value: 0x7F0E0008
-			public const int video4 = 2131623944;
+			public const int video16 = 2131623944;
 			
 			// aapt resource value: 0x7F0E0009
-			public const int video5 = 2131623945;
+			public const int video2 = 2131623945;
 			
 			// aapt resource value: 0x7F0E000A
-			public const int video6 = 2131623946;
+			public const int video3 = 2131623946;
 			
 			// aapt resource value: 0x7F0E000B
-			public const int video7 = 2131623947;
+			public const int video4 = 2131623947;
 			
 			// aapt resource value: 0x7F0E000C
-			public const int video8 = 2131623948;
+			public const int video5 = 2131623948;
 			
 			// aapt resource value: 0x7F0E000D
-			public const int video9 = 2131623949;
+			public const int video6 = 2131623949;
+			
+			// aapt resource value: 0x7F0E000E
+			public const int video7 = 2131623950;
+			
+			// aapt resource value: 0x7F0E000F
+			public const int video8 = 2131623951;
+			
+			// aapt resource value: 0x7F0E0010
+			public const int video9 = 2131623952;
 			
 			static Raw()
 			{

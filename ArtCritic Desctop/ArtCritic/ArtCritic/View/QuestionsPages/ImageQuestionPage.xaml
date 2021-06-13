@@ -14,7 +14,7 @@
                    Aspect="AspectFit"                    
                 />
         </Grid>
-        <Entry x:Name="UserAnswerEntry" Text=""/>
+        <Entry x:Name="UserAnswerEntry" Text="" Completed="AcceptAnswerImageClick"/>
         <Button x:Name="AcceptAnswerButton" Text="Ввести" Clicked="AcceptAnswerImageClick" />
         <Label x:Name="ScoreLabel" Text="0" HorizontalTextAlignment="Center" FontSize="40"></Label>
     </StackLayout>

@@ -8,3 +8,10 @@ ArtCritic.Data.Images.pic6.jpg|мона лиза
 ArtCritic.Data.Images.pic7.jpg|последний день помпеи
 ArtCritic.Data.Images.pic8.jpg|троица
 ArtCritic.Data.Images.pic9.jpg|утро в сосновом лесу
+ArtCritic.Data.Images.2.jpg|Апофеоз войны
+ArtCritic.Data.Images.3.jpg|Опричники
+ArtCritic.Data.Images.4.jpg|Воины Апокалипсиса
+ArtCritic.Data.Images.5.jpg|Устный счёт
+ArtCritic.Data.Images.6.jpg|Спор о вере
+ArtCritic.Data.Images.7.jpg|Проводы покойника
+ArtCritic.Data.Images.8.jpg|Дубки
