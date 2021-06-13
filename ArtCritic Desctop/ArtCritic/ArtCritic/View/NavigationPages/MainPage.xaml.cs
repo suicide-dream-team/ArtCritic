@@ -19,25 +19,34 @@ namespace ArtCritic
 
         async private void GameClick(object sender, EventArgs e)
         {
-            QuestionsController questionsController = new QuestionsController();
-            questionsController.LoadImageQuestions();
-            questionsController.LoadVideoQuestions();
-            questionsController.LoadMusicQuestions();
-            questionsController.ShuffleQuestionsList();
-            TextQuestion question = questionsController.GetCurrentQuestion();
-            if (typeof(VideoQuestion).IsInstanceOfType(question))
+            bool debug = true;
+
+            if (debug)
             {
-                await Navigation.PushAsync(new VideoQuestionPage(questionsController));
+                await Navigation.PushAsync(new ChooseGameModePage());
             }
-            else if (typeof(ImageQuestion).IsInstanceOfType(question))
+            else
             {
-                await Navigation.PushAsync(new ImageQuestionPage(questionsController));
+                QuestionsController questionsController = new QuestionsController();
+                questionsController.LoadImageQuestions();
+                questionsController.LoadVideoQuestions();
+                questionsController.LoadMusicQuestions();
+                questionsController.ShuffleQuestionsList();
+                TextQuestion question = questionsController.GetCurrentQuestion();
+                if (typeof(VideoQuestion).IsInstanceOfType(question))
+                {
+                    await Navigation.PushAsync(new VideoQuestionPage(questionsController));
+                }
+                else if (typeof(ImageQuestion).IsInstanceOfType(question))
+                {
+                    await Navigation.PushAsync(new ImageQuestionPage(questionsController));
+                }
+                else if (typeof(MusicQuestion).IsInstanceOfType(question))
+                {
+                    await Navigation.PushAsync(new MusicQuestionPage(questionsController));
+                }
             }
-            else if (typeof(MusicQuestion).IsInstanceOfType(question))
-            {
-                await Navigation.PushAsync(new MusicQuestionPage(questionsController));
-            }
-            //await Navigation.PushAsync(new ChooseGameModePage());
+
         }
 
     }

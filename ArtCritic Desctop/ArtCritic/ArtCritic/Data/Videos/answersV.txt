@@ -4,3 +4,11 @@ ms-appx:///video2.mp4|кавказская пленница
 ms-appx:///video3.mp4|мстители
 ms-appx:///video4.mp4|один дома
 ms-appx:///video5.mp4|пираты карибского моря
+ms-appx:///video6.mp4|анастасия
+ms-appx:///video7.mp4|бетховен
+ms-appx:///video8.mp4|дети шпионов
+ms-appx:///video9.mp4|любовь и голуби
+ms-appx:///video10.mp4|большой лебовски
+ms-appx:///video11.mp4|брат
+ms-appx:///video12.mp4|история игрушек
+ms-appx:///video13.mp4|красотка
