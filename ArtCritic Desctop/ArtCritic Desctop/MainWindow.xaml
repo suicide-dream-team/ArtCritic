@@ -10,7 +10,7 @@
 
         
         
-        <Grid x:Name="Main_menu" d:IsHidden="True" >
+        <Grid x:Name="Main_menu" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
@@ -33,23 +33,15 @@
 
             <Image x:Name="I_Game" Grid.Column="1" Grid.Row="3" MouseLeftButtonDown="I_Game_MouseLeftButtonDown"></Image>
 
-            <Button x:Name="Settings" Content="Настройки" Grid.Column="1" Grid.Row="3" Visibility="Hidden"
-                    Click="Settings_Click"/>
 
-            
-
-            <Button x:Name="Statistics" Content="Статистика" Grid.Column="1" Grid.Row="5" Visibility="Hidden"
-                    Click="Satistyc_Click"/>
+            <Image x:Name="I_Help" Grid.Row="4" Grid.Column="1" MouseLeftButtonDown="I_Help_MouseLeftButtonDown"></Image>
 
             <Image x:Name="I_Statistics" Grid.Column="1" Grid.Row="5" MouseLeftButtonDown="I_Statistics_MouseLeftButtonDown"></Image>
 
-            <Button x:Name="Exit" Content="Выход" Grid.Column="1" Grid.Row="6" Visibility="Hidden"
-                    Click="Exit_Click"/>
-
+            
             <Image x:Name="I_Exit" Grid.Column="1" Grid.Row="6" MouseLeftButtonDown="exit_pic_MouseLeftButtonDown"></Image>
 
-            <Button x:Name="Create_Pack_Button" Content="Создать новый пак вопросов" Click="Create_Pack_Button_Click" Visibility="Hidden"/>
-
+           
             <Image x:Name="I_Create_Pack_Button" Grid.Column="0" Grid.Row="7" Grid.RowSpan="2" MouseLeftButtonDown="I_Create_Pack_Button_MouseLeftButtonDown"></Image>
 
         </Grid>
@@ -83,7 +75,7 @@
             <Button x:Name="ReturnButton" Content="Меню" Grid.Column="2" Grid.Row="5" Click="Statictics_Back"/>
         </Grid>
 
-        <Grid x:Name="Type_of_game" >
+        <Grid x:Name="Type_of_game" d:IsHidden="True" >
 
             <Grid.ColumnDefinitions>
 
@@ -114,8 +106,7 @@
             <Button x:Name="Start_game" Content="Начать игру" Grid.Column="2" Grid.Row="7" Click="Start_game_Click"></Button>
             <Button x:Name="Back_to_menu" Content="Назад" Click="Back_to_menu_Click"></Button>
 
-            <Button x:Name="Start_story_game" Grid.Column="0" Grid.Row="7" Content="Режим истории" Click="Start_story_game_Click"></Button>
-            
+             
             <Button x:Name="test"  Content="test" Grid.Column="0" Grid.Row="0" Click="test_Click" Visibility="Hidden" d:IsHidden="True" />
             <Button x:Name="Video_question" Content="Video question" Grid.Column="1" Grid.Row="1" Click="Video_question_Click" Visibility="Hidden" d:IsHidden="True" />
             <Button x:Name="Music_question" Content="Music question" Grid.Column="1" Grid.Row="3" Click="Music_question_Click" Visibility="Hidden" d:IsHidden="True"/>
@@ -414,66 +405,7 @@
             <Image x:Name="I_Mixed_accept" Grid.Row="5" Grid.Column="5" MouseLeftButtonDown="I_Mixed_accept_MouseLeftButtonDown"></Image>
         </Grid>
 
-        <Grid x:Name="Story_game_accept_grid">
-            <Grid.RowDefinitions>
-                <RowDefinition></RowDefinition>
-                <RowDefinition></RowDefinition>
-                <RowDefinition></RowDefinition>
-                <RowDefinition></RowDefinition>
-                <RowDefinition></RowDefinition>
-                <RowDefinition></RowDefinition>
-                <RowDefinition></RowDefinition>
-            </Grid.RowDefinitions>
-
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
-            </Grid.ColumnDefinitions>
-            <Image x:Name="I_Story_accept" Grid.Row="5" Grid.Column="5" MouseLeftButtonDown="I_Story_accept_MouseLeftButtonDown"></Image>
-        </Grid>
         
-        <Grid x:Name="Story_game">
-            <Grid.RowDefinitions>
-                <RowDefinition></RowDefinition>
-                <RowDefinition></RowDefinition>
-                <RowDefinition></RowDefinition>
-                <RowDefinition></RowDefinition>
-                <RowDefinition></RowDefinition>
-                <RowDefinition></RowDefinition>
-                <RowDefinition></RowDefinition>
-            </Grid.RowDefinitions>
-
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
-            </Grid.ColumnDefinitions>
-            <Image x:Name="Story_background" Stretch="Fill" Grid.ColumnSpan="6" Grid.RowSpan="7"  ></Image>
-
-            <Image x:Name="Stroy_help" Grid.Row="7" Grid.Column="6" MouseLeftButtonDown="Stroy_help_MouseLeftButtonDown"></Image>
-            
-            <Image x:Name="Story_B1"  Grid.Column="4" Grid.Row="1" MouseLeftButtonDown="Story_B1_MouseLeftButtonDown"></Image>
-            <Image x:Name="Story_B2" Grid.Column="4" Grid.Row="5"  MouseLeftButtonDown="Story_B2_MouseLeftButtonDown"></Image>
-            <Image x:Name="Story_B3" Grid.Column="3" Grid.Row="3"  MouseLeftButtonDown="Story_B3_MouseLeftButtonDown"></Image>
-            <Image x:Name="Story_B4" Grid.ColumnSpan="2" Grid.Column="2" MouseLeftButtonDown="Story_B4_MouseLeftButtonDown" Margin="67,21,67,41" Grid.RowSpan="2" Grid.Row="1"  ></Image>
-            <Image x:Name="Story_B5" Grid.ColumnSpan="2" MouseLeftButtonDown="Story_B5_MouseLeftButtonDown" Margin="57,21,77,41" Grid.RowSpan="2" Grid.Row="4" ></Image>
-            <Image x:Name="Story_B6" Grid.ColumnSpan="2" Grid.Column="1" MouseLeftButtonDown="Story_B6_MouseLeftButtonDown" Margin="77,31,57,31" Grid.RowSpan="2" Grid.Row="4" ></Image>
-            <Image x:Name="Story_B7" Grid.ColumnSpan="2" Grid.Column="2" MouseLeftButtonDown="Story_B7_MouseLeftButtonDown" Margin="57,41,77,21" Grid.RowSpan="2" Grid.Row="5" ></Image>
-            <Image x:Name="Story_B8" Grid.Column="3" Margin="0,31,0,31" MouseLeftButtonDown="Story_B8_MouseLeftButtonDown" Grid.RowSpan="2" ></Image>
-            <Image x:Name="Story_B9" Grid.ColumnSpan="2" Grid.Column="1" MouseLeftButtonDown="Story_B9_MouseLeftButtonDown" Margin="46,26,88,36" Grid.RowSpan="2" Grid.Row="3"></Image>
-            <Image x:Name="Story_B10" Grid.Column="4" Margin="0,31,0,31" MouseLeftButtonDown="Story_B10_MouseLeftButtonDown" Grid.RowSpan="2" Grid.Row="3"></Image>
-            <Image x:Name="Story_B11" Grid.ColumnSpan="2" Grid.Column="2" MouseLeftButtonDown="Story_B11_MouseLeftButtonDown" Margin="98,41,36,21" Grid.RowSpan="2" Grid.Row="4"></Image>
-            <Image x:Name="Story_B12" Grid.ColumnSpan="2" Grid.Column="4" MouseLeftButtonDown="Story_B12_MouseLeftButtonDown" Margin="62,31,71,31" Grid.RowSpan="2" Grid.Row="2"></Image>
-            <Image x:Name="Story_B13" Grid.Column="2" Margin="0,57,0,5" MouseLeftButtonDown="Story_B13_MouseLeftButtonDown" Grid.RowSpan="2" Grid.Row="2"></Image>
-        </Grid>
-
     </Grid>
 
 

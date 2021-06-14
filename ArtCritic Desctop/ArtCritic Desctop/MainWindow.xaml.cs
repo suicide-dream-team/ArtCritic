@@ -39,6 +39,8 @@ namespace ArtCritic_Desctop
        // public Regex directory_name;
         private CreatePack a;
 
+        int count_correct_answer = 0;
+
         int answer_sum_video_correct = 0;
         int answer_sum_image_correct = 0;
 
@@ -56,8 +58,6 @@ namespace ArtCritic_Desctop
         Player Player = null;
         private int iter = 0; //пока я не сделаю нормальную обертку итерируем вопросы этой штукой
         private List<Music_question> music_Questions = new List<Music_question>();
-        private List<Uri> uris = new List<Uri>();
-        private List<TextQuestion> textQuestions = new List<TextQuestion>();
         private QuestionKeeper question;
         private TextQuestion textQuestion;
 
@@ -85,7 +85,6 @@ namespace ArtCritic_Desctop
             question = new QuestionKeeper("кто проживает на дне океана?", test_answers);
             Reg_Window.Visibility = Visibility.Hidden;
 
-            this.Story_game.Visibility = Visibility.Hidden;
 
             this.Main_menu.Visibility = Visibility.Hidden;
             //окно выбора типа игры
@@ -133,23 +132,26 @@ namespace ArtCritic_Desctop
         private void creat_start_menu()
         {
             string I_Game_Path = System.IO.Path.GetFullPath("..\\..\\..\\Buttons\\button_game.png");
-            
+            string I_Help_Path = System.IO.Path.GetFullPath("..\\..\\..\\Buttons\\button_help.png");
             string I_Statistics_Path = System.IO.Path.GetFullPath("..\\..\\..\\Buttons\\button_statistics.png");
-            string I_Creat_Pack_Path = System.IO.Path.GetFullPath("..\\..\\..\\Buttons\\button_download.png");
+            string I_Creat_Pack_Path = System.IO.Path.GetFullPath("..\\..\\..\\Buttons\\button_download_menu.png");
             string I_Exit_Path = System.IO.Path.GetFullPath("..\\..\\..\\Buttons\\button_exit.png");
             string I_Background_Path = System.IO.Path.GetFullPath("..\\..\\..\\wallpapers__for_menu_music_pictures\\menu.jpg");
-            Uri I_Game_U_Path = new Uri(I_Game_Path, UriKind.RelativeOrAbsolute);            
+            Uri I_Game_U_Path = new Uri(I_Game_Path, UriKind.RelativeOrAbsolute);
+            Uri I_Help_U_Path = new Uri(I_Help_Path, UriKind.RelativeOrAbsolute);
             Uri I_Statistics_U_Path = new Uri(I_Statistics_Path, UriKind.RelativeOrAbsolute);
             Uri I_Creat_Pack_U_Path = new Uri(I_Creat_Pack_Path, UriKind.RelativeOrAbsolute);
             Uri I_Exit_U_Path = new Uri(I_Exit_Path, UriKind.RelativeOrAbsolute);
             Uri I_Background_U_Path = new Uri(I_Background_Path, UriKind.RelativeOrAbsolute);
-            BitmapImage I_Game_Bitmap = new BitmapImage(I_Game_U_Path);            
+            BitmapImage I_Game_Bitmap = new BitmapImage(I_Game_U_Path);
+            BitmapImage I_Help_Bitmap = new BitmapImage(I_Help_U_Path);
             BitmapImage I_Statistics_Bitmap = new BitmapImage(I_Statistics_U_Path);
             BitmapImage I_Creat_Pack_Bitmap = new BitmapImage(I_Creat_Pack_U_Path);
             BitmapImage I_Exit_Bitmap = new BitmapImage(I_Exit_U_Path);
             BitmapImage I_Background_Bitmap = new BitmapImage(I_Background_U_Path);
             this.I_Exit.Source = I_Exit_Bitmap;
-            this.I_Game.Source = I_Game_Bitmap;            
+            this.I_Game.Source = I_Game_Bitmap;
+            this.I_Help.Source = I_Help_Bitmap;
             this.I_Statistics.Source = I_Statistics_Bitmap;
             this.I_Background.Source = I_Background_Bitmap;
             this.I_Create_Pack_Button.Source = I_Creat_Pack_Bitmap;
@@ -222,6 +224,11 @@ namespace ArtCritic_Desctop
         {
             Game_stat.Visibility = Visibility.Hidden;
             Main_menu.Visibility = Visibility.Visible;
+        }
+
+        private void I_Help_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            MessageBox.Show("По ходу игры будут встречаться 3 формата, где нужно будет угадать картину, фильм или песню. Везде необходимо вводить название и делать это без ошибок и опечаток, иначе они не засчитываются :( \n Удачи!");
         }
 
         private void Exit_Click(object sender, RoutedEventArgs e)
@@ -611,13 +618,15 @@ namespace ArtCritic_Desctop
             }
             if (check)
             {
-                MessageBox.Show(check.ToString()); //вместо этого нужно впилить апдейт игрока
+                count_correct_answer++;                
             }
             if (iter+1 == questions.Count)
             {
+                updateStatistics(count_correct_answer, questions.Count);
                 MessageBox.Show("игра закончена");
                 this.Mixed_game.Visibility = Visibility.Hidden;
                 iter = 0;
+                count_correct_answer = 0;
                 this.Type_of_game.Visibility = Visibility.Visible;
             }
             else
@@ -767,7 +776,7 @@ namespace ArtCritic_Desctop
         {
             music_Questions[iter].Stop();
             if (music_Questions[iter].Check_Answer(Music_answer.Text))
-                correctAnswer = correctAnswer + 1;
+                correctAnswer++;
             Music_answer.Text = "";
             ++iter;
             if (iter == 4)
@@ -998,262 +1007,11 @@ namespace ArtCritic_Desctop
             Reg_Window.Visibility = Visibility.Visible;
         }
 
+      
+
         //сюженый режим
 
-        private void Stroy_help_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            MessageBox.Show("По ходу игры будут встречаться 3 формата, где нужно будет угадать картину, фильм или песню. Везде необходимо вводить название и делать это без ошибок и опечаток, иначе они не засчитываются :( \nПеред началом игры не забудь зайти в свой кабинет или зарегистрироваться, чтобы сохранить свой результат. \nУдачи! ");
-        }
 
-        private void Start_story_game_Click(object sender, RoutedEventArgs e)
-        {
-            questions = QuestionDao.getQuestionsForPack(PackDao.GetByName("storyPack"));
-            string I_Circle_Button = System.IO.Path.GetFullPath("..\\..\\..\\Buttons\\circle.png");
-            Uri I_Circle_Button_U_Path = new Uri(I_Circle_Button, UriKind.RelativeOrAbsolute);
-            BitmapImage I_Circle_Button_Bitmap = new BitmapImage(I_Circle_Button_U_Path);
-            this.Story_B1.Source = I_Circle_Button_Bitmap;
-            this.Story_B2.Source = I_Circle_Button_Bitmap;
-            this.Story_B3.Source = I_Circle_Button_Bitmap;
-            this.Story_B4.Source = I_Circle_Button_Bitmap;
-            this.Story_B5.Source = I_Circle_Button_Bitmap;
-            this.Story_B6.Source = I_Circle_Button_Bitmap;
-            this.Story_B7.Source = I_Circle_Button_Bitmap;
-            this.Story_B8.Source = I_Circle_Button_Bitmap;
-            this.Story_B9.Source = I_Circle_Button_Bitmap;
-            this.Story_B10.Source = I_Circle_Button_Bitmap;
-            this.Story_B11.Source = I_Circle_Button_Bitmap;
-            this.Story_B12.Source = I_Circle_Button_Bitmap;
-            this.Story_B13.Source = I_Circle_Button_Bitmap;
-
-            string I_Story_Background = System.IO.Path.GetFullPath(@"..\..\..\wallpapers__for_menu_music_pictures\map.jpg");
-            Uri I_Story_Background_U_path = new Uri(I_Story_Background, UriKind.Relative);
-            BitmapImage I_Story_Background_Bitmap = new BitmapImage();
-            I_Story_Background_Bitmap.BeginInit();
-            I_Story_Background_Bitmap.UriSource = I_Story_Background_U_path;
-            this.Story_background.Source = I_Story_Background_Bitmap;
-
-            Type_of_game.Visibility = Visibility.Hidden;
-
-
-            string I_Music_Replay_Path = System.IO.Path.GetFullPath("..\\..\\..\\Buttons\\button_repeat.png");
-
-            string I_Music_Exit_Path = System.IO.Path.GetFullPath("..\\..\\..\\Buttons\\button_exit_game.png");
-            string I_Background_Path = System.IO.Path.GetFullPath("..\\..\\..\\wallpapers__for_menu_music_pictures\\guess_music.jpg");
-            Uri I_Music_Replay_U_Path = new Uri(I_Music_Replay_Path, UriKind.RelativeOrAbsolute);
-
-            Uri I_Music_Exit_U_Path = new Uri(I_Music_Exit_Path, UriKind.RelativeOrAbsolute);
-            Uri I_Background_U_Path = new Uri(I_Background_Path, UriKind.RelativeOrAbsolute);
-            BitmapImage I_Music_Replay_Bitmap = new BitmapImage(I_Music_Replay_U_Path);
-
-            BitmapImage I_Music_Exit_Bitmap = new BitmapImage(I_Music_Exit_U_Path);
-            BitmapImage I_Background_Bitmap = new BitmapImage(I_Background_U_Path);
-            this.I_Music_Exit.Source = I_Music_Exit_Bitmap;
-
-            this.I_Music_replay.Source = I_Music_Replay_Bitmap;
-            this.I_Music_background.Source = I_Background_Bitmap;
-
-            Back_Ground = new BitmapImage();
-            Back_Ground.BeginInit();
-            string Background_Image_Path = System.IO.Path.GetFullPath(@"..\..\..\wallpapers__for_menu_music_pictures\guess_picture.jpg");
-            Back_Ground.UriSource = new Uri(Background_Image_Path, UriKind.RelativeOrAbsolute);
-            Back_Ground.EndInit();
-            Image_Background.Source = Back_Ground;
-
-            Exit_Button = new BitmapImage();
-            Exit_Button.BeginInit();
-            string Exit_Button_Image_Path = System.IO.Path.GetFullPath(@"..\..\..\Buttons\button_exit_game.png");
-            Exit_Button.UriSource = new Uri(Exit_Button_Image_Path, UriKind.RelativeOrAbsolute);
-            Exit_Button.EndInit();
-            exit_pic.Source = Exit_Button;
-
-            Back_Ground = new BitmapImage();
-            Back_Ground.BeginInit();
-            Background_Image_Path = System.IO.Path.GetFullPath(@"..\..\..\wallpapers__for_menu_music_pictures\guess_film.jpg");
-            Back_Ground.UriSource = new Uri(Background_Image_Path, UriKind.RelativeOrAbsolute);
-            Back_Ground.EndInit();
-            Video_Background.Source = Back_Ground;
-
-            Exit_Button = new BitmapImage();
-            Exit_Button.BeginInit();
-            Exit_Button_Image_Path = System.IO.Path.GetFullPath(@"..\..\..\Buttons\button_exit_game.png");
-            Exit_Button.UriSource = new Uri(Exit_Button_Image_Path, UriKind.RelativeOrAbsolute);
-            Exit_Button.EndInit();
-            Exit_For_Video.Source = Exit_Button;
-
-
-            this.I_Music_Exit.Source = I_Music_Exit_Bitmap;
-            this.I_Music_replay.Source = I_Music_Replay_Bitmap;
-            this.I_Music_background.Source = I_Background_Bitmap;
-
-            string I_Mixed_Accept_Path = System.IO.Path.GetFullPath("..\\..\\..\\Buttons\\button_next.png");
-            Uri I_Mixed_Accept_U_Path = new Uri(I_Mixed_Accept_Path, UriKind.RelativeOrAbsolute);
-            BitmapImage I_Mixed_Accept_Bitmap = new BitmapImage(I_Mixed_Accept_U_Path);
-            this.I_Story_accept.Source = I_Mixed_Accept_Bitmap;
-            this.Story_game.Visibility = Visibility.Visible;
-            this.Story_game_accept_grid.Visibility = Visibility.Hidden;
-            MessageBox.Show("Знакомы с теорией мультивселенных? В одной из таких ты и оказался.\n Но есть одна незадача: мы так долго собирали материал и так много его нашли, что названия мы благополучно забыли.\n Помоги нам - угадай названия, а мы в конце поймем, сколько ты напомнил нам артефактов. Надеемся, ты нас не подведешь! \n Ну что, ты в деле ? ");
-        }
-
-        private void I_Story_accept_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            bool check = false;
-            string s;
-            switch (questions[iter].Type)
-            {
-                case Question.QuestionType.Audio:
-                    s = this.Music_answer.Text;
-                    check = music_.Check_Answer(s);
-                    Music_question_window.Visibility = Visibility.Hidden;
-                    break;
-                case Question.QuestionType.Picture:
-                    s = Answer_Image_Texbox.Text;
-                    check = Image_.Check_Answer(s);
-                    Image_game.Visibility = Visibility.Hidden;
-                    break;
-                case Question.QuestionType.Video:
-                    s = Answer_Video_Texbox.Text;
-                    check = Video_.Check_Answer(s);
-                    Video_game.Visibility = Visibility.Hidden;
-                    break;
-                default:
-                    MessageBox.Show("Error");
-                    break;
-            }
-            if (check)
-            {
-                MessageBox.Show(check.ToString()); //вместо этого нужно впилить апдейт игрока
-            }
-            if (iter + 1 == questions.Count)
-            {
-                MessageBox.Show("игра закончена");
-                this.Story_game_accept_grid.Visibility = Visibility.Hidden;
-                iter = 0;
-                this.Type_of_game.Visibility = Visibility.Visible;
-            }
-            else
-            {
-                iter=0;
-                Story_game.Visibility = Visibility.Visible;
-                Story_game_accept_grid.Visibility = Visibility.Hidden;
-            }
-        }
-
-        private void Story_B1_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            this.Story_game.Visibility = Visibility.Hidden;
-            Story_B1.Visibility = Visibility.Hidden;
-            iter = 0;
-            Story_game_accept_grid.Visibility = Visibility.Visible;
-            Show_mixed_question();
-        }
-
-        private void Story_B2_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            this.Story_game.Visibility = Visibility.Hidden;
-            Story_B2.Visibility = Visibility.Hidden;
-            iter = 1;
-            Story_game_accept_grid.Visibility = Visibility.Visible;
-            Show_mixed_question();
-        }
-
-        private void Story_B3_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            this.Story_game.Visibility = Visibility.Hidden;
-            Story_B3.Visibility = Visibility.Hidden;
-            iter = 2;
-            Story_game_accept_grid.Visibility = Visibility.Visible;
-            Show_mixed_question();
-        }
-
-        private void Story_B4_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            this.Story_game.Visibility = Visibility.Hidden;
-            Story_B4.Visibility = Visibility.Hidden;
-            iter = 3;
-            Story_game_accept_grid.Visibility = Visibility.Visible;
-            Show_mixed_question();
-        }
-
-        private void Story_B5_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            this.Story_game.Visibility = Visibility.Hidden;
-            Story_B5.Visibility = Visibility.Hidden;
-            iter = 4;
-            Story_game_accept_grid.Visibility = Visibility.Visible;
-            Show_mixed_question();
-        }
-
-        private void Story_B6_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            this.Story_game.Visibility = Visibility.Hidden;
-            Story_B6.Visibility = Visibility.Hidden;
-            iter = 5;
-            Story_game_accept_grid.Visibility = Visibility.Visible;
-            Show_mixed_question();
-        }
-
-        private void Story_B7_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            this.Story_game.Visibility = Visibility.Hidden;
-            Story_B7.Visibility = Visibility.Hidden;
-            iter = 6;
-            Story_game_accept_grid.Visibility = Visibility.Visible;
-            Show_mixed_question();
-        }
-
-        private void Story_B8_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            this.Story_game.Visibility = Visibility.Hidden;
-            Story_B8.Visibility = Visibility.Hidden;
-            iter = 7;
-            Story_game_accept_grid.Visibility = Visibility.Visible;
-            Show_mixed_question();
-        }
-
-        private void Story_B9_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            this.Story_game.Visibility = Visibility.Hidden;
-            Story_B9.Visibility = Visibility.Hidden;
-            iter = 8;
-            Story_game_accept_grid.Visibility = Visibility.Visible;
-            Show_mixed_question();
-        }
-
-        private void Story_B10_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            this.Story_game.Visibility = Visibility.Hidden;
-            Story_B10.Visibility = Visibility.Hidden;
-            iter = 9;
-            Story_game_accept_grid.Visibility = Visibility.Visible;
-            Show_mixed_question();
-        }
-
-        private void Story_B11_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            this.Story_game.Visibility = Visibility.Hidden;
-            Story_B11.Visibility = Visibility.Hidden;
-            iter = 10;
-            Story_game_accept_grid.Visibility = Visibility.Visible;
-            Show_mixed_question();
-        }
-
-        private void Story_B12_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            this.Story_game.Visibility = Visibility.Hidden;
-            Story_B12.Visibility = Visibility.Hidden;
-            iter = 11;
-            Story_game_accept_grid.Visibility = Visibility.Visible;
-            Show_mixed_question();
-        }
-
-        private void Story_B13_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            this.Story_game.Visibility = Visibility.Hidden;
-            Story_B13.Visibility = Visibility.Hidden;
-            iter = 12;
-            Story_game_accept_grid.Visibility = Visibility.Visible;
-            Show_mixed_question();
-        }
     }
 
 }
