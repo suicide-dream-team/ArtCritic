@@ -791,6 +791,7 @@ namespace ArtCritic_Desctop.core
                     }
                     else
                     {
+                        music_for_user.Close();
                         MessageBox.Show("Пак успешно создан");
                         is_create = true;
                         //Create_zip_archieve();
@@ -814,7 +815,7 @@ namespace ArtCritic_Desctop.core
                     else
                     {
                         //Create_zip_archieve();
-
+                        video_for_user.Source = null;
                         MessageBox.Show("Пак успешно создан");
                         is_create = true;
                     }
@@ -835,7 +836,7 @@ namespace ArtCritic_Desctop.core
                     }
                     else
                     {
-
+                        image_for_user.Source = null;
                         MessageBox.Show("Пак успешно создан");
                         is_create = true;
                         //Create_zip_archieve();
@@ -860,7 +861,9 @@ namespace ArtCritic_Desctop.core
                     }
                     else
                     {
-
+                        if (is_image == true) { image_for_user.Source = null; }
+                        if (is_music == true) { music_for_user.Close(); }
+                        if (is_video == true) { video_for_user.Source = null; }
                         MessageBox.Show("Пак успешно создан");
                         is_create = true;
                         //Create_zip_archieve();
