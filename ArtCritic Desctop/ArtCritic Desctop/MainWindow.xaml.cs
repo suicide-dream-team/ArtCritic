@@ -281,7 +281,7 @@ namespace ArtCritic_Desctop
                 CreatePack image_pack = new CreatePack(2, Creat_Answer_Image_Texbox.Text, Image_for_create, Creat_Answer_Image_Texbox, Create_Question_Image_TBlock);
                 a = image_pack;
                 //this.Closing += a.Delete_Naher;
-                if (a.is_create == true) { this.Close(); }
+                if (a.is_create == true) { Accept_Create_Name_Image_Pack.Visibility = Visibility.Visible; Accept_Create_Answer_Image.Visibility = Visibility.Hidden; Pack_create_Image.Visibility = Visibility.Hidden; Main_menu.Visibility = Visibility.Visible; }
                 Accept_Create_Name_Image_Pack.Visibility = Visibility.Hidden;
                 Accept_Create_Answer_Image.Visibility = Visibility.Visible;
                 Creat_Answer_Image_Texbox.Text = "";
@@ -296,7 +296,7 @@ namespace ArtCritic_Desctop
         {
             a.User_Create_CLick(sender, e);
             Creat_Answer_Image_Texbox.Text = "";
-            if (a.is_create == true) { this.Close(); }
+            if (a.is_create == true) { Accept_Create_Name_Image_Pack.Visibility = Visibility.Visible; Accept_Create_Answer_Image.Visibility = Visibility.Hidden; Pack_create_Image.Visibility = Visibility.Hidden; Main_menu.Visibility = Visibility.Visible; }
         }
 
         private void Create_Music_Pack_Click(object sender, RoutedEventArgs e)
@@ -314,7 +314,7 @@ namespace ArtCritic_Desctop
                 CreatePack Music_pack = new CreatePack(1, Creat_Answer_Music_Texbox.Text, mediaplayer, Creat_Answer_Music_Texbox, Create_Question_Music_TBlock);
                 a = Music_pack;
                // this.Closing += a.Delete_Naher;
-                if (a.is_create == true) { this.Close(); }
+                if (a.is_create == true) { Accept_Create_Name_Music_Pack.Visibility = Visibility.Visible; Accept_Create_Answer_Music.Visibility = Visibility.Hidden; Pack_create_Music.Visibility = Visibility.Hidden; Main_menu.Visibility = Visibility.Visible; }
                 Accept_Create_Name_Music_Pack.Visibility = Visibility.Hidden;
                 Accept_Create_Answer_Music.Visibility = Visibility.Visible;
                 Creat_Answer_Music_Texbox.Text = "";
@@ -329,7 +329,7 @@ namespace ArtCritic_Desctop
         {
             a.User_Create_CLick(sender, e);
             Creat_Answer_Music_Texbox.Text = "";
-            if (a.is_create == true) { this.Close(); }
+            if (a.is_create == true) { Accept_Create_Name_Music_Pack.Visibility = Visibility.Visible; Accept_Create_Answer_Music.Visibility = Visibility.Hidden; Pack_create_Music.Visibility = Visibility.Hidden; Main_menu.Visibility = Visibility.Visible; }
         }
 
         private void Create_Video_Pack_Click(object sender, RoutedEventArgs e)
@@ -347,7 +347,7 @@ namespace ArtCritic_Desctop
                 CreatePack Video_pack = new CreatePack(3, Creat_Answer_Video_Texbox.Text, Video_for_create, Creat_Answer_Video_Texbox, Create_Question_Video_TBlock);
                 a = Video_pack;
               //  this.Closing += a.Delete_Naher;
-                if (a.is_create == true) { this.Close(); }
+                if (a.is_create == true) { Accept_Create_Name_Video_Pack.Visibility = Visibility.Visible; Accept_Create_Answer_Video.Visibility = Visibility.Hidden; Pack_create_Video.Visibility = Visibility.Hidden; Main_menu.Visibility = Visibility.Visible; }
                 Accept_Create_Name_Video_Pack.Visibility = Visibility.Hidden;
                 Accept_Create_Answer_Video.Visibility = Visibility.Visible;
                 Creat_Answer_Video_Texbox.Text = "";
@@ -362,7 +362,7 @@ namespace ArtCritic_Desctop
         {
             a.User_Create_CLick(sender, e);
             Creat_Answer_Video_Texbox.Text = "";
-            if (a.is_create == true) { this.Close(); }
+            if (a.is_create == true) { Accept_Create_Name_Video_Pack.Visibility = Visibility.Visible; Accept_Create_Answer_Video.Visibility = Visibility.Hidden; Pack_create_Video.Visibility = Visibility.Hidden; Main_menu.Visibility = Visibility.Visible; }
         }
 
 
@@ -392,7 +392,7 @@ namespace ArtCritic_Desctop
                     Image_for_create_Mixed_for_Music.Visibility = Visibility.Visible;
                 }
               //  this.Closing += a.Delete_Naher;
-                if (a.is_create == true) { this.Close(); }
+                if (a.is_create == true) { Accept_Create_Name_Mixed_Pack.Visibility = Visibility.Visible; Accept_Create_Answer_Mixed.Visibility = Visibility.Hidden; Pack_create_Mixed.Visibility = Visibility.Hidden; Main_menu.Visibility = Visibility.Visible; }
                 Accept_Create_Name_Mixed_Pack.Visibility = Visibility.Hidden;
                 Accept_Create_Answer_Mixed.Visibility = Visibility.Visible;
                 Creat_Answer_Mixed_Texbox.Text = "";
@@ -424,7 +424,7 @@ namespace ArtCritic_Desctop
             }
             if (a.is_create == true)
             {
-                this.Close();
+                Accept_Create_Name_Mixed_Pack.Visibility = Visibility.Visible; Accept_Create_Answer_Mixed.Visibility = Visibility.Hidden; Pack_create_Mixed.Visibility = Visibility.Hidden; Main_menu.Visibility = Visibility.Visible;
             }
         }
 
