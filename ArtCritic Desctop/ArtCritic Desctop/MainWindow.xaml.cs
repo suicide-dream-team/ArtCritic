@@ -226,6 +226,7 @@ namespace ArtCritic_Desctop
         private void I_Help_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             MessageBox.Show("По ходу игры будут встречаться 3 формата, где нужно будет угадать картину, фильм или песню. Везде необходимо вводить название и делать это без ошибок и опечаток, иначе они не засчитываются :( \n Удачи!");
+            MessageBox.Show("Вы можете выбрать из нескольких заранее приготовленых паков, введя в меню игры названия im, storyPack");
         }
 
         private void I_Game_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -607,6 +608,7 @@ namespace ArtCritic_Desctop
                 case Question.QuestionType.Audio:
                     s = this.Music_answer.Text;
                     check=music_.Check_Answer(s);
+                    music_.Stop();
                     Music_question_window.Visibility = Visibility.Hidden;
                     break;
                 case Question.QuestionType.Picture:
