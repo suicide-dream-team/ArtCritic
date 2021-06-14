@@ -55,7 +55,7 @@ namespace ArtCritic_Desctop
         MediaPlayer mediaplayer = new MediaPlayer();
 
 
-        Player Player = null;
+        Player player = null;
         private int iter = 0; //пока я не сделаю нормальную обертку итерируем вопросы этой штукой
         private List<Music_question> music_Questions = new List<Music_question>();
         private QuestionKeeper question;
@@ -74,8 +74,13 @@ namespace ArtCritic_Desctop
             InitializeComponent();
             CreateAndCheckDb();
 
+            player = PlayerDao.Get(1);
+            if (player == null)
+            {
+                player = new Player("User", "password");
+                player = PlayerDao.Add(player);
+            }
 
-            Player = null;
 
 
             creat_start_menu();
@@ -86,7 +91,8 @@ namespace ArtCritic_Desctop
             Reg_Window.Visibility = Visibility.Hidden;
 
 
-            this.Main_menu.Visibility = Visibility.Hidden;
+            this.Main_menu.Visibility = Visibility.Visible;
+            this.Login_Window.Visibility = Visibility.Hidden;
             //окно выбора типа игры
             this.Game_stat.Visibility = Visibility.Hidden;
             this.Type_of_game.Visibility = Visibility.Hidden;
@@ -186,12 +192,12 @@ namespace ArtCritic_Desctop
         /// <param name="totalAnswer">Всего ответов.</param>
         private void updateStatistics(int correctAnswer, int totalAnswer)
         {
-            Player.Stat.CurrentResult = (Player.Stat.CurrentResult * Player.Stat.PlayedGames + correctAnswer * 100 / totalAnswer) / (Player.Stat.PlayedGames + 1);
-            Player.Stat.PlayedGames += 1;
-            Player.Stat.TotalQuestions += totalAnswer;
-            Player.Stat.TotalCorrectAnswers += correctAnswer;
+            player.Stat.CurrentResult = (player.Stat.CurrentResult * player.Stat.PlayedGames + correctAnswer * 100 / totalAnswer) / (player.Stat.PlayedGames + 1);
+            player.Stat.PlayedGames += 1;
+            player.Stat.TotalQuestions += totalAnswer;
+            player.Stat.TotalCorrectAnswers += correctAnswer;
 
-            Player.Stat = PlayerStatDao.Update(Player.Stat);
+            player.Stat = PlayerStatDao.Update(player.Stat);
         }
 
         //Элементы main меню
@@ -208,10 +214,10 @@ namespace ArtCritic_Desctop
         }        
         private void Satistyc_Click(object sender, RoutedEventArgs e)
         {
-            Played_Games_Label2.Content = Player.Stat.PlayedGames;
-            TotalQuestionsLabe2.Content = Player.Stat.TotalQuestions;
-            TotalCorrectAnswersLabe2.Content = Player.Stat.TotalCorrectAnswers;
-            CurrentResultLabe2.Content = Player.Stat.CurrentResult + "%";
+            Played_Games_Label2.Content = player.Stat.PlayedGames;
+            TotalQuestionsLabe2.Content = player.Stat.TotalQuestions;
+            TotalCorrectAnswersLabe2.Content = player.Stat.TotalCorrectAnswers;
+            CurrentResultLabe2.Content = player.Stat.CurrentResult + "%";
             Game_stat.Visibility = Visibility.Visible;
             
             Main_menu.Visibility = Visibility.Hidden;
@@ -894,10 +900,10 @@ namespace ArtCritic_Desctop
 
         private void I_Statistics_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            Played_Games_Label2.Content = Player.Stat.PlayedGames;
-            TotalQuestionsLabe2.Content = Player.Stat.TotalQuestions;
-            TotalCorrectAnswersLabe2.Content = Player.Stat.TotalCorrectAnswers;
-            CurrentResultLabe2.Content = Player.Stat.CurrentResult + "%";
+            Played_Games_Label2.Content = player.Stat.PlayedGames;
+            TotalQuestionsLabe2.Content = player.Stat.TotalQuestions;
+            TotalCorrectAnswersLabe2.Content = player.Stat.TotalCorrectAnswers;
+            CurrentResultLabe2.Content = player.Stat.CurrentResult + "%";
             Game_stat.Visibility = Visibility.Visible;
             Main_menu.Visibility = Visibility.Hidden;
         }
@@ -918,8 +924,8 @@ namespace ArtCritic_Desctop
                 {
                     try
                     {
-                        Player = PlayerDao.Get(Login_Textbox.Text, Password_Passbox.Password);
-                        MessageBox.Show("Пользователь авторизовался");
+                        player = PlayerDao.Get(Login_Textbox.Text, Password_Passbox.Password);
+                        //MessageBox.Show("Пользователь авторизовался");
                         Login_Window.Visibility = Visibility.Hidden;
                         Main_menu.Visibility = Visibility.Visible;
 
@@ -972,8 +978,8 @@ namespace ArtCritic_Desctop
                                 {
                                     // Вот тут записывать в бд нужно
                                     MessageBox.Show("Пользователь зарегистрирован");
-                                    Player = new Player(Textbox_Login_Reg.Text, Password_Reg1.Password);
-                                    Player = PlayerDao.Add(Player);
+                                    player = new Player(Textbox_Login_Reg.Text, Password_Reg1.Password);
+                                    player = PlayerDao.Add(player);
 
                                     Password_Reg1.Clear();
                                     Password_Reg2.Clear();
