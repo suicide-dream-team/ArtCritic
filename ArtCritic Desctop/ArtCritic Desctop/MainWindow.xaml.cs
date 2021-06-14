@@ -205,11 +205,7 @@ namespace ArtCritic_Desctop
         {
             Main_menu.Visibility = Visibility.Hidden;
             Type_of_game.Visibility = Visibility.Visible;
-        }
-        private void Settings_Click(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show("пока в разработке");
-        }
+        }        
         private void Satistyc_Click(object sender, RoutedEventArgs e)
         {
             Played_Games_Label2.Content = Player.Stat.PlayedGames;
@@ -229,6 +225,16 @@ namespace ArtCritic_Desctop
         private void I_Help_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             MessageBox.Show("По ходу игры будут встречаться 3 формата, где нужно будет угадать картину, фильм или песню. Везде необходимо вводить название и делать это без ошибок и опечаток, иначе они не засчитываются :( \n Удачи!");
+        }
+
+        private void I_Game_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            Main_menu.Visibility = Visibility.Hidden;
+            Type_of_game.Visibility = Visibility.Visible;
+            string I_Background_Path = System.IO.Path.GetFullPath("..\\..\\..\\wallpapers__for_menu_music_pictures\\menu.jpg");
+            Uri I_Background_U_Path = new Uri(I_Background_Path, UriKind.RelativeOrAbsolute);
+            BitmapImage I_Background_Bitmap = new BitmapImage(I_Background_U_Path);
+            this.I_type_of_game_Backend.Source = I_Background_Bitmap;
         }
 
         private void Exit_Click(object sender, RoutedEventArgs e)
@@ -496,7 +502,7 @@ namespace ArtCritic_Desctop
 
         //Конец элементов меню Game
 
-        //Элементы для режима игры Видео
+        
 
         void create_Mixed_Question()
         {
@@ -757,8 +763,8 @@ namespace ArtCritic_Desctop
         }
         private void Music_replay_music_Click(object sender, RoutedEventArgs e)
         {
-            music_Questions[iter].Stop();
-            music_Questions[iter].Play();
+            music_.Stop();
+            music_.Play();
         }
         private void Music_exit_Click(object sender, RoutedEventArgs e)
         {
@@ -766,7 +772,7 @@ namespace ArtCritic_Desctop
             iter = 0;
             Music_question_window.Visibility = Visibility.Hidden;
             Type_of_game.Visibility = Visibility.Visible;
-            
+            Mixed_game.Visibility = Visibility.Hidden;
         }
         private void exit_pic_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
@@ -797,7 +803,7 @@ namespace ArtCritic_Desctop
             iter = 0;
             Music_question_window.Visibility = Visibility.Hidden;
             Type_of_game.Visibility = Visibility.Visible;
-
+            Mixed_game.Visibility = Visibility.Hidden;
         }
         private void I_Music_replay_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
@@ -881,11 +887,7 @@ namespace ArtCritic_Desctop
             Type_of_game.Visibility = Visibility.Visible;
         }
 
-        private void I_Game_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            Main_menu.Visibility = Visibility.Hidden;
-            Type_of_game.Visibility = Visibility.Visible;
-        }
+        
 
        
 
