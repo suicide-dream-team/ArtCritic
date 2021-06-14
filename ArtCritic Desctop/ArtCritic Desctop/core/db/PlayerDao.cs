@@ -55,7 +55,7 @@ namespace ArtCritic_Desctop.core.db
         /// Возвращает из БД игрока по его идентификатору.
         /// </summary>
         /// <param name="id">Идентификатор искомого игрока.</param>
-        /// <returns>Объект Player с идентификатором id, или же null, если записи с таким id нет в БД.</returns>
+        /// <returns>Объект player с идентификатором id, или же null, если записи с таким id нет в БД.</returns>
         public static Player Get(int id)
         {
             try
@@ -97,7 +97,7 @@ namespace ArtCritic_Desctop.core.db
         /// </summary>
         /// <param name="name">Имя искомого игрока.</param>
         /// <param name="password">Пароль искомого игрока.</param>
-        /// <returns>Объект Player с именем name и паролем password, если такая запись есть в БД.</returns>
+        /// <returns>Объект player с именем name и паролем password, если такая запись есть в БД.</returns>
         /// <exception cref="PlayerNotFoundException">Если игрок с таким именем не найден.</exception>
         /// <exception cref="PasswordIsIncorrectException">Если пароли не совпали.</exception>
         public static Player Get(string name, string password)
@@ -148,7 +148,7 @@ namespace ArtCritic_Desctop.core.db
         /// <summary>
         /// Возвращает список всех хранящихся в БД игроков.
         /// </summary>
-        /// <returns>Список List с игроками Player, или пустой список, если в БД нет игроков.</returns>
+        /// <returns>Список List с игроками player, или пустой список, если в БД нет игроков.</returns>
         public static List<Player> GetPlayers()
         {
             try
@@ -186,7 +186,7 @@ namespace ArtCritic_Desctop.core.db
         /// Добавляет в БД новую запись для игрока, после чего возвращает её с присвоенным ей идентификатором.
         /// </summary>
         /// <param name="p">Игрок, добавляемый в БД.</param>
-        /// <returns>Объект Player хранящегося в БД только что добавленного игрока.</returns>
+        /// <returns>Объект player хранящегося в БД только что добавленного игрока.</returns>
         /// <exception cref="SQLiteException">При неудачном добавлении игрока в БД.</exception>
         public static Player Add(Player p)
         {
@@ -231,7 +231,7 @@ namespace ArtCritic_Desctop.core.db
         /// Обновляет уже хранящегося в БД игрока p. Обновление происходит по id игрока.
         /// </summary>
         /// <param name="p">Обновляемый игрок.</param>
-        /// <returns>Объект Player хранящегося в БД только что обновлённого игрока.</returns>
+        /// <returns>Объект player хранящегося в БД только что обновлённого игрока.</returns>
         public static Player Update(Player p)
         {
             try
