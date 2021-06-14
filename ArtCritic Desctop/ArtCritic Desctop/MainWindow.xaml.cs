@@ -816,8 +816,8 @@ namespace ArtCritic_Desctop
         }
         private void I_Music_replay_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            music_Questions[iter].Stop();
-            music_Questions[iter].Play();
+            music_.Stop();
+            music_.Play();
         }
 
         //Конец элементов для режима игры Музыка

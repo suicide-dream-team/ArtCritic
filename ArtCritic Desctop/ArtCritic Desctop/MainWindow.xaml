@@ -104,7 +104,7 @@
 
             </Grid.RowDefinitions>
             <Image x:Name="I_type_of_game_Backend" Grid.RowSpan="9" Grid.ColumnSpan="3" Stretch="Fill"/>
-            <TextBlock Grid.Row="2" Grid.Column="1" Text="Введите название пака"></TextBlock>
+            <TextBox Grid.Row="2" Grid.Column="1" Text="Введите название пака" IsReadOnly="True"></TextBox>
             <TextBox x:Name="Name_of_pack" Grid.Row="4" Grid.Column="1"></TextBox>
             <Button x:Name="Start_game" Content="Начать игру" Grid.Column="2" Grid.Row="7" Click="Start_game_Click"></Button>
             <Button x:Name="Back_to_menu" Content="Назад" Click="Back_to_menu_Click" Grid.Column="0" Grid.Row="7"></Button>
