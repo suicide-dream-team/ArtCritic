@@ -46,7 +46,7 @@
 
         </Grid>
 
-        <Grid x:Name="Game_stat" d:IsHidden="True" >
+        <Grid x:Name="Game_stat" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
@@ -63,6 +63,7 @@
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
+            
 
             <Label x:Name="Played_Games_Label1" Content="Сыграно игр" Grid.Column="1" Grid.Row="1"/>
             <Label x:Name="Played_Games_Label2" Content="" Grid.Column="3" Grid.Row="1"/>
@@ -73,9 +74,10 @@
             <Label x:Name="CurrentResultLabel" Content="Текущий результат" Grid.Column="1" Grid.Row="4"/>
             <Label x:Name="CurrentResultLabe2" Content="" Grid.Column="3" Grid.Row="4"/>
             <Button x:Name="ReturnButton" Content="Меню" Grid.Column="2" Grid.Row="5" Click="Statictics_Back"/>
+            
         </Grid>
 
-        <Grid x:Name="Type_of_game" >
+        <Grid x:Name="Type_of_game" d:IsHidden="True" >
 
             <Grid.ColumnDefinitions>
 
@@ -101,7 +103,7 @@
 
 
             </Grid.RowDefinitions>
-            <Image x:Name="I_type_of_game_Backend" Grid.RowSpan="9" Grid.ColumnSpan="3" Stretch="Fill"></Image>
+            <Image x:Name="I_type_of_game_Backend" Grid.RowSpan="9" Grid.ColumnSpan="3" Stretch="Fill"/>
             <TextBlock Grid.Row="2" Grid.Column="1" Text="Введите название пака"></TextBlock>
             <TextBox x:Name="Name_of_pack" Grid.Row="4" Grid.Column="1"></TextBox>
             <Button x:Name="Start_game" Content="Начать игру" Grid.Column="2" Grid.Row="7" Click="Start_game_Click"></Button>

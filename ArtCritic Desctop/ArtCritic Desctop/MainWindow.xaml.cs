@@ -213,6 +213,7 @@ namespace ArtCritic_Desctop
             TotalCorrectAnswersLabe2.Content = Player.Stat.TotalCorrectAnswers;
             CurrentResultLabe2.Content = Player.Stat.CurrentResult + "%";
             Game_stat.Visibility = Visibility.Visible;
+            
             Main_menu.Visibility = Visibility.Hidden;
         }
 
