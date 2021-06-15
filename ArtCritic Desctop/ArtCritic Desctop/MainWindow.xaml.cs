@@ -1,21 +1,11 @@
 ﻿using System.Windows;
 using System;
 using System.IO;
-//using System.Data;
 using System.Data.SQLite;
 using System.Collections.Generic;
-/*using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;*/
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-/*using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System.Reflection;*/
 using ArtCritic_Desctop.core;
 using System.Text.RegularExpressions;
 using ArtCritic_Desctop.core.db;
@@ -245,6 +235,39 @@ namespace ArtCritic_Desctop
             this.I_type_of_game_Backend.Source = I_Background_Bitmap;
         }
 
+        private void I_Create_Pack_Button_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            Main_menu.Visibility = Visibility.Hidden;
+            Pack_create.Visibility = Visibility.Visible;
+            
+            string I_Background_Path = System.IO.Path.GetFullPath("..\\..\\..\\wallpapers__for_menu_music_pictures\\download.jpg");
+            Uri I_Background_U_Path = new Uri(I_Background_Path, UriKind.RelativeOrAbsolute);
+            BitmapImage I_Background_Bitmap = new BitmapImage(I_Background_U_Path);
+            this.I_Creat_pack_Background.Source = I_Background_Bitmap;
+            
+            string I_Image_Pack_Path = System.IO.Path.GetFullPath("..\\..\\..\\Buttons\\button_images.png");
+            Uri I_Image_Pack_U_Path = new Uri(I_Image_Pack_Path, UriKind.RelativeOrAbsolute);
+            BitmapImage I_Image_Pack_Bitmap = new BitmapImage(I_Image_Pack_U_Path);
+            this.I_Create_Image_Pack.Source = I_Image_Pack_Bitmap;
+            
+            string I_Create_Mix_Pack_Path = System.IO.Path.GetFullPath("..\\..\\..\\Buttons\\button_mix.png");
+            Uri I_Create_Mix_Pack_U_Path = new Uri(I_Create_Mix_Pack_Path, UriKind.RelativeOrAbsolute);
+            BitmapImage I_Create_Mix_Pack_Bitmap = new BitmapImage(I_Create_Mix_Pack_U_Path);
+            this.I_Create_Mixed_Pack.Source = I_Create_Mix_Pack_Bitmap;
+
+            string I_Create_Videos_Pack_Path = System.IO.Path.GetFullPath("..\\..\\..\\Buttons\\button_videos.png");
+            Uri I_Create_Videos_Pack_U_Path = new Uri(I_Create_Videos_Pack_Path, UriKind.RelativeOrAbsolute);
+            BitmapImage I_Create_Videos_Pack_Bitmap = new BitmapImage(I_Create_Videos_Pack_U_Path);
+            this.I_Create_Video_Pack.Source = I_Create_Videos_Pack_Bitmap;
+            
+            string I_Create_Music_Pack_Path = System.IO.Path.GetFullPath("..\\..\\..\\Buttons\\button_music.png");
+            Uri I_Create_Music_Pack_U_Path = new Uri(I_Create_Music_Pack_Path, UriKind.RelativeOrAbsolute);
+            BitmapImage I_Create_Music_Pack_Bitmap = new BitmapImage(I_Create_Music_Pack_U_Path);
+            this.I_Create_Music_Pack.Source = I_Create_Music_Pack_Bitmap;
+        
+        }
+
+
         private void Exit_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
@@ -259,6 +282,41 @@ namespace ArtCritic_Desctop
         /// </summary>
         /// <param name="pack_name"></param>
         /// <returns></returns>
+
+        private void I_Create_Mixed_Pack_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            Pack_create.Visibility = Visibility.Hidden;
+            Pack_create_Mixed.Visibility = Visibility.Visible;
+            Create_Question_Mixed_TBlock.Text = "Как вы назовёте свой пак? ";
+        }
+
+        private void I_Create_Image_Pack_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            Pack_create.Visibility = Visibility.Hidden;
+
+            Pack_create_Image.Visibility = Visibility.Visible;
+
+            Create_Question_Image_TBlock.Text = "Введите название пака";
+        }
+
+        private void I_Create_Music_Pack_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            Pack_create.Visibility = Visibility.Hidden;
+
+            Pack_create_Music.Visibility = Visibility.Visible;
+
+            Create_Question_Music_TBlock.Text = "Как вы назовёте свой пак? ";
+        }
+
+        private void I_Create_Video_Pack_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            Pack_create.Visibility = Visibility.Hidden;
+
+            Pack_create_Video.Visibility = Visibility.Visible;
+
+            Create_Question_Video_TBlock.Text = "Как вы назовёте свой пак? ";
+        }
+
         public bool name_control(string pack_name)
         {
             return (!string.IsNullOrEmpty(pack_name) && Regex.IsMatch(pack_name, @"^([A-Za-z0-9]){1,1000}$", RegexOptions.Multiline));
@@ -910,11 +968,6 @@ namespace ArtCritic_Desctop
             Main_menu.Visibility = Visibility.Hidden;
         }
 
-        private void I_Create_Pack_Button_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            Main_menu.Visibility = Visibility.Hidden;
-            Pack_create.Visibility = Visibility.Visible;
-        }
 
 
         private void Button_Login_Click(object sender, RoutedEventArgs e)
@@ -1017,10 +1070,6 @@ namespace ArtCritic_Desctop
             Login_Window.Visibility = Visibility.Hidden;
             Reg_Window.Visibility = Visibility.Visible;
         }
-
-      
-
-        //сюженый режим
 
 
     }
